@@ -1,0 +1,9 @@
+Assets      - audio, video, obrázky
+Components  - znovupoužitelné části stránky
+Helpers     - melé pomocné funkce (např funkce -> string na speciální formát data)
+Hooks       - 
+Pages       - jednotlivé stránky
+Services    - vetší funkce (např pro volání backendu)
+Views       - vetší části stránky (např sekce)
+
+- každá komponenta má vlastní složku, která obsahuje UI+logiku; styly css; testy

@@ -9,7 +9,7 @@ const TopPanel = () =>
             <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
                 <div className="container-fluid">
                     <Link className="flex items-center text-gray-900 hover:text-gray-900 focus:text-gray-900 mt-2 lg:mt-0 mr-1" to={homePath}>
-                        <img src={require('../../Assets/Images/logo192-removebg.png')} className="logo mr-2" />
+                        <img src={require('../../Assets/Images/vut.cz.png')} className="logo mr-2" />
                     </Link>
                 </div>
             </div>

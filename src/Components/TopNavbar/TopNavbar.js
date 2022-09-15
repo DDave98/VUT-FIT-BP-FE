@@ -1,6 +1,16 @@
 import './TopNavbar.css';
 import { Link } from 'react-router-dom';
-import { homePath} from '../../Constants/pagesPath';
+import '../../Constants/menuPath';
+import { navLinks } from '../../Constants/menuPath';
+import  {
+    DropdownToggle,
+    DropdownMenu,
+    DropdownMenuWrapper,
+    MenuItem,
+    Dropdown,
+    DropdownButton
+}  from '@trendmicro/react-dropdown';
+import '@trendmicro/react-dropdown/dist/react-dropdown.css';
 
 const TopNavbar = () => {
     return <>
@@ -8,30 +18,31 @@ const TopNavbar = () => {
             <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
 
                 {/* LOGO */}
-                <div className='font-bold text-2x1 cursor-pointer flex items-center font-sans'>
+                <Link className='font-bold text-2x1 cursor-pointer flex items-center font-sans'>
                     <span className='text-3x1 text-indigo-600 mr-1 pt-2'>
                         <img src={require('../../Assets/Images/vut.cz.png')} id='logo'/>
                     </span>
-                </div>
+                </Link>
 
                 {/* Odkazy */}
                 <ul className='md:flex md:items-center h-full'>
-                        <li className='md:ml-8 text-xl'>
-                            <Link className='inline-block h-full p-3 hover:bg-gray-100 duration-500'>DashBoard</Link>
-                        </li>
-                        <li className='md:ml-8 text-xl'>
-                            <Link className='h-full p-3 hover:bg-gray-100 duration-500'>Uživatelé</Link>
-                        </li>
-                        <li className='md:ml-8 text-xl'>
-                            <Link className='h-full p-3 hover:bg-gray-100 duration-500'>Záznamy</Link>
-                        </li>
-                        <li className='md:ml-8 text-xl'>
-                            <Link className='h-full p-3 hover:bg-gray-100 duration-500'>Aplikace</Link>
-                        </li>
+                    {
+                        navLinks.map((link) => (
+                            <li className='md:ml-8 text-xl'>
+                                <Link className='inline-block h-full p-3 hover:bg-gray-100 duration-500'>{link.name}</Link>
+                            </li>   
+                        ))
+                    }
                 </ul>
 
                 {/* Profil */}
-
+                <div className="flex flex-row dropdown flex-wrap content-between">
+                    <div>
+                        <img src={require('../../Assets/Images/Sample_User_Icon.png')} id='userIcon'/>
+                    </div>
+                    <div>
+                    </div>
+                </div>
             </div>
         </nav>
     </>

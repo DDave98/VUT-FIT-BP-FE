@@ -2,15 +2,7 @@ import './TopNavbar.css';
 import { Link } from 'react-router-dom';
 import '../../Constants/menuPath';
 import { navLinks } from '../../Constants/menuPath';
-import  {
-    DropdownToggle,
-    DropdownMenu,
-    DropdownMenuWrapper,
-    MenuItem,
-    Dropdown,
-    DropdownButton
-}  from '@trendmicro/react-dropdown';
-import '@trendmicro/react-dropdown/dist/react-dropdown.css';
+import TopNavUserProfile from '../TopNavUserProfile/TopNavUserProfile'
 
 const TopNavbar = () => {
     return <>
@@ -36,13 +28,7 @@ const TopNavbar = () => {
                 </ul>
 
                 {/* Profil */}
-                <div className="flex flex-row dropdown flex-wrap content-between">
-                    <div>
-                        <img src={require('../../Assets/Images/Sample_User_Icon.png')} id='userIcon'/>
-                    </div>
-                    <div>
-                    </div>
-                </div>
+                <TopNavUserProfile />
             </div>
         </nav>
     </>

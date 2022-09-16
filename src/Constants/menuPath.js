@@ -7,3 +7,9 @@ export const navLinks = [
     {name: 'Záznamy', link: homePath},
     {name: 'Aplikace', link: homePath}
 ];
+
+export const navDropDownLinks = 
+[
+    {name: 'Nastavení', link: homePath},
+    {name: 'Odhlásit se', link: homePath}
+];

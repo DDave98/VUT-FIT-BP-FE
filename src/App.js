@@ -21,9 +21,9 @@ class App extends Component
     return routesList.map(
       ({path, component, children}, key) =>
       children.lenght < 0 ?
-      <Route exact path={path} component={component} key={topKey+""+key} /> :
+      <Route exact path={path} component={component} key={topKey+"."+key} /> :
       (
-        <Route exact path={path} component={component} key={topKey+""+key}>
+        <Route exact path={path} component={component} key={topKey+"."+key}>
           {this.GetListOfRouteComponent(children, topKey)}
         </Route>
       )

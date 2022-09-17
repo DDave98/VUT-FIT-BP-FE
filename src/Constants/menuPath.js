@@ -8,8 +8,7 @@ export const navLinks = [
     {name: 'Aplikace', link: homePath}
 ];
 
-export const navDropDownLinks = 
-[
+export const navDropDownLinks = [
     {name: 'Nastavení', link: homePath},
     {name: 'Odhlásit se', link: homePath}
 ];

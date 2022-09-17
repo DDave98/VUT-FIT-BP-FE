@@ -1,17 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const DropDowHook = () => {
 
-    const [data, setData] = useState(false);
-  
-    var dropdowns = document.getElementsById("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-  };
+    const [dropdownState, setDropdownState] = useState(false);
+
+    const dropdownToggle = () =>
+    {
+        var dropdown = document.getElementById("dropdown-content");
+        console.log(dropdown);
+        document.getElementById("dropdown-content").classList.toggle("show");
+
+        if(!dropdownState)
+        {
+            setDropdownState(true);
+            dropdown.classList.add("show");
+        }
+        else setDropdownState(false);
+    }
+
+    return {dropdownState, dropdownToggle};
 }
   
   export default DropDowHook;

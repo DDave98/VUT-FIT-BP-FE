@@ -1,14 +1,20 @@
-import "./pagesPath";
-import { homePath } from "./pagesPath";
+import {
+    homePath,
+    appPath,
+    userPath,
+    logPath,
+    settingPath,
+    profilePath
+} from "./pagesPath";
 
 export const navLinks = [
     {name: 'Přehled', link: homePath},
-    {name: 'Uživatelé', link: homePath},
-    {name: 'Záznamy', link: homePath},
-    {name: 'Aplikace', link: homePath}
+    {name: 'Uživatelé', link: userPath},
+    {name: 'Záznamy', link: logPath},
+    {name: 'Aplikace', link: appPath}
 ];
 
 export const navDropDownLinks = [
-    {name: 'Nastavení', link: homePath},
-    {name: 'Odhlásit se', link: homePath}
+    {name: 'Nastavení', link: settingPath},
+    {name: 'Odhlásit se', link: profilePath}
 ];

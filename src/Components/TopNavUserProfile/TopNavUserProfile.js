@@ -29,7 +29,7 @@ const TopNavUserProfile = ({name, surname}) => {
 
 TopNavUserProfile.propTypes = {
     name: PropTypes.string,
-    surname: PropTypes.string
+    surname: PropTypes.string,
 }
 
 export default TopNavUserProfile;

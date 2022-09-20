@@ -1,6 +1,7 @@
 
 import './LoginPage.css';
 import React from 'react';
+import API from '../../Services/AjaxService';
 
 class LoginPage extends React.Component
 {
@@ -11,6 +12,26 @@ class LoginPage extends React.Component
         {
             
         }
+    }
+
+    DidMount()
+    {
+        API.post(
+            "/api/Auth/authenticate",
+            {
+                login: "this.state....",
+                password: "this.state...",
+            }
+        ).then(response =>
+            {
+                if (response.data) {}
+                else {}
+            }
+        ).catch(error =>
+            {
+                console.log("loginPage: ", error);   
+            }
+        );
     }
 
     render()

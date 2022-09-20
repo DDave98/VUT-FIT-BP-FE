@@ -29,10 +29,12 @@ const TopNavbar = () => {
                 </ul>
 
                 {/* Profil */}
-                <TopNavUserProfile />
+                <TopNavUserProfile name="jméno" surname="příjmení"/>
             </div>
         </nav>
     </>
 }
+
+//TopNavbar.propTypes = {}
 
 export default TopNavbar;

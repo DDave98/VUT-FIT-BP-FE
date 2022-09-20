@@ -25,4 +25,6 @@ const PublicPageLayout = (props) =>
     );
 }
 
+PublicPageLayout.propTypes = {}
+
 export default PublicPageLayout;

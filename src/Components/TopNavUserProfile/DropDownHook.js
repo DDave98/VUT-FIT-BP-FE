@@ -7,7 +7,6 @@ const DropDowHook = () => {
     const dropdownToggle = () =>
     {
         var dropdown = document.getElementById("dropdown-content");
-        console.log(dropdown);
         document.getElementById("dropdown-content").classList.toggle("show");
 
         if(!dropdownState)
@@ -20,5 +19,7 @@ const DropDowHook = () => {
 
     return {dropdownState, dropdownToggle};
 }
+
+DropDowHook.propTypes = {}
   
-  export default DropDowHook;
+export default DropDowHook;

@@ -25,4 +25,6 @@ class LoginForm extends React.Component
     }
 }
 
+LoginForm.propTypes = {}
+
 export default withRouter(LoginForm);

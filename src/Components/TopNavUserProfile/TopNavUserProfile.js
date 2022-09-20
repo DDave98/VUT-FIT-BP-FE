@@ -2,8 +2,9 @@ import './TopNavUserProfile.css';
 import { Link } from 'react-router-dom';
 import {navDropDownLinks} from '../../Constants/menuPath';
 import DropDowHook from './DropDownHook';
+import PropTypes from 'prop-types';
 
-const TopNavUserProfile = () => {
+const TopNavUserProfile = ({name, surname}) => {
 
     const {dropdownState, dropdownToggle} = DropDowHook();
 
@@ -13,7 +14,7 @@ const TopNavUserProfile = () => {
                 <img src={require('../../Assets/Images/Sample_User_Icon.png')} id='userIcon'/>
             </div>
             <div id='userIcoDropdown'>
-                <p id="dropName" >Jméno Příjmení</p>
+                <p id="dropName" >{name + " " + surname}</p>
                 <div id="dropdown-content">
                     {
                         navDropDownLinks.map(({name, link}) => ( 
@@ -24,6 +25,11 @@ const TopNavUserProfile = () => {
             </div>
         </div>
     </>
+}
+
+TopNavUserProfile.propTypes = {
+    name: PropTypes.string,
+    surname: PropTypes.string
 }
 
 export default TopNavUserProfile;

@@ -3,17 +3,27 @@
 
 const Input = props =>
 {
+
+    
     const {
         inputType,
         inputPlaceholder,
         inputValue,
-        labelText
+        labelText,
+        htmlForName,
     } = props;
 
     return <>
         <div className="mt-4">
-            <label className="block">{labelText}</label> {/*Zadejte heslo:*/}
-            <input type={inputType} placeholder={inputPlaceholder} value={inputValue} className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
+            <label htmlFor={htmlForName} className="block">{labelText}</label> {/*Zadejte heslo:*/}
+            <input
+                id={htmlForName}
+                type={inputType}
+                placeholder={inputPlaceholder}
+                value={inputValue}
+                required
+                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+            />
         </div>
     </>
 };
@@ -24,6 +34,7 @@ Input.prototype =
 //    inputPlaceholder: Props.string,
 //    inputValue: Props.string,
 //    labelText: Props.string,
+//    htmlForName: Props.string,
 //    handleChange: Props.
 }
 

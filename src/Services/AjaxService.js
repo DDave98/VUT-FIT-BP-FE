@@ -20,7 +20,7 @@ API.interceptors.response.use(
                 window.location.href = loginPath;
                 break;
             default:
-                console.log("error: " + error.response.status)
+                console.log("error: ", error.response.status, " message: ", error.response);
         }
     }
 );

@@ -1,64 +1,62 @@
 import "./pagesPath";
-import HomePage from "../Pages/HomePage/HomePage";
-import LoginPage from "../Pages/LoginPage/LoginPage";
-import NotFoundPage from "../Pages/ErrorPages/404";
-import AppPage from "../Pages/AppPage/AppPage";
-import LogPage from "../Pages/LogPage/LogPage";
-import ProfilePage from "../Pages/ProfilePage/ProfilePage";
-import SettingPage from "../Pages/SettingPage/SettingPage";
-import UserPage from "../Pages/UserPage/UserPage";
+import HomePage from "../Pages/HomePage";
+import LoginPage from "../Pages/auth/LoginPage";
+import NotFoundPage from "../Pages/404";
+import AppPage from "../Pages/AppPage";
+import LogPage from "../Pages/LogPage";
+import ProfilePage from "../Pages/ProfilePage";
+import SettingPage from "../Pages/SettingPage";
+import UserPage from "../Pages/UserPage";
 
-import {
-    homePath,
-    loginPath,
-    notFoundPath,
-    appPath,
-    logPath,
-    profilePath,
-    settingPath,
-    userPath
-} from "./pagesPath";
+//import * as pages from "../Pages";
+import * as path from "./pagesPath";
+import ErrorPage from "../Pages/ErrorPage";
 
 const appRoutesList = 
 [
     {
-        path: homePath,
+        path: path.homePath,
         component: HomePage,
         children: [],
     },
     {
-        path: loginPath,
+        path: path.loginPath,
         component: LoginPage,
         children: [],
     },
     {
-        path: notFoundPath,
+        path: path.notFoundPath,
         component: NotFoundPage,
         children: [],
     },
     {
-        path: appPath,
+        path: path.appPath,
         component: AppPage,
         children: [],
     },
     {
-        path: logPath,
+        path: path.logPath,
         component: LogPage,
         children: [],
     },
     {
-        path: profilePath,
+        path: path.profilePath,
         component: ProfilePage,
         children: [],
     },
     {
-        path: settingPath,
+        path: path.settingPath,
         component: SettingPage,
         children: [],
     },
     {
-        path: userPath,
+        path: path.userPath,
         component: UserPage,
+        children: [],
+    },
+    {
+        path: path.errorPath,
+        component: ErrorPage,
         children: [],
     },
 ];

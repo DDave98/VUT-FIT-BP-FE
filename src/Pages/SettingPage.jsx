@@ -1,6 +1,5 @@
-import './SettingPage.css';
 import React, { Component } from "react";
-import PublicPageLayout from "../../Components/PageLayout/PageLayout";
+import PublicPageLayout from "../Components/PageLayout/PageLayout";
 
 class SettingPage extends React.Component
 {

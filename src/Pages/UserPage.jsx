@@ -1,6 +1,5 @@
-import './UserPage.css';
 import React, { Component } from "react";
-import PublicPageLayout from "../../Components/PageLayout/PageLayout";
+import PublicPageLayout from "../Components/PageLayout/PageLayout";
 
 class UserPage extends React.Component
 {

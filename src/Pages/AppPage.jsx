@@ -1,6 +1,5 @@
-import './AppPage.css';
 import React, { Component } from "react";
-import PublicPageLayout from "../../Components/PageLayout/PageLayout";
+import PublicPageLayout from "../Components/PageLayout/PageLayout";
 
 class AppPage extends React.Component
 {

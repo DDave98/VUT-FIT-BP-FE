@@ -1,3 +1,15 @@
 {
-    "baseApiURL": "https://authframe-api.herokuapp.com"
+    "baseApiURL": "https://authframe-api.herokuapp.com",
+
+    "path":
+    {
+       "auth":
+       {
+            "authenticate": "/api/Auth/authenticate"
+       },
+       "user":
+       {
+            "baseInfo": "/api/User/baseInfo"
+       }
+    }
 }

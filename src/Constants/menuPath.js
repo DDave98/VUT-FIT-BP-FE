@@ -15,6 +15,7 @@ export const navLinks = [
 ];
 
 export const navDropDownLinks = [
+    {name: 'Profil', link: profilePath},
     {name: 'Nastavení', link: settingPath},
     {name: 'Odhlásit se', link: profilePath}
 ];

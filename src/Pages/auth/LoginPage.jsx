@@ -67,9 +67,13 @@ class LoginPage extends React.Component
                                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                                 />
                             </div>
-                            <div className="flex items-baseline justify-between">
+
+                            <div className="flex items-baseline justify-between mb-6">
                                 <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 w-full">Přihlásit se</button>
                             </div>
+
+                            <Recaptcha />
+
                             <BreakLine id={"loginBreakLine1"}>nebo</BreakLine>
                             <div id='loginSocialIcons' className="flex items-baseline justify-between">
                                 <img src={require ('../../Assets/Images/socialIcons/facebook.png')} className='h-10'/>
@@ -79,8 +83,7 @@ class LoginPage extends React.Component
                                 <img src={require ('../../Assets/Images/socialIcons/linkedin.png')} className='h-10'/>
                                 <img src={require ('../../Assets/Images/socialIcons/microsoft.png')} className='h-10'/>
                             </div>
-                            <BreakLine id={"loginBreakLine1"}>ověření</BreakLine>
-                            <Recaptcha />
+                            
                         </form>
                     </div>
                 </div>

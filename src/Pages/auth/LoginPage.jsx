@@ -2,7 +2,7 @@ import React from 'react';
 import API from '../../Services/AjaxService';
 import Form from 'react-bootstrap/Form';
 import BreakLine from '../../Components/BrakLine/BreakLine';
-import { Button } from 'react-bootstrap';
+import Recaptcha from '../../Components/ReCAPTCHA/ReCAPTCHA';
 
 class LoginPage extends React.Component
 {
@@ -35,6 +35,11 @@ class LoginPage extends React.Component
         );
     }
 
+    logInEvent(id)
+    {
+        console.log(id);
+    }
+
     render()
     {
         return (
@@ -65,10 +70,17 @@ class LoginPage extends React.Component
                             <div className="flex items-baseline justify-between">
                                 <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 w-full">Přihlásit se</button>
                             </div>
-                            <BreakLine>nebo</BreakLine>
+                            <BreakLine id={"loginBreakLine1"}>nebo</BreakLine>
                             <div id='loginSocialIcons' className="flex items-baseline justify-between">
-                                <Button ></Button>
+                                <img src={require ('../../Assets/Images/socialIcons/facebook.png')} className='h-10'/>
+                                <img src={require ('../../Assets/Images/socialIcons/github.png')} className='h-10'/>
+                                <img src={require ('../../Assets/Images/socialIcons/google.png')} className='h-10'/>
+                                <img src={require ('../../Assets/Images/socialIcons/instagram.png')} className='h-10'/>
+                                <img src={require ('../../Assets/Images/socialIcons/linkedin.png')} className='h-10'/>
+                                <img src={require ('../../Assets/Images/socialIcons/microsoft.png')} className='h-10'/>
                             </div>
+                            <BreakLine id={"loginBreakLine1"}>ověření</BreakLine>
+                            <Recaptcha />
                         </form>
                     </div>
                 </div>

@@ -76,14 +76,14 @@ class LoginPage extends React.Component
 
                             <BreakLine id={"loginBreakLine1"}>nebo</BreakLine>
                             <div id='loginSocialIcons' className="flex items-baseline justify-between">
-                                <img src={require ('../../Assets/Images/socialIcons/facebook.png')} className='h-10'/>
-                                <img src={require ('../../Assets/Images/socialIcons/github.png')} className='h-10'/>
-                                <img src={require ('../../Assets/Images/socialIcons/google.png')} className='h-10'/>
-                                <img src={require ('../../Assets/Images/socialIcons/instagram.png')} className='h-10'/>
-                                <img src={require ('../../Assets/Images/socialIcons/linkedin.png')} className='h-10'/>
-                                <img src={require ('../../Assets/Images/socialIcons/microsoft.png')} className='h-10'/>
+                                <img src={require ('../../Assets/Images/socialIcons/facebook.png')} className='h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent'/>
+                                <img src={require ('../../Assets/Images/socialIcons/github.png')} className='h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent'/>
+                                <img src={require ('../../Assets/Images/socialIcons/google.png')} className='h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent'/>
+                                <img src={require ('../../Assets/Images/socialIcons/instagram.png')} className='h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent'/>
+                                <img src={require ('../../Assets/Images/socialIcons/linkedin.png')} className='h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent'/>
+                                <img src={require ('../../Assets/Images/socialIcons/microsoft.png')} className='h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent'/>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>

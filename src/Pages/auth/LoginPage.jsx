@@ -56,6 +56,7 @@ class LoginPage extends React.Component
                                     id="loginInputLogin"
                                     placeholder='zadejte login'
                                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                                    required
                                 />
                             </div>
                             <div className="flex items-baseline justify-between">
@@ -65,6 +66,7 @@ class LoginPage extends React.Component
                                     id="loginInputPasswd"
                                     placeholder='zadejte heslo'
                                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                                    required
                                 />
                             </div>
 

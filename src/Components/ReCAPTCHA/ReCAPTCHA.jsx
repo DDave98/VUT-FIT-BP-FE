@@ -1,9 +1,8 @@
 import ReCAPTCHA from "react-google-recaptcha";
- 
+import config from "../../Constants/config.json";
 
 const Recaptcha = () =>
 {
-
     const onChange = (value) =>
     {
         console.log("Captcha value:", value);
@@ -11,7 +10,7 @@ const Recaptcha = () =>
 
     return <>
         <ReCAPTCHA
-            sitekey="Your client site key"
+            sitekey={config.RecaptchaKey}
             onChange={onChange}
         />  
     </>

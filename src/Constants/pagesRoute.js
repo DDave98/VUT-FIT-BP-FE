@@ -7,10 +7,8 @@ import LogPage from "../Pages/LogPage";
 import ProfilePage from "../Pages/ProfilePage";
 import SettingPage from "../Pages/SettingPage";
 import UserPage from "../Pages/UserPage";
-
-//import * as pages from "../Pages";
-import * as path from "./pagesPath";
 import ErrorPage from "../Pages/ErrorPage";
+import * as path from "./pagesPath";
 
 const appRoutesList = 
 [

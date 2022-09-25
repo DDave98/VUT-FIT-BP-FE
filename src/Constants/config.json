@@ -11,5 +11,7 @@
        {
             "baseInfo": "/api/User/baseInfo"
        }
-    }
+    },
+
+    "RecaptchaKey": "some key"
 }

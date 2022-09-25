@@ -1,6 +1,5 @@
-
 import React  from "react";
-import "./PageLayout.css";
+import "../../Styles/PageLayout.css";
 import TopNavbar from "../TopNavbar/TopNavbar";
 import Footer from "../Footer/Footer";
 

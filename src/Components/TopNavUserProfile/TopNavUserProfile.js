@@ -1,4 +1,4 @@
-import './TopNavUserProfile.css';
+import '../../Styles/TopNavUserProfile.css';
 import { Link } from 'react-router-dom';
 import {navDropDownLinks} from '../../Constants/menuPath';
 import DropDowHook from './DropDownHook';
@@ -9,7 +9,11 @@ const TopNavUserProfile = ({name, surname}) => {
     const {dropdownState, dropdownToggle} = DropDowHook();
 
     return <>
-        <div onClick={dropdownToggle} className="flex flex-row dropdown flex-wrap content-between mr-10">
+        <div
+            onMouseEnter={dropdownToggle}
+            onMouseLeave={dropdownToggle}
+            className="flex flex-row dropdown flex-wrap content-between mr-10"
+        >
             <div id='userIcoContainer' className='mr-2'>
                 <img src={require('../../Assets/Images/Sample_User_Icon.png')} id='userIcon'/>
             </div>

@@ -4,7 +4,7 @@ import {loginPath} from "../Constants/pagesPath";
 
 export function Logout()
 {
-    DeleteFromStorage(accessTokenTag);   // delete token
-    DeleteFromStorage(refreshTokenTag);  // delete token
-    window.location.href = loginPath;   // redirect home
+    DeleteFromStorage(accessTokenTag);   // delete access token
+    DeleteFromStorage(refreshTokenTag);  // delete refresh token
+    window.location.href = loginPath;    // redirect home
 }

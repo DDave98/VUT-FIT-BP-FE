@@ -28,7 +28,7 @@ SaveToStorage.propTypes = {
 }
 
 // delete token in local strorage
-export function DeleteFromToken(tag)
+export function DeleteFromStorage(tag)
 {
     return new Promise((resolve) =>
         {
@@ -38,6 +38,6 @@ export function DeleteFromToken(tag)
     );
 }
 
-DeleteFromToken.propTypes = {
+DeleteFromStorage.propTypes = {
     tag: PropTypes.string,
 }

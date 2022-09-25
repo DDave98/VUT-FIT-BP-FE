@@ -1,2 +1,2 @@
 
-export const tokenTag = 'authFrameworkToken';
+export const tokenTag = 'AuthTokenJWT';

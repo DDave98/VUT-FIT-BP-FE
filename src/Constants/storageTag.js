@@ -1,2 +1,2 @@
-
-export const tokenTag = 'AuthTokenJWT';
+export const accessTokenTag = 'AccessTokenJWT';
+export const refreshTokenTag = 'RefreshTokenJWT';

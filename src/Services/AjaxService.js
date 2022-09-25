@@ -1,9 +1,6 @@
 import axios from 'axios';
 import config from "../Constants/config.json";
-import {loginPath} from "../Constants/pagesPath";
-import {tokenTag} from '../Constants/storageTag';
-import './StorageService'
-import { DeleteFromStorage, DeleteFromToken } from './StorageService';
+import {Logout} from './LogoutService';
 
 const URL = config.baseApiURL;
 const API = axios.create({baseURL: URL})
@@ -19,8 +16,7 @@ API.interceptors.response.use(
         switch(error.response.status)
         {
             case 401:
-                DeleteFromStorage(tokenTag);        // delete token
-                window.location.href = loginPath;   // redirect home
+                Logout();
                 break;
             default:
                 console.log("error: ", error.response.status, " message: ", error.response);

@@ -8,6 +8,8 @@ import ProfilePage from "../Pages/ProfilePage";
 import SettingPage from "../Pages/SettingPage";
 import UserPage from "../Pages/UserPage";
 import ErrorPage from "../Pages/ErrorPage";
+import RegistrationPage from "../Pages/auth/RegisterPage";
+
 import * as path from "./pagesPath";
 
 const appRoutesList = 
@@ -57,6 +59,11 @@ const appRoutesList =
         component: ErrorPage,
         children: [],
     },
+    {
+        path: path.registerPath,
+        component: RegistrationPage,
+        children: [],
+    }
 ];
 
 export default appRoutesList;

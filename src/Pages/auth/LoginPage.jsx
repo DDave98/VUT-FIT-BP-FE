@@ -75,7 +75,6 @@ class LoginPage extends React.Component
                             </div>
 
                             <Recaptcha />
-
                             <BreakLine id={"loginBreakLine1"}>nebo</BreakLine>
                             <div id='loginSocialIcons' className="flex items-baseline justify-between">
                                 <img src={require ('../../Assets/Images/socialIcons/facebook.png')} className='h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent'/>

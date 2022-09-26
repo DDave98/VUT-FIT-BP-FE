@@ -16,7 +16,8 @@ import appRoutesList from "./Constants/pagesRoute";
 class App extends Component
 {
 
-   GetListOfRouteComponent(routesList, topKey)
+  // funcion create list of routes components
+  GetListOfRouteComponent(routesList, topKey)
   { 
     return routesList.map(
       ({path, component, children}, key) =>

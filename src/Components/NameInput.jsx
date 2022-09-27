@@ -1,17 +1,35 @@
 import { useRef, useState, useEffect } from 'react'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-const NameInput = ({divStyleClass, }) =>
+const NameInput = (
+    {
+        InputType,
+        placeholder,
+        htmlFor,
+        inputName,
+        divStyleClass,
+        regex,
+        instruction
+    }) =>
 {
+
+    const userRef = useRef();
 
     const [name, setName] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
 
+    useEffect(() =>
+    {
+        const result = regex.test(name);
+        console.log(name, result);
+        setValidName(result);
+    }, [name])
+
     return <>
         <div className={divStyleClass}>
-            <Form.Label htmlFor="registerInputName" className='block'>
-                Jméno:
+            <Form.Label htmlFor={htmlFor} className='block'>
+                {inputName}
                 <span className={validName ? iconStyleClass : "hidden"}>
                     <FontAwesomeIcon icon={faCheck} />
                 </span>
@@ -20,8 +38,8 @@ const NameInput = ({divStyleClass, }) =>
                 </span>
             </Form.Label>
             <Form.Control
-                type="text"
-                id="registerInputName"
+                type={InputType}
+                id={htmlFor}
                 ref={userRef}
                 autoComplete="off"
                 onChange={(e) => setName(e.target.value)}
@@ -29,7 +47,7 @@ const NameInput = ({divStyleClass, }) =>
                 aria-describedby="nameNote"
                 onFocus={() => setUserFocus(true)}
                 onBlur={() => setUserFocus(false)}
-                placeholder='zadejte jméno'
+                placeholder={placeholder}
                 className={inputStyleClass}
                 required
             />
@@ -52,8 +70,7 @@ const NameInput = ({divStyleClass, }) =>
                         >
                         </path>
                 </svg>
-                jméno by mělo být minimálně 4 znaky dlouhé, mělo by začínat písmenem. 
-                Písmena, číslice, podtržítka, pomlčky jsou povolené.
+                {instruction}
             </p>
         </div>
     </>

@@ -63,26 +63,6 @@ const RegistrationPage = () =>
                         instruction={instr}
                         userRef={userRef}
                     />
-                    <FormInput
-                        InputType='password'
-                        placeholder='zadejte heslo'
-                        htmlFor='registrationFormPwd1'
-                        inputName='Heslo:'
-                        divStyleClass={divStyleClass}
-                        regex={passwordRegex}
-                        instruction={instr}
-                        userRef={userRef}
-                    />
-                    <FormInput
-                        InputType='password'
-                        placeholder='zadejte heslo znovu'
-                        htmlFor='registrationFormPwd2'
-                        inputName='Potvrďte heslo:'
-                        divStyleClass={divStyleClass}
-                        regex={passwordRegex}
-                        instruction={instr}
-                        userRef={userRef}
-                    />
                     <div className="flex items-baseline justify-between mb-6 mt-2">
                         <button className={buttonStyleClass}>Registrovat se</button>
                     </div>

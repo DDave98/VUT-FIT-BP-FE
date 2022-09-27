@@ -1,5 +1,5 @@
 /**
- * kompo
+ * layout pro celostránkový formulář
  */
 
 import React  from "react";

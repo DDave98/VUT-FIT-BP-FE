@@ -1,7 +1,8 @@
 import API from '../../Services/AjaxService';
 import Form from 'react-bootstrap/Form';
 import FormPageLayout from '../../Components/FormPageLayout';
-import { useRef, useState, useEffect } from 'react'
+import { FormInput } from '../../Components/FormInput';
+import { useRef, useState, useEffect } from 'react';
 import { nameRegex, passwordRegex, emailRegex } from '../../Constants/regex';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -48,8 +49,7 @@ const RegistrationPage = () =>
     useEffect(() =>
     {
         const result = nameRegex.test(name);
-        console.log(result);
-        console.log(name);
+        console.log("inputName,", name, result);
         setValidName(result);
     }, [name])
 
@@ -87,6 +87,8 @@ const RegistrationPage = () =>
     const iconStyleClass = "inline-block ml-3 text-green-600";
     const icon2StyleClass = "inline-block ml-3 text-red-600";
 
+    const instr = "příjmení by mělo být minimálně 4 znaky dlouhé, mělo by začínat písmenem. Písmena, číslice, podtržítka, pomlčky jsou povolené.";
+
     return <>
             <div className="flex items-center justify-center min-h-screen bg-gray-100">
                 <p 
@@ -97,93 +99,46 @@ const RegistrationPage = () =>
                     {errMsg}
                 </p>
                 <FormPageLayout name='Registrace'>
+                    <FormInput
+                        InputType='text'
+                        placeholder='zadejte jméno'
+                        htmlFor='registrationFormName'
+                        inputName='Jméno:'
+                        divStyleClass={divStyleClass}
+                        regex={nameRegex}
+                        instruction={instr}
+                        userRef={userRef}
+                    />
+                    <FormInput
+                        InputType='text'
+                        placeholder='zadejte Příjmení'
+                        htmlFor='registrationFormSurname'
+                        inputName='Příjmení:'
+                        divStyleClass={divStyleClass}
+                        regex={nameRegex}
+                        instruction={instr}
+                        userRef={userRef}
+                    />
                     <div className={divStyleClass}>
-                        <Form.Label htmlFor="registerInputName" className='block'>
-                            Jméno:
-                            <span className={validName ? iconStyleClass : "hidden"}>
-                                <FontAwesomeIcon icon={faCheck} />
-                            </span>
-                            <span className={validName || !name ? "hidden" : icon2StyleClass}>
-                                <FontAwesomeIcon icon={faTimes} />
-                            </span>
-                        </Form.Label>
-                            <Form.Control
-                                type="text"
-                                id="registerInputName"
-                                ref={userRef}
-                                autoComplete="off"
-                                onChange={(e) => setName(e.target.value)}
-                                aria-invalid={validName ? "false" : "true"}
-                                aria-describedby="nameNote"
-                                onFocus={() => setUserFocus(true)}
-                                onBlur={() => setUserFocus(false)}
-                                placeholder='zadejte jméno'
-                                className={inputStyleClass}
-                                required
-                            />
-                            <p
-                                id='nameNote'
-                                className={userFocus && name && !validName ? instructionsStyleClass : "hidden"}
-                            >
-                                <svg
-                                    class="w-5 h-5 inline mr-1"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        >
-                                        </path>
-                                </svg>
-                                jméno by mělo být minimálně 4 znaky dlouhé, mělo by začínat písmenem. 
-                                Písmena, číslice, podtržítka, pomlčky jsou povolené.
-                            </p>
-                        </div>
-                        <div className={divStyleClass}>
-                            <Form.Label htmlFor="registerInputSurname" className='block mr-5'>Příjmení:</Form.Label>
-                            <Form.Control
-                                type="text"
-                                id="registerInputSurname"
-                                placeholder='zadejte příjmení'
-                                className={inputStyleClass}
-                                required
-                            />
-                        </div>
-                        <div className={divStyleClass}>
-                            <Form.Label htmlFor="registerInputEmail" className='block mr-5'>Email:</Form.Label>
-                            <Form.Control
-                                type="text"
-                                id="registerInputEmail"
-                                placeholder='zadejte login'
-                                className={inputStyleClass}
-                                required
-                            />
-                        </div>
-                        <div className={divStyleClass}>
-                            <Form.Label htmlFor="registerInputPaswd" className='block mr-5'>Heslo:</Form.Label>
-                            <Form.Control
-                                type="password"
-                                id="registerInputPaswd"
-                                placeholder='zadejte heslo'
-                                className={inputStyleClass}
-                                required
-                            />
-                        </div>
-                        <div className={divStyleClass}>
-                            <Form.Label htmlFor="registerInputPaswd2" className='block mr-5'>Potvrdit:</Form.Label>
-                            <Form.Control
-                                type="password"
-                                id="registerInputPaswd2"
-                                placeholder='zadejte heslo znovu'
-                                className={inputStyleClass}
-                                required
-                            />
-                        </div>
+                        <Form.Label htmlFor="registerInputPaswd" className='block mr-5'>Heslo:</Form.Label>
+                        <Form.Control
+                            type="password"
+                            id="registerInputPaswd"
+                            placeholder='zadejte heslo'
+                            className={inputStyleClass}
+                            required
+                        />
+                    </div>
+                    <div className={divStyleClass}>
+                        <Form.Label htmlFor="registerInputPaswd2" className='block mr-5'>Potvrdit:</Form.Label>
+                        <Form.Control
+                            type="password"
+                            id="registerInputPaswd2"
+                            placeholder='zadejte heslo znovu'
+                            className={inputStyleClass}
+                            required
+                        />
+                    </div>
                         <div className="flex items-baseline justify-between mb-6 mt-2">
                             <button className={buttonStyleClass}>Registrovat se</button>
                         </div>

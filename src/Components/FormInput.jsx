@@ -64,16 +64,16 @@ const FormInput = (
                 className={valueFocus && value && !validValue ? instructionsStyleClass : "hidden"}
             >
                 <svg
-                    class="w-5 h-5 inline mr-1"
+                    className="w-5 h-5 inline mr-1"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                         <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                         >
                         </path>
@@ -92,7 +92,7 @@ FormInput.propTypes =
     htmlFor: PropTypes.string.isRequired,
     inputName: PropTypes.string.isRequired,
     divStyleClass: PropTypes.string.isRequired,
-    regex: PropTypes.arrayOf(PropTypes.instanceOf(RegExp)),
+    regex: PropTypes.instanceOf(RegExp),
     instruction: PropTypes.string.isRequired,
 }
 

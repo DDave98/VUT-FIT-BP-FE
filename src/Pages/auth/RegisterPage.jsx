@@ -1,25 +1,12 @@
-import API from '../../Services/AjaxService';
-import Form from 'react-bootstrap/Form';
 import FormPageLayout from '../../Components/FormPageLayout';
 import { FormInput } from '../../Components/FormInput';
 import { useRef, useState, useEffect } from 'react';
 import { nameRegex, passwordRegex, emailRegex } from '../../Constants/regex';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const RegistrationPage = () =>
 {
     const userRef = useRef();
     const errRef = useRef();
-
-    const [pwd, setPwd] = useState('');
-    const [validPwd, setValidPwd] = useState(false);
-    const [pwdFocus, setPwdFocus] = useState(false);
-
-
-    const [pwd2, setPwd2] = useState('');
-    const [validPwd2, setValidPwd2] = useState(false);
-    const [pwd2Focus, setPwd2Focus] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
     const [sucess, setSucess] = useState(false);
@@ -28,21 +15,6 @@ const RegistrationPage = () =>
     {
         userRef.current.focus();
     }, [])
-
-    useEffect(() =>
-    {
-        setErrMsg('');
-    }, [pwd, pwd])
-
-    useEffect(() =>
-    {
-        const result = passwordRegex.test(pwd);
-        console.log(result);
-        console.log(pwd);
-        setValidPwd(result);
-        const match = pwd === pwd2;
-        setPwd2(match);
-    }, [pwd, pwd2])
 
 
     const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
@@ -78,6 +50,16 @@ const RegistrationPage = () =>
                         inputName='Příjmení:'
                         divStyleClass={divStyleClass}
                         regex={nameRegex}
+                        instruction={instr}
+                        userRef={userRef}
+                    />
+                    <FormInput
+                        InputType='text'
+                        placeholder='zadejte Email'
+                        htmlFor='registrationFormEmail'
+                        inputName='Email:'
+                        divStyleClass={divStyleClass}
+                        regex={emailRegex}
                         instruction={instr}
                         userRef={userRef}
                     />

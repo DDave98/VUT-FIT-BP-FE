@@ -35,13 +35,11 @@ const FormPwdInputs = (
         //console.log('pwd1:', result, pwd1);
         setValidPwd1(result);
 
-        const isValid = isSame() && result;
+        const isValid = pwd1 === pwd2 && result;
         //console.log('pwd2:', isValid, pwd2);
         onChangeValue(pwd1);
         getValidValue(isValid);
     }, [pwd1, pwd2]);
-
-    const isSame = (value) => {return pwd1 === value && pwd1 != ""}
 
     return <>
         <FormInput
@@ -66,8 +64,7 @@ const FormPwdInputs = (
             userRef={userRef}
             onChangeValue={(value) => setPwd2(value)}
             getValidValue={() => {}}
-            extSetValidValue={(value) => isSame(value)}
-            testVal={pwd1}
+            extCompareValue={pwd1}
         />
     </>
 

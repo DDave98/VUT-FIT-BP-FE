@@ -17,8 +17,7 @@ const FormInput = (
         userRef,
         onChangeValue,
         getValidValue,
-        extSetValidValue,
-        testVal,
+        extCompareValue
     }) =>
 {
 
@@ -29,13 +28,13 @@ const FormInput = (
     useEffect(() =>
     {
         const result = regex?.test(value) || isSame(value);
-        console.log(inputName, value, result);
+        console.log(inputName, value, result, extCompareValue);
         setValidValue(result);
         onChangeValue(value);
         getValidValue(result);
-    }, [value]);
+    }, [value, extCompareValue]);
 
-    const isSame = (value) => extSetValidValue?.(value) || false
+    const isSame = (value) => extCompareValue === value && extCompareValue != ""
 
     //const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
     const inputStyleClass = "w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600";
@@ -78,7 +77,7 @@ const FormInput = (
         <div className={divStyleClass}>
             <Form.Label htmlFor={htmlFor} className='block'>
                 {inputName}
-                {regex != null || extSetValidValue != null ? validationIcons : <></>}
+                {regex != null || extCompareValue != null ? validationIcons : <></>}
             </Form.Label>
             <Form.Control
                 type={InputType? InputType : 'text'}
@@ -92,7 +91,6 @@ const FormInput = (
                 onBlur={() => setValueFocus(false)}
                 placeholder={placeholder? placeholder : ''}
                 className={inputStyleClass}
-                required
             />
             {instruction != null ? instructionElement : <></>}
         </div>
@@ -111,7 +109,7 @@ FormInput.propTypes =
     instruction: PropTypes.string,
     getValidValue: propTypes.func,
     onChange: PropTypes.func,
-    extSetValidValue: PropTypes.func
+    extCompareValue: PropTypes.string,
 }
 
 export {FormInput};

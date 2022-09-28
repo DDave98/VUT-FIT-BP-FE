@@ -1,5 +1,6 @@
 import FormPageLayout from '../../Components/FormPageLayout';
 import { FormInput } from '../../Components/FormInput';
+import { FormPwdInputs } from '../../Components/FormPwdInputs';
 import { useRef, useState, useEffect } from 'react';
 import { nameRegex, passwordRegex, emailRegex } from '../../Constants/regex';
 
@@ -51,11 +52,12 @@ const RegistrationPage = () =>
 
 
     const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
-    const inputStyleClass = "w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600";
     const buttonStyleClass = "px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 w-full";
 
     const instr = "Minimální délka 4 znaky. Mělo by začínat písmenem. Písmena, číslice, podtržítka, pomlčky jsou povolené.";
     const emailInstr = "zadejte platnou e-mailovou adresu."
+    const pwdInstr = "Heslo by mělo obsahovat malé a velké písmena, číslice, speciální znak a minimální délka je 8 znaků."
+    const pwd2Instr='Hesla se musí shodovat'
 
     return <>
             <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -68,7 +70,6 @@ const RegistrationPage = () =>
                 </p>
                 <FormPageLayout name='Registrace'>
                     <FormInput
-                        InputType='text'
                         placeholder='zadejte jméno'
                         htmlFor='registrationFormName'
                         inputName='Jméno:'
@@ -80,7 +81,6 @@ const RegistrationPage = () =>
                         getValidValue={(value) => setValidName(value)}
                     />
                     <FormInput
-                        InputType='text'
                         placeholder='zadejte Příjmení'
                         htmlFor='registrationFormSurname'
                         inputName='Příjmení:'
@@ -92,7 +92,6 @@ const RegistrationPage = () =>
                         getValidValue={(isValid) => setValidSurname(isValid)}
                     />
                     <FormInput
-                        InputType='text'
                         placeholder='zadejte Email'
                         htmlFor='registrationFormEmail'
                         inputName='Email:'
@@ -102,6 +101,20 @@ const RegistrationPage = () =>
                         userRef={userRef}
                         onChangeValue={(value) => setEmail(value)}
                         getValidValue={(isValid) => setValidEmail(isValid)}
+                    />
+                    <FormPwdInputs
+                        placeholder1='zadejte heslo'
+                        placeholder2='zadejte heslo znovu'
+                        htmlFor='registrationFormPwd'
+                        input1Name='Heslo:'
+                        input2Name='Potvrdit Heslo:'
+                        divsStyleClass={divStyleClass}
+                        regex={passwordRegex}
+                        instruction1={pwdInstr}
+                        instruction2={pwd2Instr}
+                        userRef={userRef}
+                        onChangeValue={(value) => setPassword(value)}
+                        getValidValue={(isValid) => setValidPassword(isValid)}
                     />
                     <div className="flex items-baseline justify-between mb-6 mt-2">
                         <button className={buttonStyleClass}>Registrovat se</button>

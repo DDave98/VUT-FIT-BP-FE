@@ -6,7 +6,6 @@
 import { useState, useEffect } from 'react';
 import { FormInput } from './FormInput';
 import PropTypes from 'prop-types';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 const FormPwdInputs = (
     {

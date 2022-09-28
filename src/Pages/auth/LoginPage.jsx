@@ -3,6 +3,8 @@ import API from '../../Services/AjaxService';
 import Form from 'react-bootstrap/Form';
 import BreakLine from '../../Components/BrakLine/BreakLine';
 import Recaptcha from '../../Components/ReCAPTCHA/ReCAPTCHA';
+import { Link } from 'react-router-dom';
+import { registerPath } from "../../Constants/pagesPath";
 
 class LoginPage extends React.Component
 {
@@ -69,7 +71,7 @@ class LoginPage extends React.Component
                                     required
                                 />
                             </div>
-
+                            <Link to={""} className="text-right inline-block w-full text-sm text-gray-500 hover:text-blue-900">Zapomněl jste heslo?</Link>
                             <div className="flex items-baseline justify-between mb-6">
                                 <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 w-full">Přihlásit se</button>
                             </div>
@@ -84,6 +86,11 @@ class LoginPage extends React.Component
                                 <img src={require ('../../Assets/Images/socialIcons/linkedin.png')} className='h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent'/>
                                 <img src={require ('../../Assets/Images/socialIcons/microsoft.png')} className='h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent'/>
                             </div>
+
+                            <p className='mt-10'>
+                                Nemáte účet?
+                                <Link to={registerPath} className="text-blue-900 ml-2">Registrujte se</Link>
+                            </p>
 
                         </form>
                     </div>

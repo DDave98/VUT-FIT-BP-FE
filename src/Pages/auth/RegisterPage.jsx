@@ -11,10 +11,43 @@ const RegistrationPage = () =>
     const [errMsg, setErrMsg] = useState('');
     const [sucess, setSucess] = useState(false);
 
+
+    const [name, setName] = useState('');
+    const [validName, setValidName] = useState(false);
+
+    const [surname, setSurname] = useState('');
+    const [validSurname, setValidSurname] = useState(false);
+
+    const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+
+    const [password, setPassword] = useState('');
+    const [validPassword, setValidPassword] = useState(false);
+
     useEffect(() =>
     {
         userRef.current.focus();
-    }, [])
+    }, []);
+
+    useEffect(() =>
+    {
+        console.log("name: ", name, "isValid: ", validName);
+    }, [name, validName]);
+
+    useEffect(() =>
+    {
+        console.log("surname: ", surname, "isValid: ", validSurname);
+    }, [surname, validSurname]);
+
+    useEffect(() =>
+    {
+        console.log("email: ", email, "isValid: ", validEmail);
+    }, [email, validEmail]);
+
+    useEffect(() =>
+    {
+        console.log("password: ", password, "isValid: ", validPassword);
+    }, [password, validPassword]);
 
 
     const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
@@ -43,6 +76,8 @@ const RegistrationPage = () =>
                         regex={nameRegex}
                         instruction={instr}
                         userRef={userRef}
+                        onChangeValue={(value) => setName(value)}
+                        getValidValue={(value) => setValidName(value)}
                     />
                     <FormInput
                         InputType='text'
@@ -53,6 +88,8 @@ const RegistrationPage = () =>
                         regex={nameRegex}
                         instruction={instr}
                         userRef={userRef}
+                        onChangeValue={(value) => setSurname(value)}
+                        getValidValue={(isValid) => setValidSurname(isValid)}
                     />
                     <FormInput
                         InputType='text'
@@ -63,6 +100,8 @@ const RegistrationPage = () =>
                         regex={emailRegex}
                         instruction={emailInstr}
                         userRef={userRef}
+                        onChangeValue={(value) => setEmail(value)}
+                        getValidValue={(isValid) => setValidEmail(isValid)}
                     />
                     <div className="flex items-baseline justify-between mb-6 mt-2">
                         <button className={buttonStyleClass}>Registrovat se</button>

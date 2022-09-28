@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 const FormInput = (
     {
@@ -13,7 +14,9 @@ const FormInput = (
         divStyleClass,
         regex,
         instruction,
-        userRef
+        userRef,
+        onChangeValue,
+        getValidValue,
     }) =>
 {
 
@@ -24,8 +27,10 @@ const FormInput = (
     useEffect(() =>
     {
         const result = regex.test(value);
-        console.log(inputName, value, result);
+        //console.log(inputName, value, result);
         setValidValue(result);
+        onChangeValue(value);
+        getValidValue(result);
     }, [value]);
 
     //const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
@@ -94,6 +99,8 @@ FormInput.propTypes =
     divStyleClass: PropTypes.string.isRequired,
     regex: PropTypes.instanceOf(RegExp),
     instruction: PropTypes.string.isRequired,
+    getValidValue: propTypes.func,
+    onChange: PropTypes.func,
 }
 
 export {FormInput};

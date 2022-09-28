@@ -1,31 +1,43 @@
-useEffect(() =>
-{
-    const result = passwordRegex.test(pwd);
-    console.log(result);
-    console.log(pwd);
-    setValidPwd(result);
-    const match = pwd === pwd2;
-    setPwd2(match);
-}, [pwd, pwd2])
+/**
+ * Komponenta kombinuje dva Form Inputy
+ * tvoří drojici heslo a potvrzení hesla
+ */
 
 import { useRef, useState, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 
 const FormPwdInputs = (
     {
-        InputType,
-        placeholder,
+        placeholder1,
+        placeholder2,
         htmlFor,
-        inputName,
-        divStyleClass,
+        input1Name,
+        input2Name,
+        divsStyleClass,
         regex,
-        instruction,
-        userRef
+        instruction1,
+        instruction2,
+        userRef,
+        onChangeValue,
+        getValidValue
     }) =>
 {
+
+    const [pwd2, setPwd2] = useState(false);
+    const [pwd1, setPwd1] = useState('');
+    const [validPwd1, setValidPwd1] = useState(false);
+
+
+    useEffect(() =>
+    {
+        const result = regex.test(pwd1);
+        console.log('pwd1:', result, pwd1);
+        setValidPwd1(result);
+
+        const isValid = (pwd1 === pwd2) && validPwd1;
+        onChangeValue(pwd1);
+        getValidValue(isValid);
+    }, [pwd1, pwd2]);
 
     return <>
         <FormInput
@@ -54,7 +66,6 @@ const FormPwdInputs = (
 
 FormPwdInputs.propTypes = 
 {
-    InputType: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     htmlFor: PropTypes.string.isRequired,
     inputName: PropTypes.string.isRequired,

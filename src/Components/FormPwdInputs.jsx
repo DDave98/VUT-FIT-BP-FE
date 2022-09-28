@@ -35,15 +35,15 @@ const FormPwdInputs = (
         //console.log('pwd1:', result, pwd1);
         setValidPwd1(result);
 
-        const isValid = pwd1 === pwd2 && result;
+        const isValid = pwd1 === pwd2 && validPwd1;
         //console.log('pwd2:', isValid, pwd2);
         onChangeValue(pwd1);
-        getValidValue(isValid);
+        getValidValue?.(isValid);
     }, [pwd1, pwd2]);
 
     return <>
         <FormInput
-            
+            InputType="password"
             placeholder={placeholder1}
             htmlFor={htmlFor + '1'}
             inputName={input1Name}
@@ -55,7 +55,7 @@ const FormPwdInputs = (
             getValidValue={(value) => setValidPwd1(value)}
         />
         <FormInput
-        
+            InputType="password"
             placeholder={placeholder2}
             htmlFor={htmlFor + '2'}
             inputName={input2Name}
@@ -63,7 +63,6 @@ const FormPwdInputs = (
             instruction={instruction2}
             userRef={userRef}
             onChangeValue={(value) => setPwd2(value)}
-            getValidValue={() => {}}
             extCompareValue={pwd1}
         />
     </>
@@ -81,7 +80,7 @@ FormPwdInputs.propTypes =
     regex: PropTypes.instanceOf(RegExp),
     instruction1: PropTypes.string.isRequired,
     instruction2: PropTypes.string.isRequired,
-    getValidValue: propTypes.func,
+    getValidValue: PropTypes.func,
     onChange: PropTypes.func,
 }
 

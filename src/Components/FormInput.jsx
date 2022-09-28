@@ -28,10 +28,10 @@ const FormInput = (
     useEffect(() =>
     {
         const result = regex?.test(value) || isSame(value);
-        console.log(inputName, value, result, extCompareValue);
+        //console.log(inputName, value, result);
         setValidValue(result);
         onChangeValue(value);
-        getValidValue(result);
+        getValidValue?.(result);
     }, [value, extCompareValue]);
 
     const isSame = (value) => extCompareValue === value && extCompareValue != ""
@@ -107,7 +107,7 @@ FormInput.propTypes =
     divStyleClass: PropTypes.string,
     regex: PropTypes.instanceOf(RegExp),
     instruction: PropTypes.string,
-    getValidValue: propTypes.func,
+    getValidValue: PropTypes.func,
     onChange: PropTypes.func,
     extCompareValue: PropTypes.string,
 }

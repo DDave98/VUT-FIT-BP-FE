@@ -1,7 +1,9 @@
 import FormPageLayout from '../../Components/FormPageLayout';
+import { loginPath } from "../../Constants/pagesPath";
 import { FormInput } from '../../Components/FormInput';
 import { FormPwdInputs } from '../../Components/FormPwdInputs';
 import { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { nameRegex, passwordRegex, emailRegex } from '../../Constants/regex';
 
 const RegistrationPage = () =>
@@ -32,22 +34,22 @@ const RegistrationPage = () =>
 
     useEffect(() =>
     {
-        console.log("name: ", name, "isValid: ", validName);
+        //console.log("name: ", name, "isValid: ", validName);
     }, [name, validName]);
 
     useEffect(() =>
     {
-        console.log("surname: ", surname, "isValid: ", validSurname);
+        //console.log("surname: ", surname, "isValid: ", validSurname);
     }, [surname, validSurname]);
 
     useEffect(() =>
     {
-        console.log("email: ", email, "isValid: ", validEmail);
+        //console.log("email: ", email, "isValid: ", validEmail);
     }, [email, validEmail]);
 
     useEffect(() =>
     {
-        console.log("password: ", password, "isValid: ", validPassword);
+        //console.log("password: ", password, "isValid: ", validPassword);
     }, [password, validPassword]);
 
 
@@ -70,6 +72,7 @@ const RegistrationPage = () =>
                 </p>
                 <FormPageLayout name='Registrace'>
                     <FormInput
+                    InputType="email"
                         placeholder='zadejte jméno'
                         htmlFor='registrationFormName'
                         inputName='Jméno:'
@@ -119,6 +122,8 @@ const RegistrationPage = () =>
                     <div className="flex items-baseline justify-between mb-6 mt-2">
                         <button className={buttonStyleClass}>Registrovat se</button>
                     </div>
+                    <p>Jste již registrovaný?</p>
+                    <Link to={loginPath} className='underline'>Přihlásit se</Link>
                 </FormPageLayout>
             </div>
     </>

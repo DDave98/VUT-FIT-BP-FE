@@ -52,7 +52,7 @@ const FormInput = (
     </>
 
     const instructionElement = <p
-        id='nameNote'
+        id={inputName + "nameNote"}
         className={valueFocus && value && !validValue ? instructionsStyleClass : "hidden"}
     >
         <svg
@@ -86,7 +86,7 @@ const FormInput = (
                 autoComplete="off"
                 onChange={(e) => setValue(e.target.value)}
                 aria-invalid={validValue ? "false" : "true"}
-                aria-describedby="nameNote"
+                aria-describedby={inputName + "nameNote"}
                 onFocus={() => setValueFocus(true)}
                 onBlur={() => setValueFocus(false)}
                 placeholder={placeholder? placeholder : ''}

@@ -58,7 +58,7 @@ const RegistrationPage = () =>
 
     const instr = "Minimální délka 4 znaky. Mělo by začínat písmenem. Písmena, číslice, podtržítka, pomlčky jsou povolené.";
     const emailInstr = "zadejte platnou e-mailovou adresu."
-    const pwdInstr = "Heslo by mělo obsahovat malé a velké písmena, číslice, speciální znak a minimální délka je 8 znaků."
+    const pwdInstr = "Heslo musí obsahovat malé a velké písmena, číslici, speciální znak. Minimální délka je 8 znaků. Povolené speciální znaky jsou !@#$%"
     const pwd2Instr='Hesla se musí shodovat'
 
     return <>
@@ -120,7 +120,12 @@ const RegistrationPage = () =>
                         getValidValue={(isValid) => setValidPassword(isValid)}
                     />
                     <div className="flex items-baseline justify-between mb-6 mt-2">
-                        <button className={buttonStyleClass}>Registrovat se</button>
+                        <button 
+                            className={buttonStyleClass}
+                            disabled={!validName || !validSurname || !validEmail || !validPassword ? true : false}
+                        >
+                            Registrovat se
+                        </button>
                     </div>
                     <p>Jste již registrovaný?</p>
                     <Link to={loginPath} className='underline'>Přihlásit se</Link>

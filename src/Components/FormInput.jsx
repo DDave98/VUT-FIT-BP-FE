@@ -16,11 +16,12 @@ const FormInput = (
         userRef,
         onChangeValue,
         getValidValue,
-        extCompareValue
+        extCompareValue,
+        inputValue
     }) =>
 {
 
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(inputValue ?? "");
     const [validValue, setValidValue] = useState(false);
     const [valueFocus, setValueFocus] = useState(false);
 
@@ -74,11 +75,11 @@ const FormInput = (
 
     return <>
         <div className={divStyleClass}>
-            <Form.Label htmlFor={htmlFor} className='block'>
+            <label htmlFor={htmlFor} className='block'>
                 {inputName}
                 {regex != null || extCompareValue != null ? validationIcons : <></>}
-            </Form.Label>
-            <Form.Control
+            </label>
+            <input
                 type={InputType? InputType : 'text'}
                 id={htmlFor}
                 ref={userRef}
@@ -90,6 +91,7 @@ const FormInput = (
                 onBlur={() => setValueFocus(false)}
                 placeholder={placeholder? placeholder : ''}
                 className={inputStyleClass}
+                defaultValue={inputValue ?? ""}
             />
             {instruction != null ? instructionElement : <></>}
         </div>
@@ -109,6 +111,7 @@ FormInput.propTypes =
     getValidValue: PropTypes.func,
     onChange: PropTypes.func,
     extCompareValue: PropTypes.string,
+    inputValue: PropTypes.string,
 }
 
 export {FormInput};

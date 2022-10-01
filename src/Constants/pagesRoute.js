@@ -11,6 +11,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import RegistrationPage from "../Pages/auth/RegisterPage";
 
 import * as path from "./pagesPath";
+import ConfirmPage from "../Pages/ConfirmPage";
 
 const appRoutesList = 
 [
@@ -62,6 +63,11 @@ const appRoutesList =
     {
         path: path.registerPath,
         component: RegistrationPage,
+        children: [],
+    },
+    {
+        path: path.confirmPath,
+        component: ConfirmPage,
         children: [],
     }
 ];

@@ -23,11 +23,10 @@ const ConfirmPage = () =>
             confirmSuccess ?
             (
                 <>
-                    <FormPageLayout name='Email úspěšně potvrzen'>
-                        <FontAwesomeIcon icon={faCheck} className="m-auto p-10 text-2xl font-bol w-20 h-20  border-solid border-2 border-green-600 rounded-full block text-green-600"/>
-                        
-                        <div className="flex items-baseline justify-between mb-6 mt-8 text-center">
-                            <Link to={loginPath} className={buttonStyleClass} >Přihlásit se</Link>
+                    <FormPageLayout name='Email byl úspěšně potvrzený'>
+                        <FontAwesomeIcon icon={faCheck} className="m-auto p-10 text-2xl font-bol w-20 h-20 mb-8 mt-16 border-solid border-2 border-green-600 rounded-full block text-green-600"/>
+                        <div className="flex items-baseline justify-between mb-6 text-center">
+                            <Link to={loginPath} className={buttonStyleClass} >přejít na přihlášení</Link>
                         </div>
                     </FormPageLayout>
                 </>

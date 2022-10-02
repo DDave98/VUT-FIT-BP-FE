@@ -71,7 +71,7 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
     return <>
         <FormPageLayout name='Registrace' handlSubmit={handlSubmit}>
             <FormInput
-                inputName="Zadejte potvrzovací kód"
+                inputName="Jméno:"
                 placeholder='zadejte jméno'
                 htmlFor='registrationFormName'
                 divStyleClass={divStyleClass}

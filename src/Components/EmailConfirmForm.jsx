@@ -32,7 +32,7 @@ const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
             <h4 className='text-1xl font-bold mb-2'>Uživatel byl zaregistrován</h4>
             <p className='mb-8 italic'>
                 Na uvedenou e-mailuvou adresu byl zaslán potvrzovací kód.
-                Klikněte na odkaz v emailu nebo napiště kód v Emailu. <br />
+                Klikněte na odkaz v e-mailu nebo napiště kód v e-mailu. <br />
                 Po potvrzení bude účet aktivní, jinak do 5 minut bude registrace stornována.
             </p>
             <FormInput

@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from 'react';
-import EmailConfirmForm from '../../Components/EmailConfirmForm';
 import RegistrationForm from '../../Components/RegistrationForm';
 import { confirmPath } from '../../Constants/pagesPath';
 import { Redirect } from 'react-router-dom';

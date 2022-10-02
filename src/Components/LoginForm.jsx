@@ -1,12 +1,14 @@
 
 // General
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+// hook
+import useAuth from '../Hooks/useAuth';
 
 // Services
 import { PublicAPI } from '../Services/AjaxService';
-import { SaveToStorage } from '../Services/StorageService';
 
 // Components
 import BreakLine from './BrakLine/BreakLine';
@@ -18,12 +20,15 @@ import { FormInput } from './FormInput';
 import { registerPath } from "../Constants/pagesPath";
 import config from "../Constants/config.json";
 import { passwordRegex, emailRegex } from '../Constants/regex';
-import { accessTokenTag } from '../Constants/storageTag';
 
-const LoginForm = ({setOnSuccess, setOnError}) =>
+const LoginForm = ({setOnError}) =>
 {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const userRef = useRef();
+    const { setAuth } = useAuth();
 
     const [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(false);
@@ -51,9 +56,10 @@ const LoginForm = ({setOnSuccess, setOnError}) =>
                 loginPath,
                 JSON.stringify(loginData)
             );
-            console.log("response: ", response.data, response.status);
-            SaveToStorage(response.data, accessTokenTag);
-            setOnSuccess(response.data);
+
+            const token = response.data;
+            setAuth({token});
+            navigate(from, {replace: true});
         }
         catch (err)
         {
@@ -102,7 +108,9 @@ const LoginForm = ({setOnSuccess, setOnError}) =>
                     Přihlásit se
                 </button>
             </div>
-            <Recaptcha />
+            <div className='flex item-base justify-center' >
+                <Recaptcha />
+            </div>
             <BreakLine id={"loginBreakLine1"}>nebo</BreakLine>
             <div id='loginSocialIcons' className="flex items-baseline justify-evenly">
                 <img src={require ('../Assets/Images/socialIcons/facebook.png')} className={socialIconStyle}/>
@@ -123,7 +131,6 @@ const LoginForm = ({setOnSuccess, setOnError}) =>
 
 LoginForm.propTypes = 
 {
-    setOnSuccess: PropTypes.func.isRequired,
     setOnError: PropTypes.func.isRequired,
 }
 

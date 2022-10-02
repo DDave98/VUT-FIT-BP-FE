@@ -3,49 +3,44 @@
     autor: David Michalica
 */
 
-import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import RequireAuth from './Components/RequireAuth';
+import { privateRoutes, publicRoutes } from "./Constants/pagesRoute";
+import NotFoundPage from './Pages/404';
 
-import appRoutesList from "./Constants/pagesRoute";
-
-class App extends Component
+function App()
 {
 
-  // funcion create list of routes components
-  GetListOfRouteComponent(routesList, topKey)
-  { 
-    return routesList.map(
-      ({path, component, children}, key) =>
-      children.lenght < 0 ?
-      <Route exact path={path} component={component} key={topKey+"."+key} /> :
-      (
-        <Route exact path={path} component={component} key={topKey+"."+key}>
-          {this.GetListOfRouteComponent(children, topKey)}
+  const publicRoutesComponents = GetListOfRouteComponent(publicRoutes);
+  const privateRoutesComponents = GetListOfRouteComponent(privateRoutes);
+
+  return (
+    <Routes>
+      { /* PUBLIC ROUTE */}
+      {publicRoutesComponents}
+
+      { /* PRIVATE ROUTE */}
+        <Route element={<RequireAuth />} >
+          {privateRoutesComponents}
         </Route>
-      )
-    );
-  }
+        <Route path='/*' element={<NotFoundPage />}/>
+    </Routes>
+  ); 
+}
 
-  render()
-  {
-    const routeComponents = this.GetListOfRouteComponent(appRoutesList);
-
-    return (
-    <div className="App">
-      <Router>
-        <Switch>
-          {routeComponents}
-          <Redirect from='/*' to="/404"/>
-        </Switch>
-      </Router>
-    </div>
+// funcion create list of routes components
+function GetListOfRouteComponent(routesList, topKey)
+{ 
+  return routesList.map(
+    ({path, component, children}, key) =>
+    children.lenght < 0 ?
+    <Route exact path={path} element={component} key={topKey+"."+key} /> :
+    (
+      <Route exact path={path} element={component} key={topKey+"."+key}>
+        {GetListOfRouteComponent(children, topKey)}
+      </Route>
+    )
   );
-  }  
 }
 
 export default App;

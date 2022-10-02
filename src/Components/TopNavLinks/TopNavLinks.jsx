@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../../Constants/menuPath';
 import { useState, useEffect } from 'react';
-import PropTypes, { string } from 'prop-types';
+import PropTypes, { object, string } from 'prop-types';
 
 const TopNavLinks = ({navLinks}) => {
 
@@ -21,7 +21,7 @@ const TopNavLinks = ({navLinks}) => {
 
 TopNavLinks.propTypes =
 {
-    navLinks: PropTypes.arrayOf(string)
+    navLinks: PropTypes.arrayOf(object)
 }
 
 export default TopNavLinks;

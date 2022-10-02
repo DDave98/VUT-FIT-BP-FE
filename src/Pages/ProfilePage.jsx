@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PublicPageLayout from "../Components/PageLayout/PageLayout";
+import PublicPageLayout from "../Components/PageLayout";
 
 class ProfilePage extends React.Component
 {

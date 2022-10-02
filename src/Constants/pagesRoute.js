@@ -13,63 +13,65 @@ import RegistrationPage from "../Pages/auth/RegisterPage";
 import * as path from "./pagesPath";
 import ConfirmPage from "../Pages/ConfirmPage";
 
-const appRoutesList = 
+export const publicRoutes =
 [
     {
-        path: path.homePath,
-        component: HomePage,
-        children: [],
-    },
-    {
         path: path.loginPath,
-        component: LoginPage,
+        component: <LoginPage />,
         children: [],
     },
     {
         path: path.notFoundPath,
-        component: NotFoundPage,
-        children: [],
-    },
-    {
-        path: path.appPath,
-        component: AppPage,
-        children: [],
-    },
-    {
-        path: path.logPath,
-        component: LogPage,
-        children: [],
-    },
-    {
-        path: path.profilePath,
-        component: ProfilePage,
-        children: [],
-    },
-    {
-        path: path.settingPath,
-        component: SettingPage,
-        children: [],
-    },
-    {
-        path: path.userPath,
-        component: UserPage,
+        component: <NotFoundPage />,
         children: [],
     },
     {
         path: path.errorPath,
-        component: ErrorPage,
+        component: <ErrorPage />,
         children: [],
     },
     {
         path: path.registerPath,
-        component: RegistrationPage,
+        component: <RegistrationPage />,
         children: [],
     },
     {
         path: path.confirmPath,
-        component: ConfirmPage,
+        component: <ConfirmPage />,
         children: [],
     }
 ];
 
-export default appRoutesList;
+export const privateRoutes =
+[
+    {
+        path: path.homePath,
+        component: <HomePage />,
+        children: [],
+    },
+    {
+        path: path.appPath,
+        component: <AppPage />,
+        children: [],
+    },
+    {
+        path: path.logPath,
+        component: <LogPage />,
+        children: [],
+    },
+    {
+        path: path.profilePath,
+        component: <ProfilePage />,
+        children: [],
+    },
+    {
+        path: path.settingPath,
+        component: <SettingPage />,
+        children: [],
+    },
+    {
+        path: path.userPath,
+        component: <UserPage />,
+        children: [],
+    }
+];

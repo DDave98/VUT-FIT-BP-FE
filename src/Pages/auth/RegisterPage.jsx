@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import RegistrationForm from '../../Components/RegistrationForm';
 import { confirmPath } from '../../Constants/pagesPath';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 const RegistrationPage = () =>
 {
@@ -18,7 +18,7 @@ const RegistrationPage = () =>
     return <>
         {
             registrationSuccess ?
-                <Redirect to={confirmPath}/> :
+                <Navigate to={confirmPath}/> :
                 <RegistrationForm setOnSuccess={setRegistrationSuccess} setOnError={setRegistrationErrorMsg} />
         }
         <p 

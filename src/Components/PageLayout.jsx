@@ -1,7 +1,7 @@
 import React  from "react";
-import "../../Styles/PageLayout.css";
-import TopNavbar from "../TopNavbar/TopNavbar";
-import Footer from "../Footer/Footer";
+import "../Styles/PageLayout.css";
+import TopNavbar from "./TopNavbar";
+import Footer from "./Footer/Footer";
 
 const PublicPageLayout = (props) =>
 {

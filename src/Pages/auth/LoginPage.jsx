@@ -1,13 +1,11 @@
 import { useRef, useState, useEffect } from 'react';
 import { homePath } from "../../Constants/pagesPath";
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import LoginForm from '../../Components/LoginForm';
 
 const LoginPage = () =>
 {
     const errRef = useRef();
-
-    const [loginSuccess, setLoginSuccess] = useState(false);
     const [loginErrorMsg, setLoginErrorMsg] = useState('');
 
     useEffect(() =>
@@ -16,11 +14,7 @@ const LoginPage = () =>
     }, [loginErrorMsg]);
 
     return <>
-        {
-            loginSuccess ?
-                <Redirect to={homePath}/> :
-                <LoginForm setOnError={setLoginErrorMsg} setOnSuccess={setLoginSuccess} />
-        }
+        <LoginForm setOnError={setLoginErrorMsg} />
         <p 
             ref={errRef}
             className={loginErrorMsg ? "errmsg" : "hidden"}

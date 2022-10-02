@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from "../Constants/config.json";
 import {Logout} from './LogoutService';
 
-const URL = config.baseApiURL;
+const URL = "https://localhost:7155";//config.baseApiURL;
 const API = axios.create({baseURL: URL})
 
 API.defaults.headers.common['Authorization'] = "token here";
@@ -29,7 +29,8 @@ export const PublicAPI = axios.create({
     headers:
     {
         'Accept': "application/json",
-        'Content-Type': "application/json"
+        'Content-Type': "application/json",
+        "Access-Control-Allow-Origin": "*"
     }
 });
 

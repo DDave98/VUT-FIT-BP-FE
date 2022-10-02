@@ -9,7 +9,7 @@ const FormPageLayout = ({name, handlSubmit, ...props}) =>
 {
     const handlSubmitEvent = async (e) => {
         e.preventDefault();
-        handlSubmit?.();
+        await handlSubmit?.();
     }
 
     return (

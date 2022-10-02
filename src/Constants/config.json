@@ -5,11 +5,13 @@
     {
        "auth":
        {
-            "authenticate": "/api/Auth/authenticate"
+            "authenticate":   "/api/Auth/authenticate",
+            "refresh":        "/api/Auth/Refresh",
+            "registration":   "/api/Auth/Registration"
        },
        "user":
        {
-            "baseInfo": "/api/User/baseInfo"
+            "baseInfo":       "/api/User/baseInfo"
        }
     },
 

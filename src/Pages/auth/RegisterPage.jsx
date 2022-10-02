@@ -11,8 +11,10 @@ const RegistrationPage = () =>
     const [registrationSuccess, setRegistrationSuccess] = useState(false);
     const [registrationErrorMsg, setRegistrationErrorMsg] = useState('');
 
-    const [confirmSuccess, setConfirmSuccess] = useState(false);
-    const [confirmErrorMsg, setConfirmErrorMsg] = useState('');
+    useEffect(() =>
+    {
+        errRef.current.focus();
+    }, [registrationErrorMsg]);
 
     return <>
         {
@@ -26,13 +28,6 @@ const RegistrationPage = () =>
             aria-live="assertive"
         >
             {registrationErrorMsg}
-        </p>
-        <p 
-            ref={errRef}
-            className={confirmErrorMsg ? "errmsg" : "hidden"}
-            aria-live="assertive"
-        >
-            {confirmErrorMsg}
         </p>
     </>
 };

@@ -6,6 +6,8 @@ import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { nameRegex, passwordRegex, emailRegex } from '../Constants/regex';
+import { PublicAPI } from '../Services/AjaxService';
+import config from "../Constants/config.json";
 
 const RegistrationForm = ({setOnSuccess, setOnError}) =>
 {
@@ -23,16 +25,39 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
     const [password, setPassword] = useState('');
     const [validPassword, setValidPassword] = useState(false);
 
-    const handlSubmit = () => {
+    const handlSubmit = async () => {
 
         if (!(validEmail && validName && validSurname && validPassword))
         {
             setOnError("Nevalidní vstup");
-            console.log("nevalidní vstup");
             return;
         }
 
-        setOnSuccess(true);
+        const registrationPath = config.path.auth.registration;
+        const registrationData = {
+            Name: name,
+            Surname: surname,
+            Email: email,
+            Password: password
+        }
+
+        try
+        {
+            const response = await PublicAPI.post(
+                registrationPath,
+                JSON.stringify(registrationData)
+            );
+            console.log("response: ", response.data, response.status);
+            setOnSuccess(response.data);
+        }
+        catch (err)
+        {
+            if (!err) setOnError("žádná odpověď od serveru, zkontrolujte prosím připojení.");
+            else if (err.response?.status === 409) setOnError("zadaný email je již registrovaný");
+            else if (err.response?.status === 400) setOnError("některý z uvedených parametrů je neplatný");
+            else setOnError("Registrace se nezdařila");
+            console.log("registration form error: ", err.message);
+        }
     }
 
     const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";

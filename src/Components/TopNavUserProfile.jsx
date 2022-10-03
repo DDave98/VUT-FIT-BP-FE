@@ -1,7 +1,7 @@
 import '../Styles/TopNavUserProfile.css';
 import { Link, useNavigate } from 'react-router-dom';
 import {navDropDownLinks} from '../Constants/menuPath';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { Logout } from '../Services/LogoutService';
 

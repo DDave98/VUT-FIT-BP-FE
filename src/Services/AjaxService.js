@@ -23,17 +23,3 @@ export const PrivateAPI = axios.create({
     },
     withCredentials: true
 });
-
-PrivateAPI.interceptors.response.use(
-    (response) => {return response},
-    (error) =>
-    {
-        switch(error.response.status)
-        {
-            case 401:
-                return Logout();
-            default:
-                console.log("error: ", error.response, " message: ", error.response);
-        }
-    }
-);

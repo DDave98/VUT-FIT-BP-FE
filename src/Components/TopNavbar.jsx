@@ -16,8 +16,9 @@ import TopNavLinks from './TopNavLinks/TopNavLinks';
 import { homePath } from '../Constants/pagesPath';
 import config from "../Constants/config.json";
 import { PrivateAPI } from '../Services/AjaxService';
+import {NotificationManager} from 'react-notifications';
 
-const TopNavbar = ({setOnError}) => {
+const TopNavbar = () => {
 
     const [firstName, setFirstName] = useState('Jmeno');
     const [lastName, setLastName] = useState('Příjmení');
@@ -34,17 +35,15 @@ const TopNavbar = ({setOnError}) => {
         }
         catch (err)
         {
-            if (!err?.response) setOnError("žádná odpověď od serveru, zkontrolujte prosím připojení.");
-            else if (err.response?.status === 400) setOnError("některý z uvedených parametrů je neplatný");
-            else setOnError("Přihlášení se nezdařila");
-            console.log("topNav error: ", err?.message);
-        } 
+            NotificationManager.error("nelze načíst data", "BaseInfo()", 10000);
+            console.log("topNav error: ", err);
+        }
     }
 
     // hook pro načtení dat
     useEffect(() =>
     {
-        // GetBaseInfo();
+        GetBaseInfo();
     }, []);
 
     return <>
@@ -70,7 +69,6 @@ const TopNavbar = ({setOnError}) => {
 
 TopNavbar.propTypes =
 {
-    setOnError: propTypes.func,
 }
 
 export default TopNavbar;

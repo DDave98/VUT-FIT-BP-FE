@@ -4,7 +4,7 @@ import { loginPath } from "../Constants/pagesPath";
 
 const RequireAuth = () =>
 {
-    const { auth } = useAuth();         // token uložený v paměti instance
+    const { auth } = useAuth();         // token saved into page instance memory
     const location = useLocation();
     //console.log(auth?.token);
     return (

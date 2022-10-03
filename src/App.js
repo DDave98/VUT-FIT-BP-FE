@@ -3,7 +3,9 @@
     autor: David Michalica
 */
 
+import 'react-notifications/lib/notifications.css';
 import { Routes, Route } from 'react-router-dom';
+import PublicPageLayout from './Components/PageLayout';
 import RequireAuth from './Components/RequireAuth';
 import { privateRoutes, publicRoutes } from "./Constants/pagesRoute";
 import NotFoundPage from './Pages/404';
@@ -20,8 +22,10 @@ function App()
       {publicRoutesComponents}
 
       { /* PRIVATE ROUTE */}
-        <Route element={<RequireAuth />} >
-          {privateRoutesComponents}
+        <Route element={<RequireAuth />} > {/* tento element vyžaduje přítomný token v paměti */}
+            <Route element={<PublicPageLayout />} > {/* všechny stránky uvnitř mají stejný layout (topnav + footer) */}
+              {privateRoutesComponents}
+            </Route>
         </Route>
         <Route path='/*' element={<NotFoundPage />}/>
     </Routes>

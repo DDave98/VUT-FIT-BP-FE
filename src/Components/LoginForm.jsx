@@ -58,15 +58,19 @@ const LoginForm = ({setOnError}) =>
             );
 
             const token = response.data;
-            setAuth({token});
+            setAuth({token});   // save token to page instance memory
             navigate(from, {replace: true});
         }
         catch (err)
         {
-            if (!err) setOnError("žádná odpověď od serveru, zkontrolujte prosím připojení.");
-            else if (err.response?.status === 400) setOnError("některý z uvedených parametrů je neplatný");
-            else setOnError("Přihlášení se nezdařila");
-            console.log("login form error: ", err.message);
+            var errTitle = "Nastala chyba při zpracování";
+            var errMessage = "...";
+            if (err == null) errMessage = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
+            else if (err.response?.status == 400) errMessage = "některý z uvedených parametrů je neplatný";
+            else errMessage = "Přihlášení se nezdařilo";
+
+            setOnError(errMessage, errTitle);
+            console.log("login form error: ", err);
         }
     }
 

@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 // Services
 
 // Components
-import TopNavUserProfile from './TopNavUserProfile/TopNavUserProfile'
+import TopNavUserProfile from './TopNavUserProfile'
 
 // Constants
 import '../Styles/TopNavbar.css';
@@ -44,7 +44,7 @@ const TopNavbar = ({setOnError}) => {
     // hook pro načtení dat
     useEffect(() =>
     {
-        GetBaseInfo();
+        // GetBaseInfo();
     }, []);
 
     return <>

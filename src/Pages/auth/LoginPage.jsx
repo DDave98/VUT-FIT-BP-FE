@@ -2,26 +2,20 @@ import { useRef, useState, useEffect } from 'react';
 import { homePath } from "../../Constants/pagesPath";
 import { Navigate } from 'react-router-dom';
 import LoginForm from '../../Components/LoginForm';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const LoginPage = () =>
 {
-    const errRef = useRef();
-    const [loginErrorMsg, setLoginErrorMsg] = useState('');
+    // zde pak uložit token a zobrazit form pro dvoufazové
 
-    useEffect(() =>
+    const ShowError = (message, title) =>
     {
-        errRef.current.focus();
-    }, [loginErrorMsg]);
+        NotificationManager.error(message, title, 10000);
+    }
 
     return <>
-        <LoginForm setOnError={setLoginErrorMsg} />
-        <p 
-            ref={errRef}
-            className={loginErrorMsg ? "errmsg" : "hidden"}
-            aria-live="assertive"
-        >
-            {loginErrorMsg}
-        </p>
+        <LoginForm setOnError={ShowError} />
+        <NotificationContainer />
     </>
 };
 

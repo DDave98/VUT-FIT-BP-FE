@@ -1,8 +1,10 @@
 import FormPageLayout from './FormPageLayout';
 import { FormInput } from './FormInput';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { guidRegex } from '../Constants/regex';
+import config from "../Constants/config.json";
+import { PublicAPI } from '../Services/AjaxService';
 
 const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
 {
@@ -11,17 +13,21 @@ const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
     const [confirmCode, setConfirmCode] = useState(urlConfirmCode);
     const [validConfirmCode, setValidConfirmCode] = useState(false);
 
-    const handlSubmit = () => {
-
-        if (!validConfirmCode)
+    const handlSubmit = async () => {
+        try
         {
-            setOnError("Nevalidní kód");
-            console.log("nevalidní kód");
-            return;
-        }
+            const path = config.path.confirmEmail + "?code=" + confirmCode;
+            const response = await PublicAPI.get(path);
 
-        setOnError("");
-        setOnSuccess(true);
+            setOnSuccess(true);
+        }
+        catch (err)
+        {
+             if (err == null) setOnError("žádná odpověď od serveru, zkontrolujte prosím připojení.", "Nastala chyba při zpracování");
+            else if (err.response?.status == 400) setOnError("Nevalidní kód", "");
+            else setOnError("Potvrzení se nezdařilo", "Nastala chyba při zpracování");
+            console.log("login form error: ", err);
+        }
     }
 
     const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
@@ -33,7 +39,7 @@ const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
             <p className='mb-8 italic'>
                 Na uvedenou e-mailuvou adresu byl zaslán potvrzovací kód.
                 Klikněte na odkaz v e-mailu nebo napiště kód v e-mailu. <br />
-                Po potvrzení bude účet aktivní, jinak do 5 minut bude registrace stornována.
+                Po potvrzení bude účet aktivní, jinak do pár minut bude registrace zrušena.
             </p>
             <FormInput
                 inputName={'Potvrzovací kód:'}

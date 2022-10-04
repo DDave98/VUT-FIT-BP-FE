@@ -33,7 +33,7 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
             return;
         }
 
-        const registrationPath = config.path.auth.registration;
+        const registrationPath = config.path.registration;
         const registrationData = {
             Name: name,
             Surname: surname,
@@ -52,11 +52,11 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
         }
         catch (err)
         {
-            if (!err) setOnError("žádná odpověď od serveru, zkontrolujte prosím připojení.");
-            else if (err.response?.status === 409) setOnError("zadaný email je již registrovaný");
-            else if (err.response?.status === 400) setOnError("některý z uvedených parametrů je neplatný");
-            else setOnError("Registrace se nezdařila");
-            console.log("registration form error: ", err.message);
+            if (err == null) setOnError("žádná odpověď od serveru, zkontrolujte prosím připojení.", "nastala chyba");
+            else if (err.response?.status == 409) setOnError(err.response.data, "");
+            else if (err.response?.status == 400) setOnError("některý z uvedených parametrů je neplatný", "");
+            else setOnError("Registrace se nezdařila", "nastala chyba");
+            console.log("registration form error: ", err);
         }
     }
 

@@ -44,7 +44,7 @@ const LoginForm = ({setOnError}) =>
             return;
         }
 
-        const loginPath = config.path.auth.authenticate;
+        const loginPath = config.path.authenticate;
         const loginData = {
             Password: password,
             Login: email

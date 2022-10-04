@@ -3,16 +3,11 @@
 
     "path":
     {
-       "auth":
-       {
-            "authenticate":   "/api/Auth/authenticate",
-            "refresh":        "/api/Auth/Refresh",
-            "registration":   "/api/Auth/Registration"
-       },
-       "user":
-       {
-            "baseInfo":       "/api/User/baseInfo"
-       }
+          "authenticate":   "/api/Auth/authenticate",
+          "confirmEmail":   "/api/Auth/confirmEmail",
+          "refresh":        "/api/Auth/Refresh",
+          "registration":   "/api/User/Registration",
+          "baseInfo":       "/api/User/baseInfo"
     },
 
     "RecaptchaKey": "some key"

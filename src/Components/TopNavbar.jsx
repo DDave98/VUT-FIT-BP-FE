@@ -25,7 +25,7 @@ const TopNavbar = () => {
 
     const GetBaseInfo = async () =>
     {
-        const baseInfoPath = config.path.user.baseInfo;
+        const baseInfoPath = config.path.baseInfo;
 
         try
         {

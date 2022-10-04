@@ -1,33 +1,25 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState } from 'react';
 import RegistrationForm from '../../Components/RegistrationForm';
 import { confirmPath } from '../../Constants/pagesPath';
 import { Navigate } from 'react-router-dom';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const RegistrationPage = () =>
 {
-    const errRef = useRef();
-
     const [registrationSuccess, setRegistrationSuccess] = useState(false);
-    const [registrationErrorMsg, setRegistrationErrorMsg] = useState('');
 
-    useEffect(() =>
+    const ShowError = (message, title) =>
     {
-        errRef.current.focus();
-    }, [registrationErrorMsg]);
+        NotificationManager.error(message, title, 10000);
+    }
 
     return <>
         {
             registrationSuccess ?
                 <Navigate to={confirmPath}/> :
-                <RegistrationForm setOnSuccess={setRegistrationSuccess} setOnError={setRegistrationErrorMsg} />
+                <RegistrationForm setOnSuccess={setRegistrationSuccess} setOnError={ShowError} />
         }
-        <p 
-            ref={errRef}
-            className={registrationErrorMsg ? "errmsg" : "hidden"}
-            aria-live="assertive"
-        >
-            {registrationErrorMsg}
-        </p>
+        <NotificationContainer />
     </>
 };
 

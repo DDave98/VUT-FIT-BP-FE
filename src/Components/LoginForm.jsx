@@ -11,8 +11,8 @@ import useAuth from '../Hooks/useAuth';
 import { PublicAPI } from '../Services/AjaxService';
 
 // Components
-import BreakLine from './BrakLine/BreakLine';
-import Recaptcha from './ReCAPTCHA/ReCAPTCHA';
+import BreakLine from './BreakLine';
+import Recaptcha from './ReCAPTCHA';
 import FormPageLayout from './FormPageLayout';
 import { FormInput } from './FormInput';
 

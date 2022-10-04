@@ -1,5 +1,5 @@
 import ReCAPTCHA from "react-google-recaptcha";
-import config from "../../Constants/config.json";
+import config from "../Constants/config.json";
 
 const Recaptcha = () =>
 {

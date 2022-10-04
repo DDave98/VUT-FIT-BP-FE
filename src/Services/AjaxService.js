@@ -1,9 +1,9 @@
 import axios from 'axios';
 import config from "../Constants/config.json";
+import useAuth from '../Hooks/useAuth';
 import {Logout} from './LogoutService';
 
 const URL = config.baseApiURL;
-
 export const PublicAPI = axios.create({
     baseURL: URL,
     headers:
@@ -19,7 +19,6 @@ export const PrivateAPI = axios.create({
     {
         'Accept': "application/json",
         'Content-Type': "application/json",
-        'Authorization': "tokenJWT",
     },
     withCredentials: true
 });

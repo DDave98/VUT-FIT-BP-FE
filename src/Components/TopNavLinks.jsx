@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../../Constants/menuPath';
+import '../Constants/menuPath';
 import { useState, useEffect } from 'react';
 import PropTypes, { object, string } from 'prop-types';
 

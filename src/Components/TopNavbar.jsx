@@ -12,7 +12,7 @@ import TopNavUserProfile from './TopNavUserProfile'
 // Constants
 import '../Styles/TopNavbar.css';
 import { navLinks as links } from '../Constants/menuPath';
-import TopNavLinks from './TopNavLinks/TopNavLinks';
+import TopNavLinks from './TopNavLinks';
 import { homePath } from '../Constants/pagesPath';
 import config from "../Constants/config.json";
 import { PrivateAPI } from '../Services/AjaxService';

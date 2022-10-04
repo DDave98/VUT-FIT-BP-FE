@@ -1,7 +1,7 @@
 import React  from "react";
 import "../Styles/PageLayout.css";
 import TopNavbar from "./TopNavbar";
-import Footer from "./Footer/Footer";
+import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 

@@ -9,6 +9,7 @@ import useAuth from '../Hooks/useAuth';
 
 // Services
 import { PublicAPI } from '../Services/AjaxService';
+import { SaveToStorage } from '../Services/StorageService';
 
 // Components
 import BreakLine from './BreakLine';
@@ -20,6 +21,7 @@ import { FormInput } from './FormInput';
 import { registerPath } from "../Constants/pagesPath";
 import config from "../Constants/config.json";
 import { passwordRegex, emailRegex } from '../Constants/regex';
+import { accessTokenTag } from '../Constants/storageTag';
 
 const LoginForm = ({setOnError}) =>
 {
@@ -59,6 +61,7 @@ const LoginForm = ({setOnError}) =>
 
             const token = response.data;
             setAuth({token});   // save token to page instance memory
+            SaveToStorage(token, accessTokenTag);
             navigate(from, {replace: true});
         }
         catch (err)

@@ -28,11 +28,6 @@ const TopNavUserProfile = ({name, surname}) => {
         else setDropdownState(false);
     }
 
-    const logout = async () =>
-    {
-        setAuth({});
-    }
-
     return <>
         <div
             onMouseEnter={dropdownToggle}
@@ -50,7 +45,7 @@ const TopNavUserProfile = ({name, surname}) => {
                             <Link key={name+link} to={link}  id='dropdownLink'>{name}</Link>
                         ))
                     }
-                    <button id='dropdownLink' onClick={logout} >Odhlásit se</button>
+                    <button id='dropdownLink' onClick={Logout} >Odhlásit se</button>
                 </div>
             </div>
         </div>

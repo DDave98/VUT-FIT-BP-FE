@@ -11,12 +11,14 @@ import {accessTokenTag} from '../Constants/storageTag';
 import {loginPath} from "../Constants/pagesPath";
 
 
-export function Logout()
+function Logout () 
 {
     //const { setAuth } = useContext(AuthContext);
-    const location = useLocation();
+    //let location = useLocation();
     
     //setAuth({});                         // delete access token from memory
     DeleteFromStorage(accessTokenTag);   // delete access token from local storage
-    return <Navigate to={loginPath} state={{from: location}} replace />
+    return <Navigate to={loginPath} replace />
 }
+
+export default Logout;

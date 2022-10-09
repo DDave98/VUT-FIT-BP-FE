@@ -1,19 +1,13 @@
 import '../Styles/TopNavUserProfile.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {navDropDownLinks} from '../Constants/menuPath';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PropTypes from 'prop-types';
-import { Logout } from '../Services/LogoutService';
-
-// hook
-import useAuth from '../Hooks/useAuth';
+import Logout from '../Services/LogoutService';
 
 const TopNavUserProfile = ({name, surname}) => {
 
     const [dropdownState, setDropdownState] = useState(false);
-
-    const { setAuth } = useAuth();
-    const navigate = useNavigate(); 
 
     const dropdownToggle = () =>
     {

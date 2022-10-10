@@ -1,14 +1,12 @@
 // General
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import FormPageLayout from './FormPageLayout';
 import { FormInput } from './FormInput';
 import { emailRegex } from '../Constants/regex';
 import SendButton from './SendButton';
 import config from "../Constants/config.json";
 import { PublicAPI } from '../Services/AjaxService';
-import SuccessForm from './SuccessForm';
 
 const RecoveryForm = ({setOnError, setOnSuccess}) =>
 {

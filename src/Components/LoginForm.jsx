@@ -18,7 +18,7 @@ import FormPageLayout from './FormPageLayout';
 import { FormInput } from './FormInput';
 
 // Constants
-import { registerPath } from "../Constants/pagesPath";
+import { recoveryPath, registerPath } from "../Constants/pagesPath";
 import config from "../Constants/config.json";
 import { passwordRegex, emailRegex } from '../Constants/regex';
 import { accessTokenTag } from '../Constants/storageTag';
@@ -38,7 +38,8 @@ const LoginForm = ({setOnError}) =>
     const [password, setPassword] = useState('');
     const [validPassword, setValidPassword] = useState(false);
 
-    const handlSubmit = async () => {
+    const handlSubmit = async () =>
+    {
 
         if (!validPassword || !validEmail)
         {
@@ -106,7 +107,7 @@ const LoginForm = ({setOnError}) =>
                 onChangeValue={(value) => setPassword(value)}
                 getValidValue={(isValid) => setValidPassword(isValid)}
             />
-            <Link to={""} className={lostPasswodStyle}>Zapomněl jste heslo?</Link>
+            <Link to={recoveryPath} className={lostPasswodStyle}>Zapomněl jste heslo?</Link>
             <div className={submitButtonStyle}>
                 <button
                     className={buttonStyleClass}

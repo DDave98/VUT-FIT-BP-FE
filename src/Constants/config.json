@@ -7,7 +7,8 @@
           "confirmEmail":   "/api/Auth/confirmEmail",
           "refresh":        "/api/Auth/Refresh",
           "registration":   "/api/User/Registration",
-          "baseInfo":       "/api/User/baseInfo"
+          "baseInfo":       "/api/User/baseInfo",
+          "recovery":       "/api/Auth/recovery"
     },
 
     "RecaptchaKey": "some key"

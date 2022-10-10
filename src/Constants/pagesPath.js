@@ -9,3 +9,4 @@ export const userPath = "/users";
 export const errorPath = "/error/:errorCode";
 export const registerPath = "/registration";
 export const confirmPath = "/confirm";
+export const recoveryPath = "/recovery";

@@ -99,7 +99,7 @@ const LoginForm = ({setOnError}) =>
             <FormInput
                 InputType="password"
                 inputName="Heslo:"
-                placeholder='zadejte email'
+                placeholder='zadejte heslo'
                 htmlFor='loginFormPwd'
                 divStyleClass={divStyleClass}
                 userRef={userRef}

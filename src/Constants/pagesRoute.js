@@ -7,7 +7,6 @@ import LogPage from "../Pages/LogPage";
 import ProfilePage from "../Pages/ProfilePage";
 import SettingPage from "../Pages/SettingPage";
 import UserPage from "../Pages/UserPage";
-import ErrorPage from "../Pages/ErrorPage";
 import RecoveryPage from "../Pages/RecoveryPage";
 import RegistrationPage from "../Pages/auth/RegisterPage";
 
@@ -24,11 +23,6 @@ export const publicRoutes =
     {
         path: path.notFoundPath,
         component: <NotFoundPage />,
-        children: [],
-    },
-    {
-        path: path.errorPath,
-        component: <ErrorPage />,
         children: [],
     },
     {

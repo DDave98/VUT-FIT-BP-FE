@@ -34,10 +34,13 @@ const ConfirmPage = () =>
                 />
             ) :
             (
-                <EmailConfirmForm setOnSuccess={setConfirmSuccess} setOnError={ShowError} urlConfirmCode={code} />
+                <EmailConfirmForm
+                    setOnSuccess={setConfirmSuccess}
+                    setOnError={ShowError}
+                    urlConfirmCode={code}
+                />
             )
         }
-        <NotificationContainer />
     </>
 };
 

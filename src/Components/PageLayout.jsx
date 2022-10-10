@@ -3,7 +3,6 @@ import "../Styles/PageLayout.css";
 import TopNavbar from "./TopNavbar";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
-import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const PublicPageLayout = (props) =>
 {
@@ -21,7 +20,7 @@ const PublicPageLayout = (props) =>
                 <h2 className="text-xl">Na webu se pracuje</h2>
                 <img src="https://www.nicepng.com/png/detail/137-1379308_website-work-in-progress.png" className="inProgress ml-auto mr-auto"/>
             </div>
-            <NotificationContainer />
+            
             <Footer />
         </>
     );

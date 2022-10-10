@@ -1,5 +1,5 @@
 import LoginForm from '../../Components/LoginForm';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 
 const LoginPage = () =>
 {
@@ -10,10 +10,7 @@ const LoginPage = () =>
         NotificationManager.error(message, title, 10000);
     }
 
-    return <>
-        <LoginForm setOnError={ShowError} />
-        <NotificationContainer />
-    </>
+    return <LoginForm setOnError={ShowError} />
 };
 
 export default LoginPage;

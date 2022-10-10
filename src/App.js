@@ -8,6 +8,7 @@ import { Routes, Route } from 'react-router-dom';
 import PublicPageLayout from './Components/PageLayout';
 import RequireAuth from './Components/RequireAuth';
 import { privateRoutes, publicRoutes } from "./Constants/pagesRoute";
+import { NotificationContainer } from 'react-notifications';
 import NotFoundPage from './Pages/404';
 
 function App()
@@ -17,18 +18,21 @@ function App()
   const privateRoutesComponents = GetListOfRouteComponent(privateRoutes);
 
   return (
-    <Routes>
-      { /* PUBLIC ROUTE */}
-      {publicRoutesComponents}
+    <>
+        <Routes>
+        { /* PUBLIC ROUTE */}
+        {publicRoutesComponents}
 
-      { /* PRIVATE ROUTE */}
-        <Route element={<RequireAuth />} > {/* tento element vyžaduje přítomný token v paměti */}
-            <Route element={<PublicPageLayout />} > {/* všechny stránky uvnitř mají stejný layout (topnav + footer) */}
-              {privateRoutesComponents}
-            </Route>
-        </Route>
-        <Route path='/*' element={<NotFoundPage />}/>
-    </Routes>
+        { /* PRIVATE ROUTE */}
+          <Route element={<RequireAuth />} > {/* tento element vyžaduje přítomný token v paměti */}
+              <Route element={<PublicPageLayout />} > {/* všechny stránky uvnitř mají stejný layout (topnav + footer) */}
+                {privateRoutesComponents}
+              </Route>
+          </Route>
+          <Route path='/*' element={<NotFoundPage />}/>
+      </Routes>
+      <NotificationContainer />
+    </>
   ); 
 }
 

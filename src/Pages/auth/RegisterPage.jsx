@@ -17,9 +17,11 @@ const RegistrationPage = () =>
         {
             registrationSuccess ?
                 <Navigate to={confirmPath}/> :
-                <RegistrationForm setOnSuccess={setRegistrationSuccess} setOnError={ShowError} />
+                <RegistrationForm
+                    setOnSuccess={setRegistrationSuccess}
+                    setOnError={ShowError}
+                />
         }
-        <NotificationContainer />
     </>
 };
 

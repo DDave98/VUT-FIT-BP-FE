@@ -6,6 +6,7 @@
 import { useState, useEffect } from 'react';
 import { FormInput } from './FormInput';
 import PropTypes from 'prop-types';
+import { passwordRegex } from '../Constants/regex';
 
 const FormPwdInputs = (
     {
@@ -30,15 +31,16 @@ const FormPwdInputs = (
 
     useEffect(() =>
     {
-        const result = regex.test(pwd1);
-        //console.log('pwd1:', result, pwd1);
+        const result = regex?.test(pwd1) ?? passwordRegex.test(pwd1);
+
         setValidPwd1(result);
 
         const isValid = pwd1 === pwd2 && validPwd1;
-        //console.log('pwd2:', isValid, pwd2);
         onChangeValue(pwd1);
         getValidValue?.(isValid);
     }, [pwd1, pwd2]);
+
+    const divStyle = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
 
     return <>
         <FormInput
@@ -46,8 +48,8 @@ const FormPwdInputs = (
             placeholder={placeholder1}
             htmlFor={htmlFor + '1'}
             inputName={input1Name}
-            divStyleClass={divsStyleClass}
-            regex={regex}
+            divStyleClass={divsStyleClass ?? divStyle}
+            regex={regex ?? passwordRegex}
             instruction={instruction1}
             userRef={userRef}
             onChangeValue={(value) => setPwd1(value)}
@@ -58,7 +60,7 @@ const FormPwdInputs = (
             placeholder={placeholder2}
             htmlFor={htmlFor + '2'}
             inputName={input2Name}
-            divStyleClass={divsStyleClass}
+            divStyleClass={divsStyleClass ?? divStyle}
             instruction={instruction2}
             userRef={userRef}
             onChangeValue={(value) => setPwd2(value)}
@@ -75,10 +77,10 @@ FormPwdInputs.propTypes =
     htmlFor: PropTypes.string.isRequired,
     input1Name: PropTypes.string.isRequired,
     input2Name: PropTypes.string.isRequired,
-    divsStyleClass: PropTypes.string.isRequired,
+    divsStyleClass: PropTypes.string,
     regex: PropTypes.instanceOf(RegExp),
-    instruction1: PropTypes.string.isRequired,
-    instruction2: PropTypes.string.isRequired,
+    instruction1: PropTypes.string,
+    instruction2: PropTypes.string,
     getValidValue: PropTypes.func,
     onChange: PropTypes.func,
 }

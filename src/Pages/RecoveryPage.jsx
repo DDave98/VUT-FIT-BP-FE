@@ -4,10 +4,12 @@ import SuccessForm from "../Components/SuccessForm";
 import { loginPath } from "../Constants/pagesPath";
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import NewPasswordForm from "../Components/NewPasswordForm";
 
 const RecoveryPage = () =>
 {
     const [emailSend, SetEmailSend] = useState(false);
+    const [pwdChanged, SetPwdChanged] = useState(false);
     const [code, setCode] = useState('');
 
     const ShowError = (message, title) =>
@@ -21,35 +23,37 @@ const RecoveryPage = () =>
     {
         const urlCode = new URLSearchParams(search).get('code');
         setCode(urlCode);
-    }, []); 
-
+    }, []);
 
     return <>
         {
-            code != null ?
+            code == null ?
             (
-                <SuccessForm
-                title="Nice!"
-                buttonText={code}
-                LinkPath=""
-                />
+                emailSend ? 
+                (
+                    <SuccessForm title="Email byl poslán" buttonText="přejít na přihlášení" LinkPath={loginPath} />
+                ) :
+                (
+                    <RecoveryForm setOnError={ShowError} setOnSuccess={SetEmailSend} />
+                )     
             ) :
             (
-                emailSend ?
+                 !pwdChanged ?
+                 (
+                    <NewPasswordForm
+                        setOnSuccess={SetPwdChanged}
+                        code={code}
+                    />
+                ) :
                 (
                     <SuccessForm
-                        title="Email byl poslán"
+                        title="Heslo bylo změněno"
                         buttonText="přejít na přihlášení"
                         LinkPath={loginPath}
                     />
-                ) : 
-                (
-                    <RecoveryForm setOnError={ShowError} setOnSuccess={SetEmailSend} />
                 )
             )
         }
-        
-        <NotificationContainer />
     </>
 };
 

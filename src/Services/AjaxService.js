@@ -1,10 +1,8 @@
 import axios from 'axios';
 import config from "../Constants/config.json";
-import useAuth from '../Hooks/useAuth';
-import {Logout} from './LogoutService';
 
-const URL = config.baseApiURL;
-//const URL = "https://localhost:7155";
+//const URL = config.baseApiURL;
+const URL = "https://localhost:7155";
 
 export const PublicAPI = axios.create({
     baseURL: URL,

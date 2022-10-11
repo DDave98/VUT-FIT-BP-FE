@@ -2,7 +2,6 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import FormPageLayout from './FormPageLayout';
-import { passwordRegex } from '../Constants/regex';
 import SendButton from './SendButton';
 import config from "../Constants/config.json";
 import { PublicAPI } from '../Services/AjaxService';

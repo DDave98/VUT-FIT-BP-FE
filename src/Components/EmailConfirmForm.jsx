@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { guidRegex } from '../Constants/regex';
 import config from "../Constants/config.json";
 import { PublicAPI } from '../Services/AjaxService';
+import SendButton from './SendButton';
 
 const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
 {
@@ -12,13 +13,15 @@ const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
 
     const [confirmCode, setConfirmCode] = useState(urlConfirmCode);
     const [validConfirmCode, setValidConfirmCode] = useState(false);
+    const [loadMode, setLoadMode] = useState(false);
 
-    const handlSubmit = async () => {
+    const handlSubmit = async () =>
+    {
+        setLoadMode(true);
         try
         {
             const path = config.path.confirmEmail + "?code=" + confirmCode;
-            const response = await PublicAPI.get(path);
-
+            await PublicAPI.get(path);
             setOnSuccess(true);
         }
         catch (err)
@@ -28,10 +31,8 @@ const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
             else setOnError("Potvrzení se nezdařilo", "Nastala chyba při zpracování");
             console.log("login form error: ", err);
         }
+        setLoadMode(false);
     }
-
-    const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
-    const buttonStyleClass = "px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 w-full disabled:opacity-50 disabled:bg-gray-400";
 
     return <>
         <FormPageLayout name='Potvrzení Emailu' handlSubmit={handlSubmit}>
@@ -48,18 +49,14 @@ const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
                 userRef={userRef}
                 onChangeValue={(value) => setConfirmCode(value)}
                 getValidValue={(isValid) => setValidConfirmCode(isValid)}
-                divStyleClass={divStyleClass}
                 regex={guidRegex}
                 inputValue={urlConfirmCode}
             />
-            <div className="flex items-baseline justify-between mb-6 mt-2">
-                <button
-                    className={buttonStyleClass}
-                    disabled={ !validConfirmCode ? true : false }
-                >
-                    potvrdit
-                </button>
-            </div>
+            <SendButton 
+                disabled={!validConfirmCode}
+                text="potvrdit"
+                loadMode={loadMode}
+            />
         </FormPageLayout>
     </>
 };

@@ -49,8 +49,6 @@ const RecoveryForm = ({setOnError, setOnSuccess}) =>
         setLoadMode(false);
     }
 
-    const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
-
     return (
         <FormPageLayout name="Obnova Hesla" handlSubmit={handlSubmit}>
             <FormInput
@@ -58,7 +56,6 @@ const RecoveryForm = ({setOnError, setOnSuccess}) =>
                 InputType="email"
                 placeholder='zadejte email'
                 htmlFor='loginFormName'
-                divStyleClass={divStyleClass}
                 userRef={userRef}
                 regex={emailRegex}
                 onChangeValue={(value) => setEmail(value)}

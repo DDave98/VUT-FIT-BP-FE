@@ -36,7 +36,7 @@ const FormInput = (
 
     const isSame = (value) => extCompareValue === value && extCompareValue != ""
 
-    //const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
+    const divStyle = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
     const inputStyleClass = "w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600";
     const instructionsStyleClass = "mt-4 bg-black block text-white p-2 rounded-md";
     const iconStyleClass = "inline-block ml-3 text-green-600";
@@ -74,7 +74,7 @@ const FormInput = (
     </p>
 
     return <>
-        <div className={divStyleClass}>
+        <div className={divStyleClass ?? divStyle}>
             <label htmlFor={htmlFor} className='block'>
                 {inputName}
                 {regex != null || extCompareValue != null ? validationIcons : <></>}

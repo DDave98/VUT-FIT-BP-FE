@@ -8,10 +8,13 @@ import PropTypes from 'prop-types';
 import { nameRegex, passwordRegex, emailRegex } from '../Constants/regex';
 import { PublicAPI } from '../Services/AjaxService';
 import config from "../Constants/config.json";
+import SendButton from './SendButton';
 
 const RegistrationForm = ({setOnSuccess, setOnError}) =>
 {
     const userRef = useRef();
+
+    const [loadMode, setLoadMode] = useState(false);
 
     const [name, setName] = useState('');
     const [validName, setValidName] = useState(false);
@@ -32,6 +35,8 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
             setOnError("Nevalidní vstup");
             return;
         }
+
+        setLoadMode(true);
 
         const registrationPath = config.path.registration;
         const registrationData = {
@@ -58,10 +63,9 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
             else setOnError("Registrace se nezdařila", "nastala chyba");
             console.log("registration form error: ", err);
         }
-    }
 
-    const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
-    const buttonStyleClass = "px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 w-full disabled:opacity-50 disabled:bg-gray-400";
+        setLoadMode(false);
+    }
 
     const instr = "Minimální délka 4 znaky. Mělo by začínat písmenem. Písmena, číslice, podtržítka, pomlčky jsou povolené.";
     const emailInstr = "zadejte platnou e-mailovou adresu."
@@ -74,7 +78,6 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
                 inputName="Jméno:"
                 placeholder='zadejte jméno'
                 htmlFor='registrationFormName'
-                divStyleClass={divStyleClass}
                 regex={nameRegex}
                 instruction={instr}
                 userRef={userRef}
@@ -85,7 +88,6 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
                 placeholder='zadejte Příjmení'
                 htmlFor='registrationFormSurname'
                 inputName='Příjmení:'
-                divStyleClass={divStyleClass}
                 regex={nameRegex}
                 instruction={instr}
                 userRef={userRef}
@@ -96,7 +98,6 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
                 placeholder='zadejte Email'
                 htmlFor='registrationFormEmail'
                 inputName='Email:'
-                divStyleClass={divStyleClass}
                 regex={emailRegex}
                 instruction={emailInstr}
                 userRef={userRef}
@@ -109,7 +110,6 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
                 htmlFor='registrationFormPwd'
                 input1Name='Heslo:'
                 input2Name='Potvrdit Heslo:'
-                divsStyleClass={divStyleClass}
                 regex={passwordRegex}
                 instruction1={pwdInstr}
                 instruction2={pwd2Instr}
@@ -117,14 +117,11 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
                 onChangeValue={(value) => setPassword(value)}
                 getValidValue={(isValid) => setValidPassword(isValid)}
             />
-            <div className="flex items-baseline justify-between mb-6 mt-2">
-                <button
-                    className={buttonStyleClass}
-                    disabled={!validName || !validSurname || !validEmail || !validPassword ? true : false}
-                >
-                    Registrovat se
-                </button>
-            </div>
+            <SendButton 
+                disabled={!validName || !validSurname || !validEmail || !validPassword}
+                text="Registrovat se"
+                loadMode={loadMode}
+            />
             <p>Jste již registrovaný?</p>
             <Link to={loginPath} className='underline'>Přihlásit se</Link>
         </FormPageLayout>

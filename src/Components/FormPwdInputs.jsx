@@ -40,15 +40,13 @@ const FormPwdInputs = (
         getValidValue?.(isValid);
     }, [pwd1, pwd2]);
 
-    const divStyle = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
-
     return <>
         <FormInput
             InputType="password"
             placeholder={placeholder1}
             htmlFor={htmlFor + '1'}
             inputName={input1Name}
-            divStyleClass={divsStyleClass ?? divStyle}
+            divStyleClass={divsStyleClass}
             regex={regex ?? passwordRegex}
             instruction={instruction1}
             userRef={userRef}
@@ -60,7 +58,7 @@ const FormPwdInputs = (
             placeholder={placeholder2}
             htmlFor={htmlFor + '2'}
             inputName={input2Name}
-            divStyleClass={divsStyleClass ?? divStyle}
+            divStyleClass={divsStyleClass}
             instruction={instruction2}
             userRef={userRef}
             onChangeValue={(value) => setPwd2(value)}

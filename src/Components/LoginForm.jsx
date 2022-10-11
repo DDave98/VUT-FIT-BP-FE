@@ -16,6 +16,7 @@ import BreakLine from './BreakLine';
 import Recaptcha from './ReCAPTCHA';
 import FormPageLayout from './FormPageLayout';
 import { FormInput } from './FormInput';
+import SendButton from './SendButton';
 
 // Constants
 import { recoveryPath, registerPath } from "../Constants/pagesPath";
@@ -31,6 +32,7 @@ const LoginForm = ({setOnError}) =>
 
     const userRef = useRef();
     const { setAuth } = useAuth();
+    const [loadMode, setLoadMode] = useState(false);
 
     const [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(false);
@@ -46,6 +48,8 @@ const LoginForm = ({setOnError}) =>
             setOnError("Nevalidní vstup");
             return;
         }
+
+        setLoadMode(true);
 
         const loginPath = config.path.authenticate;
         const loginData = {
@@ -76,12 +80,11 @@ const LoginForm = ({setOnError}) =>
             setOnError(errMessage, errTitle);
             console.log("login form error: ", err);
         }
+
+        setLoadMode(false);
     }
 
-    const divStyleClass = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
     const lostPasswodStyle = "text-right inline-block w-full text-sm text-gray-500 hover:text-blue-900";
-    const submitButtonStyle = "flex items-baseline justify-between mb-6 mt-2";
-    const buttonStyleClass = "px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 w-full disabled:opacity-50 disabled:bg-gray-400";
     const socialIconStyle = 'h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent';
 
     return <>
@@ -90,7 +93,6 @@ const LoginForm = ({setOnError}) =>
                 inputName="Email:"
                 placeholder='zadejte email'
                 htmlFor='loginFormName'
-                divStyleClass={divStyleClass}
                 userRef={userRef}
                 regex={emailRegex}
                 onChangeValue={(value) => setEmail(value)}
@@ -101,21 +103,17 @@ const LoginForm = ({setOnError}) =>
                 inputName="Heslo:"
                 placeholder='zadejte heslo'
                 htmlFor='loginFormPwd'
-                divStyleClass={divStyleClass}
                 userRef={userRef}
                 regex={passwordRegex}
                 onChangeValue={(value) => setPassword(value)}
                 getValidValue={(isValid) => setValidPassword(isValid)}
             />
             <Link to={recoveryPath} className={lostPasswodStyle}>Zapomněl jste heslo?</Link>
-            <div className={submitButtonStyle}>
-                <button
-                    className={buttonStyleClass}
-                    disabled={!validEmail || !validPassword ? true : false}
-                >
-                    Přihlásit se
-                </button>
-            </div>
+            <SendButton 
+                disabled={!validEmail || !validPassword}
+                text="Přihlásit se"
+                loadMode={loadMode}
+            />
             <div className='flex item-base justify-center' >
                 <Recaptcha />
             </div>

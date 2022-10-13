@@ -1,5 +1,5 @@
 import RecoveryForm from "../Components/RecoveryForm";
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {NotificationManager} from 'react-notifications';
 import SuccessForm from "../Components/SuccessForm";
 import { loginPath } from "../Constants/pagesPath";
 import { useState, useEffect } from 'react';

@@ -30,7 +30,7 @@ const NewPasswordForm = ({setOnSuccess, code}) =>
 
         try
         {
-            await PublicAPI.post(recoveryPath, data);
+            await PublicAPI.put(recoveryPath, data);
             setOnSuccess(true);
         }
         catch (err)

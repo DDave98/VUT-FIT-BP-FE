@@ -21,8 +21,9 @@ import SendButton from './SendButton';
 // Constants
 import { recoveryPath, registerPath } from "../Constants/pagesPath";
 import config from "../Constants/config.json";
-import { passwordRegex, emailRegex } from '../Constants/regex';
+import { emailRegex } from '../Constants/regex';
 import { accessTokenTag } from '../Constants/storageTag';
+import FormInputPassword from './FormInputPassword';
 
 const LoginForm = ({setOnError}) =>
 {
@@ -87,6 +88,7 @@ const LoginForm = ({setOnError}) =>
     const lostPasswodStyle = "text-right inline-block w-full text-sm text-gray-500 hover:text-blue-900";
     const socialIconStyle = 'h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent';
 
+
     return <>
         <FormPageLayout name="Přihlášení" handlSubmit={handlSubmit}>
             <FormInput
@@ -98,16 +100,17 @@ const LoginForm = ({setOnError}) =>
                 onChangeValue={(value) => setEmail(value)}
                 getValidValue={(isValid) => setValidEmail(isValid)}
             />
-            <FormInput
-                InputType="password"
+            <FormInputPassword
+                InputType={"password"}
                 inputName="Heslo:"
                 placeholder='zadejte heslo'
                 htmlFor='loginFormPwd'
                 userRef={userRef}
-                regex={passwordRegex}
+                divStyleClass="grow"
                 onChangeValue={(value) => setPassword(value)}
                 getValidValue={(isValid) => setValidPassword(isValid)}
             />
+
             <Link to={recoveryPath} className={lostPasswodStyle}>Zapomněl jste heslo?</Link>
             <SendButton 
                 disabled={!validEmail || !validPassword}
@@ -119,6 +122,7 @@ const LoginForm = ({setOnError}) =>
             </div>
             <BreakLine id={"loginBreakLine1"}>nebo</BreakLine>
             <div id='loginSocialIcons' className="flex items-baseline justify-evenly">
+                
                 <img src={require ('../Assets/Images/socialIcons/facebook.png')} className={socialIconStyle}/>
                 <img src={require ('../Assets/Images/socialIcons/github.png')} className={socialIconStyle}/>
                 <img src={require ('../Assets/Images/socialIcons/google.png')} className={socialIconStyle}/>

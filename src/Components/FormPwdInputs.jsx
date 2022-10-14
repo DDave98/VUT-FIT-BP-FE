@@ -4,9 +4,9 @@
  */
 
 import { useState, useEffect } from 'react';
-import { FormInput } from './FormInput';
 import PropTypes from 'prop-types';
 import { passwordRegex } from '../Constants/regex';
+import FormInputPassword from './FormInputPassword';
 
 const FormPwdInputs = (
     {
@@ -41,7 +41,7 @@ const FormPwdInputs = (
     }, [pwd1, pwd2]);
 
     return <>
-        <FormInput
+        <FormInputPassword
             InputType="password"
             placeholder={placeholder1}
             htmlFor={htmlFor + '1'}
@@ -53,7 +53,7 @@ const FormPwdInputs = (
             onChangeValue={(value) => setPwd1(value)}
             getValidValue={(value) => setValidPwd1(value)}
         />
-        <FormInput
+        <FormInputPassword
             InputType="password"
             placeholder={placeholder2}
             htmlFor={htmlFor + '2'}

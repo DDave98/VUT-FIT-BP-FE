@@ -1,5 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
+import { useState, useEffect } from 'react';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
@@ -17,24 +16,41 @@ const FormInput = (
         onChangeValue,
         getValidValue,
         extCompareValue,
-        inputValue
+        inputValue,
+        readOnly
     }) =>
 {
 
-    const [value, setValue] = useState(inputValue ?? "");
+    const [value, setValue] = useState('');
     const [validValue, setValidValue] = useState(false);
     const [valueFocus, setValueFocus] = useState(false);
 
-    useEffect(() =>
+    const checkInput = () =>
     {
-        const result = regex?.test(value) || isSame(value);
-        //console.log(inputName, value, result);
+        const result = regex?.test(value) && value != null || isSame(value);
+        //console.log(inputName, value, result, isSame(value));
+
         setValidValue(result);
         onChangeValue(value);
         getValidValue?.(result);
+    }
+
+    useEffect(() =>
+    {
+        checkInput();
     }, [value, extCompareValue]);
 
-    const isSame = (value) => extCompareValue === value && extCompareValue != ""
+    useEffect(() => 
+    {
+        setValue(inputValue);
+    }, [inputValue])
+
+    const isSame = (value) =>
+    {
+        if (extCompareValue != null)
+            return extCompareValue === value && extCompareValue != "";
+        else return false;
+    }
 
     const divStyle = "flex flex-col items-baseline justify-between mt-2 max-w-lg";
     const inputStyleClass = "w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600";
@@ -74,7 +90,7 @@ const FormInput = (
     </p>
 
     return <>
-        <div className={divStyleClass ?? divStyle}>
+        <div className={divStyle + " " + divStyleClass}>
             <label htmlFor={htmlFor} className='block'>
                 {inputName}
                 {regex != null || extCompareValue != null ? validationIcons : <></>}
@@ -92,6 +108,7 @@ const FormInput = (
                 placeholder={placeholder? placeholder : ''}
                 className={inputStyleClass}
                 defaultValue={inputValue ?? ""}
+                readOnly={readOnly ?? false}
             />
             {instruction != null ? instructionElement : <></>}
         </div>
@@ -109,9 +126,10 @@ FormInput.propTypes =
     regex: PropTypes.instanceOf(RegExp),
     instruction: PropTypes.string,
     getValidValue: PropTypes.func,
-    onChange: PropTypes.func,
+    onChangeValue: PropTypes.func,
     extCompareValue: PropTypes.string,
     inputValue: PropTypes.string,
+    readOnly: PropTypes.bool
 }
 
 export {FormInput};

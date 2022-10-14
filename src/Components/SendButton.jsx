@@ -3,7 +3,7 @@
  * rodičovský element tuto funkci může zapnout či vypnout
  */
 
- import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Loader from './Loader';
 
 const SendButton = ({disabled, text, loadMode}) =>

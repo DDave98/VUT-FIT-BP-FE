@@ -9,6 +9,7 @@ import { nameRegex, passwordRegex, emailRegex } from '../Constants/regex';
 import { PublicAPI } from '../Services/AjaxService';
 import config from "../Constants/config.json";
 import SendButton from './SendButton';
+import Recaptcha from './ReCAPTCHA';
 
 const RegistrationForm = ({setOnSuccess, setOnError}) =>
 {
@@ -117,6 +118,7 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
                 onChangeValue={(value) => setPassword(value)}
                 getValidValue={(isValid) => setValidPassword(isValid)}
             />
+            <Recaptcha />
             <SendButton 
                 disabled={!validName || !validSurname || !validEmail || !validPassword}
                 text="Registrovat se"

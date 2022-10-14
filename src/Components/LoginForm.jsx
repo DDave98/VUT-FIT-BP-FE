@@ -21,7 +21,7 @@ import SendButton from './SendButton';
 // Constants
 import { recoveryPath, registerPath } from "../Constants/pagesPath";
 import config from "../Constants/config.json";
-import { emailRegex } from '../Constants/regex';
+import { emailRegex, passwordRegex } from '../Constants/regex';
 import { accessTokenTag } from '../Constants/storageTag';
 import FormInputPassword from './FormInputPassword';
 import SocialIconPanel from './SocialIconPanel';
@@ -106,6 +106,7 @@ const LoginForm = ({setOnError}) =>
                 htmlFor='loginFormPwd'
                 userRef={userRef}
                 divStyleClass="grow"
+                regex={passwordRegex}
                 onChangeValue={(value) => setPassword(value)}
                 getValidValue={(isValid) => setValidPassword(isValid)}
             />

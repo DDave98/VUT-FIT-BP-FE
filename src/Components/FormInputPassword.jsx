@@ -43,6 +43,14 @@ const FormInputPassword = (
                     instruction={instruction}
                     inputValue={inputValue}
                     extCompareValue={extCompareValue ?? ""}
+                    onPaste={(e) => {
+                        e.preventDefault();
+                        return false;
+                    }}
+                    onCopy={(e) => {
+                        e.preventDefault();
+                        return false;
+                    }}
                 />
                 <img
                     src={require (!passwordShown ? 

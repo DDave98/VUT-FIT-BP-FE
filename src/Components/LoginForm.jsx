@@ -100,7 +100,7 @@ const LoginForm = ({setOnError}) =>
                 onChangeValue={(value) => setEmail(value)}
                 getValidValue={(isValid) => setValidEmail(isValid)}
             />
-            <FormInputPassword
+            <FormInput
                 InputType={"password"}
                 inputName="Heslo:"
                 placeholder='zadejte heslo'

@@ -17,7 +17,9 @@ const FormInput = (
         getValidValue,
         extCompareValue,
         inputValue,
-        readOnly
+        readOnly,
+        onCopy,
+        onPaste
     }) =>
 {
 
@@ -109,6 +111,8 @@ const FormInput = (
                 className={inputStyleClass}
                 defaultValue={inputValue ?? ""}
                 readOnly={readOnly ?? false}
+                onCopy={onCopy}
+                onPaste={onPaste}
             />
             {instruction != null ? instructionElement : <></>}
         </div>

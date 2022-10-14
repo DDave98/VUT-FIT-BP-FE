@@ -7,8 +7,9 @@ import { emailRegex } from '../Constants/regex';
 import SendButton from './SendButton';
 import config from "../Constants/config.json";
 import { PublicAPI } from '../Services/AjaxService';
+import { NotificationManager } from 'react-notifications';
 
-const RecoveryForm = ({setOnError, setOnSuccess}) =>
+const RecoveryForm = ({setOnSuccess}) =>
 {
 
     const userRef = useRef();
@@ -23,7 +24,7 @@ const RecoveryForm = ({setOnError, setOnSuccess}) =>
 
         if (!validEmail)
         {
-            setOnError("Nevalidní vstup");
+            NotificationManager.error("Nevalidní vstup", 10000);
             return;
         }
 
@@ -42,7 +43,7 @@ const RecoveryForm = ({setOnError, setOnSuccess}) =>
             else if (err.response?.status == 400) errMessage = "některý z uvedených parametrů je neplatný";
             else errMessage = "Operace se nezdařila";
 
-            setOnError(errMessage, errTitle);
+            NotificationManager.error(errMessage, errTitle, 10000);
             console.log("Recovery form error: ", err);
         }
 
@@ -72,7 +73,6 @@ const RecoveryForm = ({setOnError, setOnSuccess}) =>
 
 RecoveryForm.propTypes = 
 {
-    setOnError: PropTypes.func.isRequired,
     setOnSuccess: PropTypes.func.isRequired,
 }
 

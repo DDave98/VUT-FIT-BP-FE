@@ -1,9 +1,11 @@
+import { NotificationManager } from 'react-notifications';
 import { PublicAPI } from '../Services/AjaxService';
-
+import { useState } from 'react';
 
 const SocialIconPanel = () =>
 {
     const socialIconStyle = 'h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent';
+    const [wait, setWait] = useState(false);
 
     const iconPaths = {
         "/api/Auth/authenticate/facebook" : require ('../Assets/Images/socialIcons/facebook.png'),
@@ -16,11 +18,16 @@ const SocialIconPanel = () =>
 
     const LogIn = async (e) =>
     {
-        console.log(e.target.name);
+        console.log(e.target.name, wait);
+
+        if (wait) return;
+        else setWait(true);
 
         try
         {
-            await PublicAPI.get(e.target.name)
+            var result = await PublicAPI.get(e.target.name)
+            NotificationManager.info(result.data);
+
         }
         catch (err)
         {
@@ -30,8 +37,11 @@ const SocialIconPanel = () =>
             else if (err.response?.status == 400) errMessage = "zadaný přihlašovací provider neexistuje";
             else errMessage = "Operace se nezdařila";
 
+            NotificationManager.error(errMessage, errTitle, 10000);
             console.log("socialpanel form error: ", err);
         }
+
+        setWait(false);
     }
 
     return (

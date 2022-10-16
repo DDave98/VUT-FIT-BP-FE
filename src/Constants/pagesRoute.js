@@ -1,6 +1,6 @@
 import "./pagesPath";
 import HomePage from "../Pages/HomePage";
-import LoginPage from "../Pages/auth/LoginPage";
+import LoginPage from "../Pages/LoginPage";
 import NotFoundPage from "../Pages/404";
 import AppPage from "../Pages/AppPage";
 import LogPage from "../Pages/LogPage";
@@ -8,7 +8,7 @@ import ProfilePage from "../Pages/ProfilePage";
 import SettingPage from "../Pages/SettingPage";
 import UserPage from "../Pages/UserPage";
 import RecoveryPage from "../Pages/RecoveryPage";
-import RegistrationPage from "../Pages/auth/RegisterPage";
+import RegistrationPage from "../Pages/RegisterPage";
 
 import * as path from "./pagesPath";
 import ConfirmPage from "../Pages/ConfirmPage";

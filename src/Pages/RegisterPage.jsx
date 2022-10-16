@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import RegistrationForm from '../../Components/RegistrationForm';
-import { confirmPath } from '../../Constants/pagesPath';
+import RegistrationForm from '../Components/RegistrationForm';
+import { confirmPath } from '../Constants/pagesPath';
 import { Navigate } from 'react-router-dom';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 

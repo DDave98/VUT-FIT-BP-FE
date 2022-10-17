@@ -1,5 +1,5 @@
 import FormPageLayout from './FormPageLayout';
-import { loginPath } from "../Constants/pagesPath";
+import { loginPath, confirmPath } from "../Constants/pagesPath";
 import { FormInput } from './FormInput';
 import { FormPwdInputs } from './FormPwdInputs';
 import { useRef, useState, useEffect } from 'react';
@@ -44,7 +44,8 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
             Name: name,
             Surname: surname,
             Email: email,
-            Password: password
+            Password: password,
+            Hook: confirmPath
         }
 
         try

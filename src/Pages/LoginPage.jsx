@@ -1,16 +1,58 @@
 import LoginForm from '../Components/LoginForm';
-import { NotificationManager } from 'react-notifications';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { SaveToStorage } from '../Services/StorageService';
+import useAuth from '../Hooks/useAuth';
+import { accessTokenTag } from '../Constants/storageTag';
 
 const LoginPage = () =>
 {
-    // zde pak uložit token a zobrazit form pro dvoufazové
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { setAuth } = useAuth();
+    const search = useLocation().search;
 
-    const ShowError = (message, title) =>
+    const app = new URLSearchParams(search).get('app');
+    const hook = new URLSearchParams(search).get('hook');
+    const url = window.location.origin;
+
+    const setOnSuccess = (token) =>
     {
-        NotificationManager.error(message, title, 10000);
+        // zde pak zobrazit form pro dvoufazové
+
+        if (hook != null)
+        {
+            /*
+            navigate(to={{
+                pathname: hook,
+                search: "?token="+token
+            }}) */
+            window.location.replace(hook + "?token=" + token);
+        }
+        else
+        {
+            const from = location.state?.from?.pathname || "/";
+            setAuth({token});   // save token to page instance memory
+            SaveToStorage(token, accessTokenTag);
+            navigate(from, {replace: true});
+        }
+
     }
 
-    return <LoginForm setOnError={ShowError} />
+    useEffect(() => 
+    {
+        // zjistit zda je ?hook & ?app v url
+    }, [])
+
+    return (
+        <>
+            <LoginForm
+                setOnSuccess={setOnSuccess}
+                formName={"Přihlášení" + (app ? " - " + app : "")}
+                Hook={hook ?? url}
+            />
+        </>
+    )
 };
 
 export default LoginPage;

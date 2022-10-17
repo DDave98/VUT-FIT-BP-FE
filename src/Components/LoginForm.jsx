@@ -2,14 +2,12 @@
 // General
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-
-// hook
-import useAuth from '../Hooks/useAuth';
+import { Link } from 'react-router-dom';
+import NotificationManager from 'react-notifications/lib/NotificationManager';
 
 // Services
 import { PublicAPI } from '../Services/AjaxService';
-import { SaveToStorage } from '../Services/StorageService';
+
 
 // Components
 import BreakLine from './BreakLine';
@@ -22,18 +20,16 @@ import SendButton from './SendButton';
 import { recoveryPath, registerPath } from "../Constants/pagesPath";
 import config from "../Constants/config.json";
 import { emailRegex, passwordRegex } from '../Constants/regex';
-import { accessTokenTag } from '../Constants/storageTag';
-import FormInputPassword from './FormInputPassword';
 import SocialIconPanel from './SocialIconPanel';
 
-const LoginForm = ({setOnError}) =>
+const LoginForm = (
 {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
-
+    setOnSuccess,
+    formName,
+    Hook
+}) =>
+{
     const userRef = useRef();
-    const { setAuth } = useAuth();
     const [loadMode, setLoadMode] = useState(false);
 
     const [email, setEmail] = useState('');
@@ -47,7 +43,7 @@ const LoginForm = ({setOnError}) =>
 
         if (!validPassword || !validEmail)
         {
-            setOnError("Nevalidní vstup");
+            NotificationManager.error("Nevalidní vstup");
             return;
         }
 
@@ -56,7 +52,8 @@ const LoginForm = ({setOnError}) =>
         const loginPath = config.path.authenticate;
         const loginData = {
             Password: password,
-            Login: email
+            Login: email,
+            App: Hook
         };
         
         try
@@ -67,9 +64,7 @@ const LoginForm = ({setOnError}) =>
             );
 
             const token = response.data;
-            setAuth({token});   // save token to page instance memory
-            SaveToStorage(token, accessTokenTag);
-            navigate(from, {replace: true});
+            setOnSuccess(token);
         }
         catch (err)
         {
@@ -79,7 +74,7 @@ const LoginForm = ({setOnError}) =>
             else if (err.response?.status == 400) errMessage = "některý z uvedených parametrů je neplatný";
             else errMessage = "Přihlášení se nezdařilo";
 
-            setOnError(errMessage, errTitle);
+            NotificationManager.error(errMessage, errTitle, 10000);
             console.log("login form error: ", err);
         }
 
@@ -89,7 +84,7 @@ const LoginForm = ({setOnError}) =>
     const lostPasswodStyle = "text-right inline-block w-full text-sm text-gray-500 hover:text-blue-900";
     
     return <>
-        <FormPageLayout name="Přihlášení" handlSubmit={handlSubmit}>
+        <FormPageLayout name={formName} handlSubmit={handlSubmit}>
             <FormInput
                 inputName="Email:"
                 placeholder='zadejte email'
@@ -133,7 +128,7 @@ const LoginForm = ({setOnError}) =>
 
 LoginForm.propTypes = 
 {
-    setOnError: PropTypes.func.isRequired,
+    setOnSuccess: PropTypes.func,
 }
 
 export default LoginForm;

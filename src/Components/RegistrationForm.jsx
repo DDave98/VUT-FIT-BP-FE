@@ -45,7 +45,7 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
             Surname: surname,
             Email: email,
             Password: password,
-            Hook: confirmPath
+            Hook: window.location.origin + confirmPath
         }
 
         try

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import EmailConfirmForm from '../Components/EmailConfirmForm';
 import { loginPath } from "../Constants/pagesPath";
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 import SuccessForm from '../Components/SuccessForm';
 
 const ConfirmPage = () =>

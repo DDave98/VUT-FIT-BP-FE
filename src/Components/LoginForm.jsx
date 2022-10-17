@@ -116,7 +116,7 @@ const LoginForm = (
                 <Recaptcha />
             </div>
             <BreakLine id={"loginBreakLine1"}>nebo</BreakLine>
-            <SocialIconPanel />
+            <SocialIconPanel disabled={loadMode} />
             <p className='mt-10'>
                 Nemáte účet?
                 <Link to={registerPath} className="text-blue-900 ml-2">Registrujte se</Link>

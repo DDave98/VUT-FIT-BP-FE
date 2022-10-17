@@ -1,26 +1,19 @@
 import { NotificationManager } from 'react-notifications';
 import { PublicAPI } from '../Services/AjaxService';
 import { useState } from 'react';
+import { externalLoginPath } from '../Constants/externalLoginPath';
+import PropTypes from 'prop-types';
 
-const SocialIconPanel = () =>
+const SocialIconPanel = ({disabled}) =>
 {
     const socialIconStyle = 'h-10 hover:border-sky-500 hover:ring-2 hover:border-transparent';
     const [wait, setWait] = useState(false);
-
-    const iconPaths = {
-        "/api/Auth/authenticate/facebook" : require ('../Assets/Images/socialIcons/facebook.png'),
-        "/api/Auth/authenticate/github" : require ('../Assets/Images/socialIcons/github.png'),
-        "/api/Auth/authenticate/google" : require ('../Assets/Images/socialIcons/google.png'),
-        "/api/Auth/authenticate/instagram" : require ('../Assets/Images/socialIcons/instagram.png'),
-        "/api/Auth/authenticate/linkedin" : require ('../Assets/Images/socialIcons/linkedin.png'),
-        "/api/Auth/authenticate/microsoft" : require ('../Assets/Images/socialIcons/microsoft.png'),
-    };
 
     const LogIn = async (e) =>
     {
         console.log(e.target.name, wait);
 
-        if (wait) return;
+        if (wait || disabled) return;
         else setWait(true);
 
         try
@@ -48,11 +41,11 @@ const SocialIconPanel = () =>
         <>
             <div id='loginSocialIcons' className="flex items-baseline justify-evenly">
                 {
-                    Object.entries(iconPaths).map(([key, value]) => (
+                    externalLoginPath.map(({url, api}) => (
                         <img
-                            src={value}
-                            key={key}
-                            name={key}
+                            src={url}
+                            key={api}
+                            name={api}
                             className={socialIconStyle}
                             onClick={LogIn}
                         />
@@ -61,6 +54,11 @@ const SocialIconPanel = () =>
             </div>
         </>
     )
+}
+
+SocialIconPanel.propTypes = 
+{
+    disabled: PropTypes.bool,
 }
 
 export default SocialIconPanel;

@@ -31,6 +31,7 @@ const LoginForm = (
 {
     const userRef = useRef();
     const [loadMode, setLoadMode] = useState(false);
+    const [reValid, setReValid] = useState(false);
 
     const [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(false);
@@ -107,14 +108,17 @@ const LoginForm = (
             />
 
             <Link to={recoveryPath} className={lostPasswodStyle}>Zapomněl jste heslo?</Link>
+
+            <Recaptcha
+                siteKey={config.RecaptchaKey}
+                isValid={setReValid}
+            />
+
             <SendButton 
-                disabled={!validEmail || !validPassword}
+                disabled={!validEmail || !validPassword || !reValid}
                 text="Přihlásit se"
                 loadMode={loadMode}
             />
-            <div className='flex item-base justify-center' >
-                <Recaptcha />
-            </div>
             <BreakLine id={"loginBreakLine1"}>nebo</BreakLine>
             <SocialIconPanel disabled={loadMode} />
             <p className='mt-10'>

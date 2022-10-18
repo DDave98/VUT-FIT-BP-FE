@@ -22,11 +22,6 @@ const LoginPage = () =>
 
         if (hook != null)
         {
-            /*
-            navigate(to={{
-                pathname: hook,
-                search: "?token="+token
-            }}) */
             window.location.replace(hook + "?token=" + token);
         }
         else

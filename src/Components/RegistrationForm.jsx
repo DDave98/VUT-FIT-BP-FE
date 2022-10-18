@@ -16,6 +16,7 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
     const userRef = useRef();
 
     const [loadMode, setLoadMode] = useState(false);
+    const [reValid, setReValid] = useState(false);
 
     const [name, setName] = useState('');
     const [validName, setValidName] = useState(false);
@@ -119,9 +120,12 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
                 onChangeValue={(value) => setPassword(value)}
                 getValidValue={(isValid) => setValidPassword(isValid)}
             />
-            <Recaptcha />
+            <Recaptcha
+                siteKey={config.RecaptchaKey}
+                isValid={setReValid}
+            />
             <SendButton 
-                disabled={!validName || !validSurname || !validEmail || !validPassword}
+                disabled={!validName || !validSurname || !validEmail || !validPassword || !reValid}
                 text="Registrovat se"
                 loadMode={loadMode}
             />

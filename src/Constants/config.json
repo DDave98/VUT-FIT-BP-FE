@@ -8,8 +8,9 @@
           "refresh":        "/api/Auth/Refresh",
           "registration":   "/api/User/Registration",
           "baseInfo":       "/api/User/baseInfo",
-          "recovery":       "/api/Auth/recovery"
+          "recovery":       "/api/Auth/recovery",
+          "recaptcha":      "/api/Auth/reCaptcha"
     },
 
-    "RecaptchaKey": "some key"
+    "RecaptchaKey": "6Lfc0o0iAAAAAFqKE31474-dxJWXpqpxDAw_Zt5l"
 }

@@ -1,4 +1,3 @@
-import { Logout } from "../Services/LogoutService";
 import {
     homePath,
     appPath,

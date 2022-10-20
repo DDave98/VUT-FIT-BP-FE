@@ -75,6 +75,8 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
     const pwdInstr = "Heslo musí obsahovat malé a velké písmena, číslici, speciální znak. Minimální délka je 8 znaků. Povolené speciální znaky jsou !@#$%"
     const pwd2Instr='Hesla se musí shodovat'
 
+    const sendButtonDisabled = !validName || !validSurname || !validEmail || !validPassword || !reValid;
+
     return <>
         <FormPageLayout name='Registrace' handlSubmit={handlSubmit}>
             <FormInput
@@ -125,12 +127,14 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
                 isValid={setReValid}
             />
             <SendButton 
-                disabled={!validName || !validSurname || !validEmail || !validPassword || !reValid}
+                disabled={sendButtonDisabled}
                 text="Registrovat se"
                 loadMode={loadMode}
             />
             <p className='text-sm mb-5'>
-                 * Kliknutím na příhlásit vytvoříte nový účet a zároveň s tím souhlasíte s podmínkami zpracování osobních údajů.
+                * Kliknutím na registrovat se vytvoříte nový účet a zároveň s tím souhlasíte s
+                <Link className='text-blue-600 uderline' to={""}> podmínkami zpracování </Link>
+                osobních údajů.
             </p>
             <div className='flex'>
                 <p className='mr-2'>Jste již registrovaný?</p>

@@ -35,7 +35,6 @@ const RecaptchaV2 = ({className, siteKey, isValid}) =>
     {
         VerifyToken(value).then( (val) =>
         {
-            window.alert(val);
             if (!val) recaptchaRef.current.reset();
             isValid(val);   
         });

@@ -129,8 +129,13 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
                 text="Registrovat se"
                 loadMode={loadMode}
             />
-            <p>Jste již registrovaný?</p>
-            <Link to={loginPath} className='underline'>Přihlásit se</Link>
+            <p className='text-sm mb-5'>
+                 * Kliknutím na příhlásit vytvoříte nový účet a zároveň s tím souhlasíte s podmínkami zpracování osobních údajů.
+            </p>
+            <div className='flex'>
+                <p className='mr-2'>Jste již registrovaný?</p>
+                <Link to={loginPath} className='underline'>Přihlásit se</Link>
+            </div>
         </FormPageLayout>
     </>
 };

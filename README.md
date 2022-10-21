@@ -74,5 +74,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 - některé komponenty jsou použity z knihovny:
     -- https://react-bootstrap.github.io/
+    -- https://react.semantic-ui.com/
+    
 - použitý css framework: https://tailwindcss.com/
 - popup: https://www.npmjs.com/package/react-notifications

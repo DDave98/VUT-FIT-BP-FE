@@ -2,18 +2,15 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import EmailConfirmForm from '../Components/EmailConfirmForm';
 import { loginPath } from "../Constants/pagesPath";
-import { NotificationManager } from 'react-notifications';
 import SuccessForm from '../Components/SuccessForm';
 
-const ConfirmPage = () =>
+const ConfirmPage = ({
+    formElement,
+    successFromProperties
+}) =>
 {
     const [confirmSuccess, setConfirmSuccess] = useState(false);
     const [code, setCode] = useState('');
-    
-    const ShowError = (message, title) =>
-    {
-        NotificationManager.error(message, title, 10000);
-    }
 
     const search = useLocation().search;
 
@@ -36,8 +33,7 @@ const ConfirmPage = () =>
             (
                 <EmailConfirmForm
                     setOnSuccess={setConfirmSuccess}
-                    setOnError={ShowError}
-                    urlConfirmCode={code}
+                    code={code}
                 />
             )
         }

@@ -7,7 +7,7 @@ import 'react-notifications/lib/notifications.css';
 import { Routes, Route } from 'react-router-dom';
 import PublicPageLayout from './Components/PageLayout';
 import RequireAuth from './Components/RequireAuth';
-import { privateRoutes, publicRoutes } from "./Constants/pagesRoute";
+import { privateRoutes, publicRoutes } from "./Constants/pagesStructure";
 import { NotificationContainer } from 'react-notifications';
 import NotFoundPage from './Pages/404';
 
@@ -37,18 +37,20 @@ function App()
 }
 
 // funcion create list of routes components
-function GetListOfRouteComponent(routesList, topKey)
+function GetListOfRouteComponent(routesList)
 { 
-  return routesList.map(
-    ({path, component, children}, key) =>
-    children.lenght < 0 ?
-    <Route exact path={path} element={component} key={topKey+"."+key} /> :
+  const list = routesList.map(
+    ({path, component, children, key}) =>
+    children?.lenght < 0 ?
+    <Route exact path={path} element={component} key={key} /> :
     (
-      <Route exact path={path} element={component} key={topKey+"."+key}>
-        {GetListOfRouteComponent(children, topKey)}
+      <Route exact path={path} key={key}>
+        <Route index element={component} />
+        {GetListOfRouteComponent(children)}
       </Route>
     )
   );
+  return list;
 }
 
 export default App;

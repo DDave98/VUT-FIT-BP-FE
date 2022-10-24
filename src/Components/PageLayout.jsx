@@ -15,11 +15,6 @@ const PublicPageLayout = (props) =>
                 {props.children}
                 <Outlet />
             </div>
-
-            <div className="ml-auto mr-auto text-center mt-10 mb-20">
-                <h2 className="text-xl">Na webu se pracuje</h2>
-                <img src="https://www.nicepng.com/png/detail/137-1379308_website-work-in-progress.png" className="inProgress ml-auto mr-auto"/>
-            </div>
             
             <Footer />
         </>

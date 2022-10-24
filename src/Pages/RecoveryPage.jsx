@@ -31,10 +31,17 @@ const RecoveryPage = () =>
             (
                 emailSend ? 
                 (
-                    <SuccessForm title="Email byl poslán" buttonText="přejít na přihlášení" LinkPath={loginPath} />
+                    <SuccessForm 
+                        title="Email byl poslán"
+                        buttonText="přejít na přihlášení"
+                        LinkPath={loginPath}
+                    />
                 ) :
                 (
-                    <RecoveryForm setOnError={ShowError} setOnSuccess={SetEmailSend} />
+                    <RecoveryForm
+                        setOnError={ShowError}
+                        setOnSuccess={SetEmailSend}
+                    />
                 )     
             ) :
             (

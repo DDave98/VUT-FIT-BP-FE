@@ -6,7 +6,10 @@ class UserPage extends React.Component
     render()
     {
         return (
-                <h1 className='text-7xl mt-10 ml-10'>Uživatelé</h1>
+                <>
+                    <h1 className='text-7xl mt-10 ml-10'>Uživatelé</h1>
+                    
+                </>
         );
     }
 }

@@ -6,12 +6,13 @@ import { guidRegex } from '../Constants/regex';
 import config from "../Constants/config.json";
 import { PublicAPI } from '../Services/AjaxService';
 import SendButton from './SendButton';
+import { NotificationManager } from 'react-notifications';
 
-const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
+const EmailConfirmForm = ({setOnSuccess, code}) =>
 {
     const userRef = useRef();
 
-    const [confirmCode, setConfirmCode] = useState(urlConfirmCode);
+    const [confirmCode, setConfirmCode] = useState(code);
     const [validConfirmCode, setValidConfirmCode] = useState(false);
     const [loadMode, setLoadMode] = useState(false);
 
@@ -26,9 +27,14 @@ const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
         }
         catch (err)
         {
-             if (err == null) setOnError("žádná odpověď od serveru, zkontrolujte prosím připojení.", "Nastala chyba při zpracování");
-            else if (err.response?.status == 400) setOnError("Nevalidní kód", "");
-            else setOnError("Potvrzení se nezdařilo", "Nastala chyba při zpracování");
+            const message = "";
+            const title = "";
+
+            if (err == null) message = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
+            else if (err.response?.status == 400) message = "Nevalidní kód";
+            else message = "Potvrzení se nezdařilo";
+
+            NotificationManager.error(message, title, 10000);
             console.log("login form error: ", err);
         }
         setLoadMode(false);
@@ -50,7 +56,7 @@ const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
                 onChangeValue={(value) => setConfirmCode(value)}
                 getValidValue={(isValid) => setValidConfirmCode(isValid)}
                 regex={guidRegex}
-                inputValue={urlConfirmCode}
+                inputValue={code}
             />
             <SendButton 
                 disabled={!validConfirmCode}
@@ -64,8 +70,7 @@ const EmailConfirmForm = ({setOnSuccess, setOnError, urlConfirmCode}) =>
 EmailConfirmForm.propTypes = 
 {
     setOnSuccess: PropTypes.func.isRequired,
-    setOnError: PropTypes.func.isRequired,
-    urlConfirmCode: PropTypes.string
+    code: PropTypes.string
 }
 
 export default EmailConfirmForm;

@@ -21,6 +21,7 @@ import { recoveryPath, registerPath } from "../Constants/pagesPath";
 import config from "../Constants/config.json";
 import { emailRegex, passwordRegex } from '../Constants/regex';
 import SocialIconPanel from './SocialIconPanel';
+import "../Styles/LoginForm.css";
 
 const LoginForm = (
 {
@@ -81,8 +82,6 @@ const LoginForm = (
 
         setLoadMode(false);
     }
-
-    const lostPasswodStyle = "text-right inline-block w-full text-sm text-gray-500 hover:text-blue-900";
     
     return <>
         <FormPageLayout name={formName} handlSubmit={handlSubmit}>
@@ -101,13 +100,12 @@ const LoginForm = (
                 placeholder='zadejte heslo'
                 htmlFor='loginFormPwd'
                 userRef={userRef}
-                divStyleClass="grow"
                 regex={passwordRegex}
                 onChangeValue={(value) => setPassword(value)}
                 getValidValue={(isValid) => setValidPassword(isValid)}
             />
 
-            <Link to={recoveryPath} className={lostPasswodStyle}>Zapomněl jste heslo?</Link>
+            <Link to={recoveryPath} className='lostPasswod'>Zapomněl jste heslo?</Link>
 
             <Recaptcha
                 siteKey={config.RecaptchaKey}
@@ -119,11 +117,11 @@ const LoginForm = (
                 text="Přihlásit se"
                 loadMode={loadMode}
             />
-            <BreakLine id={"loginBreakLine1"}>nebo</BreakLine>
+            <BreakLine>nebo</BreakLine>
             <SocialIconPanel disabled={loadMode} />
-            <p className='mt-10'>
+            <p className='LoginRegistration'>
                 Nemáte účet?
-                <Link to={registerPath} className="text-blue-900 ml-2">Registrujte se</Link>
+                <Link to={registerPath}>Registrujte se</Link>
             </p>
 
         </FormPageLayout>

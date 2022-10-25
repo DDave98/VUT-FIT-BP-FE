@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer components
+{
+    .SuccessFormButton
+    {
+        @apply px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 w-full disabled:opacity-50 disabled:bg-gray-400;
+    }
+
+    .SuccessFormIcon
+    {
+        @apply m-auto p-10 text-2xl w-20 h-20 mb-8 mt-16 border-solid border-2 border-green-600 rounded-full block text-green-600;
+    }
+}

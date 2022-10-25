@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import '../Constants/menuPath';
 import PropTypes, { object, string } from 'prop-types';
+import "../Styles/TopNavLinks.css";
 
 const TopNavLinks = ({navLinks}) => {
 
     return <>
         {/* Odkazy */}
-        <ul className='md:flex md:items-center h-full'>
+        <ul className='TopNavLinks'>
             {
                 navLinks.map(({name, link}) => (
-                    <li key={name+link} className='md:ml-8 text-xl'>
-                        <Link to={link} className='inline-block h-full p-3 hover:bg-gray-100 duration-500'>{name}</Link>
+                    <li key={name+link}>
+                        <Link to={link}>{name}</Link>
                     </li>   
                 ))
             }

@@ -1,3 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer components
+{
+  .TopNavUserProfile
+  {
+    @apply flex flex-row flex-wrap content-between mr-10;
+  }
+
+  .userIcoContainer
+  {
+    @apply mr-2;
+  }
+}
+
 /* Dropdown Button */
 #dropName 
 {

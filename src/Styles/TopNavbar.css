@@ -1,10 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind variants;
 
 @layer components
 {
+    .NavBar
+    {
+        @apply w-full fixed top-0 left-0 shadow-md;
+    }
 
+    .NavBarLayout
+    {
+        @apply md:flex items-center justify-between bg-white py-4 md:px-10 px-7;
+    }
+
+    .NavBarLink
+    {
+        @apply font-bold cursor-pointer flex items-center font-sans;
+    }
+
+    .NavBarLink span
+    {
+        @apply text-indigo-600 mr-1 pt-2;
+    }
 }
 
 #logo

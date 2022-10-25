@@ -26,9 +26,9 @@ const TopNavUserProfile = ({name, surname}) => {
         <div
             onMouseEnter={dropdownToggle}
             onMouseLeave={dropdownToggle}
-            className="flex flex-row dropdown flex-wrap content-between mr-10"
+            className="TopNavUserProfile"
         >
-            <div id='userIcoContainer' className='mr-2'>
+            <div id='userIcoContainer' className='userIcoContainer'>
                 <img src={require('../Assets/Images/Sample_User_Icon.png')} id='userIcon'/>
             </div>
             <div id='userIcoDropdown'>

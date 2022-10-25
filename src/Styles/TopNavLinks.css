@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer components
+{
+    .TopNavLinks
+    {
+        @apply md:flex md:items-center h-full;
+    }
+
+    .TopNavLinks li
+    {
+        @apply md:ml-8 text-xl;
+    }
+
+    .TopNavLinks a
+    {
+        @apply inline-block h-full p-3 hover:bg-gray-100 duration-500;
+    }
+}

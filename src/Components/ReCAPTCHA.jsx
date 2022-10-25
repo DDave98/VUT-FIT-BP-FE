@@ -4,6 +4,7 @@ import config from "../Constants/config.json";
 import { PublicAPI } from "../Services/AjaxService";
 import { useRef, useEffect } from 'react';
 import NotificationManager from "react-notifications/lib/NotificationManager";
+import "../Styles/Recaptcha.css";
 
 const RecaptchaV2 = ({className, siteKey, isValid}) =>
 {
@@ -51,10 +52,8 @@ const RecaptchaV2 = ({className, siteKey, isValid}) =>
         recaptchaRef.current.reset();
     }, [])
 
-    const recaptchaStyle = 'flex item-base justify-center mt-5';
-
     return <>
-        <div className={className ?? recaptchaStyle} >
+        <div className={className ?? "Recaptcha"} >
             <ReCAPTCHA
                 ref={recaptchaRef}
                 sitekey={siteKey}

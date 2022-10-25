@@ -47,12 +47,12 @@ const TopNavbar = () => {
     }, []);
 
     return <>
-        <nav className='w-full fixed top-0 left-0 shadow-md'>
-            <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
+        <nav className='NavBar'>
+            <div className='NavBarLayout'>
 
                 {/* LOGO */}
-                <Link to={homePath} className='font-bold text-2x1 cursor-pointer flex items-center font-sans'>
-                    <span className='text-3x1 text-indigo-600 mr-1 pt-2'>
+                <Link to={homePath} className='NavBarLink'>
+                    <span>
                         <img src={require('../Assets/Images/vut.cz.png')} id='logo'/>
                     </span>
                 </Link>

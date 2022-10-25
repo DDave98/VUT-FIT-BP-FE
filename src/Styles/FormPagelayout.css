@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer components
+{
+    .FormPagelayout
+    {
+        /*form place*/
+        @apply flex items-center justify-center min-h-screen bg-gray-100;
+    }
+
+    .FormPagelayoutWindow
+    {
+        /*form style*/
+        @apply px-8 py-6 mt-4 mb-4 text-left bg-white shadow-lg xl:w-1/4;
+    }
+
+    .FormPagelayoutHeader
+    {
+        @apply text-2xl font-bold text-center;
+    }
+
+    .FormPagelayoutForm
+    {
+        @apply mt-4;
+    }
+}

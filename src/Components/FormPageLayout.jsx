@@ -2,8 +2,8 @@
  * layout pro celostránkový formulář
  */
 
-
 import PropTypes from 'prop-types';
+import "../Styles/FormPagelayout.css";
 
 const FormPageLayout = ({name, handlSubmit, ...props}) =>
 {
@@ -13,10 +13,13 @@ const FormPageLayout = ({name, handlSubmit, ...props}) =>
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="px-8 py-6 mt-4 mb-4 text-left bg-white shadow-lg xl:w-1/4">
-                <h3 className="text-2xl font-bold text-center">{name}</h3>
-                <form onSubmit={handlSubmitEvent} className="mt-4">
+        <div className="FormPagelayout">
+            <div className="FormPagelayoutWindow">
+                <h3 className="FormPagelayoutHeader">{name}</h3>
+                <form 
+                    onSubmit={handlSubmitEvent}
+                    className="FormPagelayoutForm"
+                >
                     {props.children}
 
                 </form>

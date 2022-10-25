@@ -31,11 +31,11 @@ export const publicRoutes =
     CreateRoute(path.notFoundPath, <NotFoundPage />, "NotFoundPage"),
     CreateRoute(path.registerPath, <RegistrationPage />, "RegistrationPage",
     [
-        CreateRoute("confirm", <ConfirmPage form={EmailConfirmForm} />, "RegistrationConfirm"),
+        CreateRoute("confirm", <ConfirmPage formElement={<EmailConfirmForm />} />, "RegistrationConfirm"),
     ]),
     CreateRoute(path.recoveryPath, <RecoveryPage />, "RecoveryPage",
     [
-        CreateRoute(path.confirmPath, <ConfirmPage form={NewPasswordForm} />, "RecoveryConfirm"),
+        CreateRoute(path.confirmPath, <ConfirmPage formElement={<NewPasswordForm />} />, "RecoveryConfirm"),
     ])
 ];
 

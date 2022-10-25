@@ -7,6 +7,7 @@ import config from "../Constants/config.json";
 import { PublicAPI } from '../Services/AjaxService';
 import SendButton from './SendButton';
 import { NotificationManager } from 'react-notifications';
+import "../Styles/EmailConfirmForm.css";
 
 const EmailConfirmForm = ({setOnSuccess, code}) =>
 {
@@ -42,8 +43,8 @@ const EmailConfirmForm = ({setOnSuccess, code}) =>
 
     return <>
         <FormPageLayout name='Potvrzení Emailu' handlSubmit={handlSubmit}>
-            <h4 className='text-1xl font-bold mb-2'>Uživatel byl zaregistrován</h4>
-            <p className='mb-8 italic'>
+            <h4 className='EmailConfirmFormHeader'>Uživatel byl zaregistrován</h4>
+            <p className='EmailConfirmFormText'>
                 Na uvedenou e-mailuvou adresu byl zaslán potvrzovací kód.
                 Klikněte na odkaz v e-mailu nebo napiště kód v e-mailu. <br />
                 Po potvrzení bude účet aktivní, jinak do pár minut bude registrace zrušena.
@@ -58,7 +59,7 @@ const EmailConfirmForm = ({setOnSuccess, code}) =>
                 regex={guidRegex}
                 inputValue={code}
             />
-            <SendButton 
+            <SendButton
                 disabled={!validConfirmCode}
                 text="potvrdit"
                 loadMode={loadMode}

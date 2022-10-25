@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer components
+{
+    .EmailConfirmFormHeader
+    {
+        @apply text-xl font-bold mb-2;
+    }
+    
+    .EmailConfirmFormText
+    {
+        @apply mb-8 italic;
+    }
+}

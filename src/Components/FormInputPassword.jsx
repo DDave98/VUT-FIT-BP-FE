@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { passwordRegex } from '../Constants/regex';
 import { FormInput } from './FormInput';
+import "../Styles/FormInputPassword.css";
 
 const FormInputPassword = (
 {
@@ -25,11 +26,9 @@ const FormInputPassword = (
         setPasswordShown(!passwordShown);
       };
 
-    const icoStyle = "h-9 ml-2 mt-9 p-2 green-600 block border border-sky-100 hover:border-sky-600 rounded-full";
-
     return (
         <>
-            <div className="flex flex-row max-w-lg" >
+            <div className="FormInputPassword" >
                 <FormInput
                     InputType={passwordShown ? "text" : "password"}
                     inputName={inputName}
@@ -56,7 +55,7 @@ const FormInputPassword = (
                     src={require (!passwordShown ? 
                         "../Assets/Images/pwd_icons/hide.png" :
                         "../Assets/Images/pwd_icons/show.png")}
-                    className={icoStyle}
+                    className="FormInputPasswordIcon"
                     onClick={togglePassword}
                 />
             </div>

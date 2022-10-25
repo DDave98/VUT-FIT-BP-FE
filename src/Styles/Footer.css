@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer components
+{
+    .footer
+    {
+        @apply text-center p-6 bg-gray-600 mt-80
+    }
+
+    .footer a
+    {
+        @apply text-gray-200 font-semibold
+    }
+}

@@ -18,7 +18,17 @@ const ConfirmPage = ({
     {
         const urlCode = new URLSearchParams(search).get('code');
         setCode(urlCode);
+        console.log(formElement);
     }, []); 
+
+    const form = () =>
+    {
+        const element = formElement;
+        element.setOnSuccess = setConfirmSuccess;
+        element.code = code;
+        console.log(element);
+        return element;
+    }
 
     return <>
         {
@@ -31,10 +41,9 @@ const ConfirmPage = ({
                 />
             ) :
             (
-                <EmailConfirmForm
-                    setOnSuccess={setConfirmSuccess}
-                    code={code}
-                />
+               <>
+               {formElement}
+               </>
             )
         }
     </>

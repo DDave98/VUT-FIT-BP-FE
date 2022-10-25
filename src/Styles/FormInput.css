@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer components
+{
+    .FormInput
+    {
+        @apply flex flex-col items-baseline justify-between mt-2 max-w-lg;
+    }
+
+    .iconCheck
+    {
+        @apply inline-block ml-3 text-green-600;
+    }
+
+    .iconCross
+    {
+        @apply inline-block ml-3 text-red-600;
+    }
+
+    .instructions
+    {
+        @apply mt-4 bg-black block text-white p-2 rounded-md;
+    }
+
+    .instructionsIcon
+    {
+        @apply w-5 h-5 inline mr-1
+    }
+
+    .inputStyleClass
+    {
+        @apply w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600
+    }
+}

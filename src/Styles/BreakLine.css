@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer components
+{
+    .breakLine
+    {
+        display: flex; 
+        position: relative; 
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem; 
+        align-items: center; 
+    }
+
+    .breakLineLeft
+    {
+        flex-grow: 1; 
+        border-top-width: 1px; 
+        border-color: #9CA3AF; 
+    }
+
+    .breakLineText
+    {
+        margin-left: 1rem;
+        margin-right: 1rem; 
+        color: #9CA3AF; 
+        flex-shrink: 1; 
+    }
+
+    .breakLineRight
+    {
+        flex-grow: 1; 
+        border-top-width: 1px; 
+        border-color: #9CA3AF; 
+    }
+}

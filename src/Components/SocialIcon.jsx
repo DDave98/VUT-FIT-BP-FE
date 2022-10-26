@@ -48,14 +48,12 @@ const SocialIcon = (
 
     return (
         <>
-            <button >
-                <img
-                    src={src}
-                    className={className ?? "SocialIcon"}
-                    onClick={LogIn}
-                    name={name}
-            />
-            </button>           
+            <img
+                src={src}
+                className={className ?? "SocialIcon"}
+                onClick={LogIn}
+                name={name}
+            />        
         </>
     )
 }

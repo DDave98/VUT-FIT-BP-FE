@@ -7,7 +7,7 @@
 {
     .FormInput
     {
-        @apply flex flex-col items-baseline justify-between mt-2 max-w-lg;
+        @apply flex flex-col items-baseline justify-between mt-4 max-w-lg;
     }
 
     .iconCheck

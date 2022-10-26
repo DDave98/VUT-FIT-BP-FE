@@ -10,7 +10,7 @@ import RequireAuth from './Components/RequireAuth';
 import { privateRoutes, publicRoutes } from "./Constants/pagesStructure";
 import { NotificationContainer } from 'react-notifications';
 import NotFoundPage from './Pages/404';
-//import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css'
 
 function App()
 {

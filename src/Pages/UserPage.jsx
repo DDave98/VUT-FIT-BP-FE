@@ -16,7 +16,7 @@ const UserPage = () =>
                     <Dropdown />
                 </div>
                 <div className='DataPanel w-full p-10 bg-blue-100'>
-
+                    
                 </div>
                 <div className='DataViewPanel w-full p-10 bg-orange-100'>
                     <PerPage />

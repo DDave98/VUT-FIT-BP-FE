@@ -53,7 +53,7 @@ const SocialIcon = (
                 className={className ?? "SocialIcon"}
                 onClick={LogIn}
                 name={name}
-            />        
+            />
         </>
     )
 }

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer components
+{
+    .ViewTypeSelect
+    {
+        @apply inline-block w-full flex flex-row;
+    }
+
+    .VTSbutton
+    {
+        @apply ml-4;
+    }
+}
+
+/*
+  Hide radio button (the round disc)
+  we will use just the label to create pushbutton effect
+*/
+.ViewTypeSelect input[type=radio] {
+    display:none; 
+    margin:10px;
+}
+
+/*
+  Change the look'n'feel of labels (which are adjacent to radiobuttons).
+  Add some margin, padding to label
+*/
+.VTSinput + label {
+    display:inline-block;
+    margin:-2px;
+    padding: 4px 12px;
+    background-color: #e7e7e7;
+    border: solid #fff 2px;
+    border-color: #ddd;
+}
+/*
+ Change background color for label next to checked radio button
+ to make it look like highlighted button
+*/
+.VTSinput:checked + label { 
+   background-image: none;
+    background-color:#d0d0d0;
+}

@@ -11,7 +11,8 @@ export const navLinks = [
     {name: 'Přehled', link: homePath},
     {name: 'Uživatelé', link: userPath},
     {name: 'Záznamy', link: logPath},
-    {name: 'Aplikace', link: appPath}
+    {name: 'Aplikace', link: appPath},
+    {name: 'Zprávy', link: null},
 ];
 
 export const navDropDownLinks = [

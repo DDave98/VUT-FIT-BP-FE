@@ -1,7 +1,10 @@
-
 import { Dropdown as DropdownUI } from 'semantic-ui-react'
+import PropTypes from 'prop-types';
 
-const Dropdown = () =>
+const Dropdown = (
+{
+
+}) =>
 {
   const options = [
     { key: 'aplikace 1', value: 'aplikace 1', text: 'aplikace 1'},
@@ -29,6 +32,11 @@ const Dropdown = () =>
         />
       </>
     )
+}
+
+Dropdown.propTypes = 
+{
+    //setOnSuccess: PropTypes.func.isRequired,
 }
 
 export default Dropdown;

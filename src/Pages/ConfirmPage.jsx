@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import EmailConfirmForm from '../Components/EmailConfirmForm';
 import { loginPath } from "../Constants/pagesPath";
 import SuccessForm from '../Components/SuccessForm';
+import React from 'react';
 
 const ConfirmPage = ({
     formElement,
@@ -12,22 +12,20 @@ const ConfirmPage = ({
     const [confirmSuccess, setConfirmSuccess] = useState(false);
     const [code, setCode] = useState('');
 
+    const formParam = {setOnSuccess: setConfirmSuccess, code: code};
+
     const search = useLocation().search;
 
     useEffect(() =>
     {
         const urlCode = new URLSearchParams(search).get('code');
         setCode(urlCode);
-        console.log(formElement);
     }, []); 
 
     const form = () =>
     {
-        const element = formElement;
-        element.setOnSuccess = setConfirmSuccess;
-        element.code = code;
-        console.log(element);
-        return element;
+        const formComponent = React.cloneElement(formElement, formParam);
+        return formComponent;
     }
 
     return <>
@@ -42,7 +40,9 @@ const ConfirmPage = ({
             ) :
             (
                <>
-               {formElement}
+                {
+                    form()
+                }
                </>
             )
         }

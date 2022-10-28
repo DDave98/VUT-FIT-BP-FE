@@ -22,6 +22,9 @@ const TableView = (
                     </Table.Cell>
                 })
             }
+                <Table.HeaderCell>
+                        <button>více informací</button>
+                </Table.HeaderCell>
             </Table.Row>
         })
         console.log(bodyData)
@@ -40,6 +43,8 @@ const TableView = (
                             </Table.HeaderCell>
                         )
                     }
+                    <Table.HeaderCell>
+                    </Table.HeaderCell>
                 </Table.Row>
                 </Table.Header>
 

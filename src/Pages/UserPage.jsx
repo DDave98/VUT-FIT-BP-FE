@@ -25,7 +25,6 @@ const UserPage = () =>
                         data = {data}
                         onPage = {10}
                         page = {1}
-
                     />
                 </div>
                 <div className='DataViewPanel w-full p-10 bg-orange-100'>

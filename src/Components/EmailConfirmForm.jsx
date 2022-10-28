@@ -24,6 +24,7 @@ const EmailConfirmForm = ({setOnSuccess, code}) =>
         {
             const path = config.path.confirmEmail + "?code=" + confirmCode;
             await PublicAPI.get(path);
+            setLoadMode(false);
             setOnSuccess(true);
         }
         catch (err)

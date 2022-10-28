@@ -13,6 +13,7 @@ const ConfirmPage = ({
     const [code, setCode] = useState('');
 
     const formParam = {setOnSuccess: setConfirmSuccess, code: code};
+    const { title, buttonText, LinkPath } = successFromProperties;
 
     const search = useLocation().search;
 
@@ -24,8 +25,7 @@ const ConfirmPage = ({
 
     const form = () =>
     {
-        const formComponent = React.cloneElement(formElement, formParam);
-        return formComponent;
+        return React.cloneElement(formElement, formParam);
     }
 
     return <>
@@ -39,11 +39,7 @@ const ConfirmPage = ({
                 />
             ) :
             (
-               <>
-                {
-                    form()
-                }
-               </>
+               <>{form()}</>
             )
         }
     </>

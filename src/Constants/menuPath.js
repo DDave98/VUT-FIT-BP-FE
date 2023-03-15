@@ -4,7 +4,8 @@ import {
     userPath,
     logPath,
     settingPath,
-    profilePath
+    profilePath,
+    messagePath,
 } from "./pagesPath";
 
 export const navLinks = [
@@ -12,7 +13,7 @@ export const navLinks = [
     {name: 'Uživatelé', link: userPath},
     {name: 'Záznamy', link: logPath},
     {name: 'Aplikace', link: appPath},
-    {name: 'Zprávy', link: null},
+    {name: 'Zprávy', link: messagePath},
 ];
 
 export const navDropDownLinks = [

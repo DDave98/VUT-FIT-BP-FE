@@ -6,6 +6,7 @@ export const logPath = "/logs";
 export const profilePath = "/profile";
 export const settingPath = "/setting";
 export const userPath = "/users";
+export const messagePath = "/messages";
 export const registerPath = "/registration";
 export const confirmPath = "confirm";
 export const recoveryPath = "/recovery";

@@ -9,6 +9,7 @@ import UserPage from "../Pages/UserPage";
 import RecoveryPage from "../Pages/RecoveryPage";
 import RegistrationPage from "../Pages/RegisterPage";
 import ConfirmPage from "../Pages/ConfirmPage";
+import MessagePage from "../Pages/MessagePage";
 
 import * as path from "./pagesPath";
 
@@ -47,4 +48,5 @@ export const privateRoutes =
     CreateRoute(path.profilePath, <ProfilePage />, "ProfilePage"),
     CreateRoute(path.settingPath, <SettingPage />, "SettingPage"),
     CreateRoute(path.userPath, <UserPage />, "UserPage"),
+    CreateRoute(path.messagePath, <MessagePage />, "MessagePage"),
 ];

@@ -1,5 +1,5 @@
 import {NotificationManager} from 'react-notifications';
-import "../Styles/UserPage.css";
+import "../Styles/LogPage.css";
 import Dropdown from '../Components/Dropdown';
 import Pagination from '../Components/Pagination';
 import PerPage from '../Components/PerPage';
@@ -8,7 +8,7 @@ import ViewTypeSelect from '../Components/ViewTypeSelect';
 import ModalDetail from '../Components/Modal-Detail';
 import { useState } from 'react';
 
-const UserPage = () =>
+const MessagePage = () =>
 {
     const [showModal, setShowModal] = useState(false);
 
@@ -22,82 +22,116 @@ const UserPage = () =>
 
     const headers = [
         {
-            name: "Jméno",
+            name: "Vytvořeno",
             class: "col-10"
         },
         {
-            name: "Příjmení",
+            name: "Typ",
             class: "col-10"
         },
         {
-            name: "E-mail",
+            name: "Uživatel",
             class: "col-10"
         },
         {
-            name:  "Role",
+            name:  "Aplikace",
             class: "col-10"
         },
         {
-            name:  "Počet Aplikací",
+            name:  "IP",
+            class: "col-10"
+        }
+        ,
+        {
+            name:  "Poznámka",
             class: "col-10"
         }
     ];
 
     const filters = {
-        apps: ["Vše"].concat(Array.from({ length: 20 }, (value, index) => "Aplikace " + (index+1))),
         sort: headers.map((opt) => (opt.name)),
         directions: ["Vzestupně", "Sestupně"],
-        type: ["Vše", "Hry", "Grafické nástroje", "Programovací nástroje", "Ostatní"]
+        type: ["Upozornění", "Informace", "Chyba"]
     }
 
     const data = [
         { 
-            name: "Alfreds",
-            surname: "Futterkiste",
-            email: "alaric.keeshawn@foundtoo.com", 
-            role: "Uživatel",
-            apps_cnt: 10,
+            created: "18/2/2023 9:47:15",
+            type: "Warning",
+            user: "Dave", 
+            app: "App 2",
+            ip: "192.168.0.3",
+            note: "Access denied",
         },
         { 
-            name: "Berglunds",
-            surname: "Snabbkop",
-            email: "Berglunds.snabbkop@foundtoo.com", 
-            role: "Uživatel",
-            apps_cnt: 0,
+            created: "13/3/2023 6:8:15",
+            type: "Information",
+            user: "Dave", 
+            app: "App 2",
+            ip: "192.168.0.3",
+            note: "Access denied",
         },
         { 
-            name: "Koniglich",
-            surname: "Essen",
-            email: "Koniglich.Essen@foundtoo.com", 
-            role: "Uživatel",
-            apps_cnt: 0,
+            created: "25/2/2023 6:52:55",
+            type: "Error",
+            user: "Dave", 
+            app: "App 2",
+            ip: "192.168.0.3",
+            note: "Access denied",
         },
         { 
-            name: "Laughing Bacchus",
-            surname: "Winecellars",
-            email: "Laughing.Winecellars@foundtoo.com", 
-            role: "Uživatel",
-            apps_cnt: 0,
+            created: "18/2/2023 9:47:15",
+            type: "Warning",
+            user: "Dave", 
+            app: "App 2",
+            ip: "192.168.0.3",
+            note: "Access denied",
         },
         { 
-            name: "Magazzini Alimentari",
-            surname: "Riuniti",
-            email: "Magazzini.Riuniti@foundtoo.com", 
-            role: "Uživatel",
-            apps_cnt: 0,
+            created: "13/3/2023 6:8:15",
+            type: "Information",
+            user: "Dave", 
+            app: "App 2",
+            ip: "192.168.0.3",
+            note: "Access denied",
         },
         { 
-            name: "North",
-            surname: "South",
-            email: "North.South@foundtoo.com", 
-            role: "Admin",
-            apps_cnt: 0,
+            created: "25/2/2023 6:52:55",
+            type: "Error",
+            user: "Dave", 
+            app: "App 2",
+            ip: "192.168.0.3",
+            note: "Access denied",
+        },
+        { 
+            created: "18/2/2023 9:47:15",
+            type: "Warning",
+            user: "Dave", 
+            app: "App 2",
+            ip: "192.168.0.3",
+            note: "Access denied",
+        },
+        { 
+            created: "13/3/2023 6:8:15",
+            type: "Information",
+            user: "Dave", 
+            app: "App 2",
+            ip: "192.168.0.3",
+            note: "Access denied",
+        },
+        { 
+            created: "25/2/2023 6:52:55",
+            type: "Error",
+            user: "Dave", 
+            app: "App 2",
+            ip: "192.168.0.3",
+            note: "Access denied",
         },
     ];
     
     return (
-        <div className='UserPage'>
-            <h1>Uživatelé</h1>
+        <div className='LogPage'>
+            <h1>Přehled Zpráv</h1>
 
             {/* <!-- filter panel --> */}
             <div className="filter-panel">
@@ -110,18 +144,18 @@ const UserPage = () =>
                     
                     {/* <!-- Sorting --> */}
                     <div className="sorting">
-                    
-                    {/* <!-- vztah k aplikaci --> */}
-                    <div className="sorting-dropdown">
-                        <label for="cars">Aplikace:</label>
-                        <select name="cars" id="cars">
-                            {
-                                filters.apps.map((opt) => (
-                                    <option value={opt}>{opt}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
+
+                        <div className="sorting-dropdown">
+                            <label for="cars">Typ:</label>
+                            <div id="list1" className="dropdown-check-list" tabindex="100">
+                                <span className="anchor">Select</span>
+                                <ul className="items">
+                                <li><input className="checkbox" />warinng </li>
+                                <li><input className="checkbox" />error</li>
+                                <li><input className="checkbox" />info </li>
+                                </ul>
+                            </div>
+                        </div>
                     
                     {/* <!-- řazeni podle sloupce --> */}
                     <div className="sorting-dropdown">
@@ -146,11 +180,7 @@ const UserPage = () =>
                             }
                         </select>
                     </div>
-                    
-                    <div>
-                        <label for="">blokovaní</label>
-                        <input type="checkbox" />
-                    </div>
+
                     </div>
                     
                     <div className="panel-bottom">
@@ -175,11 +205,12 @@ const UserPage = () =>
                 {
                     data.map((line) => (
                         <tr>
-                            <td>{line.name}</td>
-                            <td>{line.surname}</td>
-                            <td>{line.email}</td>
-                            <td>{line.role}</td>
-                            <td>{line.apps_cnt}</td>
+                            <td>{line.created}</td>
+                            <td><div className={line.type + "Type"}>{line.type}</div></td>
+                            <td>{line.user}</td>
+                            <td>{line.app}</td>
+                            <td>{line.ip}</td>
+                            <td>{line.note}</td>
                             <td onClick={() => setShowModal(true)}>
                                 možnosti
                             </td>
@@ -193,34 +224,12 @@ const UserPage = () =>
                 <div className="table-footer-content">
                     
                     {/* <!-- pagination --> */}
-
                     <Pagination totalPages={totalPages} />
-                    
-                    {/* <!-- show style --> */}
-                    <div className="show-style">
-                        <ViewTypeSelect />
-                    </div> 
                 </div>
             </div>
-
-            {/* puvodni filtrpanel 
-            {<div className='filterPanel w-full p-10 bg-slate-100'>
-                <label for="cars">Aplikace:</label>
-                <Dropdown />
-            </div>} 
-
-            
-
-            <div className='DataPanel w-full p-10 bg-blue-100'>
-                <TableView
-                    data = {data}
-                    onPage = {10}
-                    page = {1}
-                />
-            </div>*/}
-            <ModalDetail show={showModal} onClose={handleCloseModal} header="Detail Aplikace"/>
+            <ModalDetail show={showModal} onClose={handleCloseModal} header="Detail Zprávy"/>
         </div>
     );
 }
 
-export default UserPage;
+export default MessagePage;

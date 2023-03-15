@@ -17,7 +17,7 @@ function Logout ()
     //let location = useLocation();
     
     //setAuth({});                         // delete access token from memory
-    DeleteFromStorage(accessTokenTag);   // delete access token from local storage
+    DeleteFromStorage(accessTokenTag);     // delete access token from local storage
     return <Navigate to={loginPath} replace />
 }
 

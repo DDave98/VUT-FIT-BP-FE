@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { Dropdown as DropdownUI } from 'semantic-ui-react';
 //import "../Styles/PerPage.css";
 
 const PerPage = (
@@ -16,7 +15,8 @@ const PerPage = (
     ]
 
     return (
-        <div className='PerPageContainer w-full'>
+    <div className="sorting-dropdown">
+        {/*<div className='PerPageContainer w-full'>
             {'Zobrazit na stránku: '}
             <DropdownUI
                 compact
@@ -25,7 +25,15 @@ const PerPage = (
                 defaultValue={options[0].value}
                 disabled={disabled ?? false}
             />
-        </div>
+    </div>*/}
+    <label for="cars">počet na stránku:</label>
+    <select name="cars" id="cars">
+        <option value="opel">10</option>
+        <option value="volvo">20</option>
+        <option value="saab">50</option>
+        <option value="saab">100</option>
+    </select>
+    </div>
     )
 }
 

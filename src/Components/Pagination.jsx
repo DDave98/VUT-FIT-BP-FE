@@ -10,7 +10,7 @@ const Pagination = (
 }) =>
 {
     return (
-        <div className='PaginationContainer w-full'>
+        <div className='PaginationContainer'>
             <div className='PaginationItem'>
                 <PaginationUi
                     boundaryRange={0}

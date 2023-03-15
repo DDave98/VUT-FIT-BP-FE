@@ -9,7 +9,6 @@ const ViewTypeSelect = (
 
     return (
         <div className='ViewTypeSelect'>
-            {'Typ zobrazení: '}
             <div className='VTSbutton'>
                 <input type="radio" id="radio1" name="radios" value="all" className='VTSinput' checked />
                 <label for="radio1" className='VTSlabel'>

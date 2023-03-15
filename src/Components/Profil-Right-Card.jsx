@@ -7,7 +7,7 @@ import { telRegex } from "../Constants/regex";
 /// přijme objekt získaný od serveru
 const ProfilRightCard = () => {
 
-    const [editMode, setEditMode] = useState(false);
+    const [editMode, setEditMode] = useState(true);
 
     /// zatím provizorně
     const [name, setName] = useState("David");

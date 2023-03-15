@@ -1,0 +1,245 @@
+
+/* -------------------------------------------------------- */
+/* základní část */
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+.UserPage
+{
+    padding: 3vh;
+}
+
+.UserPage h1
+{
+    font-size: 4.5rem;
+    line-height: 1;
+    margin-top: 2.5rem;
+}
+
+/* -------------------------------------------------------- */
+/* filter section */
+
+.filter-panel
+{
+    margin: 3vh 0px 5vh;
+    -webkit-box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
+    -moz-box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
+    box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
+}
+
+.filter-panel h2
+{
+    margin: 1rem;
+    font-weight: bold;
+    font-size: 2rem;    
+}
+
+.filter-panel-content
+{
+  background: white;
+  width: 100%;
+  min-height: 10vh;
+  padding: 2vh 2vh;
+}
+
+/* -------------------------------------------------------- */
+/* search bar */
+
+#myInput 
+{
+  margin: 0px 1rem;
+  width: 90%;
+  font-size: 16px;
+  padding: .9vh 2vh;
+  border: 1px solid #ddd;
+}
+
+/* -------------------------------------------------------- */
+/* table */
+
+#myTable
+{
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 65vh;
+  border: 1px solid #ddd;
+  font-size: 18px;
+  margin: 2vh 0vh;
+  background: white;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.table-header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+.col-10
+{
+    width: 10%;
+}
+
+.col-5
+{
+    width: 5%;
+}
+
+tr td:last-child:hover
+{
+  text-decoration: underline solid 1px black;
+  cursor: pointer;
+}
+
+/* -------------------------------------------------------- */
+/* footer */
+
+.table-footer-content
+{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* -------------------------------------------------------- */
+/* pages */
+
+.pagination
+{
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #000;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #FFF;
+  border-radius: 5px;
+}
+
+/* -------------------------------------------------------- */
+/* show style */
+
+.show-style
+{
+  display: flex;
+  gap: 1vh;
+}
+
+.button-style
+{
+  padding: 0.5rem;
+  border: solid 1px #AAA;
+  background-color: #fff;
+}
+
+.button-style:hover
+{
+  background-color: #EEE;
+  border-color: #000;
+}
+
+.button-style.active
+{
+  background-color: #AAA
+}
+
+.show-line
+{
+  background-image: url("https://link.tsbohemia.cz/img/icon/category-list.svg");
+  width: 1rem;
+  height: 1rem;
+}
+
+.show-block
+{
+  background-image: url("https://link.tsbohemia.cz/img/icon/category-cards.svg");
+  width: 1rem;
+  height: 1rem;
+}
+
+/* -------------------------------------------------------- */
+/* sorting */
+
+.sorting
+{
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+  margin: 1rem 0px;
+}
+
+.sorting-dropdown
+{
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.sorting-dropdown label
+{
+  text-transform:capitalize;
+  margin-bottom: 0.5rem;
+}
+
+/* -------------------------------------------------------- */
+/* panel bottom */
+
+.panel-bottom
+{
+  width: 100%;
+  display: flex;
+  padding: 0px 1rem;
+  justify-content: space-between;
+}
+
+.SearchCounter p
+{
+  display: inline;
+  font-weight: bold;
+}
+
+.panel-bottom
+{
+  border-top: 1px solid black;
+  padding-top: 1rem;
+}
+
+.panel-bottom .sorting-dropdown
+{
+  flex-direction: row;
+  width: 30%;
+  justify-content: right;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.panel-bottom label
+{
+  margin: 0px;
+}
+
+#cars
+{
+  padding: 8px 10px;
+  border: none;
+}

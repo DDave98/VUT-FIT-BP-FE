@@ -5,33 +5,21 @@ import { telRegex } from "../Constants/regex";
 
 /// funkce komponenta, která představuje pravou stranu stránky profil
 /// přijme objekt získaný od serveru
-const ProfilRightCard = () => {
+const ProfilDataCard = ({data}) => {
 
     const [editMode, setEditMode] = useState(true);
-
-    /// zatím provizorně
-    const [name, setName] = useState("David");
-    const [surname, setSurname] = useState("Michalica");
-    const [email, setEmail] = useState("fip@jukmuh.al");
-    const [tel, setTel] = useState("+420 123 456 789");
-    const [MFA, setMFA] = useState(false);
-    const [city, setCity] = useState("Brno");
-    const [state, setState] = useState("Cze");
-    const [PSC, setPSC] = useState("612 00");
-    const [gender, setGender] = useState("muž");
-    const [birth, setBirth] = useState("13.11.1998");
-    const [relig, setRelig] = useState("");
-    const [edu, setEdu] = useState("Střední škola s maturitou");
-    const [job, setJob] = useState("Programátor");
 
     const changeEditMode = () =>
     {
         setEditMode(!editMode);
     }
 
-    const handleChange = (e) => 
+    const ChangeDateFormat = (date) =>
     {
-        setGender(e.target.value);
+      let newDate = new Date(date);
+      let newnew = newDate.getFullYear() + "-" + newDate.getMonth().toPrecision(2) + "-11";
+      console.log("aaaaaaaaa", newnew);
+      return newnew;
     }
 
   return (
@@ -40,8 +28,8 @@ const ProfilRightCard = () => {
         <h6 className="">Jméno</h6>
         {
             editMode ? 
-            <div className="cardLineData">{name}</div>
-            :<input type="text" value={name} required/>
+            <div className="cardLineData">{data?.name}</div>
+            :<input type="text" value={data?.name} required/>
         }
       </div>
       <hr />
@@ -50,8 +38,8 @@ const ProfilRightCard = () => {
         <h6 className="">Příjmení</h6>
         {
             editMode ? 
-            <div className="cardLineData">{surname}</div>
-            :<input type="text" value={surname} required/>
+            <div className="cardLineData">{data?.surname}</div>
+            :<input type="text" value={data?.surname} required/>
         }
       </div>
       <hr />
@@ -60,8 +48,8 @@ const ProfilRightCard = () => {
         <h6 className="">Email</h6>
         {
             editMode ? 
-            <div className="cardLineData">{email}</div>
-            :<input type="text" value={email} required />
+            <div className="cardLineData">{data?.email}</div>
+            :<input type="text" value={data?.email} required />
         }
       </div>
       <hr />
@@ -70,8 +58,8 @@ const ProfilRightCard = () => {
         <h6 className="">Telefon</h6>
         {
             editMode ? 
-            <div className="cardLineData">{tel}</div>
-            :<input type="tel" value={tel} pattern={telRegex}/>
+            <div className="cardLineData">{data?.phone}</div>
+            :<input type="tel" value={data?.phone} pattern={telRegex}/>
         }
       </div>
       <hr />
@@ -80,8 +68,8 @@ const ProfilRightCard = () => {
         <h6 className="">2FA</h6>
         {
             editMode ? 
-            <div className="cardLineData">{MFA ? "Ano" : "Ne"}</div>
-            :<input type="checkbox" value={MFA} disabled/>
+            <div className="cardLineData">{data?.twoFactorAuth != "none" ? "Ano" : "Ne"}</div>
+            :<input type="checkbox" value={data?.twoFactorAuth} disabled/>
         }
       </div>
       <hr />
@@ -90,8 +78,8 @@ const ProfilRightCard = () => {
         <h6 className="">Město</h6>
         {
             editMode ? 
-            <div className="cardLineData">{city}</div>
-            :<input type="input" value={city} />
+            <div className="cardLineData">{data?.city}</div>
+            :<input type="input" value={data?.city} />
         }
       </div>
       <hr />
@@ -100,8 +88,8 @@ const ProfilRightCard = () => {
         <h6 className="">Stát</h6>
         {
             editMode ? 
-            <div className="cardLineData">{state}</div>
-            :<input type="text" value={state} />
+            <div className="cardLineData">{data?.state}</div>
+            :<input type="text" value={data?.state} />
         }
       </div>
       <hr />
@@ -110,8 +98,8 @@ const ProfilRightCard = () => {
         <h6 className="">PSČ</h6>
         {
             editMode ? 
-            <div className="cardLineData">{PSC}</div>
-            :<input type="input" value={PSC} />
+            <div className="cardLineData">{"TODO PSC"}</div>
+            :<input type="input" value={"PSC"} />
         }
       </div>
       <hr />
@@ -120,10 +108,10 @@ const ProfilRightCard = () => {
         <h6 className="">Pohlaví</h6>
         {
             editMode ? 
-            <div className="cardLineData">{gender}</div>
-            :<select name="gender" id="gender" onChange={handleChange} select={gender}>
-                <option value="muž">Muž</option>
-                <option value="žena">Žena</option>
+            <div className="cardLineData">{data.sex == 0 ? "muž" : data.sex == 1 ? "žena" : "neuvedeno"}</div>
+            :<select name="gender" id="gender" onChange={null} select={data.sex}>
+                <option value="0">Muž</option>
+                <option value="1">Žena</option>
             </select>
         }
       </div>
@@ -133,8 +121,8 @@ const ProfilRightCard = () => {
         <h6 className="">Datum narození</h6>
         {
             editMode ? 
-            <div className="cardLineData">{birth}</div>
-            :<input type="date" value={birth} max={(new Date()).getDate()} onChange={(e) => setBirth(e.value)} />
+            <div className="cardLineData">{new Date(data?.birthdate).toLocaleDateString()}</div>
+            :<input type="date" value={ChangeDateFormat(data.birthdate)} max={(new Date()).getDate()} onChange={(e) => (e) => console.log(e.target.value) /*setBirth(e.value)*/} />
         }
       </div>
       <hr />
@@ -143,8 +131,8 @@ const ProfilRightCard = () => {
         <h6 className="">Náboženské vyznání</h6>
         {
             editMode ? 
-            <div className="cardLineData">{relig == "" ? "-" : relig}</div>
-            :<input type="text" value={relig} />
+            <div className="cardLineData">{data?.religion == "" ? "-" : data?.religion}</div>
+            :<input type="text" value={data?.religion} />
         }
       </div>
       <hr />
@@ -153,8 +141,8 @@ const ProfilRightCard = () => {
         <h6 className="">Dosažené vzdělání</h6>
         {
             editMode ? 
-            <div className="cardLineData">{edu}</div>
-            :<input type="text" value={edu} />
+            <div className="cardLineData">{"edu"}</div>
+            :<input type="text" value={"edu"} />
         }
       </div>
       <hr />
@@ -163,8 +151,8 @@ const ProfilRightCard = () => {
         <h6 className="">Profese</h6>
         {
             editMode ? 
-            <div className="cardLineData">{job}</div>
-            :<input type="text" value={job} />
+            <div className="cardLineData">{"job"}</div>
+            :<input type="text" value={"job"} />
         }
       </div>
       <hr />
@@ -189,8 +177,8 @@ const ProfilRightCard = () => {
   );
 };
 
-ProfilRightCard.propTypes = {
+ProfilDataCard.propTypes = {
   //isabled: PropTypes.bool,
 };
 
-export default ProfilRightCard;
+export default ProfilDataCard;

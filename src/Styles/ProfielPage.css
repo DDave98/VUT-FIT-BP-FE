@@ -2,6 +2,18 @@
   box-sizing: border-box;
 }
 
+.profilePage
+{
+  margin-top: 2.5rem;
+}
+
+.profilePage h1
+{
+  font-size: 4.5rem;
+  line-height: 1;
+  margin-left: 3rem;
+}
+
 .profile-body {
   display: flex;
   padding: 1rem;

@@ -15,8 +15,12 @@ import { navLinks as links } from '../Constants/menuPath';
 import TopNavLinks from './TopNavLinks';
 import { homePath } from '../Constants/pagesPath';
 import config from "../Constants/config.json";
-import { PrivateAPI } from '../Services/AjaxService';
 import {NotificationManager} from 'react-notifications';
+
+// Prototyp
+import { GetFromStorage } from '../Services/StorageService';
+import { PrivateAPI } from '../Services/AjaxService';
+import { accessTokenTag } from '../Constants/storageTag';
 
 const TopNavbar = () => {
 
@@ -25,13 +29,20 @@ const TopNavbar = () => {
 
     const GetBaseInfo = async () =>
     {
-        const baseInfoPath = config.path.baseInfo;
+        const selfInfo = config.path.selfInfo;
 
         try
         {
-            const response = await PrivateAPI.get(baseInfoPath);
+            var token = GetFromStorage(accessTokenTag);
+            console.log("token: ", token)
+            const response = await PrivateAPI.get(selfInfo, 
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
             console.log("data:  ", response.data);
             setFirstName(response.data.name);
+            setLastName(response.data.surname);
         }
         catch (err)
         {

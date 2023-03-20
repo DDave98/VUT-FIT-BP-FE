@@ -4,10 +4,11 @@ const Footer = () =>
 {
     return (
         <footer className="footer">
-            <span >© 2021 Copyright: </span>
-            <a href="https://tailwind-elements.com/">
-                Tailwind Elements
+            <span >Copyright © 2023 - </span>
+            <a href="https://www.fit.vut.cz/.cs">
+                Fakulta informačních technologií VUT v Brně 
             </a>
+            {/* přidat logo, */}
         </footer>
     );
 };

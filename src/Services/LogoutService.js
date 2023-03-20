@@ -18,7 +18,7 @@ function Logout ()
     
     //setAuth({});                         // delete access token from memory
     DeleteFromStorage(accessTokenTag);     // delete access token from local storage
-    return <Navigate to={loginPath} replace />
+    <Navigate to={loginPath} replace />
 }
 
 export default Logout;

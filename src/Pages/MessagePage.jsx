@@ -1,5 +1,5 @@
 import {NotificationManager} from 'react-notifications';
-import "../Styles/LogPage.css";
+import "../Styles/MessagePage.css";
 import Dropdown from '../Components/Dropdown';
 import Pagination from '../Components/Pagination';
 import PerPage from '../Components/PerPage';
@@ -17,35 +17,23 @@ const MessagePage = () =>
         setShowModal(false);
     };
 
+    
     const matchCount = 2000;
     const totalPages = 20;
 
     const headers = [
         {
-            name: "Vytvořeno",
+            name: "Datum Odeslání",
             class: "col-10"
         },
         {
-            name: "Typ",
+            name: "Odesílatel",
             class: "col-10"
         },
         {
-            name: "Uživatel",
+            name: "Předmět",
             class: "col-10"
         },
-        {
-            name:  "Aplikace",
-            class: "col-10"
-        },
-        {
-            name:  "IP",
-            class: "col-10"
-        }
-        ,
-        {
-            name:  "Poznámka",
-            class: "col-10"
-        }
     ];
 
     const filters = {
@@ -145,41 +133,51 @@ const MessagePage = () =>
                     {/* <!-- Sorting --> */}
                     <div className="sorting">
 
-                        <div className="sorting-dropdown">
-                            <label for="cars">Typ:</label>
-                            <div id="list1" className="dropdown-check-list" tabindex="100">
-                                <span className="anchor">Select</span>
-                                <ul className="items">
-                                <li><input className="checkbox" />warinng </li>
-                                <li><input className="checkbox" />error</li>
-                                <li><input className="checkbox" />info </li>
-                                </ul>
-                            </div>
-                        </div>
-                    
+
                     {/* <!-- řazeni podle sloupce --> */}
                     <div className="sorting-dropdown">
-                        <label for="sort-col">řadit podle:</label>
+                        <label for="sort-col">Zobrazit:</label>
                         <select name="sort-col" id="cars">
-                            {
-                                filters.sort.map((opt) => (
-                                    <option value={opt}>{opt}</option>
-                                ))
-                            }
+                            <option className="" >vše </option>
+                            <option className="" >Zobrazené </option>
+                            <option className="" >Nezobrazené </option>
                         </select>
                     </div>
+
+                        {/* <!-- řazeni podle sloupce --> */}
+                        <div className="sorting-dropdown">
+                        <label for="sort-col">Typ zprávy:</label>
+                            <select name="sort-col" id="cars">
+                                <option className="" >vše </option>
+                                <option className="" >Pozvánky</option>
+                                <option className="" >Oznámení</option>
+                                <option className="" >Chyby</option>
+                            </select>
+                        </div>
                     
-                    {/* <!-- směr řazení --> */}
-                    <div className="sorting-dropdown">
-                        <label for="cars">směr řazení:</label>
-                        <select name="cars" id="cars">
-                            {
-                                filters.directions.map((opt) => (
-                                    <option value={opt}>{opt}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
+                        {/* <!-- řazeni podle sloupce --> */}
+                        <div className="sorting-dropdown">
+                            <label for="sort-col">řadit podle:</label>
+                            <select name="sort-col" id="cars">
+                                {
+                                    filters.sort.map((opt) => (
+                                        <option value={opt}>{opt}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                    
+                        {/* <!-- směr řazení --> */}
+                        <div className="sorting-dropdown">
+                            <label for="cars">směr řazení:</label>
+                            <select name="cars" id="cars">
+                                {
+                                    filters.directions.map((opt) => (
+                                        <option value={opt}>{opt}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
 
                     </div>
                     
@@ -187,37 +185,231 @@ const MessagePage = () =>
                         <div className="SearchCounter">
                             počet výsledků: <p>150</p>
                         </div>
+
+                        <div className="tri-state-toggle">
+
+                            <button className="tri-state-toggle-button active" id="toggle-button1">
+                                Příchozí
+                            </button>
+
+                            <button className="tri-state-toggle-button" id="toggle-button2">
+                                Odeslané
+                            </button>
+
+                            <button className="tri-state-toggle-button" id="toggle-button3">
+                                Smazané
+                            </button>
+
+                        </div>
+
+                        <button className="refresh">
+                            <span></span>
+                            <label> obnovit</label>
+                        </button>
+
                         <PerPage />
                     </div>                
                 </div>
             </div>
 
             {/* <!-- Table of content --> */}
-            <table id="myTable">
-                <tr className="table-header">
-                    {
-                        headers.map((col) =>(
-                            <th className={col.class}>{col.name}</th>
-                        ))
-                    }
-                    <th className="col-5"> </th>
-                </tr>
-                {
-                    data.map((line) => (
-                        <tr>
-                            <td>{line.created}</td>
-                            <td><div className={line.type + "Type"}>{line.type}</div></td>
-                            <td>{line.user}</td>
-                            <td>{line.app}</td>
-                            <td>{line.ip}</td>
-                            <td>{line.note}</td>
-                            <td onClick={() => setShowModal(true)}>
-                                možnosti
-                            </td>
-                        </tr>
-                    ))
-                }
-            </table>
+            <div class="contentContainer">
+    <div class="messageStack">
+
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+      <div class="stackItem">
+        <div class="stackItemType">
+          <span class="gg-info"></span>
+        </div>
+        <div class="stackItemView">
+          <div class="stackItemHeader stackItemLine">
+            <h3 class="stackItemApp">Aplikace 1</h3>
+            <p class="stackItemDate">15.3.2023 10:23:20</p>
+          </div>
+          <div class="stackItemSubject">
+            Pozvánka do aplikace Aplikace 1
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="MessageViewWindow">
+      <h3>Aplikace 1</h3>
+      <div class="MessageWindowHead">
+        <div class="MessageWindowIco">
+        </div>
+        <div class="HeaderWindowInfo">
+          <div>dne 15.3.2023 10:23:20</div>
+          <div>od <a href="#">Jmeno Příjmení</a> </div>
+        </div>
+        
+      </div>
+      <div class="MessageWindowBody">
+        
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero, eget facilisis enim ipsum id lacus. Nulla pulvinar eleifend sem. Integer malesuada. Nam quis nulla. Integer vulputate sem a nibh rutrum consequat. Nunc dapibus tortor vel mi dapibus sollicitudin. Fusce tellus odio, dapibus id fermentum quis, suscipit id erat. Nullam sit amet magna in magna gravida vehicula. Aliquam ornare wisi eu metus. Sed convallis magna eu sem. Nunc auctor. Donec iaculis gravida nulla.
+
+Nullam rhoncus aliquam metus. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Sed ac dolor sit amet purus malesuada congue. Etiam egestas wisi a erat. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero, eget facilisis enim ipsum id lacus. Mauris dictum facilisis augue. Integer pellentesque quam vel velit. Nulla quis diam. Phasellus faucibus molestie nisl. Sed convallis magna eu sem. Donec iaculis gravida nulla. Aliquam id dolor. Quisque porta. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Vivamus ac leo pretium faucibus.
+
+Maecenas lorem. Mauris elementum mauris vitae tortor. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris dictum facilisis augue. Maecenas aliquet accumsan leo. Morbi imperdiet, mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus. Maecenas aliquet accumsan leo. Aliquam ante. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Proin mattis lacinia justo. Aliquam in lorem sit amet leo accumsan lacinia. Morbi leo mi, nonummy eget tristique non, rhoncus non leo. Fusce tellus odio, dapibus id fermentum quis, suscipit id erat. Aliquam erat volutpat. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit.
+
+Etiam egestas wisi a erat. Quisque porta. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Etiam dictum tincidunt diam. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Fusce tellus. Morbi scelerisque luctus velit. Integer in sapien. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Integer pellentesque quam vel velit. In dapibus augue non sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+      </div>
+    </div>
+  </div>
         
             {/* <!-- Footer of page --> */}
             <div className="table-footer">

@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-//import "../Styles/PerPage.css";
+import "../../Styles/ProfilePageStyles/Profile-SocialCard.css";
 
 /// funkce/komponenta, která představuje část stránky profil
 /// načte informace o připojených účtech ze serveru
-const ProfilSocialCard = () => {
-    const changeEditMode = () => {};
-
+const ProfilSocialCard = ({toggleAccount}) =>
+{
     return (
         <div className="SocialPart card">
             <ul>

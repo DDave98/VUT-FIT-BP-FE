@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-//import "../Styles/PerPage.css";
 
 /// funkce/komponenta, která představuje část stránky profil
 /// načte informace o připojených účtech ze serveru
-const ProfilProfilCard = ({data}) =>
+const ProfilProfilCard = ({data, passwordChange, photoChange}) =>
 {
+    const HandlePassword = () => passwordChange();
+    const HandlePhoto = () => photoChange();
+
     return (
         <div className="profile-card">
             <img
@@ -18,13 +20,13 @@ const ProfilProfilCard = ({data}) =>
                 <h4>
                     {data.name} {data.surname}
                 </h4>
-                <p className="">{data.role}</p>
-                <p className="">počet aplikací: #</p>
-                <p className="">
+                <p>{data.role}</p>
+                <p>počet aplikací: #</p>
+                <p>
                     založen: {new Date(data.created).toLocaleDateString()}
                 </p>
-                <button className="btn-secondary btn">změna hesla</button>
-                <button className="btn-secondary btn">nové foto</button>
+                <button className="btn-secondary btn" onClick={() => HandlePassword}>změna hesla</button>
+                <button className="btn-secondary btn" onClick={() => HandlePhoto}>nové foto</button>
             </div>
         </div>
     );

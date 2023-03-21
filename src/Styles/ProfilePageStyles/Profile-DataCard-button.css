@@ -1,0 +1,12 @@
+.cardLine-button
+{
+    border: solid black 1px;
+    padding: 5px 5%;
+}
+
+.cardLine-button:hover
+{
+    border: solid #007bff 1px;
+    color: #007bff;
+    transition: color 0.5s, border 0.5s;
+}

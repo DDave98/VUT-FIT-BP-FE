@@ -34,13 +34,11 @@ const TopNavbar = () => {
         try
         {
             var token = GetFromStorage(accessTokenTag);
-            console.log("token: ", token)
             const response = await PrivateAPI.get(selfInfo, 
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }
             );
-            console.log("data:  ", response.data);
             setFirstName(response.data.name);
             setLastName(response.data.surname);
         }

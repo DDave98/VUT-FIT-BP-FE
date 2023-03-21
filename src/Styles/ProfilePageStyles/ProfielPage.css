@@ -54,14 +54,6 @@
   box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
 }
 
-.profile-card, .SocialPart
-{
-  -webkit-box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
-  -moz-box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
-  box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
-  background-color: #fff;
-}
-
 .profile-image {
   border-radius: 50% !important;
   border-style: none;
@@ -129,66 +121,6 @@
   color: #007bff;
   border-color: #007bff;
   background-color: #fff;
-}
-
-.SocialPart {
-  margin-top: 3em;
-}
-
-.SocialPart ul {
-  display: flex;
-  flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
-  margin-top: 0;
-  word-wrap: break-word;
-}
-
-.SocialPart li {
-  display: flex;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-  border-right-width: 0;
-  border-left-width: 0;
-  border-radius: 0;
-  align-items: center !important;
-  justify-content: space-between !important;
-  flex-wrap: wrap !important;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.SocialPart h6 {
-  margin-top: 0px;
-  font-size: 1rem;
-  margin-bottom: 0;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-}
-
-.SocialPart svg {
-  margin-right: 1rem !important;
-  overflow: hidden;
-  vertical-align: middle;
-}
-
-.SocialPart span {
-  color: #6c757d !important;
-}
-
-.facebook-ico {
-  color: #007bff !important;
-}
-.twitter-ico {
-  color: #17a2b8 !important;
-}
-.instagram-ico {
-  color: #dc3545 !important;
-}
-
-.profile-body-right {
-  width: 100%;
 }
 
 .profile-body-right .profile-card {

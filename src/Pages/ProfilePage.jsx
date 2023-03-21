@@ -1,7 +1,7 @@
-import "../Styles/ProfielPage.css"
-import ProfilDataCard from "../Components/Profil-Data-Card";
-import ProfilSocialCard from "../Components/Profil-Social-Card";
-import ProfilProfilCard from "../Components/Profil-Profil-Card";
+import "../Styles/ProfilePageStyles/ProfielPage.css"
+import ProfilDataCard from "../Components/ProfilePage/Profil-Data-Card";
+import ProfilSocialCard from "../Components/ProfilePage/Profil-Social-Card";
+import ProfilProfilCard from "../Components/ProfilePage/Profil-Profil-Card";
 
 
 import { useState, useEffect } from "react";
@@ -12,6 +12,7 @@ import { PrivateAPI } from '../Services/AjaxService';
 import { accessTokenTag } from '../Constants/storageTag';
 import config from "../Constants/config.json";
 import {NotificationManager} from 'react-notifications';
+import ModalWindow from "../Components/ModalWindow";
 
 
 
@@ -20,23 +21,60 @@ const ProfilePage = () =>
     const InitUserData =  {
         id: "49de0439-0000-4706-7522-08dab0608231",
         email: "email@email.cz",
-        name: "Jméno",
-        surname: "Příjmení",
+        name: "",
+        surname: "",
         phone: 0,
         isEnable: true,
         created: "2000-03-19T00:00:00",
-        twoFactorAuth: "none",
-        state: "Stát",
-        city: "Město",
+        twoFactorAuth: "",
+        state: "",
+        city: "",
         religion: "",
         role: "role",
         sex: -1,
         birthdate: "2000-03-19T00:00:00",
-        edu: "edu",
-        job: "job"
+        education: "",
+        career: ""
     }
 
     const [userData, setUserData] = useState(InitUserData);
+
+    const [modalShow, setModalShow] = useState(false);
+    const [modalHeader, setModalHeader] = useState("Nadpis");
+    const [modalElement, setModalElement] = useState(null);
+    
+    const CloseModal = () =>
+    {
+        setModalShow(false);
+    }
+
+    const ChangePassword = () =>
+    {
+        setModalHeader("Změnit Heslo");
+        setModalElement(<>změna hesla</>);
+        setModalShow(true);
+    }
+
+    const ChangePhoto = () =>
+    {
+        setModalHeader("Změnit Profilovou fotku");
+        setModalElement(<>fotka</>);
+        setModalShow(true);
+    }
+
+    const ToggleAccont = (id) =>
+    {
+        setModalHeader("Přidat / Odebrat Propojení");
+        setModalElement(<>účet</>);
+        setModalShow(true);
+    }
+
+    const ChangeEmail = () =>
+    {
+        setModalHeader("Změna Emailu");
+        setModalElement(<>email</>);
+        setModalShow(false);
+    }
 
     const GetBaseInfo = async () =>
     {
@@ -78,17 +116,21 @@ const ProfilePage = () =>
                 <div className="profile-body-left">
                 
                     {/* <!-- vrchní čtverec --> */}
-                    <ProfilProfilCard data={userData} />
+                    <ProfilProfilCard data={userData} passwordChange={ChangePassword} photoChange={ChangePhoto} />
                 
                     {/* <!-- Spodní čtverec --> */}
-                    <ProfilSocialCard />
+                    <ProfilSocialCard toggleAccount={ToggleAccont}/>
                 </div>
 
                 {/* <!-- Pravá strana --> */}
                 <div className="profile-body-right">
-                    <ProfilDataCard data={userData} />
+                    <ProfilDataCard data={userData} emailChange={ChangeEmail} />
                 </div>
             </div>
+
+            <ModalWindow show={modalShow} header={modalHeader} onClose={CloseModal}>
+                {modalElement}
+            </ModalWindow>
         </div>
     );
 }

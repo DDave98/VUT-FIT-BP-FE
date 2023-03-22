@@ -72,9 +72,10 @@ const ProfilePage = () =>
 
     const ChangeEmail = () =>
     {
+        console.log("Email change click");
         setModalHeader("Změna Emailu");
         setModalElement(<>email</>);
-        setModalShow(false);
+        setModalShow(true);
     }
 
     const GetBaseInfo = async () =>

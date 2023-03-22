@@ -34,12 +34,12 @@ const ProfilDataCard = ({data, emailChange}) => {
   }
 
   const [editMode, setEditMode] = useState(true);
-  const [editData, setEditData] = useState(data);
+  const [editData, setEditData] = useState(formData);
 
 
   const changeEditMode = () =>
   {
-      // setEditMode(!editMode);
+      setEditMode(!editMode);
   }
 
   const sendChanges = async () =>
@@ -123,10 +123,26 @@ const ProfilDataCard = ({data, emailChange}) => {
         onChange={(e) => (e) => console.log(e.target.value)}
       />
 
-      <ProfilDataCardInput header="Náboženské vyznání" value={data?.religion} editMode={editMode} />
-      <ProfilDataCardInput header="Dosažené vzdělání" value={editData?.education} editMode={editMode} />
-      <ProfilDataCardInput header="Profese" value={data?.career} editMode={editMode} />
-      <ProfilDataCardEdit editMode={editMode} changeEditMode={changeEditMode} sendChanges={sendChanges} />
+      <ProfilDataCardInput 
+        header="Náboženské vyznání" 
+        value={data?.religion} 
+        editMode={editMode} />
+      
+      <ProfilDataCardInput 
+        header="Dosažené vzdělání" 
+        value={editData?.education} 
+        editMode={editMode} />
+      
+      <ProfilDataCardInput 
+        header="Profese" 
+        value={data?.career} 
+        editMode={editMode} />
+      
+      <ProfilDataCardEdit 
+        editMode={editMode} 
+        changeEditMode={changeEditMode} 
+        sendChanges={sendChanges} />
+        
     </div>
   );
 };

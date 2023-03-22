@@ -7,11 +7,6 @@ const ModalWindow = (
 
     const modalClass = show ? "modal" : "modalHide";
 
-    const handleClose = () => 
-    {
-        onClose();
-    };
-
     return (
         <>
             {/*<!-- The Modal -->*/}
@@ -21,7 +16,7 @@ const ModalWindow = (
                 <div className="modal-content">
 
                     <div className="modal-header">
-                        <span className="close" onClick={() => handleClose}>
+                        <span className="close" onClick={onClose}>
                             &times;
                         </span>
                         <h2>{header}</h2>

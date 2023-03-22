@@ -3,20 +3,6 @@ import { useState, useEffect } from 'react';
 
 const ProfilDataCardSelect = ({header, editMode, value, values, selected, onChange}) =>
 {
-    const [sel, setVal] = useState(selected);
-
-    const valueChange = (newVal) =>
-    {
-      setVal(newVal.target.value);
-      onChange(newVal.target.value);
-    }
-  
-    // effect runs on component mount
-    useEffect(() => 
-    {
-      setVal(selected);
-    }, [selected]);
-
   return (
     <>
         <div className="cardLine">
@@ -24,7 +10,7 @@ const ProfilDataCardSelect = ({header, editMode, value, values, selected, onChan
         {
             editMode ? 
             <div className="cardLineData">{value}</div>
-            :<select name="gender" id="gender" onChange={(e) => valueChange(e)} select={sel}>
+            :<select name="gender" id="gender" onChange={(e) => onChange(e.target.value)} select={selected}>
                 {
                     values.map((a) => (
                         <option value={a.value} key={a.value}>{a.name}</option>

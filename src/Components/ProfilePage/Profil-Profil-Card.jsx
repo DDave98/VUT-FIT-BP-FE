@@ -5,8 +5,6 @@ import { useState, useEffect } from "react";
 /// načte informace o připojených účtech ze serveru
 const ProfilProfilCard = ({data, passwordChange, photoChange}) =>
 {
-    const HandlePassword = () => passwordChange();
-    const HandlePhoto = () => photoChange();
 
     return (
         <div className="profile-card">
@@ -25,8 +23,8 @@ const ProfilProfilCard = ({data, passwordChange, photoChange}) =>
                 <p>
                     založen: {new Date(data.created).toLocaleDateString()}
                 </p>
-                <button className="btn-secondary btn" onClick={() => HandlePassword}>změna hesla</button>
-                <button className="btn-secondary btn" onClick={() => HandlePhoto}>nové foto</button>
+                <button className="btn-secondary btn" onClick={passwordChange}>změna hesla</button>
+                <button className="btn-secondary btn" onClick={photoChange}>nové foto</button>
             </div>
         </div>
     );

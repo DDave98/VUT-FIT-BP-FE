@@ -80,7 +80,7 @@ FormPwdInputs.propTypes =
     instruction1: PropTypes.string,
     instruction2: PropTypes.string,
     getValidValue: PropTypes.func,
-    onChange: PropTypes.func,
+    onChangeValue: PropTypes.func,
 }
 
 export {FormPwdInputs};

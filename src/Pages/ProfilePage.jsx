@@ -2,7 +2,9 @@ import "../Styles/ProfilePageStyles/ProfielPage.css"
 import ProfilDataCard from "../Components/ProfilePage/Profil-Data-Card";
 import ProfilSocialCard from "../Components/ProfilePage/Profil-Social-Card";
 import ProfilProfilCard from "../Components/ProfilePage/Profil-Profil-Card";
-
+import ProfilModalPassword from "../Components/ProfilePage/Profile-Modal-Password";
+import {NotificationManager} from 'react-notifications';
+import ModalWindow from "../Components/ModalWindow";
 
 import { useState, useEffect } from "react";
 
@@ -11,8 +13,6 @@ import { GetFromStorage } from '../Services/StorageService';
 import { PrivateAPI } from '../Services/AjaxService';
 import { accessTokenTag } from '../Constants/storageTag';
 import config from "../Constants/config.json";
-import {NotificationManager} from 'react-notifications';
-import ModalWindow from "../Components/ModalWindow";
 
 
 
@@ -51,7 +51,7 @@ const ProfilePage = () =>
     const ChangePassword = () =>
     {
         setModalHeader("Změnit Heslo");
-        setModalElement(<>změna hesla</>);
+        setModalElement(<ProfilModalPassword />);
         setModalShow(true);
     }
 
@@ -64,8 +64,9 @@ const ProfilePage = () =>
 
     const ToggleAccont = (id) =>
     {
-        setModalHeader("Přidat / Odebrat Propojení");
-        setModalElement(<>účet</>);
+        console.log("accout click:", id);
+        setModalHeader("Přidat / Odebrat " + id);
+        setModalElement(<>účet {id}</>);
         setModalShow(true);
     }
 

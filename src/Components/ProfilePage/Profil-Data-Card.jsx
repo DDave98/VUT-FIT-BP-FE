@@ -36,9 +36,10 @@ const ProfilDataCard = ({data, emailChange}) => {
   const [editMode, setEditMode] = useState(true);
   const [editData, setEditData] = useState(data);
 
+
   const changeEditMode = () =>
   {
-      setEditMode(!editMode);
+      // setEditMode(!editMode);
   }
 
   const sendChanges = async () =>
@@ -73,14 +74,45 @@ const ProfilDataCard = ({data, emailChange}) => {
   return (
     <div className="profile-card">
 
-      <ProfilDataCardInput header="Jméno" value={data?.name} editMode={editMode} />
-      <ProfilDataCardInput header="Příjmení" value={data?.surname} editMode={editMode} />
-      <ProfilDataCardButton header="Email" value={data?.email} editMode={editMode} onClick={emailChange()} btnVal="Změnit"/>
-      <ProfilDataCardInput header="Telefon" value={data?.phone} editMode={editMode} />
-      <ProfilDataCardInput header="2FA" value={data?.twoFactorAuth != "none" ? "Ano" : "Ne"} editMode={editMode} />
-      <ProfilDataCardInput header="Stát" value={data?.state} editMode={editMode} />
-      <ProfilDataCardInput header="Město" value={data?.city} editMode={editMode} />
-      <ProfilDataCardSelect header="Pohlaví" editMode={editMode} selected={data.sex} value={pohlaviMap(data.sex)} values={pohlaviValues}/>
+      <ProfilDataCardInput
+        header="Jméno"
+        value={data?.name}
+        editMode={editMode} />
+
+      <ProfilDataCardInput 
+        header="Příjmení" 
+        value={data?.surname} 
+        editMode={editMode} />
+
+      <ProfilDataCardButton 
+        header="Email" value={data?.email} 
+        editMode={editMode} onClick={emailChange} 
+        btnVal="Změnit"/>
+
+      <ProfilDataCardInput 
+        header="Telefon" 
+        value={data?.phone} 
+        editMode={editMode} />
+
+      <ProfilDataCardInput 
+        header="2FA" 
+        value={data?.twoFactorAuth != "none" ? "Ano" : "Ne"} 
+        editMode={editMode} />
+
+      <ProfilDataCardInput 
+        header="Stát" value={data?.state} 
+        editMode={editMode} />
+
+      <ProfilDataCardInput 
+        header="Město" 
+        value={data?.city} 
+        editMode={editMode} />
+
+      <ProfilDataCardSelect 
+        header="Pohlaví" editMode={editMode} 
+        selected={data.sex} 
+        value={pohlaviMap(data.sex)} 
+        values={pohlaviValues}/>
 
       <ProfilDataCardCalendar 
         header="Datum narození"

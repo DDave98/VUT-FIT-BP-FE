@@ -11,7 +11,7 @@ const ProfilDataCardButton = ({value, header, editMode, onClick, btnVal}) =>
             {
                 editMode ? 
                 <div className="cardLineData">{value}</div>
-                :<button className="cardLine-button" required onChange={() => onClick()}>
+                :<button className="cardLine-button" required onChange={onClick}>
                     {btnVal}
                 </button>
             }

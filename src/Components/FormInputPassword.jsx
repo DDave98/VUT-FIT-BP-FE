@@ -24,7 +24,7 @@ const FormInputPassword = (
 
     const togglePassword = () => {
         setPasswordShown(!passwordShown);
-      };
+    };
 
     return (
         <>

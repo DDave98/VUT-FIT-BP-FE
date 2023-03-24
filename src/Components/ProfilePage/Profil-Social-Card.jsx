@@ -18,11 +18,11 @@ const ProfilSocialCard = ({toggleAccount}) =>
     {
         switch(name)
         {
-            case "Website": return webIco;
             case "Github": return GithubIco;
             case "Twitter": return twitterIco;
             case "Instagram": return instaIco;
             case "Facebook": return fbIco;
+            default: return webIco;
         }
     }
 
@@ -123,9 +123,9 @@ const ProfilSocialCard = ({toggleAccount}) =>
         <div className="SocialPart card">
             <ul>
                 {
-                    data.map((accout) => (
+                    data.map((accout, num) => (
                         <ProfilSocialCardAccout
-                            key={accout.header}
+                            key={num}
                             header={accout.name}
                             state={accout.state}
                             onClick={toggleAccount}>

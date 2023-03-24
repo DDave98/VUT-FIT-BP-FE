@@ -1,8 +1,8 @@
 import axios from 'axios';
-import config from "../Constants/config.json";
+import { baseApiURL } from '../Constants/apiPath';
 
 //const URL = config.baseApiURL;
-const URL = "https://localhost:7155";
+const URL = baseApiURL;
 
 export const PublicAPI = axios.create({
     baseURL: URL,

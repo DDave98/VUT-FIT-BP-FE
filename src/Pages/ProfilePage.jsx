@@ -13,6 +13,7 @@ import { GetFromStorage } from '../Services/StorageService';
 import { PrivateAPI } from '../Services/AjaxService';
 import { accessTokenTag } from '../Constants/storageTag';
 import config from "../Constants/config.json";
+import ProfilModalPhoto from "../Components/ProfilePage/Profile-Modal-Photo";
 
 
 
@@ -58,7 +59,7 @@ const ProfilePage = () =>
     const ChangePhoto = () =>
     {
         setModalHeader("Změnit Profilovou fotku");
-        setModalElement(<>fotka</>);
+        setModalElement(<ProfilModalPhoto />);
         setModalShow(true);
     }
 

@@ -1,0 +1,75 @@
+#dropZ
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: inherit;
+}
+
+.zone 
+{
+	 background: radial-gradient(ellipse at center, #007bff ,#007bff 100%);
+	 width: 100%;
+	 height: 50vh;
+	 text-align: center;
+	 color: white;
+	 z-index: 20;
+	 transition: all 0.3s ease-out;
+	 box-shadow: 0 0 0 1px rgba(255,255,255,0.05), inset 0 0 .25em 0 rgba(0,0,0,0.25);
+}
+ .zone .btnCompression .active {
+	 background: #EB6A5A;
+	 color: white;
+}
+ .zone i 
+{
+	 text-align: center;
+	 font-size: 10em;
+	 color: #fff;
+	 margin-bottom: 2rem;
+  font-size: 8rem;
+}
+ .zone .selectFile {
+	 height: 50px;
+	 margin: 20px auto;
+	 width: 200px;
+}
+ .zone label, .zone input {
+	 cursor: pointer;
+	 display: block;
+	 height: 50px;
+	 width: 100%;
+	 border-radius: 5px;
+}
+ .zone label 
+{
+	 background: #fff;
+	 color: #007bff;
+	 display: inline-block;
+	 font-size: 1.2em;
+	 line-height: 50px;
+	 padding: 0;
+	 text-align: center;
+	 white-space: nowrap;
+	 text-transform: uppercase;
+	 font-weight: 400;
+	 box-shadow: 0 1px 1px gray;
+}
+ .zone input[type=file] {
+	 opacity: 0;
+}
+
+ .zone:hover i {
+	 color: #555;
+   transition: color 2s;
+}
+ .zone:hover label {
+	 background: #fff;
+	 color: #555;
+}
+ .zone:fade {
+	 transition: all 0.3s ease-out;
+	 opacity: 1;
+}
+ 

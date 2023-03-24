@@ -44,18 +44,22 @@ const ProfilePage = () =>
     const [modalHeader, setModalHeader] = useState("Nadpis");
     const [modalElement, setModalElement] = useState(null);
     
-    const CloseModal = () =>
+    // funkce zavře modal okno
+    const CloseModal = () => 
     {
-        setModalShow(false);
+        setModalShow(false);    // zavřít okno
+        setModalElement(<></>); // smazat obsah modalu
     }
 
+    // otevření okna s formulářem na změnu hesla
     const ChangePassword = () =>
     {
         setModalHeader("Změnit Heslo");
-        setModalElement(<ProfilModalPassword />);
+        setModalElement(<ProfilModalPassword CloseModal={CloseModal} />);
         setModalShow(true);
     }
 
+    // otevření okna s formulářem na změnu obrázku
     const ChangePhoto = () =>
     {
         setModalHeader("Změnit Profilovou fotku");
@@ -63,6 +67,7 @@ const ProfilePage = () =>
         setModalShow(true);
     }
 
+    // otevření okna s formulářem na přidání/odebrání účtu
     const ToggleAccont = (id) =>
     {
         console.log("accout click:", id);
@@ -71,6 +76,7 @@ const ProfilePage = () =>
         setModalShow(true);
     }
 
+    // otevření okna s formulářem na změnu emailu
     const ChangeEmail = () =>
     {
         console.log("Email change click");
@@ -79,6 +85,7 @@ const ProfilePage = () =>
         setModalShow(true);
     }
 
+    // metoda načte z api data o přihlášeném uživateli
     const GetBaseInfo = async () =>
     {
         const selfInfo = config.path.selfInfo;
@@ -102,7 +109,7 @@ const ProfilePage = () =>
         }
     }
 
-    // hook pro načtení dat
+    // hook pro načtení dat při otevření stránky
     useEffect(() =>
     {
         GetBaseInfo();

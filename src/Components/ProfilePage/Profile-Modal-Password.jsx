@@ -11,9 +11,10 @@ import { PrivateAPI } from "../../Services/AjaxService";
 import { GetFromStorage } from "../../Services/StorageService";
 import { accessTokenTag } from "../../Constants/storageTag";
 
+
 /// funkce/komponenta, která představuje část stránky profil
 /// načte informace o připojených účtech ze serveru
-const ProfilModalPassword = ({data}) =>
+const ProfilModalPassword = ({CloseModal}) =>
 {
     const [oldPassword, setOldPassword] = useState('');
     const [oldPasswordValid, setOldPasswordValid] = useState(false);
@@ -45,7 +46,9 @@ const ProfilModalPassword = ({data}) =>
                 );
 
                 console.log("pwd changed", response.data);
-                NotificationManager.success("Heslo bylo změněno", " ", 4000);
+                NotificationManager.success("Heslo bylo úspěšně změněno", "Změna hesla", 4000);
+                CloseModal();
+                
             }
             catch (err)
             {
@@ -105,8 +108,14 @@ const ProfilModalPassword = ({data}) =>
     );
 };
 
+/// typová kontrola parametrů
 ProfilModalPassword.propTypes = {
-    //isabled: PropTypes.bool,
+    CloseModal: PropTypes.func,
 };
+
+/// výchozí hodnoty parametrů
+ProfilModalPassword.defaultProps = {
+    CloseModal: null,
+}
 
 export default ProfilModalPassword;

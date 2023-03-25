@@ -41,9 +41,8 @@ const ProfilModalPhotoForm = ({setPhoto}) =>
 {
     const [dragging, setDragging] = useState(false);
 
-    const CheckSize = (e) =>
+    const CheckSize = (file) =>
     {
-        const file = e.dataTransfer.files[0];
         if (file && file.size > 1000000)   // 1MB = 1000000B
             return false;
         return true;
@@ -51,8 +50,9 @@ const ProfilModalPhotoForm = ({setPhoto}) =>
 
     const handlePhotoChange = (e) => 
     {
-        if(CheckSize(e))
-            setPhoto(URL.createObjectURL(e.target.files[0]));
+        const file = e.target.files[0];
+        if(CheckSize(file))
+            setPhoto(URL.createObjectURL(file));
     };
 
     const handleDragEnter = (e) => 
@@ -72,7 +72,7 @@ const ProfilModalPhotoForm = ({setPhoto}) =>
         e.preventDefault();
         setDragging(false);
         const file = e.dataTransfer.files[0];
-        if(CheckSize(e))
+        if(CheckSize(file))
             setPhoto(URL.createObjectURL(file));
     };
 

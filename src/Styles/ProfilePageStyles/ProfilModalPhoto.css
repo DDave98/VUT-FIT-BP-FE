@@ -9,8 +9,8 @@
 
 .zone 
 {
-	 background: radial-gradient(ellipse at center, #007bff ,#007bff 100%);
-	 width: 100%;
+	 background: radial-gradient(ellipse at center, #BBB ,#DDD 100%);
+	 width: 100%;	/*007bff 555*/
 	 height: 50vh;
 	 text-align: center;
 	 color: white;
@@ -56,20 +56,47 @@
 	 font-weight: 400;
 	 box-shadow: 0 1px 1px gray;
 }
- .zone input[type=file] {
-	 opacity: 0;
+
+.zone input[type=file]
+{
+	opacity: 0;
 }
 
- .zone:hover i {
-	 color: #555;
+.zone:hover i
+{
+	color: #555;
    transition: color 2s;
 }
- .zone:hover label {
-	 background: #fff;
-	 color: #555;
+
+.zone:hover label 
+{
+	background: #fff;
+	color: #555;
 }
- .zone:fade {
-	 transition: all 0.3s ease-out;
-	 opacity: 1;
+
+.zone:fade {
+	transition: all 0.3s ease-out;
+	opacity: 1;
 }
  
+.photoPreview
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  	justify-content: center;
+  	height: inherit;
+	gap: 5rem;
+}
+
+.photoPreview .profile-image
+{
+	height: 10vw;
+	width: 10vw;
+}
+
+.photoPreview div
+{
+	display: flex;
+	gap: 1rem;
+}

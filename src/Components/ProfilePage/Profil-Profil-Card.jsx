@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 
 /// funkce/komponenta, která představuje část stránky profil
 /// načte informace o připojených účtech ze serveru
-const ProfilProfilCard = ({data, passwordChange, photoChange}) =>
+const ProfilProfilCard = ({data, passwordChange, photoChange, photo}) =>
 {
-
+    const defPhoto = "https://bootdey.com/img/Content/avatar/avatar7.png";
     return (
         <div className="profile-card">
             <img
-                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                src={photo != null ? photo : defPhoto}
                 alt="Admin"
                 className="profile-image"
                 width="150"

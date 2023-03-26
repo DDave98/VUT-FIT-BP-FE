@@ -43,6 +43,9 @@ const ProfilePage = () =>
     const [modalShow, setModalShow] = useState(false);
     const [modalHeader, setModalHeader] = useState("Nadpis");
     const [modalElement, setModalElement] = useState(null);
+
+    const [photo, setPhoto] = useState(null);
+
     
     // funkce zavře modal okno
     const CloseModal = () => 
@@ -101,6 +104,15 @@ const ProfilePage = () =>
             
             console.log(response.data);
             setUserData(() => response.data);
+            
+            const blob = new Blob([response.data.photo], { type: 'image/jpeg' });
+            const dataUrl = await new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.readAsDataURL(blob);
+            });
+            console.log("photo", blob);
+            setPhoto(dataUrl);
         }
         catch (err)
         {
@@ -126,7 +138,11 @@ const ProfilePage = () =>
                 <div className="profile-body-left">
                 
                     {/* <!-- vrchní čtverec --> */}
-                    <ProfilProfilCard data={userData} passwordChange={ChangePassword} photoChange={ChangePhoto} />
+                    <ProfilProfilCard 
+                        data={userData} 
+                        passwordChange={ChangePassword} 
+                        photoChange={ChangePhoto}
+                        photo={photo} />
                 
                     {/* <!-- Spodní čtverec --> */}
                     <ProfilSocialCard toggleAccount={ToggleAccont}/>

@@ -1,29 +1,44 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
+import { NotificationManager } from "react-notifications";
+import { apiPath } from "../../Constants/apiPath";
+import { accessTokenTag } from "../../Constants/storageTag";
+import { PrivateAPI } from "../../Services/AjaxService";
+import { GetFromStorage } from "../../Services/StorageService";
 import "../../Styles/ProfilePageStyles/ProfilModalPhoto.css"
 
 /// funkce/komponenta, která představuje část stránky profil
 /// obsah modal okna, umožňuje nahrání fotky
-const ProfilModalPhoto = () =>
+const ProfilModalPhoto = ({setUserPhoto}) =>
 {
 
     const [photo, setPhoto] = useState(null);
 
     // potvrzení nahrání na server
-    const handleSubmit = (e) => 
+    const handleSubmit = async (e) => 
     {
         e.preventDefault();
-    
-        // Send photo to server
-        // Use the 'photo' variable to access the photo data
-        // e.g. const formData = new FormData();
-        //      formData.append('photo', photo);
-        //      fetch('/upload-photo', {
-        //        method: 'POST',
-        //        body: formData
-        //      }).then(response => {
-        //        // Handle response from server
-        //      });
+        const formData = new FormData();
+        formData.append("photo", photo);
+        const path = apiPath
+
+        try
+        {
+            var token = GetFromStorage(accessTokenTag);
+            const response = await PrivateAPI.put(path, formData,
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+            
+            console.log("photo upload:", response.data);
+            setUserPhoto(() => photo);
+        }
+        catch (err)
+        {
+            NotificationManager.error("nelze změnit", "UploadPhoto()", 10000);
+            console.log("photo upload error: ", err);
+        }
     };
 
     return (

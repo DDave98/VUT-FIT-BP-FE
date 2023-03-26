@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {navDropDownLinks} from '../Constants/menuPath';
 import { useState } from "react";
 import PropTypes from 'prop-types';
-import Logout from '../Services/LogoutService';
+import useLogout from '../Hooks/useLogout';
 
 const TopNavUserProfile = ({name, surname, photo}) => {
 
@@ -22,6 +22,8 @@ const TopNavUserProfile = ({name, surname, photo}) => {
         else setDropdownState(false);
     }
 
+    const handleLogout = useLogout();
+
     return <>
         <div
             onMouseEnter={dropdownToggle}
@@ -39,7 +41,7 @@ const TopNavUserProfile = ({name, surname, photo}) => {
                             <Link key={name+link} to={link}  id='dropdownLink'>{name}</Link>
                         ))
                     }
-                    <button id='dropdownLink' onClick={Logout} >Odhlásit se</button>
+                    <button id='dropdownLink' onClick={handleLogout} >Odhlásit se</button>
                 </div>
             </div>
         </div>

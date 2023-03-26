@@ -13,7 +13,10 @@ const ProfilDataCardInput = ({value, header, editMode, onChange}) =>
             {
                 editMode ? 
                 <div className="cardLineData">{value}</div>
-                :<input type="text" value={value} onChange={(e) => onChange(e.target.value)}/>
+                :<input
+                  type="text"
+                  value={value}
+                  onChange={(e) => onChange(e.target.value)}/>
             }
         </div>
         <hr />

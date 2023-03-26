@@ -37,6 +37,43 @@ const ProfilDataCard = ({data, emailChange}) => {
   const [editMode, setEditMode] = useState(true);
   const [editData, setEditData] = useState(formData);
 
+  const [userName, setUserName] = useState(editData.name);
+  const [userSurname, setUserSurname] = useState(editData.surname);
+  const [userPhone, setUserPhone] = useState(editData.phone);
+  const [user2FA, setUser2FA] = useState(editData.twoFactorAuth);
+  const [userState, setUserState] = useState(editData.state);
+  const [userCity, setUserCity] = useState(editData.city);
+  const [userReligion, setUserReligion] = useState(editData.religion);
+  const [userSex, setUserSex] = useState(editData.sex);
+  const [userBirthday, setUserBirthday] = useState(editData.birthdate);
+  const [userEducation, setUserEducation] = useState(editData.education);
+  const [userCareer, setUserCareer] = useState(editData.career);
+
+  const SetPrevVal = () =>
+  {
+    setUserName(data.name);
+    setUserSurname(data.surname);
+    setUserPhone(data.phone);
+    setUser2FA(data.twoFactorAuth);
+    setUserState(data.state);
+    setUserCity(data.city);
+    setUserReligion(data.religion);
+    setUserSex(data.sex);
+    setUserBirthday(data.birthdate);
+    setUserEducation(data.education);
+    setUserCareer(data.career);
+  } 
+
+  useEffect(() => 
+  {
+    SetPrevVal();
+  }, [data]);
+
+  useEffect(() => 
+  {
+    if (editMode) SetPrevVal();
+  }, [editMode]);
+
 
   const changeEditMode = () =>
   {
@@ -77,67 +114,81 @@ const ProfilDataCard = ({data, emailChange}) => {
 
       <ProfilDataCardInput
         header="Jméno"
-        value={data?.name}
-        editMode={editMode} />
+        value={userName}
+        editMode={editMode} 
+        onChange={setUserName} />
 
       <ProfilDataCardInput 
         header="Příjmení" 
-        value={data?.surname} 
-        editMode={editMode} />
+        value={userSurname} 
+        editMode={editMode} 
+        onChange={setUserSurname} />
 
       <ProfilDataCardButton 
-        header="Email" value={data?.email} 
-        editMode={editMode} onClick={emailChange} 
-        btnVal="Změnit"/>
+        header="Email"
+        value={data?.email} 
+        editMode={editMode} 
+        onClick={emailChange} 
+        btnVal="Změnit" />
 
       <ProfilDataCardInput 
         header="Telefon" 
-        value={data?.phone} 
-        editMode={editMode} />
+        value={userPhone} 
+        editMode={editMode} 
+        onChange={setUserPhone} />
 
       <ProfilDataCardInput 
         header="2FA" 
-        value={data?.twoFactorAuth != "none" ? "Ano" : "Ne"} 
-        editMode={editMode} />
+        value={user2FA != "none" ? "Ano" : "Ne"} 
+        editMode={editMode} 
+        onChange={setUser2FA} />
 
       <ProfilDataCardInput 
-        header="Stát" value={data?.state} 
-        editMode={editMode} />
+        header="Stát" 
+        value={userState} 
+        editMode={editMode} 
+        onChange={setUserState} />
 
       <ProfilDataCardInput 
         header="Město" 
-        value={data?.city} 
-        editMode={editMode} />
+        value={userCity} 
+        editMode={editMode} 
+        onChange={setUserCity} />
 
       <ProfilDataCardSelect 
-        header="Pohlaví" editMode={editMode} 
-        selected={data.sex} 
-        value={pohlaviMap(data.sex)} 
-        values={pohlaviValues}/>
+        header="Pohlaví" 
+        editMode={editMode} 
+        selected={userSex} 
+        value={pohlaviMap(userSex)} 
+        values={pohlaviValues}
+        onChange={setUserSex} />
 
       <ProfilDataCardCalendar 
         header="Datum narození"
         editMode={editMode}
-        value={ConvertDate(editData.birthdate)}
-        dival={new Date(data?.birthdate).toLocaleDateString()}
+        value={ConvertDate(userBirthday)}
+        dival={new Date(userBirthday).toLocaleDateString()}
         max={(new Date()).getDate()}
-        onChange={(e) => (e) => console.log(e.target.value)}
+        onChange={setUserBirthday}
       />
 
       <ProfilDataCardInput 
         header="Náboženské vyznání" 
-        value={data?.religion} 
-        editMode={editMode} />
+        value={userReligion} 
+        editMode={editMode} 
+        onChange={setUserReligion} />
       
       <ProfilDataCardInput 
         header="Dosažené vzdělání" 
-        value={editData?.education} 
-        editMode={editMode} />
+        value={userEducation} 
+        editMode={editMode} 
+        onChange={setUserEducation} />
       
       <ProfilDataCardInput 
         header="Profese" 
-        value={data?.career} 
-        editMode={editMode} />
+        value={userCareer} 
+        editMode={editMode} 
+        onChange={setUserCareer} />
       
       <ProfilDataCardEdit 
         editMode={editMode} 

@@ -43,7 +43,6 @@ const ProfilePage = () =>
     const [modalShow, setModalShow] = useState(false);
     const [modalHeader, setModalHeader] = useState("Nadpis");
     const [modalElement, setModalElement] = useState(null);
-
     
     // funkce zavře modal okno
     const CloseModal = () => 
@@ -138,7 +137,10 @@ const ProfilePage = () =>
 
                 {/* <!-- Pravá strana --> */}
                 <div className="profile-body-right">
-                    <ProfilDataCard data={userData} emailChange={ChangeEmail} />
+                    <ProfilDataCard 
+                        data={userData} 
+                        emailChange={ChangeEmail}
+                        refresh={GetBaseInfo} />
                 </div>
             </div>
 

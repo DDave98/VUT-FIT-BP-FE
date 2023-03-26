@@ -18,36 +18,22 @@ import ProfilDataCardButton from "./Profil-DataCard-button";
 
 /// funkce komponenta, která představuje pravou stranu stránky profil
 /// přijme objekt získaný od serveru
-const ProfilDataCard = ({data, emailChange}) => {
-
-  const formData = {
-    name: data.name,
-    surname: data.surname,
-    phone: data.phone,
-    twoFactorAuth: data.twoFactorAuth,
-    state: data.state,
-    city: data.city,
-    religion: data.religion,
-    sex: data.sex,
-    birthdate: data.birthdate,
-    education: data.education,
-    career: data.career,
-  }
+const ProfilDataCard = ({data, emailChange, refresh}) =>
+{
 
   const [editMode, setEditMode] = useState(true);
-  const [editData, setEditData] = useState(formData);
 
-  const [userName, setUserName] = useState(editData.name);
-  const [userSurname, setUserSurname] = useState(editData.surname);
-  const [userPhone, setUserPhone] = useState(editData.phone);
-  const [user2FA, setUser2FA] = useState(editData.twoFactorAuth);
-  const [userState, setUserState] = useState(editData.state);
-  const [userCity, setUserCity] = useState(editData.city);
-  const [userReligion, setUserReligion] = useState(editData.religion);
-  const [userSex, setUserSex] = useState(editData.sex);
-  const [userBirthday, setUserBirthday] = useState(editData.birthdate);
-  const [userEducation, setUserEducation] = useState(editData.education);
-  const [userCareer, setUserCareer] = useState(editData.career);
+  const [userName, setUserName] = useState(data.name);
+  const [userSurname, setUserSurname] = useState(data.surname);
+  const [userPhone, setUserPhone] = useState(data.phone);
+  const [user2FA, setUser2FA] = useState(data.twoFactorAuth);
+  const [userState, setUserState] = useState(data.state);
+  const [userCity, setUserCity] = useState(data.city);
+  const [userReligion, setUserReligion] = useState(data.religion);
+  const [userSex, setUserSex] = useState(data.sex);
+  const [userBirthday, setUserBirthday] = useState(data.birthdate);
+  const [userEducation, setUserEducation] = useState(data.education);
+  const [userCareer, setUserCareer] = useState(data.career);
 
   const SetPrevVal = () =>
   {
@@ -83,18 +69,33 @@ const ProfilDataCard = ({data, emailChange}) => {
   const sendChanges = async () =>
   {
     const selfInfo = apiPath.UpdateUser;
+    const data = {
+      name: userName,
+      surname: userSurname,
+      phone: userPhone,
+      twoFactorAuth: user2FA,
+      state: userState,
+      city: userCity,
+      religion: userReligion,
+      sex: userSex,
+      birthdate: userBirthday,
+      education: userEducation,
+      career: userCareer,
+    }
 
     try
     {
         var token = GetFromStorage(accessTokenTag);
-        const response = await PrivateAPI.put(selfInfo, 
-          formData,
+        const response = await PrivateAPI.put(selfInfo, data,
           {
               headers: { Authorization: `Bearer ${token}` },
           }
         );
         
         console.log("update status:", response.data);
+        NotificationManager.success("Údaje byly úspěšně změněny", "Změna profilu", 4000);
+        changeEditMode();
+        refresh();
     }
     catch (err)
     {

@@ -28,7 +28,7 @@ const ProfilModalPhoto = ({setUserPhoto}) =>
         try
         {
             var token = GetFromStorage(accessTokenTag);
-            const response = await PrivateAPI.put(path, formData,
+            const response = await PrivateAPI.patch(path, formData,
                 {
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',

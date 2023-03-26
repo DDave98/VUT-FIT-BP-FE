@@ -5,10 +5,10 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import Logout from '../Services/LogoutService';
 
-const TopNavUserProfile = ({name, surname}) => {
+const TopNavUserProfile = ({name, surname, photo}) => {
 
     const [dropdownState, setDropdownState] = useState(false);
-
+    
     const dropdownToggle = () =>
     {
         var dropdown = document.getElementById("dropdown-content");
@@ -29,7 +29,7 @@ const TopNavUserProfile = ({name, surname}) => {
             className="TopNavUserProfile"
         >
             <div id='userIcoContainer' className='userIcoContainer'>
-                <img src={require('../Assets/Images/Sample_User_Icon.png')} id='userIcon'/>
+                <img src={photo} id='userIcon' alt='user photo'/>
             </div>
             <div id='userIcoDropdown'>
                 <p id="dropName" >{name + " " + surname}</p>

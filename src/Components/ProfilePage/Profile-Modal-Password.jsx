@@ -1,16 +1,14 @@
-import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
-import FormInputPassword from "../FormInputPassword";
-import {FormPwdInputs} from "../FormPwdInputs";
-import * as txt from"../../Constants/textContent";
-import { passwordRegex } from "../../Constants/regex";
-import SendButton from "../SendButton";
-import NotificationManager from 'react-notifications/lib/NotificationManager';
-import { apiPath } from "../../Constants/apiPath";
-import { PrivateAPI } from "../../Services/AjaxService";
-import { GetFromStorage } from "../../Services/StorageService";
-import { accessTokenTag } from "../../Constants/storageTag";
-
+import { 
+    useState, 
+    useEffect, 
+    PropTypes,
+    FormInputPassword,
+    FormPwdInputs,
+    txt,
+    passwordRegex,
+    SendButton,
+    NotificationManager, apiPath, PrivateAPI, GetFromStorage, accessTokenTag
+} from "./Profile-Import";
 
 /// funkce/komponenta, která představuje část stránky profil
 /// načte informace o připojených účtech ze serveru

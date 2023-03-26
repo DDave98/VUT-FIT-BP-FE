@@ -26,6 +26,7 @@ const TopNavbar = () => {
 
     const [firstName, setFirstName] = useState('Jmeno');
     const [lastName, setLastName] = useState('Příjmení');
+    const [photo, setPhoto] = useState("https://bootdey.com/img/Content/avatar/avatar7.png");
 
     const GetBaseInfo = async () =>
     {
@@ -41,6 +42,7 @@ const TopNavbar = () => {
             );
             setFirstName(response.data.name);
             setLastName(response.data.surname);
+            setPhoto('data:image/png;base64,'+ response.data.photo)
         }
         catch (err)
         {
@@ -70,7 +72,7 @@ const TopNavbar = () => {
                 <TopNavLinks navLinks={links} />
 
                 {/* Profil */}
-                <TopNavUserProfile name={firstName} surname={lastName} />
+                <TopNavUserProfile name={firstName} surname={lastName} photo={photo}/>
             </div>
         </nav>
     </>

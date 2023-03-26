@@ -1,5 +1,9 @@
-import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { 
+    useState, 
+    useEffect, 
+    PropTypes
+} from "./Profile-Import";
+
 import "../../Styles/ProfilePageStyles/Profile-SocialCard.css";
 import ProfilSocialCardAccout from "./Profil-SocialCard-Account";
 

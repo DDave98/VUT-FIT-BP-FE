@@ -1,5 +1,8 @@
-import PropTypes from "prop-types";
-import { useState, useEffect } from 'react';
+import { 
+  useState, 
+  useEffect, 
+  PropTypes
+} from "./Profile-Import";
 
 const ProfilDataCardSelect = ({header, editMode, value, values, selected, onChange}) =>
 {

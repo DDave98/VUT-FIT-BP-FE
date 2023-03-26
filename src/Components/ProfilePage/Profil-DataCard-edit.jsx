@@ -1,4 +1,6 @@
-import PropTypes from "prop-types";
+import { 
+  PropTypes
+} from "./Profile-Import";
 
 /// funkce komponenta, která představuje pravou stranu stránky profil
 /// přijme objekt získaný od serveru

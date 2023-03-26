@@ -1,19 +1,20 @@
-import PropTypes from "prop-types";
-import { useState, useEffect } from 'react';
-import { apiPath } from "../../Constants/apiPath";
-import { ConvertDate } from "../../Services/GeneralFunctions";
+import {
+  PropTypes,
+  useState,
+  useEffect,
+  apiPath,
+  ConvertDate,
+  GetFromStorage,
+  PrivateAPI,
+  accessTokenTag,
+  NotificationManager
+} from "./Profile-Import";
 
 import ProfilDataCardInput from "./Profil-DataCard-Input";
 import ProfilDataCardSelect from "./Profil-DataCard-Select";
 import ProfilDataCardCalendar from "./Profil-Datacard-calendar";
 import ProfilDataCardEdit from "./Profil-DataCard-edit";
 import ProfilDataCardButton from "./Profil-DataCard-button";
-
-// Prototyp
-import { GetFromStorage } from '../../Services/StorageService';
-import { PrivateAPI } from '../../Services/AjaxService';
-import { accessTokenTag } from '../../Constants/storageTag';
-import {NotificationManager} from 'react-notifications';
 
 /// funkce komponenta, která představuje pravou stranu stránky profil
 /// přijme objekt získaný od serveru

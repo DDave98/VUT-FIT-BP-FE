@@ -1,10 +1,13 @@
-import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
-import { NotificationManager } from "react-notifications";
-import { apiPath } from "../../Constants/apiPath";
-import { accessTokenTag } from "../../Constants/storageTag";
-import { PrivateAPI } from "../../Services/AjaxService";
-import { GetFromStorage } from "../../Services/StorageService";
+import { 
+    useState, 
+    useEffect, 
+    PropTypes,
+    NotificationManager,
+    apiPath,
+    accessTokenTag,
+    PrivateAPI,
+    GetFromStorage
+} from "./Profile-Import";
 import "../../Styles/ProfilePageStyles/ProfilModalPhoto.css"
 
 /// funkce/komponenta, která představuje část stránky profil
@@ -20,13 +23,15 @@ const ProfilModalPhoto = ({setUserPhoto}) =>
         e.preventDefault();
         const formData = new FormData();
         formData.append("photo", photo);
-        const path = apiPath
-
+        const path = apiPath.UploadPhoto;
+        console.log("photo up: ", photo);
         try
         {
             var token = GetFromStorage(accessTokenTag);
             const response = await PrivateAPI.put(path, formData,
                 {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
                     headers: { Authorization: `Bearer ${token}` },
                 }
             );
@@ -93,7 +98,7 @@ const ProfilModalPhotoForm = ({setPhoto}) =>
 
     return (
         <div className="zone">
-            <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+            {/* <script src='https://kit.fontawesome.com/a076d05399.js' crossOrigin='anonymous'></script> */}
             <div id="dropZ"
                 onDragEnter={handleDragEnter}
                 onDragOver={handleDragEnter}
@@ -104,7 +109,7 @@ const ProfilModalPhotoForm = ({setPhoto}) =>
                 <div>Přetáhněte sem vaši fotku</div>                    
                 <span>NEBO</span>
                 <div className="selectFile">       
-                <label for="file">vyberte soubor</label>                   
+                <label htmlFor="file">vyberte soubor</label>                   
                 <input 
                     type="file" 
                     name="files[]" 

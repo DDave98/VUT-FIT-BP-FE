@@ -1,5 +1,6 @@
-import PropTypes from "prop-types";
-import { useState, useEffect, Children } from "react";
+import {
+    PropTypes
+  } from "./Profile-Import";
 
 /// funkce/komponenta, která představuje část stránky profil
 /// načte informace o připojených účtech ze serveru

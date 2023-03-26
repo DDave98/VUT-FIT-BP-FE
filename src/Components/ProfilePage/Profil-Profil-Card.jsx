@@ -1,16 +1,36 @@
-import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { 
+    useState, 
+    useEffect, 
+    PropTypes,
+    NotificationManager,
+    apiPath,
+    accessTokenTag,
+    PrivateAPI,
+    GetFromStorage
+} from "./Profile-Import";
 
 /// funkce/komponenta, která představuje část stránky profil
 /// načte informace o připojených účtech ze serveru
-const ProfilProfilCard = ({data, passwordChange, photoChange, photo}) =>
+const ProfilProfilCard = ({data, passwordChange, photoChange}) =>
 {
-    const defPhoto = "https://bootdey.com/img/Content/avatar/avatar7.png";
+    const [photo, setPhoto] = useState("https://bootdey.com/img/Content/avatar/avatar7.png");
+
+    function handleImageLoad()
+    {
+        setPhoto('data:image/png;base64,'+ data.photo);
+    }
+
+    // hook pro načtení dat při otevření stránky
+    useEffect(() =>
+    {
+        handleImageLoad()
+    }, [data]);
+    
     return (
         <div className="profile-card">
             <img
-                src={photo != null ? photo : defPhoto}
-                alt="Admin"
+                src={photo}
+                alt="Profile Photo"
                 className="profile-image"
                 width="150"
             />

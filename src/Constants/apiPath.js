@@ -15,5 +15,6 @@ export const apiPath=
     registration:   "/api/User/Registration",
     selfInfo:       "/api/User",
     UpdateUser:     "/api/User",
-    UploadPhoto:    "/api/User",
+    UploadPhoto:    "/api/User/Photo",
+    GetPhoto:       "/api/User/Photo",
 };

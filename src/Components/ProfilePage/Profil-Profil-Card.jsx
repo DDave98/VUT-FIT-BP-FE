@@ -39,7 +39,6 @@ const ProfilProfilCard = ({data, passwordChange, photoChange}) =>
                     {data.name} {data.surname}
                 </h4>
                 <p>{data.role}</p>
-                <p>počet aplikací: #</p>
                 <p>
                     založen: {new Date(data.created).toLocaleDateString()}
                 </p>

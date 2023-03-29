@@ -4,3 +4,7 @@ import {
     PropTypes
 } from "./Profile-Import";
 
+const ProfilModalAccount = () =>
+{
+    
+}

@@ -1,7 +1,7 @@
 import { externalLoginPath } from '../Constants/externalLoginPath';
 import PropTypes from 'prop-types';
 import "../Styles/SocialIconPanel.css";
-import SocialIcon from './SocialIcon';
+import SocialIcon from './LoginPage/SocialIcon';
 
 const SocialIconPanel = ({disabled}) =>
 {

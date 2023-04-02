@@ -20,7 +20,8 @@ const FormInput = (
         inputValue,
         readOnly,
         onCopy,
-        onPaste
+        onPaste,
+        disabled
     }) =>
 {
 
@@ -110,6 +111,7 @@ const FormInput = (
                 readOnly={readOnly ?? false}
                 onCopy={onCopy}
                 onPaste={onPaste}
+                disabled={disabled ?? false}
             />
             {instruction != null ? instructionElement : <></>}
         </div>

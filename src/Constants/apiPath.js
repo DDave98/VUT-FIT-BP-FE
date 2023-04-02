@@ -3,6 +3,11 @@ export const baseApiURL = "https://localhost:7155";
 
 export const apiPath=
 {
+    /* Provider path */
+    allProviders: "/api/Account",
+    usrProviders: "/api/Account/user",
+    idProviders: "/api/Account/$provider$/Accountid",
+
     /* Auth path */
     authenticate:   "/api/Auth/authenticate",
     confirmEmail:   "/api/Auth/confirmEmail",
@@ -18,3 +23,8 @@ export const apiPath=
     UploadPhoto:    "/api/User/Photo",
     GetPhoto:       "/api/User/Photo",
 };
+
+export const setApiPathVar = (key, path, value) =>
+{
+    return path.replace(key, value);
+}

@@ -6,7 +6,13 @@ import { useRef, useEffect } from 'react';
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import "../Styles/Recaptcha.css";
 
-const RecaptchaV2 = ({className, siteKey, isValid}) =>
+const RecaptchaV2 = (
+{
+    className,
+    siteKey, 
+    isValid,
+    visible = true,
+}) =>
 {
 
     const recaptchaRef = useRef();
@@ -52,17 +58,24 @@ const RecaptchaV2 = ({className, siteKey, isValid}) =>
         recaptchaRef.current.reset();
     }, [])
 
+    const visibility = visible ? "visible" : "invisible"
+    const classText = "Recaptcha " + visibility;
+    const type = "image";
+    const size = "normal";
+    const badge = "bottomright";
+    const theme = "light";
+
     return <>
-        <div className={className ?? "Recaptcha"} >
+        <div className={className ?? classText} >
             <ReCAPTCHA
                 ref={recaptchaRef}
-                sitekey={siteKey}
+                sitekey={siteKey ?? ""}
                 onChange={onChange}
-                theme="light"
+                theme={theme}
                 onErrored={onErrored}
-                size="normal"
-                badge="bottomright"
-                type="image"
+                size={size}
+                badge={badge}
+                type={type}
             />  
         </div>
     </>
@@ -71,7 +84,7 @@ const RecaptchaV2 = ({className, siteKey, isValid}) =>
 RecaptchaV2.propTypes = 
 {
     isValid: PropTypes.func,
-    siteKey: PropTypes.string.isRequired,
+    siteKey: PropTypes.string,
     className: PropTypes.string
 }
 

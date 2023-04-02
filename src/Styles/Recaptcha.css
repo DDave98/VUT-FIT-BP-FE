@@ -1,12 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
-
-@layer components
+.Recaptcha
 {
-    .Recaptcha
-    {
-        @apply flex justify-center mt-5;
-    }
+    display: flex;
+    justify-content: center;
+    margin-top: 1.25rem;
+}
+
+.Recaptcha.visible
+{
+    display: flex;
+}
+
+.Recaptcha.invisible
+{
+    display: none;
 }

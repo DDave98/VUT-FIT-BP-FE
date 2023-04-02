@@ -1,4 +1,4 @@
-import LoginForm from '../Components/LoginForm';
+import LoginForm from '../Components/LoginPage/LoginPage-LoginForm';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SaveToStorage } from '../Services/StorageService';
@@ -12,26 +12,16 @@ const LoginPage = () =>
     const { setAuth } = useAuth();
     const search = useLocation().search;
 
-    const app = new URLSearchParams(search).get('app');
-    const hook = new URLSearchParams(search).get('hook');
+    const code = new URLSearchParams(search).get('code');
     const url = window.location.origin;
 
     const setOnSuccess = (token) =>
     {
         // zde pak zobrazit form pro dvoufazové
-
-        if (hook != null)
-        {
-            window.location.replace(hook + "?token=" + token);
-        }
-        else
-        {
-            const from = location.state?.from?.pathname || "/";
-            setAuth({token});   // save token to page instance memory
-            SaveToStorage(token, accessTokenTag);
-            navigate(from, {replace: true});
-        }
-
+        const from = location.state?.from?.pathname || "/";
+        setAuth({token});   // save token to page instance memory
+        SaveToStorage(token, accessTokenTag);
+        navigate(from, {replace: true});
     }
 
     useEffect(() => 
@@ -43,8 +33,7 @@ const LoginPage = () =>
         <>
             <LoginForm
                 setOnSuccess={setOnSuccess}
-                formName={"Přihlášení" + (app ? " - " + app : "")}
-                Hook={hook ?? url}
+                formName={"Přihlášení"}
             />
         </>
     )

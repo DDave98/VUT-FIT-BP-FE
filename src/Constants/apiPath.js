@@ -7,6 +7,7 @@ export const apiPath=
     allProviders: "/api/Account",
     usrProviders: "/api/Account/user",
     idProviders: "/api/Account/$provider$/Accountid",
+    checkProviderCode: "/api/Account/",
 
     /* Auth path */
     authenticate:   "/api/Auth/authenticate",

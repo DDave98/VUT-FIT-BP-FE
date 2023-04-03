@@ -6,7 +6,11 @@ import NotificationManager from 'react-notifications/lib/NotificationManager';
 
 // Services
 import { PublicAPI } from '../../Services/AjaxService';
-
+import { 
+    GetFromStorage, 
+    SaveToStorage,
+    DeleteFromStorage
+} from "../../Services/StorageService";
 
 // Components
 import BreakLine from '../BreakLine';
@@ -21,8 +25,13 @@ import config from "../../Constants/config.json";
 import { emailRegex, passwordRegex } from '../../Constants/regex';
 import SocialIconPanel from '../SocialIconPanel';
 import { apiPath } from '../ProfilePage/Profile-Import';
+import { providerTag } from '../../Constants/storageTag';
 
 export {
+    GetFromStorage,
+    SaveToStorage,
+    DeleteFromStorage,
+    providerTag,
     useRef,
     useState,
     useEffect,

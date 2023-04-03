@@ -1,18 +1,19 @@
 import LoginForm from '../Components/LoginPage/LoginPage-LoginForm';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SaveToStorage } from '../Services/StorageService';
 import useAuth from '../Hooks/useAuth';
 import { accessTokenTag } from '../Constants/storageTag';
+import ProcessCode from '../Components/LoginPage/LoginPage-ProcessCode';
 
 const LoginPage = () =>
 {
+    const [component, setComponent] = useState(<></>);
     const navigate = useNavigate();
     const location = useLocation();
-    const { setAuth } = useAuth();
-    const search = useLocation().search;
 
-    const code = new URLSearchParams(search).get('code');
+    const { setAuth } = useAuth();
+
     const url = window.location.origin;
 
     const setOnSuccess = (token) =>
@@ -24,17 +25,56 @@ const LoginPage = () =>
         navigate(from, {replace: true});
     }
 
-    useEffect(() => 
+    const getUrlCode = () =>
     {
-        // zjistit zda je ?hook & ?app v url
-    }, [])
+        const search = location.search;
+        return new URLSearchParams(search).get('code');
+    }
 
-    return (
-        <>
+    const checkOAuthCode = () =>
+    {
+        const code = getUrlCode();
+        const isCode = !(code === "") && code != null
+        if (isCode) 
+        {
+            console.log(code, isCode);
+            return false;
+        }
+        return true;
+    }
+
+    const ShowForm = () => 
+    {
+        setComponent(
             <LoginForm
                 setOnSuccess={setOnSuccess}
                 formName={"Přihlášení"}
             />
+        );
+    }
+
+    const ShowCheckCode = () =>
+    {
+        const provider = 
+        setComponent(
+            <ProcessCode 
+                code={getUrlCode()}
+                onFail={ShowForm}
+                onSucc={() => alert("succ přihlášení")}
+            />
+        );
+    }
+
+    useEffect(() => 
+    {
+        if (!checkOAuthCode())
+            ShowCheckCode();
+        else ShowForm();
+    }, [])
+
+    return (
+        <>
+            {component}
         </>
     )
 };

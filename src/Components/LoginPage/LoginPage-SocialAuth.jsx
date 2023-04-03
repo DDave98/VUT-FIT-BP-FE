@@ -4,7 +4,8 @@ import {
     useEffect,
     PublicAPI,
     apiPath,
-    NotificationManager
+    NotificationManager,
+    BreakLine
 } from "./LoginPage-imports";
 import SocialIcon from "./SocialIcon";
 
@@ -43,9 +44,16 @@ const SocialAuth = (
     }, []);
 
     const imgPre = 'data:image/png;base64,';
+    const BreakLineText = "nebo";
 
     return (
     <>
+        {
+            providers.length > 0 ? 
+            <BreakLine>{BreakLineText}</BreakLine>
+            : <></>
+        }
+
         <div
             disabled = {disable} 
             id = 'loginSocialIcons'

@@ -2,8 +2,12 @@
  * tato koponenta představuje ikonu
  */
 
-import PropTypes from 'prop-types';
 import "../../Styles/SocialIcon.css";
+import {
+    PropTypes,
+    SaveToStorage,
+    providerTag
+} from "./LoginPage-imports";
 
 const SocialIcon = (
 {
@@ -19,9 +23,12 @@ const SocialIcon = (
 
     const LogIn = async (e) =>
     {
+        SaveToStorage(name, providerTag);
         const client_id = "?client_id=" + cid;
         const redirect_uri = "&redirect_uri=" + "http://localhost:3000/login"; // získat doménu dynamicky
-        window.location.assign(api + client_id + redirect_uri); 
+        const response_type = "&response_type=code";
+        const scope = "&scope=read_user+profile"
+        window.location.assign(api + client_id + redirect_uri + response_type + scope); 
     }
 
 

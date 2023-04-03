@@ -8,7 +8,6 @@ import {
     useRef,
     config,
     FormPageLayout,
-    BreakLine,
     registerPath,
     SendButton,
     Recaptcha,
@@ -87,7 +86,6 @@ const LoginForm = (
     const buttonText = "Přihlásit se";
     const RegisterText = "Nemáte účet?";
     const RegisterLinkText = "Registrujte se";
-    const BreakLineText = "nebo";
     
     return <>
         <FormPageLayout name={formName} handlSubmit={handlSubmit}>
@@ -114,8 +112,6 @@ const LoginForm = (
                 text={buttonText}
                 loadMode={loadMode}
             />
-
-            <BreakLine>{BreakLineText}</BreakLine>
 
             <SocialAuth
                 disabled={loadMode}

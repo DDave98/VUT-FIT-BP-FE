@@ -68,6 +68,7 @@ const SocialAuth = (
                         api={prov.api}
                         key={key}
                         cid={prov.clientId}
+                        scope={prov.scope}
                     />
                 ))
             }

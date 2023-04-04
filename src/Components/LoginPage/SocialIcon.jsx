@@ -15,7 +15,7 @@ const SocialIcon = (
     className,
     name,
     disable = false,
-    cid, api
+    cid, api, scope
 }) =>
 {
 
@@ -27,8 +27,8 @@ const SocialIcon = (
         const client_id = "?client_id=" + cid;
         const redirect_uri = "&redirect_uri=" + "http://localhost:3000/login"; // získat doménu dynamicky
         const response_type = "&response_type=code";
-        const scope = "&scope=read_user+profile"
-        window.location.assign(api + client_id + redirect_uri + response_type + scope); 
+        const scopes = "&scope=" + scope
+        window.location.assign(api + client_id + redirect_uri + response_type + scopes); 
     }
 
 

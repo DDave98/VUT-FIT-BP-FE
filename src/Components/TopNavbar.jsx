@@ -21,6 +21,7 @@ import {NotificationManager} from 'react-notifications';
 import { GetFromStorage } from '../Services/StorageService';
 import { PrivateAPI } from '../Services/AjaxService';
 import { accessTokenTag } from '../Constants/storageTag';
+import { consoleLog } from '../Services/DebugService';
 
 const TopNavbar = () => {
 
@@ -47,7 +48,7 @@ const TopNavbar = () => {
         catch (err)
         {
             NotificationManager.error("nelze načíst data", "BaseInfo()", 10000);
-            console.log("topNav error: ", err);
+            consoleLog("topNav error: " + err);
         }
     }
 

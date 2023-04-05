@@ -1,0 +1,25 @@
+.OAthCallBackPage
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5vh;
+    width: 100%;
+    height: 100vh;
+}
+
+.OAthCallBackPage h1
+{
+    font-size: max(1vw, 60px);
+    text-align: center;
+    display: inline;
+}
+
+.OAthCallBackPage #loader
+{
+    width: max(20vw, 100px);
+    height: max(20vw, 100px);
+    border-width: max(1vw, 20px);
+    border-top-width: max(1vw, 20px);
+}

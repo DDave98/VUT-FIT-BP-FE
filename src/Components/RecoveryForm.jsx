@@ -8,6 +8,7 @@ import SendButton from './SendButton';
 import config from "../Constants/config.json";
 import { PublicAPI } from '../Services/AjaxService';
 import { NotificationManager } from 'react-notifications';
+import { consoleLog } from '../Services/DebugService';
 
 const RecoveryForm = ({setOnSuccess}) =>
 {
@@ -44,7 +45,7 @@ const RecoveryForm = ({setOnSuccess}) =>
             else errMessage = "Operace se nezdařila";
 
             NotificationManager.error(errMessage, errTitle, 10000);
-            console.log("Recovery form error: ", err);
+            consoleLog("Recovery form error: " + err);
         }
 
         setLoadMode(false);

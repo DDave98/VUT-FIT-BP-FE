@@ -1,3 +1,4 @@
+import { consoleLog } from "../../Services/DebugService";
 import { 
     useState, 
     useEffect, 
@@ -42,8 +43,8 @@ const ProfilModalPassword = ({CloseModal}) =>
                         headers: { Authorization: `Bearer ${token}` },
                     }
                 );
-
-                console.log("pwd changed", response.data);
+                
+                consoleLog("pwd changed" + response.data);
                 NotificationManager.success("Heslo bylo úspěšně změněno", "Změna hesla", 4000);
                 CloseModal();
                 

@@ -42,7 +42,8 @@ display: flex;
 align-items: center;
 }
 
-.SocialPart svg {
+.SocialPart svg,
+.SocialPart img {
 margin-right: 1rem !important;
 overflow: hidden;
 vertical-align: middle;

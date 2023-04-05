@@ -13,8 +13,8 @@ const ProfilSocialCardAccout = ({onClick, header, children, state}) =>
                 {header}
             </h6>
             {
-                state ? <button value={header} className="btn-primary btn" onClick={(e) => onClick(e.target.value)}>Odpojit</button>
-                : <button value={header} className="btn-secondary btn" onClick={(e) => onClick(e.target.value)}>Připojit</button>
+                state ? <button value={header} className="btn-primary btn" onClick={(e) => onClick(e.target.value, state)}>Odpojit</button>
+                : <button value={header} className="btn-secondary btn" onClick={(e) => onClick(e.target.value, state)}>Připojit</button>
             }
         </li>
     );

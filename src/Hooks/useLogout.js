@@ -15,14 +15,14 @@ const useLogout = () =>
 {
     //const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
-    const logut = () =>
+    const logout = () =>
     {
         //setAuth({});                         // delete access token from memory
         DeleteFromStorage(accessTokenTag);   // delete access token from local storage
         navigate(loginPath);
     }
 
-    return logut;
+    return logout;
 };
 
 export default useLogout;

@@ -15,6 +15,7 @@ import ProfilDataCardSelect from "./Profil-DataCard-Select";
 import ProfilDataCardCalendar from "./Profil-Datacard-calendar";
 import ProfilDataCardEdit from "./Profil-DataCard-edit";
 import ProfilDataCardButton from "./Profil-DataCard-button";
+import { consoleLog } from "../../Services/DebugService";
 
 /// funkce komponenta, která představuje pravou stranu stránky profil
 /// přijme objekt získaný od serveru
@@ -92,7 +93,7 @@ const ProfilDataCard = ({data, emailChange, refresh}) =>
           }
         );
         
-        console.log("update status:", response.data);
+        consoleLog("update status:" + response.data);
         NotificationManager.success("Údaje byly úspěšně změněny", "Změna profilu", 4000);
         changeEditMode();
         refresh();
@@ -100,7 +101,7 @@ const ProfilDataCard = ({data, emailChange, refresh}) =>
     catch (err)
     {
         NotificationManager.error("nelze načíst data", "BaseInfo()", 10000);
-        console.log("topNav error: ", err);
+        consoleLog("topNav error: " + err);
     }
   }
 

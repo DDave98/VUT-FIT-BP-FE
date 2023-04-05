@@ -12,11 +12,11 @@ GetFromStorage.propTypes = {
 }
 
 // save token to local storage
-export function SaveToStorage(token, tag)
+export function SaveToStorage(val, tag)
 {
     return new Promise((resolve) =>
         {
-            localStorage.setItem(tag, token);
+            localStorage.setItem(tag, val);
             resolve();
         }
     );
@@ -24,7 +24,7 @@ export function SaveToStorage(token, tag)
 
 SaveToStorage.propTypes = {
     tag: PropTypes.string,
-    token: PropTypes.string,
+    val: PropTypes.string,
 }
 
 // delete token in local strorage

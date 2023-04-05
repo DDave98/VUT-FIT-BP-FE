@@ -10,6 +10,7 @@ import { PublicAPI } from '../Services/AjaxService';
 import config from "../Constants/config.json";
 import SendButton from './SendButton';
 import Recaptcha from './ReCAPTCHA';
+import { consoleLog } from '../Services/DebugService';
 
 const RegistrationForm = ({setOnSuccess, setOnError}) =>
 {
@@ -55,7 +56,7 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
                 registrationPath,
                 JSON.stringify(registrationData)
             );
-            console.log("response: ", response.data, response.status);
+            consoleLog("response: " + response.data, response.status);
             setOnSuccess(response.data);
         }
         catch (err)
@@ -64,7 +65,7 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
             else if (err.response?.status == 409) setOnError(err.response.data, "");
             else if (err.response?.status == 400) setOnError("některý z uvedených parametrů je neplatný", "");
             else setOnError("Registrace se nezdařila", "nastala chyba");
-            console.log("registration form error: ", err);
+            consoleLog("registration form error: " + err);
         }
 
         setLoadMode(false);

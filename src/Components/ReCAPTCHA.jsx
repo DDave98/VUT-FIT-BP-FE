@@ -5,6 +5,7 @@ import { PublicAPI } from "../Services/AjaxService";
 import { useRef, useEffect } from 'react';
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import "../Styles/Recaptcha.css";
+import { consoleLog } from "../Services/DebugService";
 
 const RecaptchaV2 = (
 {
@@ -33,7 +34,7 @@ const RecaptchaV2 = (
             else errMessage = "ověření se nezdařilo";
 
             NotificationManager.error(errMessage, errTitle, 10000);
-            console.log("recaptcha form error: ", err);
+            consoleLog("recaptcha form error: " + err);
             return false;
         }
     }
@@ -50,7 +51,7 @@ const RecaptchaV2 = (
     const onErrored = (err) =>
     {
         NotificationManager.error("ReCAPTCHA: chyba");
-        console.log("ReCAPTCHA: ", err);
+        consoleLog("ReCAPTCHA: " + err);
     }
 
     useEffect(()=>

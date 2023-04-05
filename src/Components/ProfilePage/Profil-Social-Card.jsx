@@ -1,25 +1,23 @@
 import { 
     useState, 
     useEffect, 
-    PropTypes
+    PropTypes,
+    NotificationManager,
+    apiPath,
+    PrivateAPI,
+    GetFromStorage,
+    accessTokenTag
 } from "./Profile-Import";
 
 import "../../Styles/ProfilePageStyles/Profile-SocialCard.css";
 import ProfilSocialCardAccout from "./Profil-SocialCard-Account";
-import { fbIco, GithubIco, instaIco, twitterIco, webIco } from "../../Constants/icons";
+import { fbIco, GithubIco, GitlabIcon, GoogleIcon, instaIco, LinkedinIcon, MicrosoftIco, twitterIco, webIco } from "../../Constants/icons";
+import { consoleLog } from "../../Services/DebugService";
 
 /// funkce/komponenta, která představuje část stránky profil
 const ProfilSocialCard = ({toggleAccount}) =>
 {
     const [providers, setProviders] = useState([]);    // seznam providerů
-
-    const data = [
-        {name: "Website", state:true},
-        {name: "Github", state:false},
-        {name: "Twitter", state:false},
-        {name: "Instagram", state:false},
-        {name: "Facebook", state:false},
-    ]
 
     const GetIcoByName = (name) =>
     {
@@ -29,13 +27,40 @@ const ProfilSocialCard = ({toggleAccount}) =>
             case "Twitter": return twitterIco;
             case "Instagram": return instaIco;
             case "Facebook": return fbIco;
+            case "Google": return GoogleIcon;
+            case "Microsoft": return MicrosoftIco;
+            case "Linkedin": return LinkedinIcon;
+            case "Gitlab": return GitlabIcon;
             default: return webIco;
         }
     }
 
-    const loadSocialAccount = () =>
+    const loadSocialAccount = async () =>
     {
         // načíst všechny providery + co má uživatel přihlášené
+        try
+        {
+            var token = GetFromStorage(accessTokenTag);
+            const path = apiPath.usrProviders;
+            const response = await PrivateAPI.get(path,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            const data = response.data;
+            consoleLog("get user providers: " + data);
+            setProviders(data);
+        }
+        catch (err)
+        {
+            if (err == null) errMessage += ", žádná odpověď od serveru, zkontrolujte prosím připojení.";
+            var errTitle = "Nastala chyba - " + err.response.status;
+            var errMessage = "Nelze načíst seznam providerů";
+            
+
+            NotificationManager.error(errMessage, errTitle, 10000);
+            consoleLog("social account get error: " + err);
+            return false;
+        }
     }
 
     useEffect(() => 
@@ -47,13 +72,13 @@ const ProfilSocialCard = ({toggleAccount}) =>
         <div className="SocialPart card">
             <ul>
                 {
-                    data.map((accout, num) => (
+                    providers.map((accout, num) => (
                         <ProfilSocialCardAccout
                             key={num}
-                            header={accout.name}
-                            state={accout.state}
+                            header={accout.providerName}
+                            state={accout.isConnected}
                             onClick={toggleAccount}>
-                            {GetIcoByName(accout.name)}
+                            {GetIcoByName(accout.providerName)}
                         </ProfilSocialCardAccout>
                     ))
                 }

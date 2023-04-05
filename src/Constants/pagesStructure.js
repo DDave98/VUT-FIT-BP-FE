@@ -10,11 +10,14 @@ import RecoveryPage from "../Pages/RecoveryPage";
 import RegistrationPage from "../Pages/RegisterPage";
 import ConfirmPage from "../Pages/ConfirmPage";
 import MessagePage from "../Pages/MessagePage";
+import OAuthPage from "../Pages/OAuthPage";
+import { OAuthPopup } from "../Pages/OAuthWindow";
 
 import * as path from "./pagesPath";
 
 import EmailConfirmForm from "../Components/EmailConfirmForm";
 import NewPasswordForm from "../Components/NewPasswordForm";
+// import { OAuthPopup } from "@tasoskakour/react-use-oauth2"; uninstall and after that delete thsi
 
 const CreateRoute = (routePath, component, key, children) =>
 {
@@ -28,6 +31,8 @@ const CreateRoute = (routePath, component, key, children) =>
 
 export const publicRoutes =
 [
+    CreateRoute(path.oauthPath, <OAuthPage />, "OAuthPage"),
+    CreateRoute(path.oauthCallbackPath, <OAuthPopup />, "OAuthCallbackPage"),
     CreateRoute(path.loginPath, <LoginPage />, "LoginPage"),
     CreateRoute(path.notFoundPath, <NotFoundPage />, "NotFoundPage"),
     CreateRoute(path.registerPath, <RegistrationPage />, "RegistrationPage",

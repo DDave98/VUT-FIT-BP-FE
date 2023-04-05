@@ -18,6 +18,7 @@ import {
 import "../../Styles/LoginForm.css";
 import BasicAuth from './LoginPage-BasicAuth';
 import SocialAuth from './LoginPage-SocialAuth';
+import { consoleLog } from "../../Services/DebugService";
 
 const LoginForm = (
 {
@@ -72,16 +73,11 @@ const LoginForm = (
             else errMessage = "Přihlášení se nezdařilo";
 
             NotificationManager.error(errMessage, errTitle, 10000);
-            console.log("login form error: ", err);
+            consoleLog("login form error: " + err);
         }
 
         setLoadMode(false);
     }
-
-    useEffect(() => 
-    {
-        
-    }, []);
 
     const buttonText = "Přihlásit se";
     const RegisterText = "Nemáte účet?";
@@ -115,6 +111,8 @@ const LoginForm = (
 
             <SocialAuth
                 disabled={loadMode}
+                onSuccess={setOnSuccess}
+                onLoad={setLoadMode}
             />
 
             <p className='LoginRegistration'>

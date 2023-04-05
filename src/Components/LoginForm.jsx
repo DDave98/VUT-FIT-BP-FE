@@ -22,6 +22,7 @@ import config from "../Constants/config.json";
 import { emailRegex, passwordRegex } from '../Constants/regex';
 import SocialIconPanel from './SocialIconPanel';
 import "../Styles/LoginForm.css";
+import { consoleLog } from '../Services/DebugService';
 
 const LoginForm = (
 {
@@ -77,7 +78,7 @@ const LoginForm = (
             else errMessage = "Přihlášení se nezdařilo";
 
             NotificationManager.error(errMessage, errTitle, 10000);
-            console.log("login form error: ", err);
+            consoleLog("login form error: " + err);
         }
 
         setLoadMode(false);
@@ -118,7 +119,9 @@ const LoginForm = (
                 loadMode={loadMode}
             />
             <BreakLine>nebo</BreakLine>
-            <SocialIconPanel disabled={loadMode} />
+            <SocialIconPanel 
+                disabled={loadMode} />
+                
             <p className='LoginRegistration'>
                 Nemáte účet?
                 <Link to={registerPath}>Registrujte se</Link>

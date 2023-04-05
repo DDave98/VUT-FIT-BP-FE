@@ -7,6 +7,7 @@ import config from "../Constants/config.json";
 import { PublicAPI } from '../Services/AjaxService';
 import { FormPwdInputs } from './FormPwdInputs';
 import { NotificationManager } from 'react-notifications';
+import { consoleLog } from '../Services/DebugService';
 
 const NewPasswordForm = ({setOnSuccess, code}) =>
 {
@@ -40,7 +41,7 @@ const NewPasswordForm = ({setOnSuccess, code}) =>
             if (err == null) errMessage = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
             else if (err.response?.status == 400) errMessage = "Nevalidní kód";
             else errMessage = "Operace se nezdařila";
-            console.log("Recovery form error: ", err);
+            consoleLog("Recovery form error: " + err);
             NotificationManager.error(errMessage, errTitle, 10000);
         }
 

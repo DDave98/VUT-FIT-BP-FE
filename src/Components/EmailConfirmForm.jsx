@@ -8,6 +8,7 @@ import { PublicAPI } from '../Services/AjaxService';
 import SendButton from './SendButton';
 import { NotificationManager } from 'react-notifications';
 import "../Styles/EmailConfirmForm.css";
+import { consoleLog } from '../Services/DebugService';
 
 const EmailConfirmForm = ({setOnSuccess, code}) =>
 {
@@ -37,7 +38,7 @@ const EmailConfirmForm = ({setOnSuccess, code}) =>
             else message = "Potvrzení se nezdařilo";
 
             NotificationManager.error(message, title, 10000);
-            console.log("login form error: ", err);
+            consoleLog("login form error: " + err);
         }
         setLoadMode(false);
     }

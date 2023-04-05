@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import "../Styles/TableView.css";
 import { Header, Table, Rating } from 'semantic-ui-react'
+import { consoleLog } from '../Services/DebugService';
 
 const TableView = (
 {
@@ -27,7 +28,7 @@ const TableView = (
                 </Table.HeaderCell>
             </Table.Row>
         })
-        console.log(bodyData)
+        consoleLog(bodyData)
         return bodyData;
     }
 

@@ -8,6 +8,7 @@ import {
     GetFromStorage
 } from "./Profile-Import";
 import "../../Styles/ProfilePageStyles/ProfilModalPhoto.css"
+import { consoleLog } from "../../Services/DebugService";
 
 /// funkce/komponenta, která představuje část stránky profil
 /// obsah modal okna, umožňuje nahrání fotky
@@ -23,7 +24,7 @@ const ProfilModalPhoto = ({setUserPhoto}) =>
         const formData = new FormData();
         formData.append("photo", photo);
         const path = apiPath.UploadPhoto;
-        console.log("photo up: ", photo);
+        consoleLog("photo up: ", photo);
         try
         {
             var token = GetFromStorage(accessTokenTag);
@@ -35,13 +36,13 @@ const ProfilModalPhoto = ({setUserPhoto}) =>
                 }
             );
             
-            console.log("photo upload:", response.data);
+            consoleLog("photo upload:", response.data);
             setUserPhoto(() => photo);
         }
         catch (err)
         {
             NotificationManager.error("nelze změnit", "UploadPhoto()", 10000);
-            console.log("photo upload error: ", err);
+            consoleLog("photo upload error: ", err);
         }
     };
 

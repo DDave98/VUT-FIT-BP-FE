@@ -3,6 +3,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import "../Styles/FormInput.css";
+import { consoleLog } from '../Services/DebugService';
 
 const FormInput = (
     {
@@ -32,7 +33,7 @@ const FormInput = (
     const checkInput = () =>
     {
         const result = regex?.test(value) && value != null || isSame(value);
-        //console.log(inputName, value, result, isSame(value));
+        //consoleLog(`${inputName} val:${value} res:${result} isSame:${isSame(value)}`);
 
         setValidValue(result);
         onChangeValue(value);

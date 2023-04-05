@@ -68,12 +68,22 @@ const ProfilePage = () =>
     }
 
     // otevření okna s formulářem na přidání/odebrání účtu
-    const ToggleAccont = (id) =>
+    const ToggleAccont = (name, isConnected) =>
     {
-        console.log("accout click:", id);
-        setModalHeader("Přidat / Odebrat " + id);
-        setModalElement(<>účet {id}</>);
-        setModalShow(true);
+        console.log("accout click:", name, "is connected:", isConnected);
+
+        if (isConnected == null) return;
+        
+        if (isConnected)
+        {
+            setModalHeader("Odebrat " + name);
+            setModalElement(<>účet {name}</>);
+            setModalShow(true);
+        }
+        else
+        {
+            alert("přidat " + name);
+        }
     }
 
     // otevření okna s formulářem na změnu emailu
@@ -109,9 +119,16 @@ const ProfilePage = () =>
         }
     }
 
+    // metoda zkontroluje zda není v url parametr code
+    const CheckParams = () =>
+    {
+
+    }
+
     // hook pro načtení dat při otevření stránky
     useEffect(() =>
     {
+        CheckParams();
         GetBaseInfo();
     }, []);
     

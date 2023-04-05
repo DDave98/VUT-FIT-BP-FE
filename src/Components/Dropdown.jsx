@@ -1,5 +1,6 @@
 import { Dropdown as DropdownUI } from 'semantic-ui-react'
 import PropTypes from 'prop-types';
+import { consoleLog } from '../Services/DebugService';
 
 const Dropdown = (
 {
@@ -14,7 +15,7 @@ const Dropdown = (
 
   const handleChange = (e, { value }) => 
   {
-    console.log("dropdown: ", value);
+    consoleLog("dropdown: " + value);
   }
 
     return (

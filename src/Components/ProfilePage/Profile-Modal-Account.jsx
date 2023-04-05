@@ -4,7 +4,8 @@ import {
     PropTypes
 } from "./Profile-Import";
 
+// odebrání účtu
 const ProfilModalAccount = () =>
 {
-    
+
 }

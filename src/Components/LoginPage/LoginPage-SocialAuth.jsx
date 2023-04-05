@@ -1,3 +1,4 @@
+import { consoleLog } from "../../Services/DebugService";
 import {
     PropTypes,
     useState,
@@ -12,12 +13,14 @@ import SocialIcon from "./SocialIcon";
 const SocialAuth = (
 {
     disable = false,
+    onSuccess,
+    onLoad
 }) =>
 {
-
     const [providers, setProviders] = useState([]);    // seznam providerů
 
-    const onLoad = async () =>
+    // funkce pro načtení seznamu providerů ze serveru
+    const LoadProviders = async () =>
     {
         try
         {
@@ -27,20 +30,21 @@ const SocialAuth = (
         }
         catch (err)
         {
-            var errTitle = "Nastala chyba - " + err.response.status;
+            var errTitle = "Nastala chyba - " + err?.response.status;
             var errMessage = "Nelze načíst seznam providerů";
             if (err == null) errMessage += ", žádná odpověď od serveru, zkontrolujte prosím připojení.";
 
             NotificationManager.error(errMessage, errTitle, 10000);
-            console.log("socialAuth form error: ", err);
+            consoleLog("socialAuth form error: " + err);
             return false;
         }
     }
 
+
     useEffect(() => 
     {
         // načtení providerů
-        onLoad();
+        LoadProviders();
     }, []);
 
     const imgPre = 'data:image/png;base64,';
@@ -69,6 +73,8 @@ const SocialAuth = (
                         key={key}
                         cid={prov.clientId}
                         scope={prov.scope}
+                        onLoad={onLoad}
+                        onSuccess={onSuccess}
                     />
                 ))
             }

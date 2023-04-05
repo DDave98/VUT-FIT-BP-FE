@@ -10,3 +10,5 @@ export const messagePath = "/messages";
 export const registerPath = "/registration";
 export const confirmPath = "confirm";
 export const recoveryPath = "/recovery";
+export const oauthPath = "/OAuth";
+export const oauthCallbackPath = "/OAuth/Callback";

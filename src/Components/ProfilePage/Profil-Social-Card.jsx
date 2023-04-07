@@ -13,27 +13,30 @@ import "../../Styles/ProfilePageStyles/Profile-SocialCard.css";
 import ProfilSocialCardAccout from "./Profil-SocialCard-Account";
 import { fbIco, GithubIco, GitlabIcon, GoogleIcon, instaIco, LinkedinIcon, MicrosoftIco, twitterIco, webIco } from "../../Constants/icons";
 import { consoleLog } from "../../Services/DebugService";
+import useOAuth2 from "../../Hooks/useOAuth2";
+
+// podle názvu vrátí svg ikonu
+const GetIcoByName = (name) =>
+{
+    switch(name)
+    {
+        case "Github": return GithubIco;
+        case "Twitter": return twitterIco;
+        case "Instagram": return instaIco;
+        case "Facebook": return fbIco;
+        case "Google": return GoogleIcon;
+        case "Microsoft": return MicrosoftIco;
+        case "Linkedin": return LinkedinIcon;
+        case "Gitlab": return GitlabIcon;
+        default: return webIco;
+    }
+}
 
 /// funkce/komponenta, která představuje část stránky profil
 const ProfilSocialCard = ({toggleAccount}) =>
 {
     const [providers, setProviders] = useState([]);    // seznam providerů
-
-    const GetIcoByName = (name) =>
-    {
-        switch(name)
-        {
-            case "Github": return GithubIco;
-            case "Twitter": return twitterIco;
-            case "Instagram": return instaIco;
-            case "Facebook": return fbIco;
-            case "Google": return GoogleIcon;
-            case "Microsoft": return MicrosoftIco;
-            case "Linkedin": return LinkedinIcon;
-            case "Gitlab": return GitlabIcon;
-            default: return webIco;
-        }
-    }
+    
 
     const loadSocialAccount = async () =>
     {
@@ -47,7 +50,7 @@ const ProfilSocialCard = ({toggleAccount}) =>
                 headers: { Authorization: `Bearer ${token}` },
             });
             const data = response.data;
-            consoleLog("get user providers: " + data);
+            consoleLog("ProfileSocialCard | providers: " + JSON.stringify(data));
             setProviders(data);
         }
         catch (err)
@@ -58,7 +61,7 @@ const ProfilSocialCard = ({toggleAccount}) =>
             
 
             NotificationManager.error(errMessage, errTitle, 10000);
-            consoleLog("social account get error: " + err);
+            consoleLog("ProfileSocialCard | social account get error: " + err);
             return false;
         }
     }
@@ -75,10 +78,12 @@ const ProfilSocialCard = ({toggleAccount}) =>
                     providers.map((accout, num) => (
                         <ProfilSocialCardAccout
                             key={num}
-                            header={accout.providerName}
-                            state={accout.isConnected}
-                            onClick={toggleAccount}>
+                            data={accout}
+                            onRemoveLink={toggleAccount}
+                            onAddLink={null}
+                        >
                             {GetIcoByName(accout.providerName)}
+                            {accout.providerName}
                         </ProfilSocialCardAccout>
                     ))
                 }

@@ -14,6 +14,7 @@ import { PrivateAPI } from '../Services/AjaxService';
 import { accessTokenTag } from '../Constants/storageTag';
 import config from "../Constants/config.json";
 import ProfilModalPhoto from "../Components/ProfilePage/Profile-Modal-Photo";
+import { consoleLog } from "../Services/DebugService";
 
 
 
@@ -70,7 +71,7 @@ const ProfilePage = () =>
     // otevření okna s formulářem na přidání/odebrání účtu
     const ToggleAccont = (name, isConnected) =>
     {
-        console.log("accout click:", name, "is connected:", isConnected);
+        consoleLog("accout click: " + name);
 
         if (isConnected == null) return;
         

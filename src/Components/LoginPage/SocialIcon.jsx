@@ -3,6 +3,7 @@
  */
 
 import useOAuth2 from "../../Hooks/useOAuth2";
+import { consoleLog } from "../../Services/DebugService";
 import "../../Styles/SocialIcon.css";
 
 import {
@@ -24,19 +25,25 @@ const SocialIcon = (
     // v případě úspěšného přihlášení
     const CheckCode = async (code) =>
     {
+        if (code == null) return;
+
         // ověření kódu
         try
         {
-            alert("aaa");
-            const path = apiPath.checkProviderCode + name;
+            const path = apiPath.loginSSO.path + name;
             var response = await PublicAPI.post( path, JSON.stringify(code));
             const token = response.data;
             // onSuccess(token);
-            alert("Server token: " + token);
+            consoleLog("Server token: " + token);
         }
         catch (err)
         {
-            handlError(err);
+            const title = "Ověření SSO";
+            var message = "";
+            if (err == null) message = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
+            else if (err.response?.status == 400) message = "nelze zpracovat (400)";
+            else message = "Přihlášení se nezdařilo";
+            NotificationManager.error(message, title, 10000);
         }
     }
 
@@ -52,13 +59,11 @@ const SocialIcon = (
         authorize();
     };
 
-    const redirectURI = "http://localhost:3000/OAuth/Callback";
     const [authorize, loading] = useOAuth2(
     {
         authEndpoint: api, 
         tokenEndpoint: apiPath.checkProviderCode + name,
-        clientId: cid, 
-        redirectUri: redirectURI, 
+        clientId: cid,
         scope: scope,
         onError: handlError,
         onSuccess: CheckCode

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Loader from '../Components/Loader';
 import { authCodeTag } from '../Constants/storageTag';
+import { consoleLog } from '../Services/DebugService';
 import { SaveToStorage } from '../Services/StorageService';
 import "../Styles/OAuth/OAuthCallback.css";
 
@@ -15,8 +16,12 @@ export const OAuthPopup = () =>
     useEffect(() => 
     { 
         const search = location.search;
-        const code =  new URLSearchParams(search).get('code');
+        const params =  new URLSearchParams(search);
+        consoleLog("OAuthPopup - params: " + params);
+        const code =  params.get('code');
+        consoleLog("OAuthPopup - code: " + code);
         SaveToStorage(code, authCodeTag);
+        //alert("OAuthCallback");
     }, []);
 
     return (

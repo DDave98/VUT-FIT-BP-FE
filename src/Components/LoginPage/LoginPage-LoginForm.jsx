@@ -12,7 +12,8 @@ import {
     SendButton,
     Recaptcha,
     recoveryPath,
-    useEffect
+    useEffect,
+    apiPath
 } from "./LoginPage-imports";
 
 import "../../Styles/LoginForm.css";
@@ -47,7 +48,7 @@ const LoginForm = (
         // proces zpracování
         setLoadMode(true);
 
-        const loginPath = config.path.authenticate;
+        const loginPath = apiPath.loginBasic.path;
         const loginData = {
             Password: password,
             Login: email,

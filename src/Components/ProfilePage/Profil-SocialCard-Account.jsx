@@ -1,20 +1,116 @@
+import useOAuth2 from "../../Hooks/useOAuth2";
+import { consoleLog } from "../../Services/DebugService";
 import {
-    PropTypes
+    PropTypes,
+    apiPath,
+    PrivateAPI,
+    NotificationManager,
+    GetFromStorage,
+    accessTokenTag,
+    useState
   } from "./Profile-Import";
 
 /// funkce/komponenta, která představuje část stránky profil
 /// načte informace o připojených účtech ze serveru
-const ProfilSocialCardAccout = ({onClick, header, children, state}) =>
+const ProfilSocialCardAccout = ({
+    onAddLink, 
+    onRemoveLink, 
+    children,
+    data,
+}) =>
 {
+
+    const {
+        providerApi, 
+        providerCid, 
+        providerScope, 
+        providerName,
+        isConnected
+    } = data;
+    const [connected, setConnected] = useState(isConnected);
+
+    const handlError = (message, header) => 
+    {
+        NotificationManager.error(message, header, 10000);
+    }
+
+    const CheckCode = async (code) =>
+    {
+        try
+        {
+            const body = JSON.stringify(code);
+            const token = GetFromStorage(accessTokenTag);
+            const path = apiPath.addUserAccountProvider.path + providerName;
+            var response = PrivateAPI.put(path, body,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            NotificationManager.success('Účet byl úspěšně přidán', 'Přidání Účtu', 10000);
+            setConnected(() => true);
+        }
+        catch (err)
+        {
+            if (err == null) errMessage += ", žádná odpověď od serveru, zkontrolujte prosím připojení.";
+            var errTitle = "Nastala chyba - " + err?.response.status;
+            var errMessage = "nelze přilinkovat ůčet"
+            NotificationManager.error(errMessage, errTitle, 10000);
+        }
+    }
+
+    // hadl on click
+    const processAddLink = async () =>
+    {
+        consoleLog("ProfleSocialCardLink | start processAddLink");
+        authorize();
+    }
+
+    const processRemoveLink = async () =>
+    {
+        const message = "Opravdu chcete odebrat " + providerName + "?";
+        const conf = window.confirm(message);
+        if (!conf) return;
+        
+        try 
+        {
+            var token = GetFromStorage(accessTokenTag);
+            const path = apiPath.delUserAccountProvider.path + providerName;
+            const response = await PrivateAPI.delete(path,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            setConnected(() => false);
+            const message = "Účet byl úspěšně odebrán";
+            NotificationManager.success(message, "", 10000);
+        }
+        catch (err)
+        {
+            var errTitle = "Nastala chyba - " + err?.response.status;
+            var errMessage = "nelze odebrat ůčet"
+            if (err == null) errMessage = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
+            NotificationManager.error(errMessage, errTitle, 10000);
+        }
+    }
+
+    const [authorize, loading] = useOAuth2(
+        {
+            authEndpoint: providerApi, 
+            tokenEndpoint: apiPath.checkProviderCode + providerName,
+            clientId: providerCid,
+            scope: providerScope,
+            onError: handlError,
+            onSuccess: CheckCode
+    });
+
     return (
         <li>
             <h6>
                 {children}
-                {header}
             </h6>
             {
-                state ? <button value={header} className="btn-primary btn" onClick={(e) => onClick(e.target.value, state)}>Odpojit</button>
-                : <button value={header} className="btn-secondary btn" onClick={(e) => onClick(e.target.value, state)}>Připojit</button>
+                connected ? <button className="btn-primary btn" onClick={processRemoveLink}>Odpojit</button>
+                : <button className="btn-secondary btn" onClick={processAddLink}>Připojit</button>
             }
         </li>
     );

@@ -6,16 +6,35 @@ export const apiPath=
     /* Provider path */
     allProviders: "/api/Account",
     usrProviders: "/api/Account/user",
-    idProviders: "/api/Account/$provider$/Accountid",
     checkProviderCode: "/api/Account/",
+    addUserAccountProvider: 
+    {
+        method: "PUT",
+        path: "/api/Account/", // {provider}
+    },
+    delUserAccountProvider: 
+    {
+        method: "DELETE",
+        path: "/api/Account/", // {provider}
+    },
 
     /* Auth path */
-    authenticate:   "/api/Auth/authenticate",
     confirmEmail:   "/api/Auth/confirmEmail",
     refresh:        "/api/Auth/Refresh",
     recovery:       "/api/Auth/recovery",
     recaptcha:      "/api/Auth/reCaptcha",
     changePwd:      "/api/Auth/password",
+    loginSSO: // přihlášení pomocí SSO
+    {
+        method: "POST",
+        path: "/api/Auth/Login/SSO/", // {provider}
+    },
+    loginBasic:
+    {
+        method: "POST",
+        path: "/api/Auth/Login/Basic",
+    },
+
 
     /* User path */
     registration:   "/api/User/Registration",

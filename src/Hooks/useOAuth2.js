@@ -1,11 +1,13 @@
 // useOAuth2.js
 import {
   useState,
-  useRef
+  useRef,
+  useEffect
 } from 'react';
 import { authCodeTag } from "../Constants/storageTag";
 import { consoleLog } from '../Services/DebugService';
 import { GetFromStorage, DeleteFromStorage } from "../Services/StorageService";
+import { useTimeout } from './useTimeout';
 
 const OAUTH_STATE_KEY = 'react-use-oauth2-state-key';
 const POPUP_HEIGHT = 700;
@@ -58,39 +60,75 @@ const closePopup = (popupRef) =>
   popupRef.current = null;
 };
 
+const ClearStorage = () => DeleteFromStorage(authCodeTag);
+
 const cleanup = ( popupRef, handleMessageListener ) => 
 {
 	closePopup(popupRef);
 	//removeState();
-  window.removeEventListener('message', handleMessageListener);
-  DeleteFromStorage(authCodeTag);
+  ClearStorage();
 };
 
 /************************************************************/
 // URL
-
-const formatAuthorizeUrl = (authorizeUrl, clientId, redirectUri, scope, state) => 
+const redirectURI = "http://localhost:3000/OAuth/Callback";
+const formatAuthorizeUrl = (authorizeUrl, clientId, scope, state) => 
 {
-	const url = `${authorizeUrl}?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&state=${state}`;
+  const rtype = "?response_type=code";
+  const cid= "&client_id=" + clientId;
+  const redirect_uri = "&redirect_uri=" + redirectURI;
+  const scopes = "&scope=" + scope;
+  const states = "&state=" + state;
+	const url = authorizeUrl + rtype + cid + redirect_uri + scopes + states;
   consoleLog("generated url: " + url);
 	return url;
 };
 
+function waitForAuthCode(popupRef, authCodeTag, timeout = 300000) 
+{
+  consoleLog("waiting for auth code");
+  return new Promise((resolve, reject) => 
+  {
+    const startTime = Date.now();
+    const checkForAuthCode = () => 
+    {
+      if (!popupRef.current) 
+      {
+        consoleLog("OAuth windows was force closed");
+        reject(new Error('Popup window closed before authentication completed'));
+        return;
+      }
+
+      const value = GetFromStorage(authCodeTag);
+
+      if (value)
+      {
+        resolve(value);
+        return;
+      }
+
+      if (Date.now() - startTime > timeout) 
+      {
+        consoleLog("OAuth windows timed out");
+        reject(new Error('Authentication timed out'));
+        return;
+      }
+
+      setTimeout(checkForAuthCode, 15000);
+    };
+
+    checkForAuthCode();
+  });
+}
 
 /************************************************************/
 // OAuth HOOK
 // https://tasoskakour.com/blog/react-use-oauth2
 
-const useOAuth2 = ({ 
-  authEndpoint,
-  clientId, 
-  redirectUri, 
-  scope,
-  onError, onSuccess
-}) => {
+const useOAuth2 = ({authEndpoint,clientId, scope, onError, onSuccess}) => 
+{
   const [{ loading, error }, setUI] = useState({ loading: false, error: null });
   const popupRef = useRef(null);
-  const listenerRef = useRef(null);
 
   const authorize = async () => 
   {
@@ -98,59 +136,32 @@ const useOAuth2 = ({
     {
       // 1. Init
       setUI({loading: true, error: null,});
+      cleanup(popupRef);
 
       // 2. Generate and save state
       // const generateState = generateState();
 
       // 3. Open popup
-      const url = formatAuthorizeUrl(authEndpoint, clientId, redirectUri, scope, "123XYZ");
+      const url = formatAuthorizeUrl(authEndpoint, clientId, scope, "123XYZ");
       popupRef.current = openPopup(url);
 
       // 4. get code from window
-      await getAuthorizationCode();
-      const authCode = GetFromStorage(authCodeTag);
+      const authCode = await waitForAuthCode(popupRef, authCodeTag);
       consoleLog("useOAuth.js | autorize | code: "+ authCode);
       setUI({loading: false, error: null});
-      await onSuccess(authCode)
+      await onSuccess(authCode);
     } 
     catch (err) 
     {
       consoleLog("useOAuth.js | autorize | popuperror: " + err);
       setUI({loading: false, error: err});
-      onError(error)
+      onError(error);
     }
     finally
     {
-      cleanup(popupRef, listenerRef.current);
+      // zavření okna
+      cleanup(popupRef);
     } 
-  };
-
-  // funkce obluhující okno
-  const getAuthorizationCode = () => 
-  {
-    return new Promise((resolve, reject) => 
-    {
-      if (!popupRef.current) reject(new Error('Okno je blokované nebo zavřené'));
-      
-      listenerRef.current = (event) => 
-      {
-        const code = GetFromStorage(authCodeTag);
-        if (code != false)
-        {
-          consoleLog("useOAuth.js | getAuthorizationCode | load from strorage: " + code);
-          if (code != "") resolve(code);
-          else reject(new Error("chybí kód"));
-        }
-      };
-      
-      // Register message listener
-      window.addEventListener('message', listenerRef.current);
-
-      // Remove listener(s) on unmount
-      return () => {
-        window.removeEventListener('message', listenerRef.current);
-      };
-    });
   };
 
   return [authorize, loading];

@@ -1,3 +1,4 @@
+import { useBasicAuthSubmit } from "./LoginPage-hooks";
 import {
     FormInput,
     useRef,
@@ -5,31 +6,37 @@ import {
     emailRegex,
     passwordRegex,
     PropTypes,
-    useEffect
+    useEffect,
     
 } from "./LoginPage-imports";
 
+/**
+ * 
+ * @param {onEmailChange} onEmailChange - nastavení hodnoty pole email
+ * @param {onPasswordChange} onPasswordChange - nastavení hodnoty pole heslo
+ * @returns furmulář běžného přihlášení
+ */
 const BasicAuth = (
 {
-    onEmailChange,
-    onPasswordChange,
-    setIsValid,
-    disabled
+    setBasicForm,
+    disabled,
 }) =>
 {
     const userRef = useRef();
     const [validEmail, setValidEmail] = useState(false);
     const [validPassword, setValidPassword] = useState(false);
-
-    const CheckValid = () =>
-    {
-        setIsValid(validEmail && validPassword);
-    }
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     useEffect(() => 
     {
-        CheckValid();
-    }, [validEmail, validPassword])
+        setBasicForm(
+        {
+            basicValid: validEmail && validPassword,
+            email: email,
+            password: password,
+        });
+    }, [validEmail, validPassword, email, password]);
 
     return <>
         <FormInput
@@ -38,7 +45,7 @@ const BasicAuth = (
             htmlFor='loginFormName'
             userRef={userRef}
             regex={emailRegex}
-            onChangeValue={onEmailChange}
+            onChangeValue={setEmail}
             getValidValue={(isValid) => setValidEmail(isValid)}
             disabled={disabled}
         />
@@ -49,7 +56,7 @@ const BasicAuth = (
             htmlFor='loginFormPwd'
             userRef={userRef}
             regex={passwordRegex}
-            onChangeValue={onPasswordChange}
+            onChangeValue={setPassword}
             getValidValue={(isValid) => setValidPassword(isValid)}
             disabled={disabled}
         />

@@ -5,46 +5,28 @@
 import useOAuth2 from "../../Hooks/useOAuth2";
 import { consoleLog } from "../../Services/DebugService";
 import "../../Styles/SocialIcon.css";
+import { useSSOAuthSubmit } from "./LoginPage-hooks";
 
 import {
     PropTypes,
     NotificationManager,
     apiPath,
-    useEffect,
-    PublicAPI
 } from "./LoginPage-imports";
 
 const SocialIcon = (
 {
-    src,
-    name,
-    cid, api, scope,
-    onLoad, onSuccess
+    src, name, cid, api, scope,
+    disabled = false,
+    setLoadMode, onSuccess
 }) =>
 {
+    const SSOAuthHook = useSSOAuthSubmit();
+
     // v případě úspěšného přihlášení
     const CheckCode = async (code) =>
     {
-        if (code == null) return;
-
-        // ověření kódu
-        try
-        {
-            const path = apiPath.loginSSO.path + name;
-            var response = await PublicAPI.post( path, JSON.stringify(code));
-            const token = response.data;
-            // onSuccess(token);
-            consoleLog("Server token: " + token);
-        }
-        catch (err)
-        {
-            const title = "Ověření SSO";
-            var message = "";
-            if (err == null) message = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
-            else if (err.response?.status == 400) message = "nelze zpracovat (400)";
-            else message = "Přihlášení se nezdařilo";
-            NotificationManager.error(message, title, 10000);
-        }
+        const token = await SSOAuthHook(code, name);
+        onSuccess(token);
     }
 
     // v případě neúspěšného příhlášení
@@ -54,9 +36,11 @@ const SocialIcon = (
     }
 
     // ověření uživatele
-    const handleAuthorize = () =>
+    const handleAuthorize = async () =>
     {
-        authorize();
+        setLoadMode(true);
+        await authorize();
+        setLoadMode(false);
     };
 
     const [authorize, loading] = useOAuth2(
@@ -68,11 +52,6 @@ const SocialIcon = (
         onError: handlError,
         onSuccess: CheckCode
     });
-
-    useEffect(() => 
-    {
-        // onLoad(loading);
-    }, [loading])
 
     return (
         <>

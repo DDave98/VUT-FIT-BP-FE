@@ -1,10 +1,7 @@
 import {
-    userRef,
     useState,
     PropTypes,
     Link,
-    NotificationManager,
-    PublicAPI,
     useRef,
     config,
     FormPageLayout,
@@ -12,30 +9,32 @@ import {
     SendButton,
     Recaptcha,
     recoveryPath,
-    useEffect,
-    apiPath
 } from "./LoginPage-imports";
 
 import "../../Styles/LoginForm.css";
 import BasicAuth from './LoginPage-BasicAuth';
 import SocialAuth from './LoginPage-SocialAuth';
 import { consoleLog } from "../../Services/DebugService";
+import { useBasicAuthSubmit } from "./LoginPage-hooks";
 
 const LoginForm = (
 {
     setOnSuccess,
-    formName,
-    Hook
 }) =>
 {
-    const userRef = useRef();
-    const [loadMode, setLoadMode] = useState(false);    // ověřovaní dat
-    const [reValid, setReValid] = useState(false);      // recaptcha check
-    const [email, setEmail] = useState('');             // zadaný email
-    const [password, setPassword] = useState('');       // zadané heslo
-    const [isValid, setIsValid] = useState(false);      // kontrola polí
+    const [loadMode, setLoadMode] = useState(false);       // proces ověřovaní dat
+    const [capchaValid, setCapchaValid] = useState(false); // recaptcha check
+    const [{basicValid, email, password}, setBasicForm] = useState({basicValid: false, email: "", password: ""});   // recaptcha check
 
+    const BasicAuthHook = useBasicAuthSubmit();
+    const handlSubmit = () =>
+    {
+        const isValid = basicValid && capchaValid;
+        BasicAuthHook(isValid, email, password, setOnSuccess, setLoadMode);
+    };
 
+    /*
+    // při stisku tlačítka
     const handlSubmit = async () =>
     {
 
@@ -78,19 +77,17 @@ const LoginForm = (
         }
 
         setLoadMode(false);
-    }
+    }*/
 
     const buttonText = "Přihlásit se";
     const RegisterText = "Nemáte účet?";
     const RegisterLinkText = "Registrujte se";
     
     return <>
-        <FormPageLayout name={formName} handlSubmit={handlSubmit}>
+        <FormPageLayout handlSubmit={handlSubmit}>
 
             <BasicAuth 
-                onEmailChange={(value) => setEmail(value)}
-                onPasswordChange={(value) => setPassword(value)}
-                setIsValid={(value) => setIsValid(value)}
+                setBasicForm={setBasicForm}
                 disabled={loadMode}
             />
 
@@ -98,22 +95,24 @@ const LoginForm = (
                 Zapomněl jste heslo?
             </Link>
 
+            {/* zobrazení pouze pokud je form připravený k odeslání */}
             <Recaptcha
                 siteKey={config.RecaptchaKey}
-                isValid={setReValid}
-                visible={isValid}
+                isValid={setCapchaValid}
+                visible={basicValid}
             />
 
+            {/* povolení v případě že recapcha i form je připravený */}
             <SendButton 
-                disabled={!isValid || !reValid}
-                text={buttonText}
+                disabled={!basicValid || !capchaValid}
                 loadMode={loadMode}
+                text={buttonText}
             />
 
             <SocialAuth
-                disabled={loadMode}
                 onSuccess={setOnSuccess}
-                onLoad={setLoadMode}
+                disabled={loadMode}
+                setLoadMode={setLoadMode}
             />
 
             <p className='LoginRegistration'>

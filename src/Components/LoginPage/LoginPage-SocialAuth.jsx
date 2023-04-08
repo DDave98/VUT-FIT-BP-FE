@@ -13,8 +13,7 @@ import SocialIcon from "./SocialIcon";
 const SocialAuth = (
 {
     disable = false,
-    onSuccess,
-    onLoad
+    onSuccess, setLoadMode
 }) =>
 {
     const [providers, setProviders] = useState([]);    // seznam providerů
@@ -59,7 +58,6 @@ const SocialAuth = (
         }
 
         <div
-            disabled = {disable} 
             id = 'loginSocialIcons'
             className = "SocialIconPanel"
         >
@@ -73,7 +71,7 @@ const SocialAuth = (
                         key={key}
                         cid={prov.clientId}
                         scope={prov.scope}
-                        onLoad={onLoad}
+                        setLoadMode={setLoadMode}
                         onSuccess={onSuccess}
                     />
                 ))

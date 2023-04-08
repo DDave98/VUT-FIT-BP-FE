@@ -10,14 +10,19 @@ const LoginPage = () =>
     const location = useLocation();
     const { setAuth } = useAuth();
  
-    // při úspěšném přihlášení
-    const setOnSuccess = (token) =>
+    const SaveToken = (token) =>
     {
-        // zde pak zobrazit form pro dvoufazové
         const from = location.state?.from?.pathname || "/";
         setAuth({token});   // save token to page instance memory
         SaveToStorage(token, accessTokenTag);
         navigate(from, {replace: true});
+    }
+
+    // při úspěšném přihlášení -> uloží token či zobrazí MFA form
+    const setOnSuccess = (token) =>
+    {
+        // zde pak zobrazit form pro dvoufazové
+        if (token != null) SaveToken(token);
     }
 
     return (

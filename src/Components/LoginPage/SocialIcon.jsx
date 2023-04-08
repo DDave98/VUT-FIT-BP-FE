@@ -1,7 +1,6 @@
 /**
  * tato koponenta představuje ikonu
  */
-
 import useOAuth2 from "../../Hooks/useOAuth2";
 import { consoleLog } from "../../Services/DebugService";
 import "../../Styles/SocialIcon.css";

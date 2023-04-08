@@ -1,7 +1,10 @@
 
 const configSetting =
 {
-    debugMode: true,
+    debuging:
+    {
+        debugMode: true,
+    }
 };
 
 export default configSetting;

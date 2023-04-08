@@ -4,7 +4,9 @@ import
     NotificationManager,
     PublicAPI,
 } from "./LoginPage-imports";
-import { consoleLog } from "../../Services/DebugService";
+import { consoleLog, ConsoleOut, consoleType } from "../../Services/DebugService";
+
+const fileName = "LoginPageHooks";
 
 // custom hook to handl submit buton on basic auth form
 export const useBasicAuthSubmit = () =>
@@ -70,7 +72,7 @@ export const useSSOAuthSubmit = () =>
             const path = apiPath.loginSSO.path + name;
             var response = await PublicAPI.post( path, JSON.stringify(code));
             const token = response.data;
-            consoleLog("Server token: " + token);
+            ConsoleOut(consoleType.log, fileName, "Server token: " + token);
             return(token);
         }
         catch (err)
@@ -80,6 +82,7 @@ export const useSSOAuthSubmit = () =>
             if (err == null) message = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
             else if (err.response?.status == 400) message = "nelze zpracovat (400)";
             else message = "Přihlášení se nezdařilo";
+            ConsoleOut(consoleType.error, fileName, message);
             NotificationManager.error(message, title, 10000);
         }
     }

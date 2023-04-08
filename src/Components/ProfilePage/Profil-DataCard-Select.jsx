@@ -16,7 +16,7 @@ const ProfilDataCardSelect = ({header, editMode, value, values, selected, onChan
             :<select name="gender" id="gender" onChange={(e) => onChange(e.target.value)} select={selected}>
                 {
                     values.map((a) => (
-                        <option value={a.value} key={a.value}>{a.name}</option>
+                        <option value={a} key={a}>{a}</option>
                     ))
                 }
             </select>

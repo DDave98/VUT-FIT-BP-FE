@@ -6,19 +6,26 @@ export const consoleLog = (message) =>
         console.log("DEBUG:", message);
 }
 
+export const consoleType = 
+{
+    log: "log",
+    warn: "warn",
+    error: "error"
+};
+
 export const ConsoleOut = (type, from, message) =>
 {
     switch (type)
     {
-        case "log":
+        case consoleType.log:
             console.log(from, " | ", message);
             break;
 
-        case "warn":
+        case consoleType.warn:
             console.warn(from, " | ", message);
             break;
 
-        case "error":
+        case consoleType.error:
             console.error(from, " | ", message);
             break;
 

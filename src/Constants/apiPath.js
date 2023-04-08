@@ -34,6 +34,11 @@ export const apiPath=
         method: "POST",
         path: "/api/Auth/Login/Basic",
     },
+    MFAMethods:
+    {
+        method: "GET",
+        path: "/api/Auth/MFA",
+    },
 
 
     /* User path */

@@ -15,7 +15,10 @@ import ProfilDataCardSelect from "./Profil-DataCard-Select";
 import ProfilDataCardCalendar from "./Profil-Datacard-calendar";
 import ProfilDataCardEdit from "./Profil-DataCard-edit";
 import ProfilDataCardButton from "./Profil-DataCard-button";
-import { consoleLog } from "../../Services/DebugService";
+import { consoleLog, ConsoleOut, consoleType } from "../../Services/DebugService";
+import { PublicAPI } from "../LoginPage/LoginPage-imports";
+
+const fileName = "ProfileDataCard";
 
 /// funkce komponenta, která představuje pravou stranu stránky profil
 /// přijme objekt získaný od serveru
@@ -23,6 +26,7 @@ const ProfilDataCard = ({data, emailChange, refresh}) =>
 {
 
   const [editMode, setEditMode] = useState(true);
+  const [mfaTypes, SetMfaTypes] = useState([]);
 
   const [userName, setUserName] = useState(data.name);
   const [userSurname, setUserSurname] = useState(data.surname);
@@ -105,11 +109,29 @@ const ProfilDataCard = ({data, emailChange, refresh}) =>
     }
   }
 
+  const Get2FAMethods = async () =>
+  {
+    try
+    {
+      const path = apiPath.MFAMethods.path; 
+      const response = await PublicAPI.get(path);
+      ConsoleOut(consoleType.log, fileName, "get mfa" + response.data);
+      SetMfaTypes(response.data);
+    }
+    catch (err)
+    {
+        NotificationManager.error("nelze načíst typy 2FA", "Get2FAMethods()", 10000);
+        consoleLog("topNav error: " + err);
+    }
+  }
+
+  useEffect(() => 
+  {
+    Get2FAMethods();
+  }, []);
+
   const pohlaviMap = (value) => {return value == 0 ? "muž" : value == 1 ? "žena" : "neuvedeno"} 
-  const  pohlaviValues = [
-    {value: 0, name: "Muž"},
-    {value: 1, name: "Žena"},
-  ];
+  const  pohlaviValues = ["Muž", "Žena"];
 
   return (
     <div className="profile-card">
@@ -139,10 +161,12 @@ const ProfilDataCard = ({data, emailChange, refresh}) =>
         editMode={editMode} 
         onChange={setUserPhone} />
 
-      <ProfilDataCardInput 
+      <ProfilDataCardSelect 
         header="2FA" 
-        value={user2FA != "none" ? "Ano" : "Ne"} 
         editMode={editMode} 
+        selected={user2FA == null ? "" : user2FA} 
+        value={user2FA == null ? "žádné" : user2FA} 
+        values={mfaTypes}
         onChange={setUser2FA} />
 
       <ProfilDataCardInput 

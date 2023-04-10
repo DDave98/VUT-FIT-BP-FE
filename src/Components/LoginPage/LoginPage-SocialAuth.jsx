@@ -10,6 +10,23 @@ import {
 } from "./LoginPage-imports";
 import SocialIcon from "./SocialIcon";
 
+const GetLogoByName = (name) =>
+{
+    switch(name)
+    {
+        case "Github": return require('../../Assets/Images/socialIcons/github.png');
+        case "Instagram": return require('../../Assets/Images/socialIcons/instagram.png');
+        case "Facebook": return require('../../Assets/Images/socialIcons/facebook.png');
+        case "Google": return require('../../Assets/Images/socialIcons/google.png');
+        case "Microsoft": return require('../../Assets/Images/socialIcons/microsoft.png');
+        case "Linkedin": return require('../../Assets/Images/socialIcons/linkedin.png');
+        case "Gitlab": return require('../../Assets/Images/socialIcons/gitlab.png');
+        default: return require('../../Assets/Images/socialIcons/web.bmp');
+    }
+}
+
+
+///
 const SocialAuth = (
 {
     disable = false,
@@ -39,14 +56,22 @@ const SocialAuth = (
         }
     }
 
-
     useEffect(() => 
     {
-        // načtení providerů
-        LoadProviders();
+        LoadProviders(); // načtení providerů ze serveru
     }, []);
 
-    const imgPre = 'data:image/png;base64,';
+    const loadIco = (src, name) =>
+    {
+        const imgPre = 'data:image/png;base64,';
+        if (src == "" || src == null) 
+        {
+            var logo =  GetLogoByName(name);
+            return logo;
+        }
+        else return imgPre + src;
+    };
+
     const BreakLineText = "nebo";
 
     return (
@@ -65,7 +90,7 @@ const SocialAuth = (
                 providers.map((prov, key) =>
                 (
                     <SocialIcon
-                        src={imgPre + prov.ico}
+                        src={loadIco(prov.ico, prov.name)}
                         name={prov.name}
                         api={prov.api}
                         key={key}

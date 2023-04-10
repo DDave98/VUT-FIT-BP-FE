@@ -34,6 +34,7 @@ const ProfilSocialCardAccout = ({
         NotificationManager.error(message, header, 10000);
     }
 
+    // callback funkce, která posíla naserver autorizační kód k ověření
     const CheckCode = async (code) =>
     {
         try
@@ -58,13 +59,14 @@ const ProfilSocialCardAccout = ({
         }
     }
 
-    // hadl on click
+    // funkce spustí autentizaci pomoc SSO
     const processAddLink = async () =>
     {
         consoleLog("ProfleSocialCardLink | start processAddLink");
         authorize();
     }
 
+    // odebrání relace mezi uživatelem a účtem u daného providera
     const processRemoveLink = async () =>
     {
         const message = "Opravdu chcete odebrat " + providerName + "?";
@@ -93,6 +95,7 @@ const ProfilSocialCardAccout = ({
         }
     }
 
+    // hook který zobrazí okno s autorizací u daného providera
     const [authorize, loading] = useOAuth2(
         {
             authEndpoint: providerApi, 

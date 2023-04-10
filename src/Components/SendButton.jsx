@@ -6,7 +6,12 @@
 import PropTypes from 'prop-types';
 import Loader from './Loader';
 
-const SendButton = ({disabled, text, loadMode}) =>
+const SendButton = (
+{
+    disabled = false, 
+    text = "submit", 
+    loadMode = false
+}) =>
 {
     const submitButtonStyle = "flex items-baseline justify-between mb-6 mt-2";
     const buttonStyleClass = "px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 w-full disabled:opacity-50 disabled:bg-gray-400";
@@ -20,7 +25,7 @@ const SendButton = ({disabled, text, loadMode}) =>
                 </div> :
                 <button
                     className={buttonStyleClass}
-                    disabled={disabled ? true : false}
+                    disabled={disabled}
                 >
                     {text}
                 </button>

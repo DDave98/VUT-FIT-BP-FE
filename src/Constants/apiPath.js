@@ -1,6 +1,15 @@
 //export const baseApiURL = new URL("https:\/\/authframe-api.herokuapp.com");
 export const baseApiURL = "https://localhost:7155";
 
+const methodType =
+{
+    GET: "GET",
+    POST: "POST",
+    PUT: "PUT",
+    DELETE: "DELETE",
+    PATCH: "PATCH",
+}
+
 export const apiPath=
 {
     /* Provider path */
@@ -9,12 +18,12 @@ export const apiPath=
     checkProviderCode: "/api/Account/",
     addUserAccountProvider: 
     {
-        method: "PUT",
+        method: methodType.PUT,
         path: "/api/Account/", // {provider}
     },
     delUserAccountProvider: 
     {
-        method: "DELETE",
+        method: methodType.DELETE,
         path: "/api/Account/", // {provider}
     },
 
@@ -26,18 +35,23 @@ export const apiPath=
     changePwd:      "/api/Auth/password",
     loginSSO: // přihlášení pomocí SSO
     {
-        method: "POST",
+        method: methodType.POST,
         path: "/api/Auth/Login/SSO/", // {provider}
     },
     loginBasic:
     {
-        method: "POST",
+        method: methodType.POST,
         path: "/api/Auth/Login/Basic",
     },
     MFAMethods:
     {
-        method: "GET",
+        method: methodType.GET,
         path: "/api/Auth/MFA",
+    },
+    MFACheck:
+    {
+        method: methodType.POST,
+        path: "/api/Auth/MFA/", // {method}
     },
 
 

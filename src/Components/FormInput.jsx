@@ -7,7 +7,7 @@ import { consoleLog } from '../Services/DebugService';
 
 const FormInput = (
     {
-        InputType,
+        InputType ='text',
         placeholder,
         htmlFor,
         inputName,
@@ -97,7 +97,7 @@ const FormInput = (
                 {regex != null || extCompareValue != null ? validationIcons : <></>}
             </label>
             <input
-                type={InputType ?? 'text'}
+                type={InputType}
                 id={htmlFor}
                 ref={userRef}
                 autoComplete="off"

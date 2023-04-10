@@ -2,20 +2,20 @@ import {
     useState,
     PropTypes,
     Link,
-    useRef,
     config,
     FormPageLayout,
     registerPath,
     SendButton,
     Recaptcha,
     recoveryPath,
+    apiPath
 } from "./LoginPage-imports";
 
 import "../../Styles/LoginForm.css";
 import BasicAuth from './LoginPage-BasicAuth';
 import SocialAuth from './LoginPage-SocialAuth';
-import { consoleLog } from "../../Services/DebugService";
-import { useBasicAuthSubmit } from "./LoginPage-hooks";
+import { usePublicApi } from "../../Hooks/usePublicAPI";
+import { NotificationManager } from "react-notifications";
 
 const LoginForm = (
 {
@@ -25,59 +25,23 @@ const LoginForm = (
     const [loadMode, setLoadMode] = useState(false);       // proces ověřovaní dat
     const [capchaValid, setCapchaValid] = useState(false); // recaptcha check
     const [{basicValid, email, password}, setBasicForm] = useState({basicValid: false, email: "", password: ""});   // recaptcha check
+    const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 
-    const BasicAuthHook = useBasicAuthSubmit();
-    const handlSubmit = () =>
-    {
-        const isValid = basicValid && capchaValid;
-        BasicAuthHook(isValid, email, password, setOnSuccess, setLoadMode);
-    };
-
-    /*
-    // při stisku tlačítka
     const handlSubmit = async () =>
     {
-
-        if (!isValid)   // pokud vstupní pole jsou nevalidní
-        {
+        if (!(basicValid && capchaValid)) 
             NotificationManager.error("Nevalidní vstup");
-            return;
-        }
 
-        // proces zpracování
         setLoadMode(true);
-
-        const loginPath = apiPath.loginBasic.path;
-        const loginData = {
-            Password: password,
-            Login: email,
-            App: Hook
-        };
-        
-        try
-        {
-            const response = await PublicAPI.post(
-                loginPath,
-                JSON.stringify(loginData)
-            );
-
-            const token = response.data;
-            setOnSuccess(token);
-        }
-        catch (err)
-        {
-            var errTitle = "Nastala chyba při zpracování";
-            var errMessage = "...";
-            if (err == null) errMessage = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
-            else if (err.response?.status == 400) errMessage = "některý z uvedených parametrů je neplatný";
-            else errMessage = "Přihlášení se nezdařilo";
-
-            NotificationManager.error(errMessage, errTitle, 10000);
-            consoleLog("login form error: " + err);
-        }
-
+        const data = { Password: password, Login: email };
+        const errorMessage = "některý z uvedených parametrů je neplatný";
+        const errorTitle = "Nastala chyba při přihlášení";
+        const error = GenerateError(errorMessage, errorTitle);
+        const params = GenerateParams(apiPath.loginBasic, data);
+        const response = await SendRequest(params, error);
         setLoadMode(false);
-    }*/
+        if (response != undefined) setOnSuccess(response.data);
+    };
 
     const buttonText = "Přihlásit se";
     const RegisterText = "Nemáte účet?";

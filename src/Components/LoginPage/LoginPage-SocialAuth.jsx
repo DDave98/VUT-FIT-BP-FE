@@ -1,3 +1,5 @@
+import { generatePath } from "react-router-dom";
+import { usePublicApi } from "../../Hooks/usePublicAPI";
 import { consoleLog } from "../../Services/DebugService";
 import {
     PropTypes,
@@ -34,26 +36,17 @@ const SocialAuth = (
 }) =>
 {
     const [providers, setProviders] = useState([]);    // seznam providerů
+    const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 
     // funkce pro načtení seznamu providerů ze serveru
     const LoadProviders = async () =>
     {
-        try
-        {
-            const path = apiPath.allProviders;
-            const response = await PublicAPI.get(path);
-            return setProviders(response.data);
-        }
-        catch (err)
-        {
-            var errTitle = "Nastala chyba - " + err?.response.status;
-            var errMessage = "Nelze načíst seznam providerů";
-            if (err == null) errMessage += ", žádná odpověď od serveru, zkontrolujte prosím připojení.";
-
-            NotificationManager.error(errMessage, errTitle, 10000);
-            consoleLog("socialAuth form error: " + err);
-            return false;
-        }
+        const errorMessage = "Chyba při načístání";
+        const errorTitle = "Nelze načíst seznam providerů";
+        const error = GenerateError(errorMessage, errorTitle);
+        const params = generatePath(apiPath.allProviders);
+        const response = await SendRequest(params, error);
+        if(response != undefined) setProviders(response.data);
     }
 
     useEffect(() => 

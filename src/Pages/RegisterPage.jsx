@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import RegistrationForm from '../Components/RegistrationForm';
 import { confirmPath } from '../Constants/pagesPath';
 import { Navigate } from 'react-router-dom';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+
+// components
+import RegistrationForm from '../Components/RegistrationPage/RegistrationForm';
 
 const RegistrationPage = () =>
 {
     const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
+    const registrationComponent = <RegistrationForm setOnSuccess={setRegistrationSuccess} />
+    const confirmationComponent = <Navigate to={confirmPath}/>;
+
     return <>
         {
-            registrationSuccess ?
-                <Navigate to={confirmPath}/> :
-                <RegistrationForm
-                    setOnSuccess={setRegistrationSuccess}
-                />
+            registrationSuccess ? confirmationComponent : registrationComponent
         }
     </>
 };

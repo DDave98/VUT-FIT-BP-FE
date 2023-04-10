@@ -1,11 +1,10 @@
 import ReCAPTCHA from "react-google-recaptcha";
 import PropTypes from 'prop-types';
-import config from "../Constants/config.json";
-import { PublicAPI } from "../Services/AjaxService";
 import { useRef, useEffect } from 'react';
-import NotificationManager from "react-notifications/lib/NotificationManager";
 import "../Styles/Recaptcha.css";
-import { consoleLog } from "../Services/DebugService";
+import { ConsoleOut, consoleType } from "../Services/DebugService";
+import { usePublicApi } from "../Hooks/usePublicAPI";
+import { apiPath } from "../Constants/apiPath";
 
 const RecaptchaV2 = (
 {
@@ -17,26 +16,18 @@ const RecaptchaV2 = (
 {
 
     const recaptchaRef = useRef();
+    const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 
     const VerifyToken = async (token) =>
     {
-        try
-        {
-            const recaptchaPath = config.path.recaptcha + "?token=" + token;
-            const response = await PublicAPI.get(recaptchaPath);
-            return response.data;
-        }
-        catch (err)
-        {
-            var errTitle = "Nastala chyba při zpracování";
-            var errMessage = "...";
-            if (err == null) errMessage = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
-            else errMessage = "ověření se nezdařilo";
-
-            NotificationManager.error(errMessage, errTitle, 10000);
-            consoleLog("recaptcha form error: " + err);
-            return false;
-        }
+        const errorMessage = "chyba při ověření na serveru";
+        const errorTitle = "Recaptcha";
+        const urlParams = [token];
+        const error = GenerateError(errorMessage, errorTitle);
+        const params = GenerateParams(apiPath.recaptcha, null, urlParams);
+        const response = await SendRequest(params, error);
+        if(response != undefined) return response.data;
+        else return false;
     }
 
     const onChange = (value) =>
@@ -50,8 +41,7 @@ const RecaptchaV2 = (
 
     const onErrored = (err) =>
     {
-        NotificationManager.error("ReCAPTCHA: chyba");
-        consoleLog("ReCAPTCHA: " + err);
+        ConsoleOut(consoleType.error, "Recaptcha", err);
     }
 
     useEffect(()=>

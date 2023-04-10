@@ -1,15 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { loginPath } from '../../Constants/pagesPath';
-import { ConsoleOut, consoleType } from '../../Services/DebugService';
+import { usePublicApi } from '../../Hooks/usePublicAPI';
 import { FormInput } from '../FormInput';
 import FormPageLayout from '../FormPageLayout';
-import { PublicAPI } from '../LoginPage/LoginPage-imports';
-import { apiPath, NotificationManager } from '../ProfilePage/Profile-Import';
+import { apiPath } from '../ProfilePage/Profile-Import';
 import SendButton from '../SendButton';
 
 /**
- * @description komponenta zpracovávající MFA ověření
+ * komponenta zpracovávající MFA ověření
  * @returns formulář k vícefázovému ověření
  */
 const MfaForm = (
@@ -23,28 +20,20 @@ const MfaForm = (
 {
     const [code, setCode] = useState("");
     const [loadMode, setLoad] = useState(false);
-    
+    const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
+
+    // odeslání zadaného kódu na server
     const VerifyCode = async () =>
     {
-        try
-        {
-            setLoad(true);
-            const path = apiPath.MFACheck.path + mfaType;
-            const response = await PublicAPI.post(path, code);
-            ConsoleOut(consoleType.log, "MFAForm", "response: " + JSON.stringify(response.data));
-            setOnSuccess(response.data)
-        }
-        catch (error)
-        {
-            var errTitle = "2FA ověření";
-            var errMessage = "chybný kód nebo metoda"
-            if (error == null) errMessage = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
-            NotificationManager.error(errMessage, errTitle, 10000);
-        }
-        finally
-        {
-            setLoad(false);
-        }
+        setLoad(true);
+        const errorMessage = "chybný kód nebo metoda";
+        const errorTitle = "2FA ověření";
+        const urlParams = [mfaType];
+        const error = GenerateError(errorMessage, errorTitle);
+        const params = GenerateParams(apiPath.MFACheck, code, urlParams);
+        const response = await SendRequest(params, error);
+        setLoad(false);
+        if(response != undefined) setOnSuccess(response.data);
     }
 
     return (

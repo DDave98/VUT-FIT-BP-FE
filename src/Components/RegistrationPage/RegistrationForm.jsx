@@ -1,18 +1,21 @@
-import FormPageLayout from './FormPageLayout';
-import { loginPath, confirmPath } from "../Constants/pagesPath";
-import { FormInput } from './FormInput';
-import { FormPwdInputs } from './FormPwdInputs';
+import FormPageLayout from '../FormPageLayout';
+import { loginPath, confirmPath } from "../../Constants/pagesPath";
+import { FormInput } from '../FormInput';
+import { FormPwdInputs } from '../FormPwdInputs';
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { nameRegex, passwordRegex, emailRegex } from '../Constants/regex';
-import { PublicAPI } from '../Services/AjaxService';
-import config from "../Constants/config.json";
-import SendButton from './SendButton';
-import Recaptcha from './ReCAPTCHA';
-import { consoleLog } from '../Services/DebugService';
+import { nameRegex, passwordRegex, emailRegex } from '../../Constants/regex';
+import { PublicAPI } from '../../Services/AjaxService';
+import config from "../../Constants/config.json";
+import SendButton from '../SendButton';
+import Recaptcha from '../ReCAPTCHA';
+import { consoleLog } from '../../Services/DebugService';
+import { usePublicApi } from '../../Hooks/usePublicAPI';
+import { NotificationManager } from 'react-notifications';
+import { apiPath } from '../ProfilePage/Profile-Import';
 
-const RegistrationForm = ({setOnSuccess, setOnError}) =>
+const RegistrationForm = ({setOnSuccess}) =>
 {
     const userRef = useRef();
 
@@ -31,17 +34,20 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
     const [password, setPassword] = useState('');
     const [validPassword, setValidPassword] = useState(false);
 
+    const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
+
     const handlSubmit = async () => {
 
         if (!(validEmail && validName && validSurname && validPassword))
         {
-            setOnError("Nevalidní vstup");
+            NotificationManager.error("Jeden ze vstupů není vaidní", "Chyba při registraci");
             return;
         }
 
         setLoadMode(true);
-
-        const registrationPath = config.path.registration;
+        const errorMessage = "Nelze registrovat uživatele. Některá z dat jsou nevalidní nebo účet s takovým emailem již existuje.";
+        const errorHeader = "Registrace uživatele";
+        const error = GenerateError(errorMessage, errorHeader);
         const registrationData = {
             Name: name,
             Surname: surname,
@@ -49,26 +55,10 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
             Password: password,
             Hook: window.location.href + "/" + confirmPath
         }
-
-        try
-        {
-            const response = await PublicAPI.post(
-                registrationPath,
-                JSON.stringify(registrationData)
-            );
-            consoleLog("response: " + response.data, response.status);
-            setOnSuccess(response.data);
-        }
-        catch (err)
-        {
-            if (err == null) setOnError("žádná odpověď od serveru, zkontrolujte prosím připojení.", "nastala chyba");
-            else if (err.response?.status == 409) setOnError(err.response.data, "");
-            else if (err.response?.status == 400) setOnError("některý z uvedených parametrů je neplatný", "");
-            else setOnError("Registrace se nezdařila", "nastala chyba");
-            consoleLog("registration form error: " + err);
-        }
-
+        const params = GenerateParams(apiPath.registration, registrationData);
+        const response = await SendRequest(params, error);
         setLoadMode(false);
+        if(response != undefined) setOnSuccess(response.data);
     }
 
     const instr = "Minimální délka 4 znaky. Mělo by začínat písmenem. Písmena, číslice, podtržítka, pomlčky jsou povolené.";
@@ -76,6 +66,7 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
     const pwdInstr = "Heslo musí obsahovat malé a velké písmena, číslici, speciální znak. Minimální délka je 8 znaků. Povolené speciální znaky jsou !@#$%"
     const pwd2Instr='Hesla se musí shodovat'
 
+    const recapchaVisible = validName && validSurname && validEmail && validPassword;
     const sendButtonDisabled = !validName || !validSurname || !validEmail || !validPassword || !reValid;
 
     return <>
@@ -126,6 +117,7 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
             <Recaptcha
                 siteKey={config.RecaptchaKey}
                 isValid={setReValid}
+                visible={recapchaVisible}
             />
             <SendButton 
                 disabled={sendButtonDisabled}
@@ -148,7 +140,6 @@ const RegistrationForm = ({setOnSuccess, setOnError}) =>
 RegistrationForm.propTypes = 
 {
     setOnSuccess: PropTypes.func.isRequired,
-    setOnError: PropTypes.func.isRequired,
 }
 
 export default RegistrationForm;

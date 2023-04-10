@@ -2,6 +2,7 @@
  * tato koponenta představuje ikonu
  */
 import useOAuth2 from "../../Hooks/useOAuth2";
+import { usePublicApi } from "../../Hooks/usePublicAPI";
 import { consoleLog } from "../../Services/DebugService";
 import "../../Styles/SocialIcon.css";
 import { useSSOAuthSubmit } from "./LoginPage-hooks";
@@ -19,13 +20,20 @@ const SocialIcon = (
     setLoadMode, onSuccess
 }) =>
 {
-    const SSOAuthHook = useSSOAuthSubmit();
+    const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
+
 
     // v případě úspěšného přihlášení
-    const CheckCode = async (code) =>
+    const CheckCode = async (code) => // předělat hook tak, aby vracel hodnotu a nevolal další metodu
     {
-        const token = await SSOAuthHook(code, name);
-        onSuccess(token);
+        const token = JSON.stringify(code);
+        const errorMessage = "Přihlášení se nezdařilo";
+        const errorTitle = "Ověření OAuth SSO";
+        const urlParams = [name];
+        const error = GenerateError(errorMessage, errorTitle);
+        const params = GenerateParams(apiPath.loginSSO, token, urlParams);
+        const response = await SendRequest(params, error);
+        if(response != undefined) onSuccess(response.data);
     }
 
     // v případě neúspěšného příhlášení
@@ -34,7 +42,7 @@ const SocialIcon = (
         NotificationManager.error(err, "Chyba při přihlašování", 10000);
     }
 
-    // ověření uživatele
+    // start: ověření uživatele
     const handleAuthorize = async () =>
     {
         setLoadMode(true);

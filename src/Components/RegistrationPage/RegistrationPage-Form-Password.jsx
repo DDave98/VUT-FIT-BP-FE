@@ -1,0 +1,1 @@
+// strana x procesu registrace - heslo -> udělat check list

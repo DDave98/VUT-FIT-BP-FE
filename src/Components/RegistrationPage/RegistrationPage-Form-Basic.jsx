@@ -1,0 +1,1 @@
+/// strana x postupu registrace - email, jméno, příjmení

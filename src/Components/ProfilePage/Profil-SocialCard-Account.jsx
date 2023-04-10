@@ -20,14 +20,10 @@ const ProfilSocialCardAccout = ({
 }) =>
 {
 
-    const {
-        providerApi, 
-        providerCid, 
-        providerScope, 
-        providerName,
-        isConnected
-    } = data;
+    const {providerApi, providerCid, providerScope, providerName, isConnected } = data;
     const [connected, setConnected] = useState(isConnected);
+    
+    // const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 
     const handlError = (message, header) => 
     {

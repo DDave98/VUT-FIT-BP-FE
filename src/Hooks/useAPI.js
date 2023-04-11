@@ -1,22 +1,22 @@
-import { NotificationManager } from "react-notifications";
-import { methodType } from "../Constants/apiPath";
-import { 
-    GenerateError as ErrGen, 
-    GenerateParams as ParamGen,
-    PublicAPI 
-} from "../Services/AjaxService";
-import { ConsoleOut, consoleType } from "../Services/DebugService";
-
-export const usePublicApi = () =>
+/*
+const useAPI = () =>
 {
     const GenerateError = ErrGen;
     const GenerateParams = ParamGen;
+    const Logout = useLogout;
 
     const SendRequest = async (param, errMsg) =>
     {
-        const {path, method, body, headers} = param;
+        const {path, method, body, headers, isPrivate} = param;
         const {errorMessage, errorHeader} = errMsg;
+
         var response = null;
+
+        if (isPrivate)
+        {
+            var token = GetFromStorage(accessTokenTag);
+            headers.Authorization = `Bearer ${token}`
+        }
 
         try
         {
@@ -47,12 +47,14 @@ export const usePublicApi = () =>
         catch (error)
         {
             if (error == null) errorMessage = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
+            if(error?.response?.status === 401) errorMessage = "Uživatel není autorizovaný.";
             NotificationManager.error(errorMessage, errorHeader, 10000);
             ConsoleOut(consoleType.error, "usePublicApi", "error: " + JSON.stringify(error));
+            Logout();
         }
 
         return response;
     }
 
     return [SendRequest, GenerateParams, GenerateError];
-}
+}*/

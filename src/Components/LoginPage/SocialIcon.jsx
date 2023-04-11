@@ -3,9 +3,7 @@
  */
 import useOAuth2 from "../../Hooks/useOAuth2";
 import { usePublicApi } from "../../Hooks/usePublicAPI";
-import { consoleLog } from "../../Services/DebugService";
 import "../../Styles/SocialIcon.css";
-import { useSSOAuthSubmit } from "./LoginPage-hooks";
 
 import {
     PropTypes,

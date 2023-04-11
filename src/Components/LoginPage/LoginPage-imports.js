@@ -23,7 +23,6 @@ import SendButton from '../SendButton';
 import { recoveryPath, registerPath } from "../../Constants/pagesPath";
 import config from "../../Constants/config.json";
 import { emailRegex, passwordRegex } from '../../Constants/regex';
-import SocialIconPanel from '../SocialIconPanel';
 import { apiPath } from '../ProfilePage/Profile-Import';
 import { providerTag } from '../../Constants/storageTag';
 
@@ -49,6 +48,5 @@ export {
     config,
     emailRegex,
     passwordRegex,
-    SocialIconPanel,
     apiPath,
 };

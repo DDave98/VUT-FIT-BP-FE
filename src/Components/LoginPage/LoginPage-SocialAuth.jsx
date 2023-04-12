@@ -11,6 +11,7 @@ import {
     BreakLine
 } from "./LoginPage-imports";
 import SocialIcon from "./SocialIcon";
+import "../../Styles/LoginPage/LoginPage-SocialAuth.css";
 
 const GetLogoByName = (name) =>
 {
@@ -44,7 +45,7 @@ const SocialAuth = (
         const errorMessage = "Chyba při načístání";
         const errorTitle = "Nelze načíst seznam providerů";
         const error = GenerateError(errorMessage, errorTitle);
-        const params = generatePath(apiPath.allProviders);
+        const params = GenerateParams(apiPath.allProviders);
         const response = await SendRequest(params, error);
         if(response != undefined) setProviders(response.data);
     }

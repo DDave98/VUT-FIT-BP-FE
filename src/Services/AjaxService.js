@@ -44,7 +44,7 @@ export const GenerateUrl = (path, params) =>
         newPath = newPath.replace(urlParamRegex, param);
     });
 
-    ConsoleOut(consoleType.log, "GenerateUrl", "path:" + path + " url:" + newPath);
+    ConsoleOut(consoleType.log, "GenerateUrl", " url:" + newPath);
     return newPath;
 };
 
@@ -58,7 +58,7 @@ export const GenerateError = (message, title) =>
 {
     return {
         errorMessage: message,
-        errorTitle: title
+        errorHeader: title
     }
 }
 
@@ -78,6 +78,6 @@ export const GenerateParams = (apiPathObj, data = null, urlParams = null, header
         path: url,
         method: apiPathObj.method,
         headers: headers,
-        body: JSON.stringify(data)
+        body: data
     }
 }

@@ -129,9 +129,11 @@ const useOAuth2 = ({authEndpoint,clientId, scope, onError, onSuccess}) =>
 {
   const [{ loading, error }, setUI] = useState({ loading: false, error: null });
   const popupRef = useRef(null);
+  const CleanWindow = () => {cleanup(popupRef)};
 
   const authorize = async () => 
   {
+    var authCode = "";
     try 
     {
       // 1. Init
@@ -146,25 +148,23 @@ const useOAuth2 = ({authEndpoint,clientId, scope, onError, onSuccess}) =>
       popupRef.current = openPopup(url);
 
       // 4. get code from window
-      const authCode = await waitForAuthCode(popupRef, authCodeTag);
+      authCode = await waitForAuthCode(popupRef, authCodeTag);
       consoleLog("useOAuth.js | autorize | code: "+ authCode);
       setUI({loading: false, error: null});
-      await onSuccess(authCode);
     } 
     catch (err) 
     {
       consoleLog("useOAuth.js | autorize | popuperror: " + err);
       setUI({loading: false, error: err});
-      onError(error);
     }
     finally
     {
-      // zavření okna
-      cleanup(popupRef);
+      // zavření okna -> cleanup(popupRef); zavoláse po ověření se serverem
+      return authCode;
     } 
   };
 
-  return [authorize, loading];
+  return [authorize, loading, CleanWindow];
 };
 
 export default useOAuth2;

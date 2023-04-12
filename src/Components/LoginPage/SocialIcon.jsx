@@ -3,6 +3,7 @@
  */
 import useOAuth2 from "../../Hooks/useOAuth2";
 import { usePublicApi } from "../../Hooks/usePublicAPI";
+import { ConsoleOut, consoleType } from "../../Services/DebugService";
 import "../../Styles/SocialIcon.css";
 
 import {
@@ -19,44 +20,51 @@ const SocialIcon = (
 }) =>
 {
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
-
+    const [authorize, loading, CleanWindow] = useOAuth2(
+    {
+        authEndpoint: api, 
+        tokenEndpoint: apiPath.checkProviderCode + name,
+        clientId: cid,
+        scope: scope,
+    });
 
     // v případě úspěšného přihlášení
     const CheckCode = async (code) => // předělat hook tak, aby vracel hodnotu a nevolal další metodu
     {
         const token = JSON.stringify(code);
         const errorMessage = "Přihlášení se nezdařilo";
-        const errorTitle = "Ověření OAuth SSO";
+        const errorHeader = "Ověření OAuth SSO";
         const urlParams = [name];
-        const error = GenerateError(errorMessage, errorTitle);
+        const error = GenerateError(errorMessage, errorHeader);
         const params = GenerateParams(apiPath.loginSSO, token, urlParams);
         const response = await SendRequest(params, error);
-        if(response != undefined) onSuccess(response.data);
+        return response;
     }
 
-    // v případě neúspěšného příhlášení
-    const handlError = (err) =>
+    // zavře okno a vypne stav načítání
+    const CleanAfterAuthorize = () =>
     {
-        NotificationManager.error(err, "Chyba při přihlašování", 10000);
+        CleanWindow();
+        setLoadMode(false);
     }
 
     // start: ověření uživatele
     const handleAuthorize = async () =>
     {
         setLoadMode(true);
-        await authorize();
-        setLoadMode(false);
-    };
+        const authcode = await authorize();
+        if (authcode == undefined)
+        { // kontrola získání ověřovacího kódu
+            ConsoleOut(consoleType.error, "SocialIcon", "nelze načíst ověřovací kód: " + name);
+            NotificationManager.error("Chyba při získání ověřovacího kódu", "Ověření " + name, 10000);
+            CleanAfterAuthorize();
+            return null;
+        } 
 
-    const [authorize, loading] = useOAuth2(
-    {
-        authEndpoint: api, 
-        tokenEndpoint: apiPath.checkProviderCode + name,
-        clientId: cid,
-        scope: scope,
-        onError: handlError,
-        onSuccess: CheckCode
-    });
+        const response = await CheckCode(authcode);
+        CleanAfterAuthorize();
+        if(response != undefined) onSuccess(response.data);
+    };
 
     return (
         <>

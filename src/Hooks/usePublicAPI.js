@@ -46,9 +46,9 @@ export const usePublicApi = () =>
         }
         catch (error)
         {
+            ConsoleOut(consoleType.error, "usePublicApi", "error: " + JSON.stringify(error));
             if (error == null) errorMessage = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
             NotificationManager.error(errorMessage, errorHeader, 10000);
-            ConsoleOut(consoleType.error, "usePublicApi", "error: " + JSON.stringify(error));
         }
 
         return response;

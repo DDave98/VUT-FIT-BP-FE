@@ -10,6 +10,12 @@ export const methodType =
     PATCH: "PATCH",
 }
 
+export const accessType =
+{
+    PUBLIC: "public",
+    PRIVATE: "private",
+}
+
 export const apiPath=
 {
     /* Provider path */
@@ -17,22 +23,26 @@ export const apiPath=
     {
         method: methodType.GET,
         path: "/api/Account",
+        access: accessType.PUBLIC,
     },
     usrProviders: 
     {
         method: methodType.GET,
         path: "/api/Account/user",
+        access: accessType.PRIVATE,
     },
     checkProviderCode: "/api/Account/",
     addUserAccountProvider: 
     {
         method: methodType.PUT,
         path: "/api/Account/", // {provider}
+        access: accessType.PRIVATE,
     },
     delUserAccountProvider: 
     {
         method: methodType.DELETE,
         path: "/api/Account/{provider}",
+        access: accessType.PRIVATE,
     },
 
     /* Auth path */
@@ -68,6 +78,16 @@ export const apiPath=
     {
         method: methodType.POST,
         path: "/api/Auth/MFA/{method}",
+    },
+    GAgenerate:
+    {
+        method: methodType.POST,
+        path: "/api/Auth/MFA/GA/GenerateQR",
+    },
+    GAverifi:
+    {
+        method: methodType.POST,
+        path: "/api/Auth/MFA/GA/VerifiQR",
     },
 
 

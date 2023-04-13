@@ -14,7 +14,7 @@ const MfaForm = (
         setOnSuccess,
         onCancel,
         countdown,
-        mfaType
+        mfaRequest
     }
 ) =>
 {
@@ -28,9 +28,13 @@ const MfaForm = (
         setLoad(true);
         const errorMessage = "chybný kód nebo metoda";
         const errorTitle = "2FA ověření";
-        const urlParams = [mfaType];
+        const urlParams = [mfaRequest.type];
+        const body = JSON.stringify({
+            code: code, 
+            taskId: mfaRequest.taskId
+        });
         const error = GenerateError(errorMessage, errorTitle);
-        const params = GenerateParams(apiPath.MFACheck, code, urlParams);
+        const params = GenerateParams(apiPath.MFACheck, body, urlParams);
         const response = await SendRequest(params, error);
         setLoad(false);
         if(response != undefined) setOnSuccess(response.data);

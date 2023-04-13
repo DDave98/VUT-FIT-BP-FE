@@ -16,7 +16,7 @@ const LoginPage = () =>
     const { setAuth } = useAuth();
 
     const [changeForm, setChangeForm] = useState(false);
-    const [mfaType, setMfaType] = useState("");
+    const [mfaRequest, setMfaType] = useState({});
 
     const [count, startCountdown, stopCountdown] = useCountdownCall(200, () =>
     {
@@ -44,7 +44,7 @@ const LoginPage = () =>
         if(AccessTokenResponse.mfa == true)
         {
             ConsoleOut(consoleType.log, "LoginPage", "changeForm -> 2FA");
-            setMfaType(AccessTokenResponse.type);
+            setMfaType(AccessTokenResponse);
             startCountdown();
             setChangeForm(true);
         }
@@ -69,7 +69,7 @@ const LoginPage = () =>
     }
 
     const loginFormElement = <LoginForm setOnSuccess={setOnSuccess} formName={"Přihlášení"} />;
-    const mfaFormElement = <MfaForm setOnSuccess={setOnSuccess} countdown={count} mfaType={mfaType} onCancel={SetLoginDefault}/>;
+    const mfaFormElement = <MfaForm setOnSuccess={setOnSuccess} countdown={count} mfaRequest={mfaRequest} onCancel={SetLoginDefault}/>;
 
     return (
         <>

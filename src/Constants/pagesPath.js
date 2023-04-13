@@ -15,18 +15,18 @@ export const oauthCallbackPath =    "/OAuth/Callback";
 
 const pagePaths = 
 {
-    homePath,
-    loginPath,
-    notFoundPath,
-    appPath,
-    logPath,
-    profilePath,
-    settingPath,
-    userPath,
-    messagePath,
-    registerPath,
-    confirmPath,
-    recoveryPath,
-    oauthPath,
-    oauthCallbackPath
+    homePath:             "/",
+    loginPath:            "/login",
+    notFoundPath:         "/404",
+    appPath:              "/apps",
+    logPath:              "/logs",
+    profilePath:          "/profile",
+    settingPath:          "/setting",
+    userPath:             "/users",
+    messagePath:          "/messages",
+    registerPath:         "/registration",
+    confirmPath:          "confirm",
+    recoveryPath:         "/recovery",
+    oauthPath:            "/OAuth",
+    oauthCallbackPath:    "/OAuth/Callback",
 }

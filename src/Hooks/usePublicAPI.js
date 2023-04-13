@@ -17,25 +17,28 @@ export const usePublicApi = () =>
         const {path, method, body, headers} = param;
         const {errorMessage, errorHeader} = errMsg;
         var response = null;
+        const httpSetting = { 
+            headers: headers 
+        };
 
         try
         {
             switch (method)
             {
                 case methodType.GET:
-                    response = await PublicAPI.get(path, headers);
+                    response = await PublicAPI.get(path, httpSetting);
                     break;
 
                 case methodType.POST:
-                    response = await PublicAPI.post(path, body, headers);
+                    response = await PublicAPI.post(path, body, httpSetting);
                     break;
 
                 case methodType.PUT:
-                    response = await PublicAPI.put(path, body, headers);
+                    response = await PublicAPI.put(path, body, httpSetting);
                     break;
 
                 case methodType.DELETE:
-                    response = await PublicAPI.delete(path, headers);
+                    response = await PublicAPI.delete(path, httpSetting);
                     break;
 
                 default:

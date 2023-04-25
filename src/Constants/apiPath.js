@@ -101,6 +101,17 @@ export const apiPath=
     UpdateUser:     "/api/User",
     UploadPhoto:    "/api/User/Photo",
     GetPhoto:       "/api/User/Photo",
+
+    /* App path */
+    ApplicationPath:
+    {
+        Filters:
+        {
+            method: methodType.GET,
+            path: "/api/App/Filters",
+            access: accessType.PRIVATE,
+        },
+    }
 };
 
 export const setApiPathVar = (key, path, value) =>

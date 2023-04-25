@@ -1,0 +1,12 @@
+.DropDownSelect
+{
+    display: flex;
+    flex-direction: column;
+    width: clamp(50px, 100%, 200px);
+}
+
+.DropDownSelect label
+{
+    text-transform:capitalize;
+    margin-bottom: 0.5rem;
+}

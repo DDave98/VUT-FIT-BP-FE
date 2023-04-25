@@ -1,0 +1,44 @@
+/* -------------------------------------------------------- */
+/* table */
+
+.WindowTable
+{
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 65vh;
+  border: 1px solid #ddd;
+  font-size: 18px;
+  margin: 2vh 0vh;
+  background: white;
+}
+
+.WindowTable th, 
+.WindowTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+.WindowTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.WindowTable tr.WindowTableHeader, 
+.WindowTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+.col-10
+{
+    width: 10%;
+}
+
+.col-5
+{
+    width: 5%;
+}
+
+tr td:last-child:hover
+{
+  text-decoration: underline solid 1px black;
+  cursor: pointer;
+}

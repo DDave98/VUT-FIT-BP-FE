@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Dropdown from "../Components/Dropdown";
+import HomePageMain from "../Components/HomePage/HomePageMain";
 
 class HomePage extends React.Component
 {
@@ -11,6 +12,7 @@ class HomePage extends React.Component
                     <div className='filterPanel w-full p-10'>
                         <Dropdown />
                     </div>
+                    <HomePageMain />
                 </div>
         );
     }

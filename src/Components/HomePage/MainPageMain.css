@@ -1,0 +1,12 @@
+.MainPageContent
+{
+    padding: 3%;
+    margin-top: 40px;
+}
+
+.MainPageContent h2
+{
+    display: inline;
+    font-size: 2rem !important;
+    font-weight: bold;
+}

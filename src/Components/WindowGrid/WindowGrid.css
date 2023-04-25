@@ -1,0 +1,14 @@
+.WindowGrid
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2vw;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.WindowGrid-black
+{
+    
+}

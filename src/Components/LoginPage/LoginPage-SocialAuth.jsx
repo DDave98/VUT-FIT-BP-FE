@@ -45,7 +45,7 @@ const SocialAuth = (
         const errorMessage = "Chyba při načístání";
         const errorTitle = "Nelze načíst seznam providerů";
         const error = GenerateError(errorMessage, errorTitle);
-        const params = GenerateParams(apiPath.allProviders);
+        const params = GenerateParams(apiPath.providerPaths.allProviders);
         const response = await SendRequest(params, error);
         if(response != undefined) setProviders(response.data);
     }

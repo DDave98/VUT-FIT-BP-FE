@@ -1,0 +1,27 @@
+
+ul.StackOfItems
+{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    word-wrap: break-word;
+    width: 100%;
+}
+
+li.StackItem
+{
+    display: flex;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-radius: 0;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    padding: 0.75rem 1.25rem;
+    border-block: 1px solid rgba(0, 0, 0, 0.125);
+    width: 100%;
+}

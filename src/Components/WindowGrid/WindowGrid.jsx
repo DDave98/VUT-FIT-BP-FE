@@ -3,7 +3,7 @@ import "./WindowGrid.css";
 const WindowGrid = ({children}) =>
 {
     return (
-        <div class="WindowGrid">
+        <div className="WindowGrid">
             {children}
         </div>
     );

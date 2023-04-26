@@ -1,6 +1,6 @@
 import WindowGrid from "../WindowGrid/WindowGrid";
 import WindowGridElement from "../WindowGrid/WindowGridElement";
-import "./AppWGE.css";
+import "./AppWindowGrid.css";
 
 const AppWindowGrid = ({data, onClick}) => 
 {
@@ -39,7 +39,7 @@ const AppWindowGrid = ({data, onClick}) =>
 
                     {/* follow button */}
                     <div className="card-button">
-                        <button onClick={onClick}>více možností</button>
+                        <button onClick={() => onClick(obj.name)}>více možností</button>
                     </div>
                 </WindowGridElement>
             ))   

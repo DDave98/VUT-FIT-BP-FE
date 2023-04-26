@@ -3,7 +3,7 @@ import "./WindowGridElement.css";
 const WindowGridElement = ({children}) =>
 {
     return (
-        <div class="card">
+        <div className="card">
             {children}
         </div>
     );

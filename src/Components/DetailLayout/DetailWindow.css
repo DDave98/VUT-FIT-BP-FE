@@ -1,0 +1,12 @@
+.DetailWindow
+{
+    display: flex;
+    padding: 1rem;
+    width: 100%;
+    margin-top: 20px;
+    color: #1a202c;
+    text-align: left;
+    background-color: #fff;
+    padding-left: 5vh;
+    padding-right: 5vh;
+}

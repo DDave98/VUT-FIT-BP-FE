@@ -1,0 +1,11 @@
+.DetailWindowColumn
+{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    max-width: 100%;
+    margin-bottom: 1rem !important;
+    padding-right: 5vh;
+    padding-left: 8px;
+    gap: 5vh;
+}

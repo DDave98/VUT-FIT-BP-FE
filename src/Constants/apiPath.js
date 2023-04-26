@@ -19,18 +19,22 @@ export const accessType =
 export const apiPath=
 {
     /* Provider path */
-    allProviders:
+    providerPaths:
     {
-        method: methodType.GET,
-        path: "/api/Account",
-        access: accessType.PUBLIC,
+        usrProviders: 
+        {
+            method: methodType.GET,
+            path: "/api/Account/user",
+            access: accessType.PRIVATE,
+        },
+        allProviders:
+        {
+            method: methodType.GET,
+            path: "/api/Account",
+            access: accessType.PUBLIC,
+        },
     },
-    usrProviders: 
-    {
-        method: methodType.GET,
-        path: "/api/Account/user",
-        access: accessType.PRIVATE,
-    },
+
     checkProviderCode: "/api/Account/",
     addUserAccountProvider: 
     {

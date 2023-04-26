@@ -1,5 +1,4 @@
 import WindowTable from "../Tables/WindowTable";
-import "./AppWGE.css";
 
 const AppWindowTable = ({data, headers, onClick}) => 
 {
@@ -12,7 +11,7 @@ const AppWindowTable = ({data, headers, onClick}) =>
                     <td>{line.owner}</td>
                     <td>{line.visibility}</td>
                     <td>{line.users_cnt}</td>
-                    <td onClick={onClick}>
+                    <td onClick={() => onClick(line.name)}>
                         možnosti
                     </td>
                 </tr>

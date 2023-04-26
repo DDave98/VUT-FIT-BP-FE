@@ -1,0 +1,45 @@
+div.SocialProfileCheckBox
+{
+    margin-top: 0px;
+    font-size: 1rem;
+    margin-bottom: 0;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+    width: 100%;
+}
+    
+.SocialProfileCheckBox svg,
+.SocialProfileCheckBox img 
+{
+    margin-right: 1rem !important;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.SocialProfileCheckBox h6 
+{
+    margin-top: 0px;
+    font-size: 1rem;
+    margin-bottom: 0;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.SocialProfileCheckBox input
+{
+    display: inline-block !important;
+    background: green;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+}
+
+.SocialProfileCheckBox .CheckBox:hover
+{
+    background-color: #ccc;
+}

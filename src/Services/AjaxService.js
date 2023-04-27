@@ -78,6 +78,7 @@ export const GenerateParams = (apiPathObj, data = null, urlParams = null, header
         path: url,
         method: apiPathObj.method,
         headers: headers,
-        body: data
+        body: data,
+        access:  apiPathObj?.access
     }
 }

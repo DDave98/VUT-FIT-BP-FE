@@ -7,22 +7,19 @@ import SearchBar from "../Elements/SearchBar";
 import SortingSelect from "../Elements/SortingSelect/SortingSelect";
 import FilterWindow from "../Filters/FilterWindow";
 import PerPage from "../PerPage";
-import { accessTokenTag, apiPath, GetFromStorage } from "../ProfilePage/Profile-Import";
+import { apiPath } from "../ProfilePage/Profile-Import";
 
-const AppFilterWindow = () =>
+const AppFilterWindow = ({total=0, onFilterChange, onClick}) =>
 {
     const [filters, setFilters] = useState({colums:{}, types:{}, owners:{}});
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 
     const LoadFilters = async () =>
     {
-        var token = GetFromStorage(accessTokenTag);
-        const headers = {Authorization: `Bearer ${token}`};
-
         const errorMessage = "Chyba při načístání filtrů";
         const errorTitle = "Nelze načíst hodnoty pro filtrování";
         const error = GenerateError(errorMessage, errorTitle);
-        const params = GenerateParams(apiPath.ApplicationPath.Filters, null, null, headers);
+        const params = GenerateParams(apiPath.ApplicationPath.Filters);
         const response = await SendRequest(params, error);
         if(response != undefined) setFilters(response.data);
     }
@@ -63,7 +60,7 @@ const AppFilterWindow = () =>
                 
                 <div className="panel-bottom">
                     <div className="SearchCounter">
-                        počet výsledků: <p>150</p>
+                        počet výsledků: <p>{total}</p>
                     </div>
                     <PerPage />
                 </div>   

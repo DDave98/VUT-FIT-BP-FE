@@ -6,105 +6,52 @@ import AppWindowGrid from "../ApplicationPage/AppWindowGrid";
 import AppWindowTable from "../ApplicationPage/AppTable";
 import AppFilterWindow from "../ApplicationPage/AppFilter";
 import ButtonSecondary from "../Elements/Buttons/ButtonSecondary";
+import { usePublicApi } from '../../Hooks/usePublicAPI';
+import { apiPath } from '../ProfilePage/Profile-Import';
+import { useEffect } from 'react';
 
-const headers = [
-    {
-        name: "Jméno",
-        class: "col-10"
-    },
-    {
-        name: "Vlastník",
-        class: "col-10"
-    },
-    {
-        name: "Dostupnost",
-        class: "col-10"
-    },
-    {
-        name:  "Počet členů",
-        class: "col-10"
-    },
-    {
-        name:  " ",
-        class: "col-5"
-    }
-];
-
-const data = [
-    { 
-        name: "Aplikace 1",
-        owner: "Alfreds Futterkiste",
-        visibility: "soukromé", 
-        users_cnt: 50,
-    },
-    { 
-        name: "Aplikace 2",
-        owner: "Berglunds snabbkop",
-        visibility: "soukromé", 
-        users_cnt: 50,
-    },
-    { 
-        name: "Aplikace 3",
-        owner: "Koniglich Essen",
-        visibility: "soukromé", 
-        users_cnt: 50,
-    },
-    { 
-        name: "Aplikace 4",
-        owner: "Laughing Bacchus Winecellars",
-        visibility: "soukromé", 
-        users_cnt: 50,
-    },
-    { 
-        name: "Aplikace 5",
-        owner: "Magazzini Alimentari Riuniti",
-        visibility: "soukromé", 
-        users_cnt: 50,
-    },
-    { 
-        name: "Aplikace 6",
-        owner: "North South",
-        visibility: "soukromé", 
-        users_cnt: 50,
-    },
-    { 
-        name: "Aplikace 7",
-        owner: "Paris specialites",
-        visibility: "soukromé", 
-        users_cnt: 50,
-    },
-    { 
-        name: "Aplikace 8",
-        owner: "Paris specialites",
-        visibility: "soukromé", 
-        users_cnt: 50,
-    },
-    { 
-        name: "Aplikace 9",
-        owner: "Paris specialites",
-        visibility: "soukromé", 
-        users_cnt: 50,
-    },
-    { 
-        name: "Aplikace 10",
-        owner: "Paris specialites",
-        visibility: "veřejné", 
-        users_cnt: 50,
-    },
-];
-
-const totalPages = 20;
-
-// zobrazení všech aplikací
+// načtení listu aplikací se základním filterem
 const AppPageListView = (
 {
     showDetail,
     showNew
 }) =>
 {
+    const [{data, total, pages, headers}, setResponse] = useState({data:[], total: 0, pages: 0, headers: []});
+    const [loadMode, setLoadMode] = useState(false);
+
     const [showTable, setShowTable] = useState(true);
     const TableElement = <AppWindowTable data={data} headers={headers} onClick={showDetail}/>;
     const GridElement = <AppWindowGrid data={data} onClick={showDetail} />;
+    const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
+
+    const loadAppList = async () =>
+    {
+        setLoadMode(true);
+        // načíst všechny providery
+        const errorMessage = "Chyba při načístání záznamů";
+        const errorTitle = "Nelze načíst záznamy";
+        const error = GenerateError(errorMessage, errorTitle);
+        const params = GenerateParams(apiPath.ApplicationPath.List);
+        const response = await SendRequest(params, error);
+        if(response != undefined) 
+        {
+            setResponse(response.data);
+        }
+        setLoadMode(false);
+    }
+
+    const onPageChange = (num) =>
+    {
+        setLoadMode(true);
+        console.log(num);
+        setLoadMode(false);
+    }
+
+    useEffect(() => 
+    {
+        loadAppList();
+    }, []);
 
     return (
         <div className='UserPageListView'>
@@ -114,7 +61,7 @@ const AppPageListView = (
                 <ButtonSecondary text="Přidat Nový" onClick={showNew}/>
             </div>
 
-            <AppFilterWindow />
+            <AppFilterWindow total={total} onFilterChange={null} onClick={null} />
 
             {/* <!-- Table of content --> */}
             { showTable ? TableElement : GridElement }
@@ -125,7 +72,7 @@ const AppPageListView = (
                     
                     {/* <!-- pagination --> */}
 
-                    <Pagination totalPages={totalPages} />
+                    <Pagination totalPages={pages} onChange={onPageChange} disabled={loadMode}/>
                     
                     {/* <!-- show style --> */}
                     <div className="show-style">

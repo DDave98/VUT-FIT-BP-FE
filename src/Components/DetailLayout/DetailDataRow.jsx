@@ -1,10 +1,10 @@
-import "./DetailDataRow.css";
+import "./DetailRow.css";
 
 const DetailDataRow = ({header, children}) =>
 {
     return (
         <div className="DetailDataRow">
-            <h6>{header}</h6>
+            <h6 className="DetailDataRow">{header}</h6>
              {children}
         </div>
     );

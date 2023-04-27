@@ -7,9 +7,9 @@ const AppWindowGrid = ({data, onClick}) =>
     return (
         <WindowGrid>
         {
-            data.map((obj) =>
+            data.map((line, key) =>
             (
-                <WindowGridElement>
+                <WindowGridElement key={key}>
                     <div className="WGEHeader">
                         
                         {/* profile-image */}
@@ -18,28 +18,28 @@ const AppWindowGrid = ({data, onClick}) =>
                         </div>
 
                         {/* name */}
-                        <div className="card-name"><p>{obj.name}</p></div>
+                        <div className="card-name"><p>{line.name}</p></div>
                     </div>
                     <div className="WGEline">
                         <p className="WGEname">vlastník:</p>
-                        <p className="WGEvalue">{obj.owner}</p>
+                        <p className="WGEvalue">{line.owner.name + " " + line.owner.surname}</p>
                     </div>
                     <div className="WGEline">
                         <p className="WGEname">viditelnost:</p>
-                        <p className="WGEvalue">{obj.visibility}</p>
+                        <p className="WGEvalue">{line.isPublic ? "Veřejné" : "Soukromé"}</p>
                     </div>
                     <div className="WGEline">
                         <p className="WGEname">Počet členů:</p>
-                        <p className="WGEvalue">{obj.users_cnt}</p>
+                        <p className="WGEvalue">{"?"}</p>
                     </div>
                     <div className="WGEline">
-                        <p className="WGEname">Počet správců:</p>
-                        <p className="WGEvalue">#</p>
+                        <p className="WGEname">Typ aplikace:</p>
+                        <p className="WGEvalue">{line.type}</p>
                     </div>
 
                     {/* follow button */}
                     <div className="card-button">
-                        <button onClick={() => onClick(obj.name)}>více možností</button>
+                        <button onClick={() => onClick(line.name)}>více možností</button>
                     </div>
                 </WindowGridElement>
             ))   

@@ -7,7 +7,6 @@ import SendButton from '../SendButton';
 import { usePublicApi } from '../../Hooks/usePublicAPI';
 
 import "../../Styles/MFAForm/GoogleAuthenticator.css";
-import { accessTokenTag, GetFromStorage } from '../ProfilePage/Profile-Import';
 import { useCountdownCall } from '../../Hooks/useTimeout';
 
 const GoogleAuthenticator = () =>
@@ -32,13 +31,11 @@ const GoogleAuthenticator = () =>
     {
         e.preventDefault();
         setLoadingMode(true);
-        var token = GetFromStorage(accessTokenTag);
         const errorMessage = "Nelze ověřit kód";
         const errorTitle = "Google Authenticator";
-        const headers = {Authorization: `Bearer ${token}`};
         const error = GenerateError(errorMessage, errorTitle);
         const body = JSON.stringify(code);
-        const params = GenerateParams(apiPath.GAverifi, body, null, headers);
+        const params = GenerateParams(apiPath.GAverifi, body);
         const response = await SendRequest(params, error);
         setLoadingMode(false);
         if(response != undefined) 
@@ -54,10 +51,8 @@ const GoogleAuthenticator = () =>
     {
         const errorMessage = "Nelze načíst QR kód";
         const errorTitle = "Google Authenticator";
-        var token = GetFromStorage(accessTokenTag);
-        const headers = {Authorization: `Bearer ${token}`};
         const error = GenerateError(errorMessage, errorTitle);
-        const params = GenerateParams(apiPath.GAgenerate, null, null, headers);
+        const params = GenerateParams(apiPath.GAgenerate);
         const response = await SendRequest(params, error);
         if(response != undefined) 
         {

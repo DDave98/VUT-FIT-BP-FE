@@ -1,11 +1,13 @@
 import { NotificationManager } from "react-notifications";
-import { methodType } from "../Constants/apiPath";
+import { accessType, methodType } from "../Constants/apiPath";
+import { accessTokenTag } from "../Constants/storageTag";
 import { 
     GenerateError as ErrGen, 
     GenerateParams as ParamGen,
     PublicAPI 
 } from "../Services/AjaxService";
 import { ConsoleOut, consoleType } from "../Services/DebugService";
+import { GetFromStorage } from "../Services/StorageService";
 
 export const usePublicApi = () =>
 {
@@ -14,11 +16,20 @@ export const usePublicApi = () =>
 
     const SendRequest = async (param, errMsg) =>
     {
-        const {path, method, body, headers} = param;
+        var {path, method, body, headers, access} = param;
         const {errorMessage, errorHeader} = errMsg;
         var response = null;
+
+        headers = headers != undefined ? headers : {};
+
+        if (access == accessType.PRIVATE)
+        {
+            const token = GetFromStorage(accessTokenTag);
+            headers.Authorization = `Bearer ${token}`;
+        }
+
         const httpSetting = { 
-            headers: headers 
+            headers: headers
         };
 
         try

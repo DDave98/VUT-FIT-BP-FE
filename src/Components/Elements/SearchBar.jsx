@@ -12,7 +12,7 @@ const SearchBar = (
                 type="text"
                 id="myInput"
                 className="SearchBar"
-                onkeyup="FilterBySearch()"
+                onKeyUp="FilterBySearch()"
                 placeholder={placeholder}
                 title="Type in a name" />
         </>

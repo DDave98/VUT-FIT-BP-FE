@@ -7,11 +7,12 @@ const WindowTable = ({headers, children}) =>
         <table className="WindowTable">
             <tr className="WindowTableHeader">
             {
-                headers.map((col) =>
+                headers.map((col, key) =>
                 (
-                    <th className={col.class}>{col.name}</th>
+                    <th key={key} className="col-10">{col}</th>
                 ))
             }
+                <th className="col-10">Detail</th>
             </tr>
             {children}
         </table>

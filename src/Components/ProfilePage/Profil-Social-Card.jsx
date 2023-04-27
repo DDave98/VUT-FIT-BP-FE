@@ -2,8 +2,6 @@ import {
     useState, 
     useEffect,
     apiPath,
-    GetFromStorage,
-    accessTokenTag
 } from "./Profile-Import";
 
 import "../../Styles/ProfilePageStyles/Profile-SocialCard.css";
@@ -20,13 +18,10 @@ const ProfilSocialCard = ({toggleAccount}) =>
     const loadSocialAccount = async () =>
     {
         // načíst všechny providery + co má uživatel přihlášené
-        var token = GetFromStorage(accessTokenTag);
-        const headers = {Authorization: `Bearer ${token}`};
-
         const errorMessage = "Chyba při načístání providerů";
         const errorTitle = "Nelze načíst providery";
         const error = GenerateError(errorMessage, errorTitle);
-        const params = GenerateParams(apiPath.providerPaths.usrProviders, null, null, headers);
+        const params = GenerateParams(apiPath.providerPaths.usrProviders);
         const response = await SendRequest(params, error);
         if(response != undefined) setProviders(response.data);
     }

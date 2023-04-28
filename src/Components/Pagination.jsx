@@ -9,7 +9,7 @@ const Pagination = (
 {
     totalPages = 1,
     disabled = false,
-    actualPage = 1,
+    actualPage,
     onChange
 }) =>
 {
@@ -60,20 +60,21 @@ const Pagination = (
 
     useEffect(() => 
     {   // v případě změny stránky z default
-       setState(actualPage); 
+       setState(actualPage);
     }, []);
 
     return (
         <div className='PaginationContainer'>
             <div className='PaginationItem'>
                 <PaginationUi
-                    boundaryRange={0}
-                    siblingRange={2}
-                    defaultActivePage={1}
-                    ellipsisItem={null}
-                    totalPages={totalPages}
-                    onPageChange={handlChange}
-                    disabled={disabled}
+                    boundaryRange={0}           // viditelná na začátku a na konci
+                    siblingRange={2}            // počet možných sourozenců
+                    defaultActivePage={1}       // výchozí aktivní
+                    ellipsisItem={null}         //
+                    totalPages={totalPages}     // celkový poočet stran
+                    onPageChange={handlChange}  // změna stránky
+                    disabled={disabled}         // vypnutí
+                    activePage={actualPage}     // aktivní stránka
                 />
             </div>
         </div>

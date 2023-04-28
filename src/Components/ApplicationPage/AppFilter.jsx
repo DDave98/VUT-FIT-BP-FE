@@ -9,10 +9,14 @@ import FilterWindow from "../Filters/FilterWindow";
 import PerPage from "../PerPage";
 import { apiPath } from "../ProfilePage/Profile-Import";
 
-const AppFilterWindow = ({total=0, onPerPageChange, onClick}) =>
+const AppFilterWindow = ({total=0, onPerPageChange, onFilterChange, onClick}) =>
 {
-    const [filters, setFilters] = useState({colums:{}, types:{}, owners:{}});
-    const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
+    const [{colums, types, owners}, setFilters] = useState({colums:{}, types:{}, owners:{}});   // vstupní hodnoty pro filtery
+    const [searchInput, setSearchInput] = useState("");                         // výstup z vyhledávacího pole
+    const [showType, setShowType] = useState(0);                                // vztahy aplikace
+    const [{orderBy, isAsc}, setOrder] = useState({orderBy:0, isAsc:true});     // řazení záznamů
+    const [appType, SetAppType] = useState(0);                                  // typy aplikace
+    const [SendRequest, GenerateParams, GenerateError] = usePublicApi();        
 
     const LoadFilters = async () =>
     {
@@ -29,33 +33,39 @@ const AppFilterWindow = ({total=0, onPerPageChange, onClick}) =>
         LoadFilters(); // načtení filtrů
     }, []);
 
+    useEffect(() => 
+    {   // aktualizace dat v nadřazené komponentě
+        onFilterChange({searchInput, showType, orderBy, isAsc, appType});
+    }, [searchInput, showType, orderBy, isAsc, appType]);
+
     return (
         <>
             <FilterWindow> 
                 <div className="FlexRow">
-                    <SearchBar onChange={null} />
-                    <ButtonSecondary text="hledat" />
+                    <SearchBar onChange={setSearchInput} />
+                    <ButtonSecondary text="Aplikovat Filtry" onClick={onClick} />
                 </div>
                 <div className="sorting">
 
                     <SortingSelect 
-                        options={filters.colums}
-                        setSelected={null}
-                        setDirection={null} />
+                        options={colums}
+                        setSelected={() => {}}
+                        setDirection={null} 
+                    />
 
                     <DropDownSelect 
-                        options={filters.types}
+                        options={types}
                         label="Typ:"
-                        onSelectedChange={null}
+                        onSelectedChange={SetAppType}
                         name="AppTypeSelect"
-                        />
+                    />
 
                     <DropDownSelect 
-                        options={filters.owners}
+                        options={owners}
                         label="Aplikace:"
-                        onSelectedChange={null}
+                        onSelectedChange={() => {}}
                         name="AppSelect"
-                        />
+                    />
                 </div>
                 
                 <div className="panel-bottom">

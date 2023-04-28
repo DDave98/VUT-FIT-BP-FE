@@ -1,7 +1,8 @@
 
 const SearchBar = (
 {
-    onChange, 
+    onChange,
+    title = "zadejte hledaný řetězec",
     placeholder = "Hledat"
 }) =>
 {
@@ -12,9 +13,9 @@ const SearchBar = (
                 type="text"
                 id="myInput"
                 className="SearchBar"
-                onKeyUp="FilterBySearch()"
                 placeholder={placeholder}
-                title="Type in a name" />
+                title={title}
+                onChange={(e) => onChange(e.target.value)}/>
         </>
     );
 }

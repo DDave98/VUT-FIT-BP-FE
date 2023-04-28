@@ -19,6 +19,27 @@ const AppPageListView = (
 {
     const [{data, total, pages, headers}, setResponse] = useState({data:[], total: 0, pages: 0, headers: []});
     
+    // aktuální potvrzený a používaný filtr
+    const [actualFilters, setActualFilters] = useState({
+        "searchInput": "",
+        "showType": 0,
+        "orderBy": 0,
+        "orderByAsc": true,
+        "appType": 0,
+        "pageNum": 1,
+        "onPage": 10
+    });
+
+    // aktualizace nastavení parametru filtru z komponenty
+    const [{searchInput, showType, orderBy, isAsc, appType}, setFilters] = useState(
+    {
+        searchInput: "", 
+        showType: 0, 
+        orderBy: 0, 
+        isAsc: true, 
+        appType: 0
+    });
+    
     const [loadMode, setLoadMode] = useState(false);
     const [actualPage, setPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
@@ -41,18 +62,38 @@ const AppPageListView = (
         setLoadMode(false);
     }
 
-    const onPageChange = async () =>
+    const ApplyNewFilters = () =>
+    {
+        const filters = {
+            "searchInput": searchInput,
+            "showType": showType,
+            "orderBy": orderBy,
+            "orderByAsc": isAsc,
+            "appType": appType,
+            "pageNum": 1,
+            "onPage": perPage
+        };
+        setActualFilters(filters);
+    }
+
+    const ApplyFilters = () =>
+    {
+        const filters = {
+            "searchInput": searchInput,
+            "showType": showType,
+            "orderBy": orderBy,
+            "orderByAsc": isAsc,
+            "appType": appType,
+            "pageNum": actualPage,
+            "onPage": perPage
+        };
+        setActualFilters(filters);
+    }
+
+    const GetFiltredData = async () =>
     {   // změna stránky
         setLoadMode(true);
-        const data = {
-        "searchInput": "",
-        "showType": 0,
-        "orderBy": 0,
-        "orderByAsc": true,
-        "appType": 0,
-        "pageNum": actualPage,
-        "onPage": perPage
-        };
+        const data = actualFilters;
         const errorMessage = "Chyba při načístání záznamů, špatný filtr";
         const errorTitle = "Nelze načíst záznamy";
         const error = GenerateError(errorMessage, errorTitle);
@@ -64,7 +105,12 @@ const AppPageListView = (
 
     useEffect(() => 
     {
-        onPageChange();
+        if (headers.length > 0) GetFiltredData();
+    }, [actualFilters]);
+
+    useEffect(() => 
+    {
+        if (headers.length > 0) ApplyFilters();
     }, [actualPage, perPage]);
 
     useEffect(() => 
@@ -80,7 +126,7 @@ const AppPageListView = (
                 <ButtonSecondary text="Přidat Nový" onClick={showNew}/>
             </div>
 
-            <AppFilterWindow total={total} onClick={null} onPerPageChange={setPerPage} />
+            <AppFilterWindow total={total} onClick={ApplyNewFilters} onFilterChange={setFilters} onPerPageChange={setPerPage} />
 
             {/* <!-- Table of content --> */}
             { showTable ? TableElement : GridElement }
@@ -91,7 +137,12 @@ const AppPageListView = (
                     
                     {/* <!-- pagination --> */}
 
-                    <Pagination totalPages={pages} onChange={setPage} disabled={loadMode}/>
+                    <Pagination 
+                        totalPages={pages} 
+                        onChange={setPage} 
+                        disabled={loadMode}
+                        actualPage={actualFilters.pageNum}
+                    />
                     
                     {/* <!-- show style --> */}
                     <div className="show-style">

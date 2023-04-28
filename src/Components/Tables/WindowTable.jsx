@@ -5,16 +5,20 @@ const WindowTable = ({headers, children}) =>
 
     return (
         <table className="WindowTable">
-            <tr className="WindowTableHeader">
-            {
-                headers.map((col, key) =>
-                (
-                    <th key={key} className="col-10">{col}</th>
-                ))
-            }
-                <th className="col-10">Detail</th>
-            </tr>
+            <thead>
+                <tr className="WindowTableHeader">
+                {
+                    headers.map((col, key) =>
+                    (
+                        <td key={key} className="col-10">{col}</td>
+                    ))
+                }
+                    <th className="col-10">Detail</th>
+                </tr>
+            </thead>
+            <tbody>
             {children}
+            </tbody>
         </table>
     );
 

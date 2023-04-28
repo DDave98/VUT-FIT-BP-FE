@@ -113,7 +113,7 @@ const UserPage = () =>
                     
                     {/* <!-- vztah k aplikaci --> */}
                     <div className="sorting-dropdown">
-                        <label for="cars">Aplikace:</label>
+                        <label htmlFor="cars">Aplikace:</label>
                         <select name="cars" id="cars">
                             {
                                 filters.apps.map((opt) => (
@@ -125,7 +125,7 @@ const UserPage = () =>
                     
                     {/* <!-- řazeni podle sloupce --> */}
                     <div className="sorting-dropdown">
-                        <label for="sort-col">řadit podle:</label>
+                        <label htmlFor="sort-col">řadit podle:</label>
                         <select name="sort-col" id="cars">
                             {
                                 filters.sort.map((opt) => (
@@ -137,7 +137,7 @@ const UserPage = () =>
                     
                     {/* <!-- směr řazení --> */}
                     <div className="sorting-dropdown">
-                        <label for="cars">směr řazení:</label>
+                        <label htmlFor="cars">směr řazení:</label>
                         <select name="cars" id="cars">
                             {
                                 filters.directions.map((opt) => (
@@ -148,7 +148,7 @@ const UserPage = () =>
                     </div>
                     
                     <div>
-                        <label for="">blokovaní</label>
+                        <label htmlFor="">blokovaní</label>
                         <input type="checkbox" />
                     </div>
                     </div>
@@ -205,7 +205,7 @@ const UserPage = () =>
 
             {/* puvodni filtrpanel 
             {<div className='filterPanel w-full p-10 bg-slate-100'>
-                <label for="cars">Aplikace:</label>
+                <label htmlFor="cars">Aplikace:</label>
                 <Dropdown />
             </div>} 
 

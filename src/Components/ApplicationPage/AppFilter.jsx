@@ -9,7 +9,7 @@ import FilterWindow from "../Filters/FilterWindow";
 import PerPage from "../PerPage";
 import { apiPath } from "../ProfilePage/Profile-Import";
 
-const AppFilterWindow = ({total=0, onFilterChange, onClick}) =>
+const AppFilterWindow = ({total=0, onPerPageChange, onClick}) =>
 {
     const [filters, setFilters] = useState({colums:{}, types:{}, owners:{}});
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
@@ -62,7 +62,7 @@ const AppFilterWindow = ({total=0, onFilterChange, onClick}) =>
                     <div className="SearchCounter">
                         počet výsledků: <p>{total}</p>
                     </div>
-                    <PerPage />
+                    <PerPage onChange={onPerPageChange} />
                 </div>   
             </FilterWindow>
         </>

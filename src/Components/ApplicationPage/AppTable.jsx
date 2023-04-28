@@ -5,6 +5,7 @@ const AppWindowTable = ({data, headers, onClick}) =>
     return (
         <WindowTable headers={headers}>
         {
+            
             data.map((line, key) => (
                 <tr key={key}>
                     <td>{line.name}</td>

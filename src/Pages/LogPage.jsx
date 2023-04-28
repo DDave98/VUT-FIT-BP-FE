@@ -146,7 +146,7 @@ const LogPage = () =>
                     <div className="sorting">
 
                         <div className="sorting-dropdown">
-                            <label for="cars">Typ:</label>
+                            <label htmlFor="cars">Typ:</label>
                             <div id="list1" className="dropdown-check-list" tabindex="100">
                                 <span className="anchor">Select</span>
                                 <ul className="items">
@@ -159,7 +159,7 @@ const LogPage = () =>
                     
                     {/* <!-- řazeni podle sloupce --> */}
                     <div className="sorting-dropdown">
-                        <label for="sort-col">řadit podle:</label>
+                        <label htmlFor="sort-col">řadit podle:</label>
                         <select name="sort-col" id="cars">
                             {
                                 filters.sort.map((opt) => (
@@ -171,7 +171,7 @@ const LogPage = () =>
                     
                     {/* <!-- směr řazení --> */}
                     <div className="sorting-dropdown">
-                        <label for="cars">směr řazení:</label>
+                        <label htmlFor="cars">směr řazení:</label>
                         <select name="cars" id="cars">
                             {
                                 filters.directions.map((opt) => (

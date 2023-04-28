@@ -1,38 +1,47 @@
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { useState } from 'react';
 //import "../Styles/PerPage.css";
 
 const PerPage = (
 {
-    disabled,
-
+    disabled = false,
+    onChange
 }) =>
 {
     const options = [
-        {key: 10, text: 10, value: 10},
-        {key: 30, text: 30, value: 30},
-        {key: 50, text: 50, value: 50},
-        {key: 90, text: 90, value: 90},
+        {text: "10", value: 10},
+        {text: "20", value: 20},
+        {text: "50", value: 50},
+        {text: "100", value: 90},
     ]
+
+    const [actualState, setState] = useState(10);
+
+
+    const handlChange = (e) =>
+    {
+        console.log(Number(e.target.value));
+        setState(Number(e.target.value));
+    }
+
+    useEffect(() => 
+    {
+        onChange(actualState);
+    }, [actualState]);
 
     return (
     <div className="sorting-dropdown">
-        {/*<div className='PerPageContainer w-full'>
-            {'Zobrazit na stránku: '}
-            <DropdownUI
-                compact
-                selection
-                options={options}
-                defaultValue={options[0].value}
-                disabled={disabled ?? false}
-            />
-    </div>*/}
-    <label for="cars">počet na stránku:</label>
-    <select name="cars" id="cars">
-        <option value="opel">10</option>
-        <option value="volvo">20</option>
-        <option value="saab">50</option>
-        <option value="saab">100</option>
-    </select>
+        <label htmlFor="cars">počet na stránku:</label>
+        <select name="cars" id="cars" value={actualState} onChange={handlChange}>
+        {
+            options.map((option) => (
+                <option  key={option.value}  value={option.value}>
+                    {option.text}
+                </option>
+            ))
+        }
+        </select>
     </div>
     )
 }

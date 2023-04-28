@@ -12,7 +12,7 @@ const DropDownSelect = (
         <>
             {/* <!-- řazeni podle typu --> */}
             <div className="DropDownSelect">
-            <label for={name}>{label}</label>
+            <label htmlFor={name}>{label}</label>
                 <select name={name} id="cars">
                     {
                         Object.keys(options).map((opt) => (

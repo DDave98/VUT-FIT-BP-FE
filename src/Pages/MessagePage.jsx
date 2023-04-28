@@ -136,7 +136,7 @@ const MessagePage = () =>
 
                     {/* <!-- řazeni podle sloupce --> */}
                     <div className="sorting-dropdown">
-                        <label for="sort-col">Zobrazit:</label>
+                        <label htmlFor="sort-col">Zobrazit:</label>
                         <select name="sort-col" id="cars">
                             <option className="" >vše </option>
                             <option className="" >Zobrazené </option>
@@ -146,7 +146,7 @@ const MessagePage = () =>
 
                         {/* <!-- řazeni podle sloupce --> */}
                         <div className="sorting-dropdown">
-                        <label for="sort-col">Typ zprávy:</label>
+                        <label htmlFor="sort-col">Typ zprávy:</label>
                             <select name="sort-col" id="cars">
                                 <option className="" >vše </option>
                                 <option className="" >Pozvánky</option>
@@ -157,7 +157,7 @@ const MessagePage = () =>
                     
                         {/* <!-- řazeni podle sloupce --> */}
                         <div className="sorting-dropdown">
-                            <label for="sort-col">řadit podle:</label>
+                            <label htmlFor="sort-col">řadit podle:</label>
                             <select name="sort-col" id="cars">
                                 {
                                     filters.sort.map((opt) => (
@@ -169,7 +169,7 @@ const MessagePage = () =>
                     
                         {/* <!-- směr řazení --> */}
                         <div className="sorting-dropdown">
-                            <label for="cars">směr řazení:</label>
+                            <label htmlFor="cars">směr řazení:</label>
                             <select name="cars" id="cars">
                                 {
                                     filters.directions.map((opt) => (

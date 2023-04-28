@@ -15,43 +15,48 @@ const Pagination = (
 {
     const [actualState, setState] = useState(1);
 
-    const setNewState = (newVal) =>
+    const checkState = (newVal) =>
     {
         if (newVal <= 0 || newVal > totalPages) 
         {
             console.error("Pagination | hodnota mimo rozsah:", newVal);
-            setState(1);
+            return false;
         }
-        else setState(newVal);
+        else return true;
     }
 
     const handlChange = (e) =>
     {
         switch(e.target.text)
         {
-            case '<': 
-                setNewState(actualState - 1);
+            case '⟨': 
+                if (checkState(actualState - 1))
+                    setState(actualState - 1);
                 break;
 
-            case "<<": 
-                setNewState(1);
+            case "«":
+                setState(1);
                 break;
 
-            case '>': 
-                setNewState(actualState + 1);
+            case '⟩': 
+                if (checkState(actualState + 1))
+                    setState(actualState + 1);
                 break;
                 
-            case ">>": 
-                setNewState(totalPages);
+            case "»": 
+                setState(totalPages);
                 break;
 
             default: // číslo
-                setNewState(Number(e.target.text));
+                setState(Number(e.target.text));
                 break;
         }
-
-        onChange(actualState);
     }
+
+    useEffect(() => 
+    {
+        onChange(actualState);
+    }, [actualState]);
 
     useEffect(() => 
     {   // v případě změny stránky z default

@@ -132,6 +132,12 @@ export const apiPath=
             method: methodType.GET,
             path: "/api/App/",
             access: accessType.PRIVATE,
+        },
+        FiltredList:
+        {
+            method: methodType.POST,
+            path: "/api/App/AppList",
+            access: accessType.PRIVATE,
         }
     }
 };

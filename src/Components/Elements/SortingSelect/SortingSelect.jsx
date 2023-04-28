@@ -8,7 +8,6 @@ const SortingSelect = (
     setDirection 
 }) =>
 {
-    console.log(options);
     return (
         <div className="SortingSelect">
             {/* <!-- řazeni podle sloupce --> */}

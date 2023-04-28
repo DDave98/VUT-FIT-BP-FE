@@ -18,7 +18,10 @@ const AppPageListView = (
 }) =>
 {
     const [{data, total, pages, headers}, setResponse] = useState({data:[], total: 0, pages: 0, headers: []});
+    
     const [loadMode, setLoadMode] = useState(false);
+    const [actualPage, setPage] = useState(1);
+    const [perPage, setPerPage] = useState(10);
 
     const [showTable, setShowTable] = useState(true);
     const TableElement = <AppWindowTable data={data} headers={headers} onClick={showDetail}/>;
@@ -34,19 +37,35 @@ const AppPageListView = (
         const error = GenerateError(errorMessage, errorTitle);
         const params = GenerateParams(apiPath.ApplicationPath.List);
         const response = await SendRequest(params, error);
-        if(response != undefined) 
-        {
-            setResponse(response.data);
-        }
+        if(response != undefined) setResponse(response.data);
         setLoadMode(false);
     }
 
-    const onPageChange = (num) =>
-    {
+    const onPageChange = async () =>
+    {   // změna stránky
         setLoadMode(true);
-        console.log(num);
+        const data = {
+        "searchInput": "",
+        "showType": 0,
+        "orderBy": 0,
+        "orderByAsc": true,
+        "appType": 0,
+        "pageNum": actualPage,
+        "onPage": perPage
+        };
+        const errorMessage = "Chyba při načístání záznamů, špatný filtr";
+        const errorTitle = "Nelze načíst záznamy";
+        const error = GenerateError(errorMessage, errorTitle);
+        const params = GenerateParams(apiPath.ApplicationPath.FiltredList, data);
+        const response = await SendRequest(params, error);
+        if(response != undefined)  setResponse(response.data);
         setLoadMode(false);
     }
+
+    useEffect(() => 
+    {
+        onPageChange();
+    }, [actualPage, perPage]);
 
     useEffect(() => 
     {
@@ -61,7 +80,7 @@ const AppPageListView = (
                 <ButtonSecondary text="Přidat Nový" onClick={showNew}/>
             </div>
 
-            <AppFilterWindow total={total} onFilterChange={null} onClick={null} />
+            <AppFilterWindow total={total} onClick={null} onPerPageChange={setPerPage} />
 
             {/* <!-- Table of content --> */}
             { showTable ? TableElement : GridElement }
@@ -72,7 +91,7 @@ const AppPageListView = (
                     
                     {/* <!-- pagination --> */}
 
-                    <Pagination totalPages={pages} onChange={onPageChange} disabled={loadMode}/>
+                    <Pagination totalPages={pages} onChange={setPage} disabled={loadMode}/>
                     
                     {/* <!-- show style --> */}
                     <div className="show-style">

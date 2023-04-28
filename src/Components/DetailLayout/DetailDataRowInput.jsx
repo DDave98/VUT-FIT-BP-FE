@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import DetailDataRow from "./DetailDataRow";
 import "./DetailRow.css";
 
-const DetailDataRowInput = ({header, value, required = false, editMode = false, onChange, expresion}) =>
+const DetailDataRowInput = (
+{
+    header, 
+    value, 
+    required = false, 
+    editMode = false, 
+    onChange, 
+    expresion
+}) =>
 {
     const [valid, setValid] = useState(true);
     const [state, setState] = useState("");
@@ -31,7 +39,9 @@ const DetailDataRowInput = ({header, value, required = false, editMode = false, 
     const editElement = <input 
         className={"DetailDataRowInput" + color} 
         type="text" value={state} 
-        onChange={handlChange} required={required} />
+        onChange={handlChange} 
+        required={required} 
+    />
 
     const showElement = <p className="DetailDataRowText">{value}</p>
     

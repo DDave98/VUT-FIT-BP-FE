@@ -69,7 +69,6 @@ const Pagination = (
                 <PaginationUi
                     boundaryRange={0}           // viditelná na začátku a na konci
                     siblingRange={2}            // počet možných sourozenců
-                    defaultActivePage={1}       // výchozí aktivní
                     ellipsisItem={null}         //
                     totalPages={totalPages}     // celkový poočet stran
                     onPageChange={handlChange}  // změna stránky

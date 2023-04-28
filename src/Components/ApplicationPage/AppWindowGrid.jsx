@@ -39,7 +39,7 @@ const AppWindowGrid = ({data, onClick}) =>
 
                     {/* follow button */}
                     <div className="card-button">
-                        <button onClick={() => onClick(line.name)}>více možností</button>
+                        <button onClick={() => onClick(line.id)}>více možností</button>
                     </div>
                 </WindowGridElement>
             ))   

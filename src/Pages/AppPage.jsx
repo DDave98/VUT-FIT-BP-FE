@@ -5,14 +5,14 @@ import AppPageNewView from "../Components/ApplicationPage/AppPage-NewView";
 
 const AppPage = () =>
 {
-    const [detail, setDetail] = useState({});
     const [view, setView] = useState(<></>);
     const [header, setHeader] = useState("");
+    const [detailId, setDetailId] = useState("");
 
-    const ShowDetailView = (Id) =>
+    const ShowDetailView = (appID) =>
     {
-        setView(detailView);
-        setHeader("Aplikace / " + Id);
+        setDetailId(appID);
+        console.log("detail of: ", appID);
     }
 
     const ShowListView = () =>
@@ -28,7 +28,7 @@ const AppPage = () =>
     }
 
     const listView = <AppPageListView showDetail={ShowDetailView} showNew={ShowNewView} />
-    const detailView = <AppPageDetailView returnBack={ShowListView} ></AppPageDetailView>;
+    const detailView = <AppPageDetailView returnBack={ShowListView} appID={detailId} />;
     const addNewView = <AppPageNewView returnBack={ShowListView} />;
 
     // 
@@ -36,6 +36,12 @@ const AppPage = () =>
     {
         ShowListView();
     }, []);
+
+    useEffect(() => 
+    {
+        setView(detailView);
+        setHeader("Aplikace / Detail");
+    }, [detailId]);
 
     return (
         <div className='AppPage Page'>

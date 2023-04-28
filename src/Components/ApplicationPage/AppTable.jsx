@@ -13,7 +13,7 @@ const AppWindowTable = ({data, headers, onClick}) =>
                     <td>{line.isPublic ? "Veřejné" : "Soukromé"}</td>
                     <td>{line.type}</td>
                     <td>{"?"}</td>
-                    <td onClick={() => onClick(line.name)}>
+                    <td onClick={() => onClick(line.id)}>
                         možnosti
                     </td>
                 </tr>

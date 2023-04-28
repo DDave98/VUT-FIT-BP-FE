@@ -113,31 +113,38 @@ export const apiPath=
         {
             method: methodType.GET,
             path: "/api/App/Filters",
-            access: accessType.PUBLIC,
+            access: accessType.PUBLIC
         },
         Types:
         {
             method: methodType.GET,
             path: "/api/App/Types",
-            access: accessType.PUBLIC,
+            access: accessType.PUBLIC
         },
         Add:
         {
             method: methodType.POST,
             path: "/api/App/",
-            access: accessType.PRIVATE,
+            access: accessType.PRIVATE
         },
         List:
         {
             method: methodType.GET,
             path: "/api/App/",
-            access: accessType.PRIVATE,
+            access: accessType.PRIVATE
         },
         FiltredList:
         {
             method: methodType.POST,
             path: "/api/App/AppList",
-            access: accessType.PRIVATE,
+            access: accessType.PRIVATE
+        },
+        Detail:
+        {
+            
+            method: methodType.GET,
+            path: "/api/App/{AId}",
+            access: accessType.PRIVATE
         }
     }
 };

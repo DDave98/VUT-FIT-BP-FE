@@ -14,7 +14,7 @@ const DropDownSelect = (
 
     const handlChange = (e) =>
     {
-        console.log(Number(e.target.value));
+        //console.log(Number(e.target.value));
         setState(Number(e.target.value));
     }
 

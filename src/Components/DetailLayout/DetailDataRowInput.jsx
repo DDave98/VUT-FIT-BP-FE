@@ -20,8 +20,7 @@ const DetailDataRowInput = (
     {
         var test = true;
         const val = e.target.value;
-        setState(() => val);
-        onChange(() => val);
+        setState(val);
 
         if (expresion != undefined)
             test = expresion?.test(value);
@@ -32,15 +31,22 @@ const DetailDataRowInput = (
     }
 
     useEffect(() => 
+    {
+        if(onChange != null)
+            onChange(state);
+    }, [state]);
+
+    useEffect(() => 
     {   // prvnotní inicializace
         setState(value);
-    }, []);
+    }, [value]);
 
     const editElement = <input 
         className={"DetailDataRowInput" + color} 
-        type="text" value={state} 
+        type="text"
+        value={state} 
         onChange={handlChange} 
-        required={required} 
+        required={required}
     />
 
     const showElement = <p className="DetailDataRowText">{value}</p>

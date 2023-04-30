@@ -19,11 +19,14 @@ import { accessTokenTag, apiPath, GetFromStorage, NotificationManager } from "..
 
 const AppPageDetailView = ({returnBack, appID}) =>
 {
+    // nove hodnoty
     const detailObj = {"name":null,"ico":null,"clientId":null,"domain":null,"type":null,"isPublic":false,"ownerI":null}
     const [domena, setDomena] = useState("");
     const [name, setName] = useState("");
     const [visibility, setVisibility] = useState("veřejné");
     const [type, setType] = useState("");
+
+    // puvodni data
     const [photo, setPhoto] = useState(null);
     const [provider, setProvider] = useState([]);
     const [checkboxes, setCheckboxes] = useState(<></>);
@@ -80,6 +83,9 @@ const AppPageDetailView = ({returnBack, appID}) =>
         const params = GenerateParams(apiPath.ApplicationPath.Detail, null, urlParams);
         const response = await SendRequest(params, error);
         if(response != undefined) setDetail(response.data);
+        else {
+            returnBack();
+        }
     }
 
     const loadApplicationTypes = async () =>
@@ -89,18 +95,14 @@ const AppPageDetailView = ({returnBack, appID}) =>
         const error = GenerateError(errorMessage, errorTitle);
         const params = GenerateParams(apiPath.ApplicationPath.Types);
         const response = await SendRequest(params, error);
-        if(response != undefined)  
-        {
-            const values = Object.values(response.data);
-            setApptypes(values);
-            setType(values[0]);
-        }
+        if(response != undefined) setApptypes(Object.values(response.data));
     }
 
     useEffect(() => 
     {
         LoadApplicationProfile();
         loadApplicationTypes();
+
     }, []);
 
     useEffect(() => 
@@ -149,10 +151,11 @@ const AppPageDetailView = ({returnBack, appID}) =>
                             header="ClientId"
                             editMode={false}
                             value={detail.clientId}
+                            required
                         />
 
                         <DetailDataRowInput 
-                            value={detail}
+                            value={detail.name}
                             header="Jméno"
                             editMode={true}
                             onChange={setName}
@@ -164,14 +167,16 @@ const AppPageDetailView = ({returnBack, appID}) =>
                             editMode={true}
                             onChange={setDomena}
                             expresion={domainRegex}
+                            value={detail.domain}
                         />
 
                         <DetailDataRowSelect
+                            value={detail.type}
                             header="Typ"
                             editMode={true}
-                            options={AppTypes}
+                            options={Object.values(AppTypes)}
                             selected={detail.type}
-                            onChange={() => console.log()}
+                            onChange={setType}
                         />
 
                         <DetailDataRowSelect
@@ -179,7 +184,8 @@ const AppPageDetailView = ({returnBack, appID}) =>
                             editMode={true}
                             options={["veřejné", "soukromé"]}
                             selected={detail.isPublic ? "veřejné" : "soukromé"}
-                            onChange={() => console.log()}
+                            value={detail.isPublic ? "veřejné" : "soukromé"}
+                            onChange={setVisibility}
                         />
 
                         <DetailControlRow>

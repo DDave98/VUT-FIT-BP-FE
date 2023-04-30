@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import DetailDataRow from "./DetailDataRow";
 import "./DetailRow.css";
 
@@ -6,15 +8,34 @@ const DetailDataRowSelect = ({
     options, selected
 }) =>
 {
-    const optionElements = options?.map((a) => (
-        <option value={a} key={a}>{a}</option>
+    const [actualState, setState] = useState(0);
+
+    const handlChange = (e) =>
+    {
+        //console.log(Number(e.target.value));
+        setState(Number(e.target.value));
+    }
+
+    useEffect(() => 
+    {
+        onChange(actualState);
+    }, [actualState]);
+
+    useEffect(() => 
+    {
+        setState(value);
+    }, [value]);
+
+    const optionElements = Object.values(options).map((opt) => (
+        <option value={opt} key={opt}>{opt}</option>
     ));
 
     const editElement = (
     <select 
         className="DetailDataRowSelect" 
-        onChange={(e) => onChange(e.target.value)} 
-        select={selected}>
+        onChange={handlChange}
+        select={selected}
+        value={actualState}>
         {optionElements}
     </select>)
 

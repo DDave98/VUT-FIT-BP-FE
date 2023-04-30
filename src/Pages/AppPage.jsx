@@ -12,11 +12,13 @@ const AppPage = () =>
     const ShowDetailView = (appID) =>
     {
         setDetailId(appID);
+        setHeader("Aplikace / Detail");
         console.log("detail of: ", appID);
     }
 
     const ShowListView = () =>
     {
+        setDetailId("");
         setView(listView);
         setHeader("Aplikace");
     }
@@ -39,8 +41,10 @@ const AppPage = () =>
 
     useEffect(() => 
     {
-        setView(detailView);
-        setHeader("Aplikace / Detail");
+        if (detailId != "")
+        {
+            setView(detailView);
+        }
     }, [detailId]);
 
     return (

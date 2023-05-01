@@ -27,7 +27,7 @@ const AppPageDetailView = ({returnBack, appID}) =>
     const [type, setType] = useState("");
 
     // puvodni data
-    const [photo, setPhoto] = useState(null);
+    const [photo, setPhoto] = useState("");
     const [provider, setProvider] = useState([]);
     const [checkboxes, setCheckboxes] = useState(<></>);
     const [AppTypes, setApptypes] = useState([]);
@@ -43,7 +43,24 @@ const AppPageDetailView = ({returnBack, appID}) =>
 
     const Update = async () =>
     {
-
+        const urlParams = [appID];
+        const data = {
+            "name": name,
+            "Ico": photo,
+            "domain": domena,
+            "isPublic": visibility == "veřejné",
+            "type": type
+        }
+        const errorMessage = "Chyba při aktualizaci dat";
+        const errorTitle = "Nelze aktualizovat detail aplikace";
+        const error = GenerateError(errorMessage, errorTitle);
+        const params = GenerateParams(apiPath.ApplicationPath.Update, data, urlParams);
+        const response = await SendRequest(params, error);
+        if(response != undefined) 
+        {
+            setDetail(response.data);
+            NotificationManager.success("Záznam byl aktualizován");
+        }
     }
 
     const GenerateChaceboxes = () =>
@@ -192,9 +209,25 @@ const AppPageDetailView = ({returnBack, appID}) =>
                             <ButtonSecondary 
                                 text="Aktualizovat" 
                                 onClick={Update} 
-                        />
+                            />
+                            <ButtonSecondary 
+                                text="Zobrazit seznam uživatelů" 
+                                onClick={() => {}} 
+                            />
                         </DetailControlRow>
 
+                    </DetailWindowCard>
+                    <DetailWindowCard>
+                        <DetailControlRow>
+                            <ButtonSecondary 
+                                text="Nové připojení" 
+                                onClick={() => {}} 
+                            />
+                            <ButtonSecondary 
+                                text="Smazat Aplikaci" 
+                                onClick={() => {}} 
+                            />
+                        </DetailControlRow> 
                     </DetailWindowCard>
                 </DetailWindowColumn>
             </DetailWindow>

@@ -12,8 +12,7 @@ const DetailDataRowSelect = ({
 
     const handlChange = (e) =>
     {
-        //console.log(Number(e.target.value));
-        setState(Number(e.target.value));
+        setState(e.target.value);
     }
 
     useEffect(() => 

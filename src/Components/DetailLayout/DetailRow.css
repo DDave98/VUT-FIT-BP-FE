@@ -68,3 +68,8 @@ input:not([type='checkbox']).DetailDataRowInput:active
   color: #007bff;
   transition: color 0.5s, outline 0.5s;
 }
+
+.DetailControlRow
+{
+  gap: 10px;
+}

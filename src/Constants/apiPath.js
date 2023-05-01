@@ -145,7 +145,13 @@ export const apiPath=
             method: methodType.GET,
             path: "/api/App/{AId}",
             access: accessType.PRIVATE
-        }
+        },
+        Update:
+        {  
+            method: methodType.PUT,
+            path: "/api/App/{AId}",
+            access: accessType.PRIVATE
+        },
     }
 };
 

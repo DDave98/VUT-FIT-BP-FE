@@ -59,6 +59,7 @@ const AppPageDetailView = ({returnBack, appID}) =>
         if(response != undefined) 
         {
             setDetail(response.data);
+            setDetail(response.data);
             NotificationManager.success("Záznam byl aktualizován");
         }
     }
@@ -115,11 +116,47 @@ const AppPageDetailView = ({returnBack, appID}) =>
         if(response != undefined) setApptypes(Object.values(response.data));
     }
 
+    const loadSocialAccount = async () =>
+    {
+        // načíst všechny providery dané aplikace TODO
+        const errorMessage = "Chyba při načístání providerů";
+        const errorTitle = "Nelze načíst providery";
+        const error = GenerateError(errorMessage, errorTitle);
+        const params = GenerateParams(apiPath.providerPaths.allProviders);
+        const response = await SendRequest(params, error);
+        if(response != undefined) 
+        {
+            const providerList = response.data.map((o) => 
+            ({
+                name: o.name, 
+                allowed: true
+            }));
+    
+            setProvider(() => providerList);
+            GenerateChaceboxes();
+        }
+    }
+
+    const GenerateNewAppAccess = async () =>
+    {
+        const urlParams = [appID];
+        const errorMessage = "Chyba při generování nového přísupu";
+        const errorTitle = "Nelze vygenerovat nový přístup";
+        const error = GenerateError(errorMessage, errorTitle);
+        const params = GenerateParams(apiPath.ApplicationPath.Access, null, urlParams);
+        const response = await SendRequest(params, error);
+        if(response != undefined) 
+        {
+            console.log(response.data);
+            // zobrazit okno s údaji a poznamkou že po zavření ClientSecret nebude zobrazitelný
+        }
+    }
+
     useEffect(() => 
     {
         LoadApplicationProfile();
         loadApplicationTypes();
-
+        loadSocialAccount(); // toto smazat a načítat z profilu detailu
     }, []);
 
     useEffect(() => 
@@ -147,6 +184,7 @@ const AppPageDetailView = ({returnBack, appID}) =>
 
                     <DetailWindowCard>
                         <StackOfItems>
+                        Prototyp
                         {
                             checkboxes
                         }
@@ -168,7 +206,6 @@ const AppPageDetailView = ({returnBack, appID}) =>
                             header="ClientId"
                             editMode={false}
                             value={detail.clientId}
-                            required
                         />
 
                         <DetailDataRowInput 
@@ -185,6 +222,7 @@ const AppPageDetailView = ({returnBack, appID}) =>
                             onChange={setDomena}
                             expresion={domainRegex}
                             value={detail.domain}
+                            required
                         />
 
                         <DetailDataRowSelect
@@ -194,6 +232,7 @@ const AppPageDetailView = ({returnBack, appID}) =>
                             options={Object.values(AppTypes)}
                             selected={detail.type}
                             onChange={setType}
+                            required
                         />
 
                         <DetailDataRowSelect
@@ -203,6 +242,7 @@ const AppPageDetailView = ({returnBack, appID}) =>
                             selected={detail.isPublic ? "veřejné" : "soukromé"}
                             value={detail.isPublic ? "veřejné" : "soukromé"}
                             onChange={setVisibility}
+                            required
                         />
 
                         <DetailControlRow>
@@ -221,7 +261,7 @@ const AppPageDetailView = ({returnBack, appID}) =>
                         <DetailControlRow>
                             <ButtonSecondary 
                                 text="Nové připojení" 
-                                onClick={() => {}} 
+                                onClick={GenerateNewAppAccess} 
                             />
                             <ButtonSecondary 
                                 text="Smazat Aplikaci" 

@@ -152,6 +152,12 @@ export const apiPath=
             path: "/api/App/{AId}",
             access: accessType.PRIVATE
         },
+        Access:
+        {  
+            method: methodType.GET,
+            path: "/api/App/{AId}/Access",
+            access: accessType.PRIVATE
+        },
     }
 };
 

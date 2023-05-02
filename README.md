@@ -78,3 +78,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
     
 - použitý css framework: https://tailwindcss.com/
 - popup: https://www.npmjs.com/package/react-notifications
+
+# struktura projektu 
+(je možné že rozdělení projektu se v průběhu vývoje změní)
+
+- Assets      - audio, video, obrázky
+- Constants   - konstantní data, endpointy, regulérní výrazy
+- Styles      - styly komponent / stránek, atd.
+- Tests       - testy komponent
+- Components  - znovupoužitelné části stránky, elementy
+- Views       - specifické části stránek, podhledy, atd.
+- Pages       - jednotlivé stránky
+
+- Helpers     - malé pomocné funkce (transformace dat, ...)
+- Hooks       - vlastní funkcionální části (znovopoužitelné funkce v komponentách)
+- Services    - vetší funkce (např pro volání backendu, využívané v hooks)
+
+každá komponenta má vlastní složku, která obsahuje UI+logiku; styly css; testy

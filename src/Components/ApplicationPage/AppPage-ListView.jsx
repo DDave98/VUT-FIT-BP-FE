@@ -1,14 +1,13 @@
 
 import Pagination from '../Pagination';
 import ViewTypeSelect from '../ViewTypeSelect';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AppWindowGrid from "../ApplicationPage/AppWindowGrid";
 import AppWindowTable from "../ApplicationPage/AppTable";
 import AppFilterWindow from "../ApplicationPage/AppFilter";
 import ButtonSecondary from "../Elements/Buttons/ButtonSecondary";
 import { usePublicApi } from '../../Hooks/usePublicAPI';
 import { apiPath } from '../ProfilePage/Profile-Import';
-import { useEffect } from 'react';
 
 // načtení listu aplikací se základním filterem
 const AppPageListView = (
@@ -39,18 +38,37 @@ const AppPageListView = (
         isAsc: true, 
         appType: 0
     });
+
+        // přihlásit uživatele do aplikace
+        const handlJoinClick = async (AppId, UserId) =>
+        {
+            if (loadMode) return;
+    
+            setLoadMode(true);
+            const headers = [AppId]
+            const data = {"ApplicationId": AppId, "UserId": UserId};
+            const errorMessage = "Nastala chyba při přihlašování do aplikace";
+            const errorTitle = "Nelze se přidat do aplikace";
+            const error = GenerateError(errorMessage, errorTitle);
+            const params = GenerateParams(apiPath.AppUsrPath.add, data, headers);
+            const response = await SendRequest(params, error);
+            if(response != undefined) await GetFiltredData();
+            setLoadMode(false);
+        }
     
     const [loadMode, setLoadMode] = useState(false);
     const [actualPage, setPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
 
     const [showTable, setShowTable] = useState(true);
-    const TableElement = <AppWindowTable data={data} headers={headers} onClick={showDetail}/>;
+    const TableElement = <AppWindowTable data={data} headers={headers} onClick={showDetail} onJoin={handlJoinClick}/>;
     const GridElement = <AppWindowGrid data={data} onClick={showDetail} />;
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 
     const loadAppList = async () =>
     {
+        if(loadMode) return;
+
         setLoadMode(true);
         // načíst všechny providery
         const errorMessage = "Chyba při načístání záznamů";
@@ -119,7 +137,7 @@ const AppPageListView = (
     }, []);
 
     return (
-        <div className='UserPageListView'>
+        <div className='AppPageListView'>
             
             <div className="FlexSpaceBetween">
                 <div></div>

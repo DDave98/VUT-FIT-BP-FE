@@ -158,6 +158,16 @@ export const apiPath=
             path: "/api/App/{AId}/Access",
             access: accessType.PRIVATE
         },
+    },
+
+    AppUsrPath:
+    {
+        add:
+        {  
+            method: methodType.POST,
+            path: "/api/AppUser/{AppId}",
+            access: accessType.PRIVATE
+        },
     }
 };
 

@@ -42,3 +42,9 @@ tr td:last-child:hover
   text-decoration: underline solid 1px black;
   cursor: pointer;
 }
+
+.ActionTableCol
+{
+  display: flex;
+  flex-direction: column;
+}

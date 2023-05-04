@@ -33,7 +33,6 @@ const AppPage = () =>
     const detailView = <AppPageDetailView returnBack={ShowListView} appID={detailId} />;
     const addNewView = <AppPageNewView returnBack={ShowListView} />;
 
-    // 
     useEffect(() => 
     {
         ShowListView();

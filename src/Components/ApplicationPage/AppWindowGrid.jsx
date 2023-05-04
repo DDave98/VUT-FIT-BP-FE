@@ -30,16 +30,29 @@ const AppWindowGrid = ({data, onClick}) =>
                     </div>
                     <div className="WGEline">
                         <p className="WGEname">Počet členů:</p>
-                        <p className="WGEvalue">{"?"}</p>
+                        <p className="WGEvalue">{line.memberCount}</p>
                     </div>
                     <div className="WGEline">
                         <p className="WGEname">Typ aplikace:</p>
                         <p className="WGEvalue">{line.type}</p>
                     </div>
+                    <div className="WGEline">
+                        <p className="WGEname">Jsem členem:</p>
+                        <p className="WGEvalue">{line.member ? "Ano" : "Ne"}</p>
+                    </div>
 
                     {/* follow button */}
                     <div className="card-button">
-                        <button onClick={() => onClick(line.id)}>více možností</button>
+                        {
+                            line.canViewDetail ?
+                            <button onClick={() => onClick(line.id)}>Detail aplikace</button>
+                            : <></>
+                        }
+                        {
+                            line.isPublic && !line.canViewDetail ? 
+                            <button onClick={() => {/* přidání se do app */}} className="joinAppBtn">Připojit se</button>
+                            : <></>
+                        }
                     </div>
                 </WindowGridElement>
             ))   

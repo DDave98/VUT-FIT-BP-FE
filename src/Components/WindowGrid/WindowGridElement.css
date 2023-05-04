@@ -11,4 +11,12 @@
     border-radius: 1rem;
   }
   
-  
+.card-button .joinAppBtn
+{
+  background-color: #23942b;
+}
+
+.card-button .leaveAppBtn
+{
+  background-color: #942d23;
+}

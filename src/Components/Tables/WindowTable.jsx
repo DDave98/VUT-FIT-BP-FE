@@ -13,7 +13,7 @@ const WindowTable = ({headers, children}) =>
                         <td key={key} className="col-10">{col}</td>
                     ))
                 }
-                    <th className="col-10">Detail</th>
+                    <th className="col-10">Akce</th>
                 </tr>
             </thead>
             <tbody>

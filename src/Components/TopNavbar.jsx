@@ -43,7 +43,8 @@ const TopNavbar = () => {
             );
             setFirstName(response.data.name);
             setLastName(response.data.surname);
-            setPhoto('data:image/png;base64,'+ response.data.photo)
+            if (response.data.photo != "") 
+                setPhoto('data:image/png;base64,'+ response.data.photo)
         }
         catch (err)
         {

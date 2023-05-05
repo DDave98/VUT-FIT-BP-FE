@@ -5,8 +5,8 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import useLogout from '../Hooks/useLogout';
 
-const TopNavUserProfile = ({name, surname, photo}) => {
-
+const TopNavUserProfile = ({name, surname, photo}) => 
+{
     const [dropdownState, setDropdownState] = useState(false);
     
     const dropdownToggle = () =>

@@ -1,21 +1,19 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { domainRegex } from "../../Constants/regex";
 import { usePublicApi } from "../../Hooks/usePublicAPI";
 import { GetIcoByName } from "../../Services/GeneralFunctions";
 import DetailControlRow from "../DetailLayout/DetailControlRow";
-import DetailDataRow from "../DetailLayout/DetailDataRow";
 import DetailDataRowInput from "../DetailLayout/DetailDataRowInput";
 import DetailDataRowSelect from "../DetailLayout/DetailDataRowSelect";
 import DetailWindow from "../DetailLayout/DetailWindow";
 import DetailWindowCard from "../DetailLayout/DetailWindowCard";
 import DetailWindowColumn from "../DetailLayout/DetailWindowColumn";
 import ButtonSecondary from "../Elements/Buttons/ButtonSecondary";
-import DropDownSelect from "../Elements/DropDownSelect/DropDownSelect";
 import ProfilePhoto from "../Elements/ProfilePhoto/ProfilePhoto";
 import SocialProfileCheckBox from "../Elements/SocialProfileStatus/SocialProfileCheckBox";
 import { StackItem, StackOfItems } from "../Elements/StackItems/StackItems";
-import { accessTokenTag, apiPath, GetFromStorage, NotificationManager } from "../ProfilePage/Profile-Import";
+import { apiPath, NotificationManager } from "../ProfilePage/Profile-Import";
+import AppPageDetailWindowView from "./AppPageWindowView";
 
 const AppPageDetailView = ({returnBack, appID}) =>
 {
@@ -33,6 +31,10 @@ const AppPageDetailView = ({returnBack, appID}) =>
     const [AppTypes, setApptypes] = useState([]);
     const [detail, setDetail] = useState(detailObj);
 
+    // stav
+    const [modalState, setModalState] = useState(false);
+    const [{cid, secret}, setAccessData] = useState({cid: "", secret: ""})
+
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 
     const onClickHandler = () =>
@@ -40,6 +42,9 @@ const AppPageDetailView = ({returnBack, appID}) =>
         var val = window.confirm("Opravdu chcete opustit stánku?\nPřípadné změny nebudou uložené");
         if (val) returnBack();
     }
+
+    const closeModal = () => setModalState(false);
+    const openModal = () => setModalState(true);
 
     const Update = async () =>
     {
@@ -148,7 +153,11 @@ const AppPageDetailView = ({returnBack, appID}) =>
         if(response != undefined) 
         {
             console.log(response.data);
-            // zobrazit okno s údaji a poznamkou že po zavření ClientSecret nebude zobrazitelný
+            setAccessData({cid: response.data.clientId, secret: response.data.clientSecret});
+            openModal();
+            const newdetail = detail;
+            newdetail.clientId = response.data.clientId;
+            setDetail(newdetail);
         }
     }
 
@@ -271,6 +280,8 @@ const AppPageDetailView = ({returnBack, appID}) =>
                     </DetailWindowCard>
                 </DetailWindowColumn>
             </DetailWindow>
+
+            <AppPageDetailWindowView clientSec={secret} clientId={cid} show={modalState} onClose={closeModal}/>
         </div>
     );
 }

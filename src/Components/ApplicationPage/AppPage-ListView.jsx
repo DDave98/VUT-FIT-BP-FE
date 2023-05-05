@@ -40,20 +40,44 @@ const AppPageListView = (
     });
 
         // přihlásit uživatele do aplikace
-        const handlJoinClick = async (AppId, UserId) =>
+        const handlJoinClick = async (AppId) =>
         {
             if (loadMode) return;
     
             setLoadMode(true);
             const headers = [AppId]
-            const data = {"ApplicationId": AppId, "UserId": UserId};
-            const errorMessage = "Nastala chyba při přihlašování do aplikace";
+            const errorMessage = "Uživatel je členem aplikace";
             const errorTitle = "Nelze se přidat do aplikace";
             const error = GenerateError(errorMessage, errorTitle);
-            const params = GenerateParams(apiPath.AppUsrPath.add, data, headers);
+            const params = GenerateParams(apiPath.AppUsrPath.add, null, headers);
             const response = await SendRequest(params, error);
-            if(response != undefined) await GetFiltredData();
+            if(response != undefined) 
+            {
+                await GetFiltredData();
+                return true;
+            }
             setLoadMode(false);
+            return false;
+        }
+
+        const handlLeaveClick = async (AppId) =>
+        {
+            if (loadMode) return;
+    
+            setLoadMode(true);
+            const headers = [AppId]
+            const errorMessage = "Uživatel není členem aplikace";
+            const errorTitle = "Nelze odebrat uživatele do aplikace";
+            const error = GenerateError(errorMessage, errorTitle);
+            const params = GenerateParams(apiPath.AppUsrPath.leave, null, headers);
+            const response = await SendRequest(params, error);
+            if(response != undefined) 
+            {
+                await GetFiltredData();
+                return true;
+            }
+            setLoadMode(false);
+            return false;
         }
     
     const [loadMode, setLoadMode] = useState(false);
@@ -61,7 +85,7 @@ const AppPageListView = (
     const [perPage, setPerPage] = useState(10);
 
     const [showTable, setShowTable] = useState(true);
-    const TableElement = <AppWindowTable data={data} headers={headers} onClick={showDetail} onJoin={handlJoinClick}/>;
+    const TableElement = <AppWindowTable data={data} headers={headers} onClick={showDetail} onJoin={handlJoinClick} onLeave={handlLeaveClick}/>;
     const GridElement = <AppWindowGrid data={data} onClick={showDetail} />;
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 

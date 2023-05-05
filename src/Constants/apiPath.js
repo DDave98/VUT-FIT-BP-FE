@@ -168,6 +168,12 @@ export const apiPath=
             path: "/api/AppUser/{AppId}",
             access: accessType.PRIVATE
         },
+        leave:
+        {
+            method: methodType.DELETE,
+            path: "/api/AppUser/{AppId}",
+            access: accessType.PRIVATE
+        }
     }
 };
 

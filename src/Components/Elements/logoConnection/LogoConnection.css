@@ -1,0 +1,39 @@
+.LogoConenction
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+img.ConnectLogo
+{
+  width: min(30%, 100px);
+  border-radius: 100%;
+  border: 1px solid black;
+}
+
+.LogoConenction .ConnectionLine
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px dashed #000;
+  text-align: center;
+  height: 10px;
+  margin-bottom: 10px;
+  width: 70%;
+}
+
+.ConnectionLine img
+{
+    position: relative;
+    top: 5px;
+    width: min(10%, 50px);
+    border-radius: 100%;
+    background-color: white;
+}

@@ -174,6 +174,16 @@ export const apiPath=
             path: "/api/AppUser/{AppId}",
             access: accessType.PRIVATE
         }
+    },
+
+    OAuthPath:
+    {
+        Code:
+        {
+            method: methodType.POST,
+            path: "/api/OAuth/code",
+            access: accessType.PUBLIC,
+        },
     }
 };
 

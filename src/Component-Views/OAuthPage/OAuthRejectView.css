@@ -1,4 +1,17 @@
-.OAuthRejectView
+.OAuthRejectView h4.RejectHeader
 {
-    
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    margin-top: 3vh;
+    width: 100%;
+}
+
+.OAuthRejectView p.RejectDescription
+{
+    display: inline-block;
+    width: 100%;
+    color: #75736d;
+    margin-bottom: 30vh;
 }

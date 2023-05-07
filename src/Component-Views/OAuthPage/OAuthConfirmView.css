@@ -1,0 +1,16 @@
+.ConfirmIlustration
+{
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.OAuthRedirect
+{
+    text-align: center;
+}
+
+.OAuthRedirect p.OAuthRedirect
+{
+    font-weight: bold;
+}

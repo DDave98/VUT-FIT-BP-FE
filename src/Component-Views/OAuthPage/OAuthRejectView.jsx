@@ -1,14 +1,18 @@
-import { StackItem, StackOfItems } from "../../Components/Elements/StackItems/StackItems";
 import FormPageLayout from "../../Components/FormPageLayout";
+import "./OAuthRejectView.css";
 
-const OAuthRejectView = () =>
+const OAuthRejectView = ({
+    errCode = 0,
+    errType="",
+    message = "",
+}) =>
 {
+    const name = "Autorizační chyba"
     return (
         <div className="OAuthRejectView">
-            <FormPageLayout name="Autorizační chyba">
-                <StackOfItems>
-                    <StackItem>aaa</StackItem>
-                </StackOfItems>
+            <FormPageLayout name={name}>
+                <h4 className="RejectHeader">Chyba {errCode}: {errType}</h4>
+                <p className="RejectDescription">{message}</p>
             </FormPageLayout>
         </div>
     );

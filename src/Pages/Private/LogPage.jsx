@@ -1,11 +1,10 @@
-import {NotificationManager} from 'react-notifications';
-import "../Styles/LogPage.css";
-import Dropdown from '../Components/Dropdown';
-import Pagination from '../Components/Pagination';
-import PerPage from '../Components/PerPage';
-import TableView from '../Components/TableView';
-import ViewTypeSelect from '../Components/ViewTypeSelect';
-import ModalDetail from '../Components/Modal-Detail';
+import "../../Styles/LogPage.css";
+import Dropdown from '../../Components/Dropdown';
+import Pagination from '../../Components/Pagination';
+import PerPage from '../../Components/PerPage';
+import TableView from '../../Components/TableView';
+import ViewTypeSelect from '../../Components/ViewTypeSelect';
+import ModalDetail from '../../Components/Modal-Detail';
 import { useState } from 'react';
 
 const LogPage = () =>

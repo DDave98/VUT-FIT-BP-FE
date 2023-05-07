@@ -101,15 +101,19 @@ export const usePublicApi = () =>
                     break;
 
                 case 499: // Client Closed Request
-                    errTypemsg = "Data nejsou dostupná z právních důvodů.";
+                    errTypemsg = "Klient ukončil požadavek.";
                     break;
 
                 case 500: // Internal Server Error
-                    errTypemsg = "Data nejsou dostupná z právních důvodů.";
+                    errTypemsg = "Chyba na straně serveru.";
                     break;
 
                 case 501: // Not Implemented
-                    errTypemsg = "Data nejsou dostupná z právních důvodů.";
+                    errTypemsg = "Funkcionalita není implementovaná.";
+                    break;
+
+                case 0:
+                    errTypemsg = "Server neodpovídá.";
                     break;
 
                 default:
@@ -122,6 +126,10 @@ export const usePublicApi = () =>
             NotificationManager.warning(errTypemsg, errorHeader, 10000);
         }
 
+        // todo upravit a vracet v případě chyby taky něco 
+        // např { response: ..., error: true, responseCode: 404 }
+        // např { response: ..., error: false, responseCode: 200 }
+        
         return response;
     }
 

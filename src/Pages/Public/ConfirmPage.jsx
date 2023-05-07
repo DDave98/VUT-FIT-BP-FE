@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { loginPath } from "../Constants/pagesPath";
-import SuccessForm from '../Components/SuccessForm';
+import { loginPath } from "../../Constants/pagesPath";
+import SuccessForm from '../../Components/SuccessForm';
 import React from 'react';
 
 const ConfirmPage = ({

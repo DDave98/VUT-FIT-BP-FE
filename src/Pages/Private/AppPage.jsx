@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import AppPageDetailView from "../Components/ApplicationPage/AppPage-DetailView";
-import AppPageListView from "../Components/ApplicationPage/AppPage-ListView";
-import AppPageNewView from "../Components/ApplicationPage/AppPage-NewView";
+import AppPageDetailView from "../../Components/ApplicationPage/AppPage-DetailView";
+import AppPageListView from "../../Components/ApplicationPage/AppPage-ListView";
+import AppPageNewView from "../../Components/ApplicationPage/AppPage-NewView";
 
 const AppPage = () =>
 {

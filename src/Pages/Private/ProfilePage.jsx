@@ -1,24 +1,23 @@
-import "../Styles/ProfilePageStyles/ProfielPage.css"
-
+import "../../Styles/ProfilePageStyles/ProfielPage.css"
 
 import {NotificationManager} from 'react-notifications';
-import Collapse from "../Components/Elements/Collapse";
-import ModalWindow from "../Components/ModalWindow";
-import ProfilDataCard from "../Components/ProfilePage/Profil-Data-Card";
-import ProfilSocialCard from "../Components/ProfilePage/Profil-Social-Card";
-import ProfilProfilCard from "../Components/ProfilePage/Profil-Profil-Card";
-import ProfilModalPassword from "../Components/ProfilePage/Profile-Modal-Password";
+import Collapse from "../../Components/Elements/Collapse";
+import ModalWindow from "../../Components/ModalWindow";
+import ProfilDataCard from "../../Components/ProfilePage/Profil-Data-Card";
+import ProfilSocialCard from "../../Components/ProfilePage/Profil-Social-Card";
+import ProfilProfilCard from "../../Components/ProfilePage/Profil-Profil-Card";
+import ProfilModalPassword from "../../Components/ProfilePage/Profile-Modal-Password";
 
 import { useState, useEffect } from "react";
 
 // Prototyp
-import { GetFromStorage } from '../Services/StorageService';
-import { PrivateAPI } from '../Services/AjaxService';
-import { accessTokenTag } from '../Constants/storageTag';
-import config from "../Constants/config.json";
-import ProfilModalPhoto from "../Components/ProfilePage/Profile-Modal-Photo";
-import { consoleLog } from "../Services/DebugService";
-import GoogleAuthenticator from "../Components/MFAForm/GoogleAuthenticator";
+import { GetFromStorage } from '../../Services/StorageService';
+import { PrivateAPI } from '../../Services/AjaxService';
+import { accessTokenTag } from '../../Constants/storageTag';
+import config from "../../Constants/config.json";
+import ProfilModalPhoto from "../../Components/ProfilePage/Profile-Modal-Photo";
+import { consoleLog } from "../../Services/DebugService";
+import GoogleAuthenticator from "../../Components/MFAForm/GoogleAuthenticator";
 
 
 

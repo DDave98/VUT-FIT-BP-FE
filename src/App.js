@@ -1,5 +1,5 @@
 /* 
-    description: Tato stranka slouzi jako uvodni
+    description: Tato stranka slouzi jako hlavní
     autor: David Michalica
 */
 
@@ -9,7 +9,8 @@ import PublicPageLayout from './Components/PageLayout';
 import RequireAuth from './Components/RequireAuth';
 import { privateRoutes, publicRoutes } from "./Constants/pagesStructure";
 import { NotificationContainer } from 'react-notifications';
-import NotFoundPage from './Pages/404';
+import NotFoundPage from './Pages/Public/404';
+
 import 'semantic-ui-css/semantic.min.css'
 
 function App()

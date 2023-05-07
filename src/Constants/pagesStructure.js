@@ -1,17 +1,20 @@
-import HomePage from "../Pages/HomePage";
-import LoginPage from "../Pages/LoginPage";
-import NotFoundPage from "../Pages/404";
-import AppPage from "../Pages/AppPage";
-import LogPage from "../Pages/LogPage";
-import ProfilePage from "../Pages/ProfilePage";
-import SettingPage from "../Pages/SettingPage";
-import UserPage from "../Pages/UserPage";
-import RecoveryPage from "../Pages/RecoveryPage";
-import RegistrationPage from "../Pages/RegisterPage";
-import ConfirmPage from "../Pages/ConfirmPage";
-import MessagePage from "../Pages/MessagePage";
-import OAuthPage from "../Pages/OAuthPage";
-import { OAuthPopup } from "../Pages/OAuthWindow";
+// PRIVATE
+import HomePage from "../Pages/Private/HomePage";
+import AppPage from "../Pages/Private/AppPage";
+import LogPage from "../Pages/Private/LogPage";
+import ProfilePage from "../Pages/Private/ProfilePage";
+import SettingPage from "../Pages/Private/SettingPage";
+import UserPage from "../Pages/Private/UserPage";
+import MessagePage from "../Pages/Private/MessagePage";
+
+// PUBLIC
+import LoginPage from "../Pages/Public/LoginPage";
+import NotFoundPage from "../Pages/Public/404";
+import RecoveryPage from "../Pages/Public/RecoveryPage";
+import RegistrationPage from "../Pages/Public/RegisterPage";
+import ConfirmPage from "../Pages/Public/ConfirmPage";
+import OAuthPage from "../Pages/Public/OAuthPage";
+import { OAuthPopup } from "../Pages/Public/OAuthWindow";
 
 import * as path from "./pagesPath";
 

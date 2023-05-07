@@ -1,6 +1,6 @@
-import "../Styles/UserPage.css";
+import "../../Styles/UserPage.css";
 import { useState, useEffect } from 'react';
-import UserPageListView from "../Components/ViewsUserPage/UserPageListView";
+import UserPageListView from "../../Components/ViewsUserPage/UserPageListView";
 
 const UserPage = () =>
 {

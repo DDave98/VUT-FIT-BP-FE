@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Dropdown from "../Components/Dropdown";
-import HomePageMain from "../Components/HomePage/HomePageMain";
+import Dropdown from "../../Components/Dropdown";
+import HomePageMain from "../../Components/HomePage/HomePageMain";
 
 class HomePage extends React.Component
 {

@@ -1,12 +1,12 @@
-import LoginForm from '../Components/LoginPage/LoginPage-LoginForm';
+import LoginForm from '../../Components/LoginPage/LoginPage-LoginForm';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { SaveToStorage } from '../Services/StorageService';
-import useAuth from '../Hooks/useAuth';
-import { accessTokenTag } from '../Constants/storageTag';
+import { SaveToStorage } from '../../Services/StorageService';
+import useAuth from '../../Hooks/useAuth';
+import { accessTokenTag } from '../../Constants/storageTag';
 import { useState } from 'react';
-import MfaForm from '../Components/MFAForm/MFAForm';
-import { ConsoleOut, consoleType } from '../Services/DebugService';
-import { useCountdownCall } from '../Hooks/useTimeout';
+import MfaForm from '../../Components/MFAForm/MFAForm';
+import { ConsoleOut, consoleType } from '../../Services/DebugService';
+import { useCountdownCall } from '../../Hooks/useTimeout';
 import { NotificationManager } from 'react-notifications';
 
 const LoginPage = () =>
@@ -59,7 +59,7 @@ const LoginPage = () =>
             SaveToStorage(accessToken, accessTokenTag);
             //SaveToStorage(AccessTokenResponse.refreshToken, refreshTokenTag);
             navigate("/");
-            navigate(0);
+            navigate(0);    // opravit a toto pak smazat !!
         }
 
         else
@@ -68,7 +68,7 @@ const LoginPage = () =>
         }
     }
 
-    const loginFormElement = <LoginForm setOnSuccess={setOnSuccess} formName={"Přihlášení"} />;
+    const loginFormElement = <LoginForm setOnSuccess={setOnSuccess} formName={"Přihlášení do AuthFramework"} />;
     const mfaFormElement = <MfaForm setOnSuccess={setOnSuccess} countdown={count} mfaRequest={mfaRequest} onCancel={SetLoginDefault}/>;
 
     return (

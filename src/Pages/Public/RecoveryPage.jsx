@@ -1,10 +1,10 @@
-import RecoveryForm from "../Components/RecoveryForm";
+import RecoveryForm from "../../Components/RecoveryForm";
 import {NotificationManager} from 'react-notifications';
-import SuccessForm from "../Components/SuccessForm";
-import { loginPath } from "../Constants/pagesPath";
+import SuccessForm from "../../Components/SuccessForm";
+import { loginPath } from "../../Constants/pagesPath";
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import NewPasswordForm from "../Components/NewPasswordForm";
+import NewPasswordForm from "../../Components/NewPasswordForm";
 
 const RecoveryPage = () =>
 {

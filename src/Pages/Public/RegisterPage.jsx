@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { confirmPath } from '../Constants/pagesPath';
+import { confirmPath } from '../../Constants/pagesPath';
 import { Navigate } from 'react-router-dom';
 
 // components
-import RegistrationForm from '../Components/RegistrationPage/RegistrationForm';
+import RegistrationForm from '../../Components/RegistrationPage/RegistrationForm';
 
 const RegistrationPage = () =>
 {

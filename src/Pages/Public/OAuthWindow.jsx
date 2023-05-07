@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Loader from '../Components/Loader';
-import { authCodeTag } from '../Constants/storageTag';
-import { consoleLog } from '../Services/DebugService';
-import { SaveToStorage } from '../Services/StorageService';
-import "../Styles/OAuth/OAuthCallback.css";
+import Loader from '../../Components/Loader';
+import { authCodeTag } from '../../Constants/storageTag';
+import { consoleLog } from '../../Services/DebugService';
+import { SaveToStorage } from '../../Services/StorageService';
+import "../../Styles/OAuth/OAuthCallback.css";
 
 // slouží jako callback pro SSO
 // - komponenta zkusí načíst kód z url a uloží

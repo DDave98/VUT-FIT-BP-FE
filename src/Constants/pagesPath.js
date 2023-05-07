@@ -10,7 +10,7 @@ export const messagePath =          "/messages";
 export const registerPath =         "/registration";
 export const confirmPath =          "confirm";
 export const recoveryPath =         "/recovery";
-export const oauthPath =            "/OAuth";
+export const oauthPath =            "/OAuth/Authorize";
 export const oauthCallbackPath =    "/OAuth/Callback";
 
 const pagePaths = 

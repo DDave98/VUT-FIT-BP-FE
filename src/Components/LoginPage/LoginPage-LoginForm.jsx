@@ -1,30 +1,29 @@
 import {
     useState,
     PropTypes,
-    Link,
     config,
     FormPageLayout,
-    registerPath,
     SendButton,
     Recaptcha,
-    recoveryPath,
     apiPath
 } from "./LoginPage-imports";
 
-import "../../Styles/LoginForm.css";
 import BasicAuth from './LoginPage-BasicAuth';
 import SocialAuth from './LoginPage-SocialAuth';
 import { usePublicApi } from "../../Hooks/usePublicAPI";
 import { NotificationManager } from "react-notifications";
+import ForgetPasswordLink from "../FormsElements/ForgetPasswordLink";
+import LoginRegistrationLink from "../FormsElements/LoginRegistrationLink";
 
 const LoginForm = (
 {
-    setOnSuccess,
+    setOnSuccess = () => {},
+    formName = ""
 }) =>
 {
     const [loadMode, setLoadMode] = useState(false);       // proces ověřovaní dat
     const [capchaValid, setCapchaValid] = useState(false); // recaptcha check
-    const [{basicValid, email, password}, setBasicForm] = useState({basicValid: false, email: "", password: ""});   // recaptcha check
+    const [{basicValid, email, password}, setBasicForm] = useState({basicValid: false, email: "", password: ""});
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 
     const handlSubmit = async () =>
@@ -44,20 +43,12 @@ const LoginForm = (
     };
 
     const buttonText = "Přihlásit se";
-    const RegisterText = "Nemáte účet?";
-    const RegisterLinkText = "Registrujte se";
     
     return <>
-        <FormPageLayout handlSubmit={handlSubmit}>
+        <FormPageLayout handlSubmit={handlSubmit} name={formName}>
 
-            <BasicAuth 
-                setBasicForm={setBasicForm}
-                disabled={loadMode}
-            />
-
-            <Link to={recoveryPath} className='lostPasswod'>
-                Zapomněl jste heslo?
-            </Link>
+            <BasicAuth setBasicForm={setBasicForm} disabled={loadMode} />
+            <ForgetPasswordLink />
 
             {/* zobrazení pouze pokud je form připravený k odeslání */}
             <Recaptcha
@@ -79,12 +70,7 @@ const LoginForm = (
                 setLoadMode={setLoadMode}
             />
 
-            <p className='LoginRegistration'>
-                {RegisterText}
-                <Link to={registerPath}>
-                    {RegisterLinkText}
-                </Link>
-            </p>
+            <LoginRegistrationLink />
 
         </FormPageLayout>
     </>

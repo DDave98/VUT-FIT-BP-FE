@@ -5,8 +5,6 @@ import DropDownSelect from "../Elements/DropDownSelect/DropDownSelect";
 import SearchBar from "../Elements/SearchBar";
 import SortingSelect from "../Elements/SortingSelect/SortingSelect";
 import FilterWindow from "../Filters/FilterWindow";
-import PerPage from "../PerPage";
-import { apiPath } from "../ProfilePage/Profile-Import";
 
 
 const UserPageFilterPanel = ({total=0, onPerPageChange, onFilterChange, onClick}) =>

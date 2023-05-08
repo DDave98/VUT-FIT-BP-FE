@@ -8,6 +8,15 @@ import { accessTokenTag } from "../../Constants/storageTag";
 import { usePublicApi } from "../../Hooks/usePublicAPI";
 import { GetFromStorage } from "../../Services/StorageService";
 
+
+const GetUrlParams = () =>
+{
+    // získání parametrů z url
+    const queryString = window.location.search;             // get query string (?...)
+    const urlParams = new URLSearchParams(queryString);     // get url params as list
+    return urlParams;
+}
+
 const OAuthPage = () =>
 {
     // na začátku kontrolovat zda není dostupný token
@@ -18,23 +27,19 @@ const OAuthPage = () =>
     
     // na začátku načíst parametry v url
 
-    const errtypes = {1: "Invalid_request"};
+    const errtypes = {1: "Invalid_request", 2: "User_Not_Allowerd"};
     const p = {clientId: "", redirectUri: "", scope: "", state: "", responseType: ""};
     
     const missingMsg = "Vyžadovaný parametr chybí: ";
     const wrongMsg = "Parametr má nevalidní hodnotu: ";
     const expMsg = " Očekává se hodnota: ";
+    const usrMgs = "Uživatel nemá povolený přístup do této aplikace"
 
     const [OAuthResponse, setOAuthResponse] = useState({});
     const [{errType, errItem, errCode}, setError] = useState({});
-
-    const RejectView = <OAuthRejectView message={errItem} errType={errType} errCode={errCode}/>;
-    const ConfirmView = <OAuthConfirmView />;
-    const LoginFormView = <OAuthLoginForm />;
+    const [actualView, SetView] = useState(<></>);
 
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
-
-    const [actualView, SetView] = useState(<></>);
 
     const SendParams = async (urlParams) =>
     {
@@ -59,12 +64,23 @@ const OAuthPage = () =>
                 setError({errType: errtypes[1], errItem: responseData.note, errCode: 400})
 
             // pokud token není platný -> LoginFormView
-            
+            if (responseData.status == 401)
+                SetView(LoginFormView);
+
+            // pokud uživatel není součástí aplikace
+            if (responseData.status == 403)
+                setError({errType: errtypes[2], errItem: usrMgs, errCode: 403})
 
             // pokud je vše ok -> ConfirmView
             if (responseData.status == 200)
-                SetView(ConfirmView);
+                setOAuthResponse(responseData.data)
         }
+    }
+
+    const ChangeProfile = () =>
+    {
+        console.log("aaa");
+        SetView(LoginFormView);
     }
 
     const CheckParams = (urlParams) =>
@@ -87,6 +103,29 @@ const OAuthPage = () =>
         return false; // některý z povinných parametrů chybí
     }
 
+    const onLogin = () =>
+    {
+        const urlParams = GetUrlParams();
+
+        if (CheckParams(urlParams))
+        {
+            // poslat požadavek na kontrolu parametrů + kontrola tokenu
+            SendParams(urlParams);
+        }
+    }
+
+    const RejectView = <OAuthRejectView message={errItem} errType={errType} errCode={errCode}/>;
+    const ConfirmView = <OAuthConfirmView data={OAuthResponse} changeProfile={ChangeProfile}/>;
+    const LoginFormView = <OAuthLoginForm onSuccess={onLogin} />;
+
+    useEffect(() => 
+    {
+        if (Object.keys(OAuthResponse).length != 0)
+        {
+            SetView(ConfirmView);
+        }
+    }, [OAuthResponse]);
+
     useEffect(() => 
     {
         if (errType != undefined &&  errItem != undefined &&  errCode != undefined)
@@ -99,9 +138,7 @@ const OAuthPage = () =>
 
     useEffect(() => 
     {
-        // získání parametrů z url
-        const queryString = window.location.search;             // get query string (?...)
-        const urlParams = new URLSearchParams(queryString);     // get url params as list
+        const urlParams = GetUrlParams();
 
         if (CheckParams(urlParams))
         {

@@ -82,3 +82,11 @@ export const GenerateParams = (apiPathObj, data = null, urlParams = null, header
         access:  apiPathObj?.access
     }
 }
+
+export const GetUrlParams = () =>
+{
+    // získání parametrů z url
+    const queryString = window.location.search;             // get query string (?...)
+    const urlParams = new URLSearchParams(queryString);     // get url params as list
+    return urlParams;
+}

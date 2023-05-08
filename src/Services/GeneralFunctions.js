@@ -25,3 +25,8 @@ export const GetIcoByName = (name) =>
         default: return webIco;
     }
 }
+
+export const ConstructIcoUrl = (ico, alt) =>
+{
+    return ico != "" ? 'data:image/png;base64,' + ico : alt;
+}

@@ -14,6 +14,8 @@ import SocialProfileCheckBox from "../Elements/SocialProfileStatus/SocialProfile
 import { StackItem, StackOfItems } from "../Elements/StackItems/StackItems";
 import { apiPath, NotificationManager } from "../ProfilePage/Profile-Import";
 import AppPageDetailWindowView from "./AppPageWindowView";
+import Applogo from "../../Assets/Images/socialIcons/web.bmp"
+import { ConstructIcoUrl } from "../../Services/GeneralFunctions";
 
 const AppPageDetailView = ({returnBack, appID}) =>
 {
@@ -185,7 +187,10 @@ const AppPageDetailView = ({returnBack, appID}) =>
                 <DetailWindowColumn psize="30%" >
 
                     <DetailWindowCard>
-                        <ProfilePhoto src={photo} alt="Profilová fotka" />
+                        <ProfilePhoto 
+                            src={ConstructIcoUrl(detail.ico, Applogo)} 
+                            alt="Profilová fotka" 
+                        />
                         <div className="FlexSpaceBetween">
                             <ButtonSecondary text="Změnit fotku" onClick={null} />
                         </div>

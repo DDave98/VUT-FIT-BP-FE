@@ -14,3 +14,15 @@
 {
     font-weight: bold;
 }
+
+.OAuthAccount
+{
+    margin: 10px 0px;
+    font-size: 0.78rem;
+}
+
+.OAuthAccount:hover p
+{
+    color: blue;
+    cursor: pointer;
+}

@@ -11,7 +11,6 @@ export const PublicAPI = axios.create({
     headers:
     {
         'Accept': "application/json",
-        'Content-Type': "application/json"
     }
 });
 
@@ -20,7 +19,6 @@ export const PrivateAPI = axios.create({
     headers:
     {
         'Accept': "application/json",
-        'Content-Type': "application/json",
     },
     withCredentials: true
 });

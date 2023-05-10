@@ -53,6 +53,7 @@ const ProfilePage = () =>
     {
         setModalShow(false);    // zavřít okno
         setModalElement(<></>); // smazat obsah modalu
+        GetBaseInfo();
     }
 
     // otevření okna s formulářem na změnu hesla
@@ -67,7 +68,7 @@ const ProfilePage = () =>
     const ChangePhoto = () =>
     {
         setModalHeader("Změnit Profilovou fotku");
-        setModalElement(<ProfilModalPhoto />);
+        setModalElement(<ProfilModalPhoto CloseModal={CloseModal} />);
         setModalShow(true);
     }
 

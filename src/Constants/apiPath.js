@@ -118,11 +118,22 @@ export const apiPath=
     {
         method: methodType.POST,
         path: "/api/User",
+        access: accessType.PUBLIC
     },
     selfInfo:       "/api/User",
     UpdateUser:     "/api/User",
-    UploadPhoto:    "/api/User/Photo",
-    GetPhoto:       "/api/User/Photo",
+    UploadPhoto:
+    {
+        method: methodType.PATCH,
+        path: "/api/User/Photo",
+        access: accessType.PRIVATE
+    },
+    GetPhoto:
+    {
+        method: methodType.GET,
+        path: "/api/User/Photo",
+        access: accessType.PRIVATE
+    },
 
     /* App path */
     ApplicationPath:

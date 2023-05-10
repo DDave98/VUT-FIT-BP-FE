@@ -22,7 +22,7 @@ export const usePublicApi = () =>
         const {errorMessage, errorHeader} = errMsg;
         var response = null;
 
-        headers = headers != undefined ? headers : {};
+        headers = headers != undefined ? headers : {"Content-Type":"application/json"};
 
         // pokud se jedná o zabezpečený endpoint - přidá se token
         if (access == accessType.PRIVATE)
@@ -35,7 +35,7 @@ export const usePublicApi = () =>
         const httpSetting = { 
             headers: headers
         };
-
+        
         try
         {
             switch (method)
@@ -46,6 +46,10 @@ export const usePublicApi = () =>
 
                 case methodType.POST:
                     response = await PublicAPI.post(path, body, httpSetting);
+                    break;
+
+                case methodType.PATCH:
+                    response = await PublicAPI.patch(path, body, httpSetting);
                     break;
 
                 case methodType.PUT:
@@ -64,7 +68,7 @@ export const usePublicApi = () =>
         }
         catch (error)
         {
-            const httpCode = error?.response?.status;
+            const httpCode = error?.response?.status ?? -1;
             var errTypemsg = "";
             if (error == null) errorMessage = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
             else switch (httpCode)

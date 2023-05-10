@@ -28,5 +28,6 @@ export const GetIcoByName = (name) =>
 
 export const ConstructIcoUrl = (ico, alt) =>
 {
+    console.log(ico);
     return ico != "" ? 'data:image/png;base64,' + ico : alt;
 }

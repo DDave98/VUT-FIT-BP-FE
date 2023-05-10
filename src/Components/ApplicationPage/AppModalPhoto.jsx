@@ -1,15 +1,10 @@
-import { 
-    useState,
-    apiPath,
-} from "./Profile-Import";
+import { useState } from "react";
 import "../../Styles/ProfilePageStyles/ProfilModalPhoto.css"
-import { consoleLog } from "../../Services/DebugService";
 import { usePublicApi } from "../../Hooks/usePublicAPI";
-import NotificationManager from "react-notifications/lib/NotificationManager";
 
 /// funkce/komponenta, která představuje část stránky profil
 /// obsah modal okna, umožňuje nahrání fotky
-const ProfilModalPhoto = ({CloseModal}) =>
+const AppModalPhoto = ({CloseModal}) =>
 {
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
     const [photo, setPhoto] = useState(null);
@@ -18,23 +13,7 @@ const ProfilModalPhoto = ({CloseModal}) =>
     const handleSubmit = async (e) => 
     {
         e.preventDefault();
-        if (!photo) {
-            console.error('No photo selected');
-            return;
-        }
-        const headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-        const formData = new FormData();
-        formData.append('photo', photo);
-        const errorMessage = "Chyba při nahrávání";
-        const errorTitle = "Nahrávání fotky";
-        const error = GenerateError(errorMessage, errorTitle);
-        const params = GenerateParams(apiPath.UploadPhoto, formData, null, headers);
-        const response = await SendRequest(params, error);
-        if(response != undefined) 
-        {
-            NotificationManager.success("Fotka byla nahrána");
-            CloseModal(photo);
-        }
+        CloseModal(photo);
     };
 
     return (
@@ -149,4 +128,4 @@ const ProfilModalPhotoPreview = ({photo, setPhoto, submitOnClick}) =>
 
 
 
-export default ProfilModalPhoto;
+export default AppModalPhoto;

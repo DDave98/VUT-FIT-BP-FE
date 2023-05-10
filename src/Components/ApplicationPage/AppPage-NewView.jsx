@@ -15,6 +15,8 @@ import DropDownSelect from "../Elements/DropDownSelect/DropDownSelect";
 import ProfilePhoto from "../Elements/ProfilePhoto/ProfilePhoto";
 import SocialProfileCheckBox from "../Elements/SocialProfileStatus/SocialProfileCheckBox";
 import { StackItem, StackOfItems } from "../Elements/StackItems/StackItems";
+import ModalWindow from "../ModalWindow";
+import AppModalPhoto from "./AppModalPhoto";
 import { accessTokenTag, apiPath, GetFromStorage, NotificationManager } from "../ProfilePage/Profile-Import";
 
 const AppPageNewView = ({returnBack}) =>
@@ -29,6 +31,11 @@ const AppPageNewView = ({returnBack}) =>
     const [checkboxes, setCheckboxes] = useState(<></>);
     const [AppTypes, setApptypes] = useState([]);
 
+    // modal 
+    const [modalShow, setModalShow] = useState(false);
+    const [modalHeader, setModalHeader] = useState("Nadpis");
+    const [modalElement, setModalElement] = useState(null);
+
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 
     const onClickHandler = () =>
@@ -37,13 +44,28 @@ const AppPageNewView = ({returnBack}) =>
         if (val) returnBack();
     }
 
+        // funkce zavře modal okno
+        const CloseModal = (foto) => 
+        {
+            if(foto != undefined) setPhoto(foto);
+            setModalShow(false);    // zavřít okno
+            setModalElement(<></>); // smazat obsah modalu
+        }
+
+    const ChangePhoto = () =>
+    {
+        setModalHeader("Změnit Profilovou fotku");
+        setModalElement(<AppModalPhoto CloseModal={CloseModal} />);
+        setModalShow(true);
+    }
+
     const Create = async () =>
     {
         // udělat check
         const newApp =
         {
             Name: name,
-            ico: "",
+            ico: "",//photo,
             Domain: domena,
             isPublic: visibility == "veřejné",
             Type: type
@@ -148,9 +170,9 @@ const AppPageNewView = ({returnBack}) =>
                 <DetailWindowColumn psize="30%" >
 
                     <DetailWindowCard>
-                        <ProfilePhoto src={photo} alt="Profilová fotka" />
+                        <ProfilePhoto src={photo ? URL.createObjectURL(photo) : ""} alt="Profilová fotka" />
                         <div className="FlexSpaceBetween">
-                            <ButtonSecondary text="Změnit fotku" onClick={null} />
+                            <ButtonSecondary text="Změnit fotku" onClick={ChangePhoto} />
                         </div>
                     </DetailWindowCard>
 
@@ -210,6 +232,9 @@ const AppPageNewView = ({returnBack}) =>
                     </DetailWindowCard>
                 </DetailWindowColumn>
             </DetailWindow>
+            <ModalWindow show={modalShow} header={modalHeader} onClose={CloseModal}>
+                {modalElement}
+            </ModalWindow>
         </div>
     );
 }

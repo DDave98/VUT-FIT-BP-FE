@@ -16,6 +16,8 @@ import { apiPath, NotificationManager } from "../ProfilePage/Profile-Import";
 import AppPageDetailWindowView from "./AppPageWindowView";
 import Applogo from "../../Assets/Images/socialIcons/web.bmp"
 import { ConstructIcoUrl } from "../../Services/GeneralFunctions";
+import ProfilModalPhoto from "../ProfilePage/Profile-Modal-Photo";
+import ModalWindow from "../ModalWindow";
 
 const AppPageDetailView = ({returnBack, appID}) =>
 {
@@ -32,6 +34,11 @@ const AppPageDetailView = ({returnBack, appID}) =>
     const [checkboxes, setCheckboxes] = useState(<></>);
     const [AppTypes, setApptypes] = useState([]);
     const [detail, setDetail] = useState(detailObj);
+
+    // modal 
+    const [modalShow, setModalShow] = useState(false);
+    const [modalHeader, setModalHeader] = useState("Nadpis");
+    const [modalElement, setModalElement] = useState(null);
 
     // stav
     const [modalState, setModalState] = useState(false);
@@ -107,7 +114,12 @@ const AppPageDetailView = ({returnBack, appID}) =>
         const error = GenerateError(errorMessage, errorTitle);
         const params = GenerateParams(apiPath.ApplicationPath.Detail, null, urlParams);
         const response = await SendRequest(params, error);
-        if(response != undefined) setDetail(response.data);
+        if(response != undefined) 
+        {
+            setDetail(response.data);//
+            const icon = response.data.ico ? 'data:image/png;base64,'+ response.data.ico : undefined;
+            setPhoto()
+        }
         else {
             returnBack();
         }
@@ -142,6 +154,21 @@ const AppPageDetailView = ({returnBack, appID}) =>
             setProvider(() => providerList);
             GenerateChaceboxes();
         }
+    }
+
+    // funkce zavře modal okno
+    const CloseModal = () => 
+    {
+        setModalShow(false);    // zavřít okno
+        setModalElement(<></>); // smazat obsah modalu
+    }
+
+    // otevření okna s formulářem na změnu obrázku
+    const ChangePhoto = () =>
+    {
+        setModalHeader("Změnit Profilovou fotku");
+        setModalElement(<ProfilModalPhoto CloseModal={CloseModal} />);
+        setModalShow(true);
     }
 
     const GenerateNewAppAccess = async () =>
@@ -188,11 +215,11 @@ const AppPageDetailView = ({returnBack, appID}) =>
 
                     <DetailWindowCard>
                         <ProfilePhoto 
-                            src={ConstructIcoUrl(detail.ico, Applogo)} 
+                            src={ConstructIcoUrl(photo, Applogo)} 
                             alt="Profilová fotka" 
                         />
                         <div className="FlexSpaceBetween">
-                            <ButtonSecondary text="Změnit fotku" onClick={null} />
+                            {/* <ButtonSecondary text="Změnit fotku" onClick={ChangePhoto} /> */}
                         </div>
                     </DetailWindowCard>
 
@@ -285,6 +312,10 @@ const AppPageDetailView = ({returnBack, appID}) =>
                     </DetailWindowCard>
                 </DetailWindowColumn>
             </DetailWindow>
+
+            <ModalWindow show={modalShow} header={modalHeader} onClose={CloseModal}>
+                {modalElement}
+            </ModalWindow>
 
             <AppPageDetailWindowView clientSec={secret} clientId={cid} show={modalState} onClose={closeModal}/>
         </div>

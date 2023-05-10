@@ -136,7 +136,7 @@ const ModalDetail = (
 
                     </div>
 
-                    <div class="modal-footer">
+                    <div className="modal-footer">
                     </div>
 
                 </div>

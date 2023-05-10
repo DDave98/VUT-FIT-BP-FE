@@ -8,7 +8,7 @@ const ViewTypeSelect = ({setShowType}) =>
     return (
         <div className='ViewTypeSelect'>
             <div className='VTSbutton' onClick={() => setShowType(true)}>
-                <input type="radio" id="radio1" name="radios" value="all" className='VTSinput' checked />
+                <input type="radio" id="radio1" name="radios" value="all" className='VTSinput' defaultChecked />
                 <label htmlFor="radio1" className='VTSlabel'>
                     <Icon name='bars' fitted />
                 </label>

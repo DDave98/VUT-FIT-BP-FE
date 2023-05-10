@@ -1,4 +1,4 @@
-input[type="checkbox"].collapsible
+input[type="checkbox"]#collapsible
 {
     display: none;
 }

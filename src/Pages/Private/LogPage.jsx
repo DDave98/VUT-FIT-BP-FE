@@ -6,6 +6,11 @@ import TableView from '../../Components/TableView';
 import ViewTypeSelect from '../../Components/ViewTypeSelect';
 import ModalDetail from '../../Components/Modal-Detail';
 import { useState } from 'react';
+import FilterWindow from "../../Components/Filters/FilterWindow";
+import SearchBar from "../../Components/Elements/SearchBar";
+import ButtonSecondary from "../../Components/Elements/Buttons/ButtonSecondary";
+import DropDownSelect from "../../Components/Elements/DropDownSelect/DropDownSelect";
+import WindowTable from "../../Components/Tables/WindowTable";
 
 const LogPage = () =>
 {
@@ -19,36 +24,10 @@ const LogPage = () =>
     const matchCount = 2000;
     const totalPages = 20;
 
-    const headers = [
-        {
-            name: "Vytvořeno",
-            class: "col-10"
-        },
-        {
-            name: "Typ",
-            class: "col-10"
-        },
-        {
-            name: "Uživatel",
-            class: "col-10"
-        },
-        {
-            name:  "Aplikace",
-            class: "col-10"
-        },
-        {
-            name:  "IP",
-            class: "col-10"
-        }
-        ,
-        {
-            name:  "Poznámka",
-            class: "col-10"
-        }
-    ];
+    const headers = ["Vytvořeno", "Typ", "Uživatel", "Aplikace", "IP", "Poznámka"];
 
     const filters = {
-        sort: headers.map((opt) => (opt.name)),
+        sort: headers,
         directions: ["Vzestupně", "Sestupně"],
         type: ["Upozornění", "Informace", "Chyba"]
     }
@@ -133,91 +112,53 @@ const LogPage = () =>
             <h1>Záznamy Aktivit</h1>
 
             {/* <!-- filter panel --> */}
-            <div className="filter-panel">
-                <div className="filter-panel-content">
-                    
-                    <h2>Filtry</h2>
-                    
-                    {/* <!-- searchbar --> */}
-                    <input type="text" id="myInput" onkeyup="FilterBySearch()" placeholder="Hledat" title="Type in a name" />
-                    
-                    {/* <!-- Sorting --> */}
-                    <div className="sorting">
-
-                        <div className="sorting-dropdown">
-                            <label htmlFor="cars">Typ:</label>
-                            <div id="list1" className="dropdown-check-list" tabindex="100">
-                                <span className="anchor">Select</span>
-                                <ul className="items">
-                                <li><input className="checkbox" />warinng </li>
-                                <li><input className="checkbox" />error</li>
-                                <li><input className="checkbox" />info </li>
-                                </ul>
-                            </div>
-                        </div>
-                    
-                    {/* <!-- řazeni podle sloupce --> */}
-                    <div className="sorting-dropdown">
-                        <label htmlFor="sort-col">řadit podle:</label>
-                        <select name="sort-col" id="cars">
-                            {
-                                filters.sort.map((opt) => (
-                                    <option value={opt}>{opt}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
-                    
-                    {/* <!-- směr řazení --> */}
-                    <div className="sorting-dropdown">
-                        <label htmlFor="cars">směr řazení:</label>
-                        <select name="cars" id="cars">
-                            {
-                                filters.directions.map((opt) => (
-                                    <option value={opt}>{opt}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
-
-                    </div>
-                    
-                    <div className="panel-bottom">
-                        <div className="SearchCounter">
-                            počet výsledků: <p>150</p>
-                        </div>
-                        <PerPage />
-                    </div>                
+            <FilterWindow>
+                <div className="FlexRow">
+                    <SearchBar onChange={() => {}} />
+                    <ButtonSecondary text="Aplikovat Filtry" onClick={() => {}} />
                 </div>
-            </div>
+                <div className="sorting">
+                    <DropDownSelect 
+                        options={{0:"warning", 1:"error", 2:"info"}}
+                        label="Typ:"
+                        onSelectedChange={() => {}}
+                        name="AppTypeSelect"
+                    />
+
+                    <DropDownSelect 
+                        options={filters.sort}
+                        label="Řadit podle:"
+                        onSelectedChange={() => {}}
+                        name="AppTypeSelect"
+                    />
+                </div>
+                <div className="panel-bottom">
+                    <div className="SearchCounter">
+                        počet výsledků: <p>{150}</p>
+                    </div>
+                    <PerPage onChange={() => {}} />
+                </div>  
+            </FilterWindow>
 
             {/* <!-- Table of content --> */}
-            <table id="myTable">
-                <tr className="table-header">
-                    {
-                        headers.map((col) =>(
-                            <th className={col.class}>{col.name}</th>
-                        ))
-                    }
-                    <th className="col-5"> </th>
-                </tr>
-                {
-                    data.map((line) => (
-                        <tr>
-                            <td>{line.created}</td>
-                            <td><div className={line.type + "Type"}>{line.type}</div></td>
-                            <td>{line.user}</td>
-                            <td>{line.app}</td>
-                            <td>{line.ip}</td>
-                            <td>{line.note}</td>
-                            <td onClick={() => setShowModal(true)}>
-                                možnosti
-                            </td>
-                        </tr>
-                    ))
-                }
-            </table>
-        
+            <WindowTable headers={headers}>
+            {
+                data.map((line, key) => (
+                    <tr key={key}>
+                        <td>{line.created}</td>
+                        <td><div className={line.type + "Type"}>{line.type}</div></td>
+                        <td>{line.user}</td>
+                        <td>{line.app}</td>
+                        <td>{line.ip}</td>
+                        <td>{line.note}</td>
+                        <td onClick={() => setShowModal(true)}>
+                            možnosti
+                        </td>
+                    </tr>
+                ))
+            }
+            </WindowTable>
+                    
             {/* <!-- Footer of page --> */}
             <div className="table-footer">
                 <div className="table-footer-content">

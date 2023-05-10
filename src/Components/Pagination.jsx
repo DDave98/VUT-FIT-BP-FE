@@ -10,7 +10,7 @@ const Pagination = (
     totalPages = 1,
     disabled = false,
     actualPage,
-    onChange
+    onChange = () => {}
 }) =>
 {
     const [actualState, setState] = useState(1);

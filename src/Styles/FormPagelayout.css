@@ -1,29 +1,44 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
-
-@layer components
+.FormPagelayout
 {
-    .FormPagelayout
-    {
-        /*form place*/
-        @apply flex items-center justify-center min-h-screen bg-gray-100;
-    }
+    /*form place*/
+    display: flex; 
+    background-color: #F3F4F6; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+}
+    
+.FormPagelayoutWindow
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem; 
+    padding-left: 2rem;
+    padding-right: 2rem; 
+    margin-top: 1rem; 
+    margin-bottom: 1rem; 
+    background-color: #ffffff; 
+    text-align: left; 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+}
 
+.FormPagelayoutHeader
+{
+    font-size: 1.5rem;
+    line-height: 2rem; 
+    font-weight: 700; 
+    text-align: center; 
+}
+
+.FormPagelayoutForm
+{
+    margin-top: 1rem; 
+}
+
+
+@media (min-width: 1280px) { 
     .FormPagelayoutWindow
     {
-        /*form style*/
-        @apply px-8 py-6 mt-4 mb-4 text-left bg-white shadow-lg xl:w-1/4;
+        width: 25%; 
     }
-
-    .FormPagelayoutHeader
-    {
-        @apply text-2xl font-bold text-center;
-    }
-
-    .FormPagelayoutForm
-    {
-        @apply mt-4;
-    }
+    
 }

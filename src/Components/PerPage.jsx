@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useState } from 'react';
-//import "../Styles/PerPage.css";
 
 const PerPage = (
 {
     disabled = false,
-    onChange
+    onChange = () => {}
 }) =>
 {
     const options = [

@@ -8,6 +8,9 @@ import "../../Styles/ProfilePageStyles/Profile-SocialCard.css";
 import ProfilSocialCardAccout from "./Profil-SocialCard-Account";
 import { usePublicApi } from "../../Hooks/usePublicAPI";
 import { GetIcoByName } from "../../Services/GeneralFunctions";
+import DetailWindowCard from "../DetailLayout/DetailWindowCard";
+import { StackItem, StackOfItems } from "../Elements/StackItems/StackItems";
+import SocialProfileCheckBox from "../Elements/SocialProfileStatus/SocialProfileCheckBox";
 
 /// funkce/komponenta, která představuje část stránky profil
 const ProfilSocialCard = ({toggleAccount}) =>
@@ -26,14 +29,38 @@ const ProfilSocialCard = ({toggleAccount}) =>
         if(response != undefined) setProviders(response.data);
     }
 
+    const GenerateChaceboxes = (prov) =>
+    {
+        return Object.keys(prov).length == 0 ? <></> : 
+        prov.map((obj, num) => (
+            <StackItem key={num}>
+                <ProfilSocialCardAccout 
+                    key={num}
+                    data={obj}
+                    onRemoveLink={toggleAccount}
+                    onAddLink={null}
+                >
+                    {GetIcoByName(obj.providerName)}
+                    {obj.providerName}
+                </ProfilSocialCardAccout>
+            </StackItem>
+        ));
+    }
+
     useEffect(() => 
     {
         loadSocialAccount();
     }, []);
 
     return (
-        <div className="SocialPart card">
-            <ul>
+        <>
+        <div className="SocialPart">
+            <DetailWindowCard>
+                <StackOfItems>
+                    {GenerateChaceboxes(providers)}
+                </StackOfItems>
+            </DetailWindowCard>
+            {/*<ul>
                 {
                     providers.map((accout, num) => (
                         <ProfilSocialCardAccout
@@ -47,8 +74,10 @@ const ProfilSocialCard = ({toggleAccount}) =>
                         </ProfilSocialCardAccout>
                     ))
                 }
-            </ul>
+            </ul>*/}
         </div>
+        </>
+        
     );
 };
 

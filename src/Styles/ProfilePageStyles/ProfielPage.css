@@ -54,17 +54,11 @@
   box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
 }
 
-.profile-image {
-  border-radius: 50% !important;
-  border-style: none;
-  background: white;
-}
-
 .profile-card-body {
   margin-top: 1rem !important;
 }
 
-.profile-card-body h4 {
+.Profil-ImgView h4 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   margin-top: 0;
@@ -72,41 +66,13 @@
   line-height: 1.2;
 }
 
-.profile-card-body p {
+.Profil-ImgView p {
   color: #6c757d !important;
   margin-bottom: 0.25rem !important;
   margin-top: 0;
 }
 
-.btn {
-  display: inline-block;
-  font-weight: 400;
-  color: #212529;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-color: transparent;
-  border: 1px solid transparent;
-  border-top-color: transparent;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  text-transform: none;
-  overflow: visible;
-  cursor: pointer;
-}
-
-.profile-card-body .btn:nth-last-child(1)
+.Profil-ImgView .btn:nth-last-child(1)
 {
     margin-left: 0.5rem;
 }

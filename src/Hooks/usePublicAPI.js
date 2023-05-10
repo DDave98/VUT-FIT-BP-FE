@@ -64,7 +64,7 @@ export const usePublicApi = () =>
         }
         catch (error)
         {
-            const httpCode = error.response.status;
+            const httpCode = error?.response?.status;
             var errTypemsg = "";
             if (error == null) errorMessage = "žádná odpověď od serveru, zkontrolujte prosím připojení.";
             else switch (httpCode)

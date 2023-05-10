@@ -1,6 +1,6 @@
 // General
+
 import { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import FormPageLayout from './FormPageLayout';
 import SendButton from './SendButton';
 import config from "../Constants/config.json";
@@ -9,7 +9,7 @@ import { FormPwdInputs } from './FormPwdInputs';
 import { NotificationManager } from 'react-notifications';
 import { consoleLog } from '../Services/DebugService';
 
-const NewPasswordForm = ({setOnSuccess, code}) =>
+const NewPasswordForm = ({setOnSuccess = () => {}, code}) =>
 {
 
     const userRef = useRef();
@@ -67,11 +67,6 @@ const NewPasswordForm = ({setOnSuccess, code}) =>
             />
         </FormPageLayout>
     );
-}
-
-NewPasswordForm.propTypes = 
-{
-    setOnSuccess: PropTypes.func.isRequired,
 }
 
 export default NewPasswordForm;

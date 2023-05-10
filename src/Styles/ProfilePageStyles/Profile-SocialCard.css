@@ -1,15 +1,12 @@
-.profile-card, .SocialPart
+ .SocialPart
 {
   -webkit-box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
   -moz-box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
   box-shadow: 9px 21px 47px -15px rgba(0,0,0,0.73);
   background-color: #fff;
+  margin-top: 3em;
 }
-
-.SocialPart {
-    margin-top: 3em;
-}
-
+/*
 .SocialPart ul {
     display: flex;
     flex-direction: column;
@@ -65,4 +62,4 @@ color: #dc3545 !important;
 
 .profile-body-right {
 width: 100%;
-}
+}*/

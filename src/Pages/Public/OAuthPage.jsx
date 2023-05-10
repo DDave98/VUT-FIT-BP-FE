@@ -3,6 +3,7 @@ import { useState } from "react";
 import OAuthConfirmView from "../../Component-Views/OAuthPage/OAuthConfirmView";
 import OAuthLoginForm from "../../Component-Views/OAuthPage/OAuthLoginForm";
 import OAuthRejectView from "../../Component-Views/OAuthPage/OAuthRejectView";
+import Loader from "../../Components/Loader";
 import { apiPath } from "../../Constants/apiPath";
 import { accessTokenTag } from "../../Constants/storageTag";
 import { usePublicApi } from "../../Hooks/usePublicAPI";
@@ -34,10 +35,11 @@ const OAuthPage = () =>
     const wrongMsg = "Parametr má nevalidní hodnotu: ";
     const expMsg = " Očekává se hodnota: ";
     const usrMgs = "Uživatel nemá povolený přístup do této aplikace"
+    const loading = <div style={{margin: "auto"}}><Loader /></div>;
 
     const [OAuthResponse, setOAuthResponse] = useState({});
     const [{errType, errItem, errCode}, setError] = useState({});
-    const [actualView, SetView] = useState(<></>);
+    const [actualView, SetView] = useState(loading);
 
     const [SendRequest, GenerateParams, GenerateError] = usePublicApi();
 

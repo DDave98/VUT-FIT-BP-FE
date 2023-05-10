@@ -103,7 +103,7 @@ const ProfilSocialCardAccout = ({
     });
 
     return (
-        <li>
+        <div className="SocialProfileCheckBox">
             <h6>
                 {children}
             </h6>
@@ -111,7 +111,7 @@ const ProfilSocialCardAccout = ({
                 connected ? <button className="btn-primary btn" onClick={processRemoveLink}>Odpojit</button>
                 : <button className="btn-secondary btn" onClick={processAddLink}>Připojit</button>
             }
-        </li>
+        </div>
     );
 };
 

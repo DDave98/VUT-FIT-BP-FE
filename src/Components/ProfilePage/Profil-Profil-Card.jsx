@@ -1,3 +1,5 @@
+import DetailWindowCard from "../DetailLayout/DetailWindowCard";
+import ProfilePhoto from "../Elements/ProfilePhoto/ProfilePhoto";
 import { 
     useState, 
     useEffect, 
@@ -27,14 +29,12 @@ const ProfilProfilCard = ({data, passwordChange, photoChange}) =>
     }, [data]);
     
     return (
-        <div className="profile-card">
-            <img
-                src={photo}
-                alt="Profile Photo"
-                className="profile-image"
-                width="150"
-            />
-            <div className="profile-card-body">
+        <div className="Profil-ImgView">
+            <DetailWindowCard>
+                <ProfilePhoto
+                    src={photo}
+                    alt="Profile Photo"
+                />
                 <h4>
                     {data.name} {data.surname}
                 </h4>
@@ -42,9 +42,11 @@ const ProfilProfilCard = ({data, passwordChange, photoChange}) =>
                 <p>
                     založen: {new Date(data.created).toLocaleDateString()}
                 </p>
-                <button className="btn-secondary btn" onClick={passwordChange}>změna hesla</button>
-                <button className="btn-secondary btn" onClick={photoChange}>nové foto</button>
-            </div>
+                <div className="profile-card-body">
+                    <button className="btn-secondary btn" onClick={passwordChange}>změna hesla</button>
+                    <button className="btn-secondary btn" onClick={photoChange}>nové foto</button>
+                </div>
+            </DetailWindowCard>
         </div>
     );
 };

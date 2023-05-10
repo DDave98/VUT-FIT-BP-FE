@@ -10,7 +10,7 @@ import { NotificationManager } from 'react-notifications';
 import "../Styles/EmailConfirmForm.css";
 import { consoleLog } from '../Services/DebugService';
 
-const EmailConfirmForm = ({setOnSuccess, code}) =>
+const EmailConfirmForm = ({setOnSuccess = () => {}, code}) =>
 {
     const userRef = useRef();
 
@@ -72,7 +72,7 @@ const EmailConfirmForm = ({setOnSuccess, code}) =>
 
 EmailConfirmForm.propTypes = 
 {
-    setOnSuccess: PropTypes.func.isRequired,
+    setOnSuccess: PropTypes.func,
     code: PropTypes.string
 }
 

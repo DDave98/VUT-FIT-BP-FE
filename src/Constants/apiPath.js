@@ -35,7 +35,12 @@ export const apiPath=
         },
     },
 
-    checkProviderCode: "/api/Account/",
+    checkProviderCode:
+    {
+        method: methodType.GET,
+        path: "/api/Account/",
+        access: accessType.PUBLIC,
+    },
     addUserAccountProvider: 
     {
         method: methodType.PUT,
@@ -50,48 +55,61 @@ export const apiPath=
     },
 
     /* Auth path */
-    confirmEmail:   "/api/Auth/confirmEmail",
+    confirmEmail:
+    {
+        method: methodType.GET,
+        path: "/api/Auth/confirmEmail",
+        access: accessType.PUBLIC,
+    },
     refresh:        "/api/Auth/Refresh",
     recovery:
     {
         method: methodType.GET,
         path: "/api/Auth/recovery/{email}",
+        access: accessType.PUBLIC
     },
     recaptcha:
     {
         method: methodType.GET,
         path: "/api/Auth/reCaptcha?token={token}",
+        access: accessType.PUBLIC
     },
     changePwd:      "/api/Auth/password",
     loginSSO: // přihlášení pomocí SSO
     {
         method: methodType.POST,
         path: "/api/Auth/Login/SSO/{provider}",
+        access: accessType.PUBLIC
     },
     loginBasic:
     {
         method: methodType.POST,
         path: "/api/Auth/Login/Basic",
+        access: accessType.PUBLIC
     },
     MFAMethods:
     {
         method: methodType.GET,
         path: "/api/Auth/MFA",
+        access: accessType.PUBLIC
     },
     MFACheck:
     {
         method: methodType.POST,
         path: "/api/Auth/MFA/{method}",
+        access: accessType.PUBLIC
     },
     GAgenerate:
     {
         method: methodType.POST,
         path: "/api/Auth/MFA/GA/GenerateQR",
+        access: accessType.PRIVATE
     },
     GAverifi:
     {
         method: methodType.POST,
         path: "/api/Auth/MFA/GA/VerifiQR",
+        access: accessType.PRIVATE
     },
 
 
